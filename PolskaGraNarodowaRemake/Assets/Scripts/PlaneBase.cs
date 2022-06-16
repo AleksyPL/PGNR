@@ -31,7 +31,7 @@ public class PlaneBase : MonoBehaviour
         flightControllScript = GetComponent<FlightController>();
         planeRendererScript = GetComponent<PlaneRenderer>();
         difficultyScript = GetComponent<DifficultyManager>();
-        currentPlaneState = StateMachine.standard;
+        currentPlaneState = StateMachine.wheelsOn;
     }
     void Update()
     {
@@ -55,8 +55,7 @@ public class PlaneBase : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Obstacle") || collision.gameObject.CompareTag("Projectile"))
         {
-            currentPlaneState = StateMachine.damaged;
-            planeRendererScript.ChangePlaneSprite();
+            flightControllScript.DamageThePlane();
         }
     }
 }

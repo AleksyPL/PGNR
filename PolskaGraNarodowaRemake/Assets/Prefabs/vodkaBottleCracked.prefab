@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5855151004404506497}
   - component: {fileID: 5855151004404506502}
   - component: {fileID: 5855151004404506503}
-  - component: {fileID: 5855151004404506500}
   m_Layer: 0
   m_Name: vodkaBottleParts_0
   m_TagString: Untagged
@@ -73,8 +72,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1202104897
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -845479891, guid: 3b7a616bf8b05a047b3ba7252a95219f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -166,18 +165,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &5855151004404506500
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5855151004404506506}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 219f16f7cfe4ec7448d2445f56814826, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5855151004682842027
 GameObject:
   m_ObjectHideFlags: 0
@@ -190,7 +177,6 @@ GameObject:
   - component: {fileID: 5855151004682842022}
   - component: {fileID: 5855151004682842023}
   - component: {fileID: 5855151004682842020}
-  - component: {fileID: 5855151004682842021}
   m_Layer: 0
   m_Name: vodkaBottleParts_1
   m_TagString: Untagged
@@ -251,8 +237,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1202104897
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -533046505, guid: 3b7a616bf8b05a047b3ba7252a95219f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -355,18 +341,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &5855151004682842021
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5855151004682842027}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 219f16f7cfe4ec7448d2445f56814826, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5855151004956493632
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,9 +350,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5855151004956493635}
+  - component: {fileID: 4408825765209352550}
   m_Layer: 0
   m_Name: vodkaBottleCracked
-  m_TagString: Untagged
+  m_TagString: Vodka
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -401,8 +376,20 @@ Transform:
   - {fileID: 5855151005152581401}
   - {fileID: 5855151004992711319}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4408825765209352550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5855151004956493632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 219f16f7cfe4ec7448d2445f56814826, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5855151004992711316
 GameObject:
   m_ObjectHideFlags: 0
@@ -415,7 +402,6 @@ GameObject:
   - component: {fileID: 5855151004992711315}
   - component: {fileID: 5855151004992711312}
   - component: {fileID: 5855151004992711313}
-  - component: {fileID: 5855151004992711318}
   m_Layer: 0
   m_Name: vodkaBottleParts_4
   m_TagString: Untagged
@@ -476,8 +462,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1202104897
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 2011659094, guid: 3b7a616bf8b05a047b3ba7252a95219f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -574,18 +560,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &5855151004992711318
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5855151004992711316}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 219f16f7cfe4ec7448d2445f56814826, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5855151005152581406
 GameObject:
   m_ObjectHideFlags: 0
@@ -598,7 +572,6 @@ GameObject:
   - component: {fileID: 5855151005152581397}
   - component: {fileID: 5855151005152581402}
   - component: {fileID: 5855151005152581403}
-  - component: {fileID: 5855151005152581400}
   m_Layer: 0
   m_Name: vodkaBottleParts_3
   m_TagString: Untagged
@@ -659,8 +632,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1202104897
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 1274680873, guid: 3b7a616bf8b05a047b3ba7252a95219f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -785,18 +758,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &5855151005152581400
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5855151005152581406}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 219f16f7cfe4ec7448d2445f56814826, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5855151005490765390
 GameObject:
   m_ObjectHideFlags: 0
@@ -809,7 +770,6 @@ GameObject:
   - component: {fileID: 5855151005490765381}
   - component: {fileID: 5855151005490765386}
   - component: {fileID: 5855151005490765387}
-  - component: {fileID: 5855151005490765384}
   m_Layer: 0
   m_Name: vodkaBottleParts_2
   m_TagString: Untagged
@@ -870,8 +830,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1202104897
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 321833296, guid: 3b7a616bf8b05a047b3ba7252a95219f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -971,15 +931,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &5855151005490765384
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5855151005490765390}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 219f16f7cfe4ec7448d2445f56814826, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

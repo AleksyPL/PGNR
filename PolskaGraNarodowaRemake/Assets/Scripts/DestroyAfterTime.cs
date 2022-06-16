@@ -8,13 +8,13 @@ public class DestroyAfterTime : MonoBehaviour
     private float lifeTimeCounter;
     void Start()
     {
-        lifeTime = 10f;
+        lifeTime = 5f;
         lifeTimeCounter = 0;
     }
     void Update()
     {
         lifeTimeCounter += Time.deltaTime;
-        if (GetComponent<Renderer>().isVisible || lifeTimeCounter >= lifeTime)
+        if (lifeTimeCounter >= lifeTime)
             Destroy(gameObject);
     }
 }

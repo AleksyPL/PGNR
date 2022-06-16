@@ -5,19 +5,17 @@ using UnityEngine;
 public class BottleOfVodka : MonoBehaviour
 {
     [SerializeField] private GameObject crackedVersionPrefab;
-
     void Start()
     {
 
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //Destroy Objects TODO
+        if(collision.gameObject.CompareTag("Obstacle") || collision.gameObject.CompareTag("Ground"))
+        {
+            //Destroy Objects TODO
+            Instantiate(crackedVersionPrefab, transform.position, Quaternion.identity);
+            Destroy(gameObject);
+        }
     }
 }

@@ -15,6 +15,7 @@ public class FlightController : MonoBehaviour
     [SerializeField] internal float altitudeChangeForce;
     [SerializeField] internal float fallingForce;
     [SerializeField] internal float airportSlowingForce;
+    [SerializeField] internal float bottleThrowForceMin;
     [SerializeField] internal float bottleThrowForceMax;
     [SerializeField] internal float bottleThrowForceIncreasmentPerFrame;
     private float bottleThrowForceCurrent;
@@ -27,7 +28,7 @@ public class FlightController : MonoBehaviour
         levelCounter = 1;
         isTouchingAirport = false;
         isTouchingGround = false;
-        bottleThrowForceCurrent = 0;
+        bottleThrowForceCurrent = bottleThrowForceMin;
     }
     void Update()
     {
@@ -36,13 +37,15 @@ public class FlightController : MonoBehaviour
             transform.position += new Vector3(planeSpeed, baseScript.inputScript.position.y * altitudeChangeForce, 0);
             if (isTouchingAirport)
             {
+                baseScript.inputScript.position.y = 0;
                 planeSpeed -= airportSlowingForce;
                 if (planeSpeed <= 0)
                 {
+                    planeSpeed = 0;
                     //NEW LEVEL TODO
                 }
-            }
-            if(baseScript.currentPlaneState == PlaneBase.StateMachine.standard)
+            }  
+            if (baseScript.currentPlaneState == PlaneBase.StateMachine.standard)
             {
                 if (baseScript.inputScript.spaceHold)
                 {
@@ -56,7 +59,7 @@ public class FlightController : MonoBehaviour
                 if (baseScript.inputScript.spaceReleased)
                 {
                     ThrowBottleOfVodka();
-                    bottleThrowForceCurrent = 0;
+                    bottleThrowForceCurrent = bottleThrowForceMin;
                 }
             }
         }
@@ -74,11 +77,20 @@ public class FlightController : MonoBehaviour
     {
         if (baseScript.currentPlaneState == PlaneBase.StateMachine.standard)
         {
-            Instantiate(bottlePrefab, bottleSpawner.transform.position, Quaternion.identity);
+            GameObject bottle = Instantiate(bottlePrefab, bottleSpawner.transform.position, Quaternion.identity);
+            bottle.GetComponent<Rigidbody2D>().AddForce(new Vector2(1,-1) * bottleThrowForceCurrent);
             baseScript.difficultyScript.difficultyMultiplier++;
             baseScript.UIScript.numberOfBottlesDrunk++;
             if (!baseScript.difficultyScript.enableDifficultyImpulses)
                 baseScript.difficultyScript.enableDifficultyImpulses = true;
         }
+    }
+    internal void DamageThePlane()
+    {
+        baseScript.currentPlaneState = PlaneBase.StateMachine.damaged;
+        baseScript.planeRendererScript.ChangePlaneSprite();
+        baseScript.planeRendererScript.ChangeTilt();
+        if (smokePrefab != null)
+            Instantiate(smokePrefab, smokeSpawner.transform.position, Quaternion.identity);
     }
 }

@@ -4,9 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Vodka
-  - TNT
+  - Projectile
   - Airport
+  - Ground
+  - Obstacle
   layers:
   - Default
   - TransparentFX

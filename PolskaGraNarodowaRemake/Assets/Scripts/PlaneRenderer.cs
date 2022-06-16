@@ -13,6 +13,7 @@ public class PlaneRenderer : MonoBehaviour
     void Start()
     {
         baseScript = GetComponent<PlaneBase>();
+        ChangePlaneSprite();
     }
     private void Update()
     {
@@ -43,7 +44,9 @@ public class PlaneRenderer : MonoBehaviour
             if (baseScript.inputScript.position.y < 0)
                 RendererEntity.transform.rotation = Quaternion.Euler(0, 0, -15f);
         }
-        if(baseScript.currentPlaneState == PlaneBase.StateMachine.wheelsOn)
+        else if (baseScript.currentPlaneState == PlaneBase.StateMachine.wheelsOn || baseScript.currentPlaneState == PlaneBase.StateMachine.crashed)
             RendererEntity.transform.rotation = Quaternion.Euler(0, 0, 0);
+        else if (baseScript.currentPlaneState == PlaneBase.StateMachine.damaged)
+            RendererEntity.transform.rotation = Quaternion.Euler(0, 0, -15f);
     }
 }
