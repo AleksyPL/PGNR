@@ -27,6 +27,7 @@ public class PlaneBase : MonoBehaviour
     internal LevelManager levelManagerScript;
     void OnEnable()
     {
+        Application.targetFrameRate = 144;
         audioScript = GetComponent<AudioManager>();
         UIScript = UIGameObject.GetComponent<UIManager>();
         inputScript = GetComponent<InputManager>();

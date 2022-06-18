@@ -13,6 +13,7 @@ public class DifficultyManager : MonoBehaviour
     internal float difficultyImpulseDirection;
     internal bool enableDifficultyImpulses;
     internal bool altitudeChangeForceOverrided;
+    [SerializeField] internal float altitudeChangeForceOverridedMultiplier;
     [SerializeField] internal float difficultyImpulseForce;
 
     void Start()
@@ -41,16 +42,16 @@ public class DifficultyManager : MonoBehaviour
         {
             if (baseScript.inputScript.position.y != difficultyImpulseDirection && baseScript.inputScript.position.y !=0 && !altitudeChangeForceOverrided)
             {
-                baseScript.flightControllScript.altitudeChangeForce *= 3;
+                baseScript.flightControllScript.altitudeChangeForce *= altitudeChangeForceOverridedMultiplier;
                 altitudeChangeForceOverrided = true;
             }    
             else if ((baseScript.inputScript.position.y == difficultyImpulseDirection && altitudeChangeForceOverrided) || (baseScript.inputScript.position.y == 0 && altitudeChangeForceOverrided))
             {
-                baseScript.flightControllScript.altitudeChangeForce /= 3;
+                baseScript.flightControllScript.altitudeChangeForce /= altitudeChangeForceOverridedMultiplier;
                 altitudeChangeForceOverrided = false;
             }
             difficultuImpulseCounter -= Time.deltaTime;
-            transform.position += new Vector3(0, difficultyImpulseDirection * difficultyImpulseForce * difficultyMultiplier, 0);
+            transform.position += new Vector3(0, difficultyImpulseDirection * difficultyImpulseForce * difficultyMultiplier * Time.deltaTime, 0);
             if (difficultuImpulseCounter <= 0)
             {
                 difficultyImpulsTimeCurrent = Random.Range(difficultyImpulsTimeMin, difficultyImpulsTimeMax);

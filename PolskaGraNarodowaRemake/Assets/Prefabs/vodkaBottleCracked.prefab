@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5855151004404506497}
   - component: {fileID: 5855151004404506502}
   - component: {fileID: 5855151004404506503}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: vodkaBottleParts_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 5855151004682842022}
   - component: {fileID: 5855151004682842023}
   - component: {fileID: 5855151004682842020}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: vodkaBottleParts_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -351,7 +351,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5855151004956493635}
   - component: {fileID: 4408825765209352550}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: vodkaBottleCracked
   m_TagString: Vodka
   m_Icon: {fileID: 0}
@@ -392,6 +392,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeTime: 5
   enableFading: 0
+  cameraGameObject: {fileID: 0}
 --- !u!1 &5855151004992711316
 GameObject:
   m_ObjectHideFlags: 0
@@ -404,7 +405,7 @@ GameObject:
   - component: {fileID: 5855151004992711315}
   - component: {fileID: 5855151004992711312}
   - component: {fileID: 5855151004992711313}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: vodkaBottleParts_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -574,7 +575,7 @@ GameObject:
   - component: {fileID: 5855151005152581397}
   - component: {fileID: 5855151005152581402}
   - component: {fileID: 5855151005152581403}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: vodkaBottleParts_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -772,7 +773,7 @@ GameObject:
   - component: {fileID: 5855151005490765381}
   - component: {fileID: 5855151005490765386}
   - component: {fileID: 5855151005490765387}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: vodkaBottleParts_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

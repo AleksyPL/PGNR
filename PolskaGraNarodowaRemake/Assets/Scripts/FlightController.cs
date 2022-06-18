@@ -37,11 +37,11 @@ public class FlightController : MonoBehaviour
     {
         if (baseScript.currentPlaneState == PlaneBase.StateMachine.standard || baseScript.currentPlaneState == PlaneBase.StateMachine.wheelsOn)
         {
-            transform.position += new Vector3(currentPlaneSpeed, baseScript.inputScript.position.y * altitudeChangeForce, 0);
+            transform.position += new Vector3(currentPlaneSpeed * Time.deltaTime, baseScript.inputScript.position.y * altitudeChangeForce * Time.deltaTime, 0);
             if (isTouchingAirport)
             {
                 baseScript.inputScript.position.y = 0;
-                currentPlaneSpeed -= airportSlowingForce;
+                currentPlaneSpeed -= airportSlowingForce * Time.deltaTime;
                 baseScript.difficultyScript.enableDifficultyImpulses = false;
                 if (currentPlaneSpeed <= 0)
                 {
@@ -59,7 +59,7 @@ public class FlightController : MonoBehaviour
                 {
                     if(bottleThrowForceCurrent < bottleThrowForceMax)
                     {
-                        bottleThrowForceCurrent += bottleThrowForceIncreasmentPerFrame;
+                        bottleThrowForceCurrent += bottleThrowForceIncreasmentPerFrame * Time.deltaTime;
                         if (bottleThrowForceCurrent > bottleThrowForceMax)
                             bottleThrowForceCurrent = bottleThrowForceMax;
                     }
@@ -74,7 +74,7 @@ public class FlightController : MonoBehaviour
         else if (baseScript.currentPlaneState == PlaneBase.StateMachine.damaged)
         {
             baseScript.difficultyScript.enableDifficultyImpulses = false;
-            transform.position += new Vector3(currentPlaneSpeed, -fallingForce, 0);
+            transform.position += new Vector3(currentPlaneSpeed * Time.deltaTime, -fallingForce * Time.deltaTime, 0);
         }
         else if (baseScript.currentPlaneState == PlaneBase.StateMachine.crashed)
         {

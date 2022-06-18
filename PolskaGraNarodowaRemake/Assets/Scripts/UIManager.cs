@@ -37,7 +37,7 @@ public class UIManager : MonoBehaviour
         else if (planeBaseScript.currentPlaneState == PlaneBase.StateMachine.damaged)
             levelProgressGameObject.GetComponent<Text>().text = "Panie Prezydencie, obawiam siê, ¿e siê rozpierdolimy";
         else if (planeBaseScript.currentPlaneState == PlaneBase.StateMachine.crashed)
-            levelProgressGameObject.GetComponent<Text>().text = "No i chuj no i czeœæ";
+            levelProgressGameObject.GetComponent<Text>().text = "Niestety, kolejny prezydent zostanie bohaterem";
         //bottles
         if (planeBaseScript.difficultyScript.difficultyMultiplier == 0)
             bottlesGameObject.GetComponent<Text>().text = "Wypite butelki: nic";

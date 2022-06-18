@@ -39,14 +39,18 @@ public class LevelManager : MonoBehaviour
                 gameScore++;
             }
             if (levelProgress < currentlevelDistance)
-                levelProgress += planeBaseScript.flightControllScript.currentPlaneSpeed;
+                levelProgress += planeBaseScript.flightControllScript.currentPlaneSpeed * Time.deltaTime;
             if (levelProgress >= currentlevelDistance)
             {
                 levelProgress = currentlevelDistance;
                 planeBaseScript.currentPlaneState = PlaneBase.StateMachine.wheelsOn;
                 planeBaseScript.planeRendererScript.ChangePlaneSprite();
-                CheckIfThePlayerIsBehindTheAirport();
             }
+        }
+        else if(planeBaseScript.flightControllScript.currentPlaneSpeed > 0 && planeBaseScript.currentPlaneState == PlaneBase.StateMachine.wheelsOn)
+        {
+            if (levelProgress >= currentlevelDistance)
+                CheckIfThePlayerIsBehindTheAirport();
         }
     }
     internal void LoadLevel()
@@ -64,8 +68,8 @@ public class LevelManager : MonoBehaviour
         }
         levelProgress = 0;
         scorePointsCounter = 0;
-        currentlevelDistance = levelCounter * 100;
-        numberOfObstacles = levelCounter * 3;
+        currentlevelDistance = 100 + levelCounter * 10;
+        numberOfObstacles = 1 + levelCounter * 2;
         planeGameObject.transform.position = new Vector3(0, (topScreenHeight - groundLevelHeight) / 2, 0);
         planeBaseScript.currentPlaneState = PlaneBase.StateMachine.standard;
         planeBaseScript.planeRendererScript.ChangePlaneSprite();
@@ -77,7 +81,7 @@ public class LevelManager : MonoBehaviour
         double sectorWidth = 0.8 * currentlevelDistance / numberOfObstacles;
         for (int i = 1; i < numberOfObstacles + 1; i++)
         {
-            int obstacle = Random.Range(0, 3);
+            int obstacle = Random.Range(0, 2);
             if (obstacle == 0) //TREE
             {
                 float offsetY = treePrefab.GetComponent<SpriteRenderer>().bounds.size.y / 2;
@@ -99,16 +103,18 @@ public class LevelManager : MonoBehaviour
                     tree.transform.position += new Vector3(0, 3 * offsetY - 1f, 0);
                 }
             }
-            else if (obstacle == 1) //FOG
-            {
-                GameObject fog = Instantiate(fogPrefab, new Vector3((float)((0.1 * currentlevelDistance) + (i * sectorWidth)), (topScreenHeight - groundLevelHeight) / 2, 0), Quaternion.identity, transform);
-                fog.gameObject.name = "fog";
-            }
-            else if (obstacle == 2) //TROTYLLAUNCHER
+            else if (obstacle == 1) //TROTYLLAUNCHER
             {
                 GameObject trotylLauncher = Instantiate(trotylLauncherPrefab, new Vector3((float)((0.1 * currentlevelDistance) + (i * sectorWidth)), groundLevelHeight, 0), Quaternion.identity, transform);
                 trotylLauncher.gameObject.name = "trotylLauncher";
             }
+        }
+        int numberOfFogInstances = numberOfObstacles / 4;
+        for(int i= 0; i < numberOfFogInstances; i++)
+        {
+            float fogPlacementX = Random.Range((float)0.1 * currentlevelDistance, (float)0.9 * currentlevelDistance);
+            GameObject fog = Instantiate(fogPrefab, new Vector3(fogPlacementX, (topScreenHeight - groundLevelHeight) / 2, 0), Quaternion.identity, transform);
+            fog.gameObject.name = "fog";
         }
     }
     private void SpawnAirpot()
