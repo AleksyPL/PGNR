@@ -20,7 +20,7 @@ public class DifficultyManager : MonoBehaviour
         baseScript = GetComponent<PlaneBase>();
         difficultyImpulseDirection = 1f;
         difficultyMultiplier = 0;
-        difficultyImpulsTimeMin = baseScript.flightControllScript.levelCounter * 0.1f;
+        difficultyImpulsTimeMin = baseScript.levelManagerScript.levelCounter * 0.1f;
         difficultyImpulsTimeMax = 2 * difficultyImpulsTimeMin;
         difficultyImpulsTimeCurrent = Random.Range(difficultyImpulsTimeMin, difficultyImpulsTimeMax);
         difficultuImpulseCounter = difficultyImpulsTimeCurrent;

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class BottleOfVodka : MonoBehaviour
 {
-    [SerializeField] private GameObject crackedVersionPrefab;
+    public GameObject crackedVersionPrefab;
+    public GameObject explosionPrefab;
     void Start()
     {
 
@@ -13,8 +14,18 @@ public class BottleOfVodka : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Obstacle") || collision.gameObject.CompareTag("Ground"))
         {
-            //Destroy Objects TODO
-            Instantiate(crackedVersionPrefab, transform.position, Quaternion.identity);
+            if (collision.gameObject.transform.name == "birchTree")
+            {
+                collision.gameObject.GetComponent<DestroyAfterTime>().enabled = true;
+            }
+            else if (collision.gameObject.transform.name == "trotyl" || collision.gameObject.transform.name == "trotylLauncher")
+            {
+                Destroy(collision.gameObject);
+                if(explosionPrefab != null)
+                    Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+            }
+            if(crackedVersionPrefab !=null)
+                Instantiate(crackedVersionPrefab, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }

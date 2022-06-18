@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour
     {
         baseScript = planeGameObject.GetComponent<PlaneBase>();
         numberOfBottlesDrunk = 0;
-        currentYear = 2009 + baseScript.flightControllScript.levelCounter;
+        currentYear = 2009 + baseScript.levelManagerScript.levelCounter;
         UpdateUI();
     }
     internal void UpdateUI()

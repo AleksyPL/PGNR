@@ -13,25 +13,26 @@ public class PlaneBase : MonoBehaviour
     }
     public GameObject cameraGameObject;
     public GameObject UIGameObject;
+    public GameObject levelManagerGameObject;
     public float cameraPositionXOffset;
 
-    internal StateMachine currentPlaneState;
+    [SerializeField] internal StateMachine currentPlaneState;
     internal InputManager inputScript;
     internal AudioManager audioScript;
     internal FlightController flightControllScript;
     internal UIManager UIScript;
     internal PlaneRenderer planeRendererScript;
     internal DifficultyManager difficultyScript;
+    internal LevelManager levelManagerScript;
     void OnEnable()
     {
-
-        //audioScript = GetComponent<AudioManager>();
+        audioScript = GetComponent<AudioManager>();
         UIScript = UIGameObject.GetComponent<UIManager>();
         inputScript = GetComponent<InputManager>();
         flightControllScript = GetComponent<FlightController>();
         planeRendererScript = GetComponent<PlaneRenderer>();
         difficultyScript = GetComponent<DifficultyManager>();
-        currentPlaneState = StateMachine.wheelsOn;
+        levelManagerScript = levelManagerGameObject.GetComponent<LevelManager>();
     }
     void Update()
     {
@@ -41,21 +42,20 @@ public class PlaneBase : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Ground"))
         {
-            currentPlaneState = StateMachine.crashed;
             flightControllScript.isTouchingGround = true;
-            planeRendererScript.ChangePlaneSprite();
+            flightControllScript.DestroyThePlane();
         }
         else if(collision.gameObject.CompareTag("Airport"))
         {
             if(currentPlaneState == StateMachine.wheelsOn)
                 flightControllScript.isTouchingAirport = true;
         }
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Obstacle") || collision.gameObject.CompareTag("Projectile"))
+        else if (collision.gameObject.CompareTag("Obstacle"))
         {
-            flightControllScript.DamageThePlane();
+            if(currentPlaneState != StateMachine.damaged)
+                flightControllScript.DamageThePlane();
+            if(collision.gameObject.GetComponent<DestroyAfterTime>())
+                collision.gameObject.GetComponent<DestroyAfterTime>().enabled = true;
         }
     }
 }

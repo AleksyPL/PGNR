@@ -9,40 +9,46 @@ public class FlightController : MonoBehaviour
     public GameObject bottlePrefab;
     public GameObject smokePrefab;
     public GameObject explosionPrefab;
-    internal int levelCounter;
+    
     internal PlaneBase baseScript;
-    [SerializeField] internal float planeSpeed;
+    [SerializeField] internal float defaultPlaneSpeed;
     [SerializeField] internal float altitudeChangeForce;
     [SerializeField] internal float fallingForce;
     [SerializeField] internal float airportSlowingForce;
     [SerializeField] internal float bottleThrowForceMin;
     [SerializeField] internal float bottleThrowForceMax;
     [SerializeField] internal float bottleThrowForceIncreasmentPerFrame;
-    private float bottleThrowForceCurrent;
+    internal float currentPlaneSpeed;
     internal bool isTouchingAirport;
     internal bool isTouchingGround;
+    internal bool toNewLevel;
+    private float bottleThrowForceCurrent;
     
     void Start()
     {
         baseScript = GetComponent<PlaneBase>();
-        levelCounter = 1;
         isTouchingAirport = false;
         isTouchingGround = false;
+        currentPlaneSpeed = defaultPlaneSpeed;
         bottleThrowForceCurrent = bottleThrowForceMin;
     }
     void Update()
     {
         if (baseScript.currentPlaneState == PlaneBase.StateMachine.standard || baseScript.currentPlaneState == PlaneBase.StateMachine.wheelsOn)
         {
-            transform.position += new Vector3(planeSpeed, baseScript.inputScript.position.y * altitudeChangeForce, 0);
+            transform.position += new Vector3(currentPlaneSpeed, baseScript.inputScript.position.y * altitudeChangeForce, 0);
             if (isTouchingAirport)
             {
                 baseScript.inputScript.position.y = 0;
-                planeSpeed -= airportSlowingForce;
-                if (planeSpeed <= 0)
+                currentPlaneSpeed -= airportSlowingForce;
+                if (currentPlaneSpeed <= 0)
                 {
-                    planeSpeed = 0;
-                    //NEW LEVEL TODO
+                    currentPlaneSpeed = 0;
+                    if(!toNewLevel)
+                    {
+                        toNewLevel = true;
+                        baseScript.levelManagerScript.LoadLevel();
+                    }
                 }
             }  
             if (baseScript.currentPlaneState == PlaneBase.StateMachine.standard)
@@ -66,18 +72,19 @@ public class FlightController : MonoBehaviour
         else if (baseScript.currentPlaneState == PlaneBase.StateMachine.damaged)
         {
             baseScript.difficultyScript.enableDifficultyImpulses = false;
-            transform.position += new Vector3(0, -fallingForce, 0);
+            transform.position += new Vector3(currentPlaneSpeed, -fallingForce, 0);
         }
         else if (baseScript.currentPlaneState == PlaneBase.StateMachine.crashed)
         {
-            //RESTART LEVEL TODO
+            //TODO SOUNDS
+            //MAIN MENU
         }
     }
     internal void ThrowBottleOfVodka()
     {
         if (baseScript.currentPlaneState == PlaneBase.StateMachine.standard)
         {
-            GameObject bottle = Instantiate(bottlePrefab, bottleSpawner.transform.position, Quaternion.identity);
+            GameObject bottle = Instantiate(bottlePrefab, bottleSpawner.transform.position, Quaternion.identity, transform);
             bottle.GetComponent<Rigidbody2D>().AddForce(new Vector2(1,-1) * bottleThrowForceCurrent);
             baseScript.difficultyScript.difficultyMultiplier++;
             baseScript.UIScript.numberOfBottlesDrunk++;
@@ -91,6 +98,16 @@ public class FlightController : MonoBehaviour
         baseScript.planeRendererScript.ChangePlaneSprite();
         baseScript.planeRendererScript.ChangeTilt();
         if (smokePrefab != null)
-            Instantiate(smokePrefab, smokeSpawner.transform.position, Quaternion.identity);
+            Instantiate(smokePrefab, smokeSpawner.transform.position, Quaternion.Euler(270,0,0), smokeSpawner.transform);
+        if (explosionPrefab != null)
+            Instantiate(explosionPrefab, transform.position, Quaternion.identity, transform);
+    }
+    internal void DestroyThePlane()
+    {
+        baseScript.currentPlaneState = PlaneBase.StateMachine.crashed;
+        baseScript.planeRendererScript.ChangePlaneSprite();
+        baseScript.planeRendererScript.ChangeTilt();
+        if (explosionPrefab != null)
+            Instantiate(explosionPrefab, transform.position, Quaternion.identity, transform);
     }
 }

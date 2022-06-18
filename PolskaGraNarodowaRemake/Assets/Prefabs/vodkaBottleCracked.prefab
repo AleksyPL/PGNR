@@ -390,6 +390,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 219f16f7cfe4ec7448d2445f56814826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lifeTime: 5
+  enableFading: 0
 --- !u!1 &5855151004992711316
 GameObject:
   m_ObjectHideFlags: 0

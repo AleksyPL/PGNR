@@ -4,10 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Projectile
   - Airport
   - Ground
   - Obstacle
+  - Plane
   layers:
   - Default
   - TransparentFX
@@ -50,9 +50,6 @@ TagManager:
     locked: 0
   - name: Plane
     uniqueID: 1202104897
-    locked: 0
-  - name: Airport
-    uniqueID: 509424431
     locked: 0
   - name: Smoke
     uniqueID: 4119643997
