@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FlightController : MonoBehaviour
 {
@@ -41,6 +42,7 @@ public class FlightController : MonoBehaviour
             {
                 baseScript.inputScript.position.y = 0;
                 currentPlaneSpeed -= airportSlowingForce;
+                baseScript.difficultyScript.enableDifficultyImpulses = false;
                 if (currentPlaneSpeed <= 0)
                 {
                     currentPlaneSpeed = 0;
@@ -77,7 +79,7 @@ public class FlightController : MonoBehaviour
         else if (baseScript.currentPlaneState == PlaneBase.StateMachine.crashed)
         {
             //TODO SOUNDS
-            //MAIN MENU
+            SceneManager.LoadScene("MainMenu");
         }
     }
     internal void ThrowBottleOfVodka()
@@ -87,7 +89,6 @@ public class FlightController : MonoBehaviour
             GameObject bottle = Instantiate(bottlePrefab, bottleSpawner.transform.position, Quaternion.identity, transform);
             bottle.GetComponent<Rigidbody2D>().AddForce(new Vector2(1,-1) * bottleThrowForceCurrent);
             baseScript.difficultyScript.difficultyMultiplier++;
-            baseScript.UIScript.numberOfBottlesDrunk++;
             if (!baseScript.difficultyScript.enableDifficultyImpulses)
                 baseScript.difficultyScript.enableDifficultyImpulses = true;
         }

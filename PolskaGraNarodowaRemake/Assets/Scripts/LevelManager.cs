@@ -14,10 +14,10 @@ public class LevelManager : MonoBehaviour
     public float topScreenHeight;
     internal PlaneBase planeBaseScript;
     internal int levelCounter;
+    internal float currentlevelDistance;
+    internal float levelProgress;
+    internal int gameScore;
     private GameObject afterAirportDestroyPointGameObject;
-    private int gameScore;
-    private float currentlevelDistance;
-    private float levelProgress;
     private float scorePointsCounter;
     private int numberOfObstacles;
 
@@ -58,6 +58,7 @@ public class LevelManager : MonoBehaviour
             planeBaseScript.flightControllScript.currentPlaneSpeed = planeBaseScript.flightControllScript.defaultPlaneSpeed;
             planeBaseScript.flightControllScript.isTouchingAirport = false;
             planeBaseScript.flightControllScript.isTouchingGround = false;
+            planeBaseScript.difficultyScript.difficultyMultiplier = 0;
             foreach (Transform child in transform)
                 GameObject.Destroy(child.gameObject);
         }
@@ -67,12 +68,13 @@ public class LevelManager : MonoBehaviour
         numberOfObstacles = levelCounter * 3;
         planeGameObject.transform.position = new Vector3(0, (topScreenHeight - groundLevelHeight) / 2, 0);
         planeBaseScript.currentPlaneState = PlaneBase.StateMachine.standard;
+        planeBaseScript.planeRendererScript.ChangePlaneSprite();
         SpawnObstacles();
         SpawnAirpot();
     }
     private void SpawnObstacles()
     {
-        double sectorWidth = 0.9 * currentlevelDistance / numberOfObstacles;
+        double sectorWidth = 0.8 * currentlevelDistance / numberOfObstacles;
         for (int i = 1; i < numberOfObstacles + 1; i++)
         {
             int obstacle = Random.Range(0, 3);
@@ -111,7 +113,7 @@ public class LevelManager : MonoBehaviour
     }
     private void SpawnAirpot()
     {
-        GameObject airport = Instantiate(airportPrefab, new Vector3((float)1.4 * currentlevelDistance, groundLevelHeight, 0), Quaternion.identity, transform);
+        GameObject airport = Instantiate(airportPrefab, new Vector3((float)1.25 * currentlevelDistance, groundLevelHeight, 0), Quaternion.identity, transform);
         afterAirportDestroyPointGameObject = airport.transform.Find("DestroyPlanePoint").gameObject;
     }
     private void CheckIfThePlayerIsBehindTheAirport()

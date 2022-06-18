@@ -14,6 +14,7 @@ public class PlaneBase : MonoBehaviour
     public GameObject cameraGameObject;
     public GameObject UIGameObject;
     public GameObject levelManagerGameObject;
+    //public GameObject hitDetection
     public float cameraPositionXOffset;
 
     [SerializeField] internal StateMachine currentPlaneState;
@@ -37,25 +38,5 @@ public class PlaneBase : MonoBehaviour
     void Update()
     {
         cameraGameObject.transform.position = new Vector3(transform.position.x + cameraPositionXOffset, cameraGameObject.transform.position.y, cameraGameObject.transform.position.z);
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.CompareTag("Ground"))
-        {
-            flightControllScript.isTouchingGround = true;
-            flightControllScript.DestroyThePlane();
-        }
-        else if(collision.gameObject.CompareTag("Airport"))
-        {
-            if(currentPlaneState == StateMachine.wheelsOn)
-                flightControllScript.isTouchingAirport = true;
-        }
-        else if (collision.gameObject.CompareTag("Obstacle"))
-        {
-            if(currentPlaneState != StateMachine.damaged)
-                flightControllScript.DamageThePlane();
-            if(collision.gameObject.GetComponent<DestroyAfterTime>())
-                collision.gameObject.GetComponent<DestroyAfterTime>().enabled = true;
-        }
     }
 }
