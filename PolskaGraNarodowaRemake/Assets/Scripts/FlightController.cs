@@ -24,6 +24,8 @@ public class FlightController : MonoBehaviour
     internal bool isTouchingGround;
     internal bool toNewLevel;
     private float bottleThrowForceCurrent;
+    [SerializeField] private float waitingTimeAfterSoundEffect;
+    private float waitingTimeForSoundEffectCurrent;
     
     void Start()
     {
@@ -32,11 +34,14 @@ public class FlightController : MonoBehaviour
         isTouchingGround = false;
         currentPlaneSpeed = defaultPlaneSpeed;
         bottleThrowForceCurrent = bottleThrowForceMin;
+        if (waitingTimeAfterSoundEffect == 0)
+            waitingTimeAfterSoundEffect = 3f;
     }
     void Update()
     {
         if (baseScript.currentPlaneState == PlaneBase.StateMachine.standard || baseScript.currentPlaneState == PlaneBase.StateMachine.wheelsOn)
         {
+            baseScript.audioScript.PlaySound("EngineSound", baseScript.audioScript.SFX);
             transform.position += new Vector3(currentPlaneSpeed * Time.deltaTime, baseScript.inputScript.position.y * altitudeChangeForce * Time.deltaTime, 0);
             if (isTouchingAirport)
             {
@@ -46,10 +51,19 @@ public class FlightController : MonoBehaviour
                 if (currentPlaneSpeed <= 0)
                 {
                     currentPlaneSpeed = 0;
-                    if(!toNewLevel)
+                    baseScript.audioScript.PlaySound("Tires", baseScript.audioScript.SFX);
+                    if (!toNewLevel)
                     {
-                        toNewLevel = true;
-                        baseScript.levelManagerScript.LoadLevel();
+                        baseScript.audioScript.StopPlayingAllSounds();
+                        int randomSoundEffect = Random.Range(0, baseScript.audioScript.landingSounds.Length);
+                        float waitingTimeForSoundEffectCombinedWithSound = baseScript.audioScript.PlaySound("Landing" + randomSoundEffect, baseScript.audioScript.landingSounds);
+                        waitingTimeForSoundEffectCurrent += Time.deltaTime;
+                        if(waitingTimeForSoundEffectCurrent >= waitingTimeForSoundEffectCombinedWithSound)
+                        {
+                            waitingTimeForSoundEffectCurrent = 0;
+                            toNewLevel = true;
+                            baseScript.levelManagerScript.LoadLevel();
+                        }
                     }
                 }
             }  
@@ -78,8 +92,12 @@ public class FlightController : MonoBehaviour
         }
         else if (baseScript.currentPlaneState == PlaneBase.StateMachine.crashed)
         {
-            //TODO SOUNDS
-            SceneManager.LoadScene("MainMenu");
+            waitingTimeForSoundEffectCurrent += Time.deltaTime;
+            if(waitingTimeForSoundEffectCurrent >= waitingTimeAfterSoundEffect)
+            {
+                waitingTimeForSoundEffectCurrent = 0;
+                SceneManager.LoadScene("MainMenu");
+            }
         }
     }
     internal void ThrowBottleOfVodka()
@@ -98,17 +116,28 @@ public class FlightController : MonoBehaviour
         baseScript.currentPlaneState = PlaneBase.StateMachine.damaged;
         baseScript.planeRendererScript.ChangePlaneSprite();
         baseScript.planeRendererScript.ChangeTilt();
+        baseScript.audioScript.StopPlayingAllSounds();
+        baseScript.audioScript.PlaySound("Whistle", baseScript.audioScript.SFX);
         if (smokePrefab != null)
             Instantiate(smokePrefab, smokeSpawner.transform.position, Quaternion.Euler(270,0,0), smokeSpawner.transform);
         if (explosionPrefab != null)
+        {
             Instantiate(explosionPrefab, transform.position, Quaternion.identity, transform);
+            baseScript.audioScript.PlaySound("Explosion", baseScript.audioScript.SFX);
+        }
+        int randomSoundEffect = Random.Range(0, baseScript.audioScript.hitReactionSounds.Length);
+        baseScript.audioScript.PlaySound("HitReaction" + randomSoundEffect, baseScript.audioScript.hitReactionSounds);
     }
     internal void DestroyThePlane()
     {
         baseScript.currentPlaneState = PlaneBase.StateMachine.crashed;
         baseScript.planeRendererScript.ChangePlaneSprite();
         baseScript.planeRendererScript.ChangeTilt();
+        baseScript.audioScript.StopPlayingAllSounds();
         if (explosionPrefab != null)
+        {
             Instantiate(explosionPrefab, transform.position, Quaternion.identity, transform);
+            baseScript.audioScript.PlaySound("Explosion", baseScript.audioScript.SFX);
+        }   
     }
 }

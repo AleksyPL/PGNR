@@ -8,10 +8,14 @@ public class TrotylLauncher : MonoBehaviour
     [SerializeField] private GameObject trotylPrefab;
     [SerializeField] private float rateOfFire;
     [SerializeField] private float launchForce;
+    private GameObject audioManagerGameObject;
+    private AudioManager audioScript;
     private float rateOfFireCounter;
     void Start()
     {
         rateOfFireCounter = 0;
+        audioManagerGameObject = GameObject.Find("AudioManager");
+        audioScript = audioManagerGameObject.GetComponent<AudioManager>();
     }
     void Update()
     {
@@ -29,6 +33,7 @@ public class TrotylLauncher : MonoBehaviour
             GameObject trotyl = Instantiate(trotylPrefab, lauchingPoint.transform.position, Quaternion.identity, transform);
             trotyl.gameObject.name = "trotyl";
             trotyl.GetComponent<Rigidbody2D>().AddForce(Vector2.up * launchForce);
+            audioScript.PlaySound("Cannon", audioScript.SFX);
         }
     }
 }

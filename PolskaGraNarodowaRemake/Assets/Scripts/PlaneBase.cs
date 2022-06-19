@@ -14,7 +14,7 @@ public class PlaneBase : MonoBehaviour
     public GameObject cameraGameObject;
     public GameObject UIGameObject;
     public GameObject levelManagerGameObject;
-    //public GameObject hitDetection
+    public GameObject audioManagerGameObject;
     public float cameraPositionXOffset;
 
     [SerializeField] internal StateMachine currentPlaneState;
@@ -28,13 +28,13 @@ public class PlaneBase : MonoBehaviour
     void OnEnable()
     {
         Application.targetFrameRate = 144;
-        audioScript = GetComponent<AudioManager>();
+        audioScript = audioManagerGameObject.GetComponent<AudioManager>();
         UIScript = UIGameObject.GetComponent<UIManager>();
+        levelManagerScript = levelManagerGameObject.GetComponent<LevelManager>();
         inputScript = GetComponent<InputManager>();
         flightControllScript = GetComponent<FlightController>();
         planeRendererScript = GetComponent<PlaneRenderer>();
         difficultyScript = GetComponent<DifficultyManager>();
-        levelManagerScript = levelManagerGameObject.GetComponent<LevelManager>();
     }
     void Update()
     {

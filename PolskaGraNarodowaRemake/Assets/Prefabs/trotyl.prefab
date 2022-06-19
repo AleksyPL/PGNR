@@ -100,6 +100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionPrefab: {fileID: 3555890799097804707, guid: c87b6386b15942e4c8eb26d445727a4e, type: 3}
+  audioManagerGameObject: {fileID: 0}
+  audioScript: {fileID: 0}
 --- !u!50 &937941669505461809
 Rigidbody2D:
   serializedVersion: 4
