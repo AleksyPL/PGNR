@@ -144,10 +144,10 @@ MonoBehaviour:
     looping: 0
     source: {fileID: 0}
   SFX:
-  - clip: {fileID: 8300000, guid: 577b61681f2707949b3487eb1c855cbc, type: 3}
+  - clip: {fileID: 8300000, guid: 36dfecd7cee10d14a81a39d871f534bf, type: 3}
     name: EngineSound
-    volume: 1
-    pitch: 1
+    volume: 0.4
+    pitch: 0.9
     looping: 1
     source: {fileID: 0}
   - clip: {fileID: 8300000, guid: a4272c560b2baeb43b5f9929f152ddda, type: 3}

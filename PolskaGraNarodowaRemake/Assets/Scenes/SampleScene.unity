@@ -1171,7 +1171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bottleSpawner: {fileID: 389405705}
   smokeSpawner: {fileID: 1926977438}
-  bottlePrefab: {fileID: 108019949142448873, guid: dc51cdc406a34804c9562f02baf278d7, type: 3}
+  bottlePrefab: {fileID: 7997397083522814020, guid: dc51cdc406a34804c9562f02baf278d7, type: 3}
   smokePrefab: {fileID: 3160574352092641783, guid: 070ad948d9e93f940adbc5350b5de6f1, type: 3}
   explosionPrefab: {fileID: 3555890799097804707, guid: c87b6386b15942e4c8eb26d445727a4e, type: 3}
   defaultPlaneSpeed: 6.5
@@ -1181,7 +1181,7 @@ MonoBehaviour:
   bottleThrowForceMin: 150
   bottleThrowForceMax: 700
   bottleThrowForceIncreasmentPerFrame: 1000
-  waitingTimeAfterSoundEffect: 3
+  waitingTimeAfterLanding: 0
 --- !u!114 &666150295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1195,7 +1195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   altitudeChangeForceOverridedMultiplier: 3
-  difficultyImpulseForce: 1
+  difficultyImpulseForce: 2.5
 --- !u!50 &666150296
 Rigidbody2D:
   serializedVersion: 4
@@ -1255,7 +1255,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   groundLevelHeight: 0.6
-  topScreenHeight: 18
+  topScreenHeight: 15
 --- !u!4 &776378767
 Transform:
   m_ObjectHideFlags: 0
@@ -1956,6 +1956,22 @@ PrefabInstance:
     - target: {fileID: 5961415093726692382, guid: 03ef519fc35c46a4eaadc7545d8d0dca, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5961415093726692383, guid: 03ef519fc35c46a4eaadc7545d8d0dca, type: 3}
+      propertyPath: planeGameObject
+      value: 
+      objectReference: {fileID: 666150285}
+    - target: {fileID: 5961415093726692383, guid: 03ef519fc35c46a4eaadc7545d8d0dca, type: 3}
+      propertyPath: waitingTimeForOneLiner
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5961415093726692383, guid: 03ef519fc35c46a4eaadc7545d8d0dca, type: 3}
+      propertyPath: waitingTimeAfterLanding
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5961415093726692383, guid: 03ef519fc35c46a4eaadc7545d8d0dca, type: 3}
+      propertyPath: waitingTimeAfterSoundEffect
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

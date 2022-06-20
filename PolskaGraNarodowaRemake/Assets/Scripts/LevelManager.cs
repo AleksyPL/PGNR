@@ -62,10 +62,15 @@ public class LevelManager : MonoBehaviour
             planeBaseScript.flightControllScript.currentPlaneSpeed = planeBaseScript.flightControllScript.defaultPlaneSpeed;
             planeBaseScript.flightControllScript.isTouchingAirport = false;
             planeBaseScript.flightControllScript.isTouchingGround = false;
+            planeBaseScript.flightControllScript.waitingTimeAfterLandingCombinedWithSoundLength = 3f;
             planeBaseScript.difficultyScript.difficultyMultiplier = 0;
+            planeBaseScript.audioScript.tiresSFXPlayed = false;
+            planeBaseScript.audioScript.landingSpeechPlayed = false;
+            planeBaseScript.flightControllScript.altitudeChangeForceCurrent = planeBaseScript.flightControllScript.altitudeChangeForce;
             foreach (Transform child in transform)
                 GameObject.Destroy(child.gameObject);
         }
+        planeBaseScript.audioScript.PlaySound("EngineSound", planeBaseScript.audioScript.SFX);
         levelProgress = 0;
         scorePointsCounter = 0;
         currentlevelDistance = 100 + levelCounter * 10;

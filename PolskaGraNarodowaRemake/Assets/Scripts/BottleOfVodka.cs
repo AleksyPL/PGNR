@@ -6,6 +6,7 @@ public class BottleOfVodka : MonoBehaviour
 {
     public GameObject crackedVersionPrefab;
     public GameObject explosionPrefab;
+    public float debrisSplashForce;
     private GameObject audioManagerGameObject;
     private AudioManager audioScript;
     void Start()
@@ -29,7 +30,13 @@ public class BottleOfVodka : MonoBehaviour
                     Instantiate(explosionPrefab, transform.position, Quaternion.identity);
             }
             if(crackedVersionPrefab !=null)
-                Instantiate(crackedVersionPrefab, transform.position, Quaternion.identity);
+            {
+                GameObject bottle = Instantiate(crackedVersionPrefab, transform.position, Quaternion.identity);
+                foreach (Transform child in bottle.transform)
+                {
+                    child.gameObject.GetComponent<Rigidbody2D>().AddForce(Random.insideUnitCircle.normalized * debrisSplashForce);
+                }
+            }
             Destroy(gameObject);
         }
     }

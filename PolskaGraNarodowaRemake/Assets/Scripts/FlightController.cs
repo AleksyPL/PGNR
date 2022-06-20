@@ -19,14 +19,16 @@ public class FlightController : MonoBehaviour
     [SerializeField] internal float bottleThrowForceMin;
     [SerializeField] internal float bottleThrowForceMax;
     [SerializeField] internal float bottleThrowForceIncreasmentPerFrame;
+    [SerializeField] internal float waitingTimeAfterLanding;
+    internal float altitudeChangeForceCurrent;
+    internal float waitingTimeAfterLandingCurrent;
+    internal float waitingTimeAfterLandingCombinedWithSoundLength;
     internal float currentPlaneSpeed;
     internal bool isTouchingAirport;
     internal bool isTouchingGround;
     internal bool toNewLevel;
     private float bottleThrowForceCurrent;
-    [SerializeField] private float waitingTimeAfterSoundEffect;
-    private float waitingTimeForSoundEffectCurrent;
-    
+
     void Start()
     {
         baseScript = GetComponent<PlaneBase>();
@@ -34,15 +36,18 @@ public class FlightController : MonoBehaviour
         isTouchingGround = false;
         currentPlaneSpeed = defaultPlaneSpeed;
         bottleThrowForceCurrent = bottleThrowForceMin;
-        if (waitingTimeAfterSoundEffect == 0)
-            waitingTimeAfterSoundEffect = 3f;
+        altitudeChangeForceCurrent = altitudeChangeForce;
+        if (waitingTimeAfterLanding == 0)
+            waitingTimeAfterLanding = 3f;
+        waitingTimeAfterLandingCombinedWithSoundLength = waitingTimeAfterLanding;
     }
     void Update()
     {
         if (baseScript.currentPlaneState == PlaneBase.StateMachine.standard || baseScript.currentPlaneState == PlaneBase.StateMachine.wheelsOn)
         {
-            baseScript.audioScript.PlaySound("EngineSound", baseScript.audioScript.SFX);
-            transform.position += new Vector3(currentPlaneSpeed * Time.deltaTime, baseScript.inputScript.position.y * altitudeChangeForce * Time.deltaTime, 0);
+            transform.position += new Vector3(currentPlaneSpeed * Time.deltaTime, baseScript.inputScript.position.y * altitudeChangeForceCurrent * Time.deltaTime, 0);
+            if (transform.position.y > baseScript.levelManagerScript.topScreenHeight)
+                transform.position = new Vector3(transform.position.x, baseScript.levelManagerScript.topScreenHeight, 0);
             if (isTouchingAirport)
             {
                 baseScript.inputScript.position.y = 0;
@@ -51,20 +56,18 @@ public class FlightController : MonoBehaviour
                 if (currentPlaneSpeed <= 0)
                 {
                     currentPlaneSpeed = 0;
-                    baseScript.audioScript.PlaySound("Tires", baseScript.audioScript.SFX);
                     if (!toNewLevel)
                     {
-                        baseScript.audioScript.StopPlayingAllSounds();
-                        int randomSoundEffect = Random.Range(0, baseScript.audioScript.landingSounds.Length);
-                        float waitingTimeForSoundEffectCombinedWithSound = baseScript.audioScript.PlaySound("Landing" + randomSoundEffect, baseScript.audioScript.landingSounds);
-                        waitingTimeForSoundEffectCurrent += Time.deltaTime;
-                        if(waitingTimeForSoundEffectCurrent >= waitingTimeForSoundEffectCombinedWithSound)
+                        waitingTimeAfterLandingCurrent += Time.deltaTime;
+                        if (waitingTimeAfterLandingCurrent >= waitingTimeAfterLandingCombinedWithSoundLength)
                         {
-                            waitingTimeForSoundEffectCurrent = 0;
                             toNewLevel = true;
+                            waitingTimeAfterLandingCurrent = 0;
+                            waitingTimeAfterLandingCombinedWithSoundLength = waitingTimeAfterLanding;
                             baseScript.levelManagerScript.LoadLevel();
                         }
                     }
+                    
                 }
             }  
             if (baseScript.currentPlaneState == PlaneBase.StateMachine.standard)
@@ -92,10 +95,10 @@ public class FlightController : MonoBehaviour
         }
         else if (baseScript.currentPlaneState == PlaneBase.StateMachine.crashed)
         {
-            waitingTimeForSoundEffectCurrent += Time.deltaTime;
-            if(waitingTimeForSoundEffectCurrent >= waitingTimeAfterSoundEffect)
+            waitingTimeAfterLandingCurrent += Time.deltaTime;
+            if(waitingTimeAfterLandingCurrent >= waitingTimeAfterLanding)
             {
-                waitingTimeForSoundEffectCurrent = 0;
+                waitingTimeAfterLandingCurrent = 0;
                 SceneManager.LoadScene("MainMenu");
             }
         }
@@ -104,7 +107,7 @@ public class FlightController : MonoBehaviour
     {
         if (baseScript.currentPlaneState == PlaneBase.StateMachine.standard)
         {
-            GameObject bottle = Instantiate(bottlePrefab, bottleSpawner.transform.position, Quaternion.identity, transform);
+            GameObject bottle = Instantiate(bottlePrefab, bottleSpawner.transform.position, Quaternion.identity);
             bottle.GetComponent<Rigidbody2D>().AddForce(new Vector2(1,-1) * bottleThrowForceCurrent);
             baseScript.difficultyScript.difficultyMultiplier++;
             if (!baseScript.difficultyScript.enableDifficultyImpulses)
@@ -133,7 +136,8 @@ public class FlightController : MonoBehaviour
         baseScript.currentPlaneState = PlaneBase.StateMachine.crashed;
         baseScript.planeRendererScript.ChangePlaneSprite();
         baseScript.planeRendererScript.ChangeTilt();
-        baseScript.audioScript.StopPlayingAllSounds();
+        baseScript.audioScript.StopPlayingSound("Whistle", baseScript.audioScript.SFX);
+        baseScript.audioScript.StopPlayingSound("EngineSound", baseScript.audioScript.SFX);
         if (explosionPrefab != null)
         {
             Instantiate(explosionPrefab, transform.position, Quaternion.identity, transform);
