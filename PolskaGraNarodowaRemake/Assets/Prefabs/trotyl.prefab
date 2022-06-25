@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2556357277673851122}
   - component: {fileID: 937941669505461809}
   - component: {fileID: 7924182334964914369}
+  - component: {fileID: 8825213249731877797}
   m_Layer: 7
   m_Name: trotyl
   m_TagString: Obstacle
@@ -100,8 +101,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionPrefab: {fileID: 3555890799097804707, guid: c87b6386b15942e4c8eb26d445727a4e, type: 3}
-  audioManagerGameObject: {fileID: 0}
-  audioScript: {fileID: 0}
 --- !u!50 &937941669505461809
 Rigidbody2D:
   serializedVersion: 4
@@ -149,3 +148,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5948925, y: 1.4256496}
   m_EdgeRadius: 0
+--- !u!114 &8825213249731877797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2771468909368673902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 219f16f7cfe4ec7448d2445f56814826, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeTime: 10
+  enableFading: 0
+  cameraGameObject: {fileID: 0}

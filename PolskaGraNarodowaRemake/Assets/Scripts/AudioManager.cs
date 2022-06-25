@@ -10,13 +10,14 @@ public class AudioManager : MonoBehaviour
     public Sound[] landingSounds;
     public Sound[] SFX;
     public Sound[] otherSounds;
-    public GameObject planeGameObject;
+    [SerializeField] internal GameObject planeGameObject;
     internal PlaneBase planeBaseScript;
     [SerializeField] internal float waitingTimeForOneLiner;
     private float waitingTimeForOneLinerCurrent;
     private bool canPlayOneLiner;
     internal bool tiresSFXPlayed;
     internal bool landingSpeechPlayed;
+    internal List<Sound> pausedSounds;
     void Awake()
     {
         LoadSounds(oneLinersSounds);
@@ -36,6 +37,7 @@ public class AudioManager : MonoBehaviour
         canPlayOneLiner = false;
         tiresSFXPlayed = false;
         landingSpeechPlayed = false;
+        pausedSounds = new List<Sound>();
     }
     void Update()
     {
@@ -162,5 +164,47 @@ public class AudioManager : MonoBehaviour
         foreach (Sound s in otherSounds)
             if (s.source.isPlaying)
                 s.source.Stop();
+    }
+    public void PausePlayingAllSounds()
+    {
+        foreach (Sound s in oneLinersSounds)
+            if (s.source.isPlaying)
+            {
+                s.source.Pause();
+                pausedSounds.Add(s);
+            }
+        foreach (Sound s in hitReactionSounds)
+            if (s.source.isPlaying)
+            {
+                s.source.Pause();
+                pausedSounds.Add(s);
+            }
+        foreach (Sound s in landingSounds)
+            if (s.source.isPlaying)
+            {
+                s.source.Pause();
+                pausedSounds.Add(s);
+            }
+        foreach (Sound s in SFX)
+            if (s.source.isPlaying)
+            {
+                s.source.Pause();
+                pausedSounds.Add(s);
+            }
+        foreach (Sound s in otherSounds)
+            if (s.source.isPlaying)
+            {
+                s.source.Pause();
+                pausedSounds.Add(s);
+            }
+    }
+    public void ResumeAllPausedSounds()
+    {
+        if(pausedSounds.Count != 0)
+        {
+            foreach (Sound s in pausedSounds)
+                s.source.UnPause();
+            pausedSounds.Clear();
+        }
     }
 }

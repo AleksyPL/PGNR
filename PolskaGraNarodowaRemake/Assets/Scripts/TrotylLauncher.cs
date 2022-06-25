@@ -30,7 +30,7 @@ public class TrotylLauncher : MonoBehaviour
     {
         if (trotylPrefab != null && lauchingPoint != null)
         {
-            GameObject trotyl = Instantiate(trotylPrefab, lauchingPoint.transform.position, Quaternion.identity, transform);
+            GameObject trotyl = Instantiate(trotylPrefab, lauchingPoint.transform.position, Quaternion.identity);
             trotyl.gameObject.name = "trotyl";
             trotyl.GetComponent<Rigidbody2D>().AddForce(Vector2.up * launchForce);
             audioScript.PlaySound("Cannon", audioScript.SFX);

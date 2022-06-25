@@ -8,11 +8,13 @@ public class InputManager : MonoBehaviour
     internal bool spaceHold;
     internal bool spaceReleased;
     internal PlaneBase baseScript;
+    internal bool ESCpressed;
     void Start()
     {
         baseScript = GetComponent<PlaneBase>();
         position = Vector3.zero;
         spaceHold = false;
+        ESCpressed = false;
     }
     void Update()
     {
@@ -23,5 +25,7 @@ public class InputManager : MonoBehaviour
             spaceHold = Input.GetButton("Jump");
             spaceReleased = Input.GetButtonUp("Jump");
         }
+        if(baseScript.currentPlaneState != PlaneBase.StateMachine.crashed)
+            ESCpressed = Input.GetButtonDown("Cancel");
     }
 }

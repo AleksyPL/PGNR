@@ -30,27 +30,30 @@ public class LevelManager : MonoBehaviour
     }
     void Update()
     {
-        if(planeBaseScript.flightControllScript.currentPlaneSpeed > 0 && planeBaseScript.currentPlaneState == PlaneBase.StateMachine.standard)
+        if (planeBaseScript.flightControllScript.currentPlaneSpeed > 0 && (planeBaseScript.currentPlaneState == PlaneBase.StateMachine.standard || planeBaseScript.currentPlaneState == PlaneBase.StateMachine.wheelsOn))
         {
             scorePointsCounter += Time.deltaTime;
-            if(scorePointsCounter > 1)
+            if (scorePointsCounter > 1)
             {
                 scorePointsCounter = 0;
                 gameScore++;
             }
-            if (levelProgress < currentlevelDistance)
-                levelProgress += planeBaseScript.flightControllScript.currentPlaneSpeed * Time.deltaTime;
-            if (levelProgress >= currentlevelDistance)
+            if (planeBaseScript.currentPlaneState == PlaneBase.StateMachine.standard)
             {
-                levelProgress = currentlevelDistance;
-                planeBaseScript.currentPlaneState = PlaneBase.StateMachine.wheelsOn;
-                planeBaseScript.planeRendererScript.ChangePlaneSprite();
+                if (levelProgress < currentlevelDistance)
+                    levelProgress += planeBaseScript.flightControllScript.currentPlaneSpeed * Time.deltaTime;
+                if (levelProgress >= currentlevelDistance)
+                {
+                    levelProgress = currentlevelDistance;
+                    planeBaseScript.currentPlaneState = PlaneBase.StateMachine.wheelsOn;
+                    planeBaseScript.planeRendererScript.ChangePlaneSprite();
+                }
             }
-        }
-        else if(planeBaseScript.flightControllScript.currentPlaneSpeed > 0 && planeBaseScript.currentPlaneState == PlaneBase.StateMachine.wheelsOn)
-        {
-            if (levelProgress >= currentlevelDistance)
-                CheckIfThePlayerIsBehindTheAirport();
+            else if(planeBaseScript.currentPlaneState == PlaneBase.StateMachine.wheelsOn)
+            {
+                if (levelProgress >= currentlevelDistance)
+                    CheckIfThePlayerIsBehindTheAirport();
+            }
         }
     }
     internal void LoadLevel()
@@ -63,6 +66,7 @@ public class LevelManager : MonoBehaviour
             planeBaseScript.flightControllScript.isTouchingAirport = false;
             planeBaseScript.flightControllScript.isTouchingGround = false;
             planeBaseScript.flightControllScript.waitingTimeAfterLandingCombinedWithSoundLength = 3f;
+            planeBaseScript.flightControllScript.rewardForLandingAdded = false;
             planeBaseScript.difficultyScript.difficultyMultiplier = 0;
             planeBaseScript.audioScript.tiresSFXPlayed = false;
             planeBaseScript.audioScript.landingSpeechPlayed = false;
@@ -90,7 +94,7 @@ public class LevelManager : MonoBehaviour
             if (obstacle == 0) //TREE
             {
                 float offsetY = treePrefab.GetComponent<SpriteRenderer>().bounds.size.y / 2;
-                GameObject tree = Instantiate(treePrefab, new Vector3((float)((0.1 * currentlevelDistance) + (i*sectorWidth)), groundLevelHeight, 0), Quaternion.identity, transform);
+                GameObject tree = Instantiate(treePrefab, new Vector3((float)((0.1 * currentlevelDistance) + (i * sectorWidth)), groundLevelHeight, 0), Quaternion.identity, transform);
                 tree.gameObject.name = "birchTree";
                 int treeHeight = Random.Range(0, 3);
                 if (treeHeight == 0)

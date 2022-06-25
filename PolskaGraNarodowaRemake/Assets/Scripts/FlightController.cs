@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class FlightController : MonoBehaviour
 {
@@ -10,34 +9,39 @@ public class FlightController : MonoBehaviour
     public GameObject bottlePrefab;
     public GameObject smokePrefab;
     public GameObject explosionPrefab;
-    
+    public int rewardForLanding;
     internal PlaneBase baseScript;
     [SerializeField] internal float defaultPlaneSpeed;
     [SerializeField] internal float altitudeChangeForce;
     [SerializeField] internal float fallingForce;
     [SerializeField] internal float airportSlowingForce;
-    [SerializeField] internal float bottleThrowForceMin;
-    [SerializeField] internal float bottleThrowForceMax;
-    [SerializeField] internal float bottleThrowForceIncreasmentPerFrame;
+    [SerializeField] private float bottleThrowForceMin;
+    [SerializeField] private float bottleThrowForceMax;
+    [SerializeField] internal float timeToFullyChargeBottleThrow;
     [SerializeField] internal float waitingTimeAfterLanding;
+    [SerializeField] private Vector2 bottleThrowAngleMin;
+    [SerializeField] private Vector2 bottleThrowAngleMax;
     internal float altitudeChangeForceCurrent;
     internal float waitingTimeAfterLandingCurrent;
     internal float waitingTimeAfterLandingCombinedWithSoundLength;
     internal float currentPlaneSpeed;
+    internal float drunkBottlesInTotal;
     internal bool isTouchingAirport;
     internal bool isTouchingGround;
     internal bool toNewLevel;
-    private float bottleThrowForceCurrent;
+    internal bool rewardForLandingAdded;
+    private float timeToFullyChargeBottleThrowCounter;
 
     void Start()
     {
         baseScript = GetComponent<PlaneBase>();
         isTouchingAirport = false;
         isTouchingGround = false;
+        rewardForLandingAdded = false;
         currentPlaneSpeed = defaultPlaneSpeed;
-        bottleThrowForceCurrent = bottleThrowForceMin;
         altitudeChangeForceCurrent = altitudeChangeForce;
-        if (waitingTimeAfterLanding == 0)
+        drunkBottlesInTotal = 0;
+        if (waitingTimeAfterLanding <= 0)
             waitingTimeAfterLanding = 3f;
         waitingTimeAfterLandingCombinedWithSoundLength = waitingTimeAfterLanding;
     }
@@ -56,6 +60,11 @@ public class FlightController : MonoBehaviour
                 if (currentPlaneSpeed <= 0)
                 {
                     currentPlaneSpeed = 0;
+                    if (!rewardForLandingAdded)
+                    {
+                        rewardForLandingAdded = true;
+                        baseScript.levelManagerScript.gameScore += rewardForLanding;
+                    }
                     if (!toNewLevel)
                     {
                         waitingTimeAfterLandingCurrent += Time.deltaTime;
@@ -67,24 +76,22 @@ public class FlightController : MonoBehaviour
                             baseScript.levelManagerScript.LoadLevel();
                         }
                     }
-                    
                 }
             }  
             if (baseScript.currentPlaneState == PlaneBase.StateMachine.standard)
             {
                 if (baseScript.inputScript.spaceHold)
                 {
-                    if(bottleThrowForceCurrent < bottleThrowForceMax)
-                    {
-                        bottleThrowForceCurrent += bottleThrowForceIncreasmentPerFrame * Time.deltaTime;
-                        if (bottleThrowForceCurrent > bottleThrowForceMax)
-                            bottleThrowForceCurrent = bottleThrowForceMax;
-                    }
+                    if (timeToFullyChargeBottleThrowCounter < timeToFullyChargeBottleThrow)
+                        timeToFullyChargeBottleThrowCounter += Time.deltaTime;
                 }
                 if (baseScript.inputScript.spaceReleased)
                 {
-                    ThrowBottleOfVodka();
-                    bottleThrowForceCurrent = bottleThrowForceMin;
+                    float bottleThrowForceCurrent = Mathf.Lerp(bottleThrowForceMin, bottleThrowForceMax, timeToFullyChargeBottleThrowCounter / timeToFullyChargeBottleThrow);
+                    Vector2 bottleThrowAngleCurrent = Vector2.Lerp(bottleThrowAngleMin, bottleThrowAngleMax, timeToFullyChargeBottleThrowCounter / timeToFullyChargeBottleThrow);
+                    ThrowBottleOfVodka(bottleThrowForceCurrent, bottleThrowAngleCurrent);
+                    drunkBottlesInTotal++;
+                    timeToFullyChargeBottleThrowCounter = 0;
                 }
             }
         }
@@ -99,16 +106,16 @@ public class FlightController : MonoBehaviour
             if(waitingTimeAfterLandingCurrent >= waitingTimeAfterLanding)
             {
                 waitingTimeAfterLandingCurrent = 0;
-                SceneManager.LoadScene("MainMenu");
+                baseScript.UIScript.EnableGameSummaryScreen();
             }
         }
     }
-    internal void ThrowBottleOfVodka()
+    internal void ThrowBottleOfVodka(float bottleThrowForce, Vector2 bottleThrowAngle)
     {
         if (baseScript.currentPlaneState == PlaneBase.StateMachine.standard)
         {
             GameObject bottle = Instantiate(bottlePrefab, bottleSpawner.transform.position, Quaternion.identity);
-            bottle.GetComponent<Rigidbody2D>().AddForce(new Vector2(1,-1) * bottleThrowForceCurrent);
+            bottle.GetComponent<Rigidbody2D>().AddForce(bottleThrowAngle * bottleThrowForce);
             baseScript.difficultyScript.difficultyMultiplier++;
             if (!baseScript.difficultyScript.enableDifficultyImpulses)
                 baseScript.difficultyScript.enableDifficultyImpulses = true;
