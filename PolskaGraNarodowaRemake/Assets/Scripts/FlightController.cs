@@ -106,7 +106,7 @@ public class FlightController : MonoBehaviour
             if(waitingTimeAfterLandingCurrent >= waitingTimeAfterLanding)
             {
                 waitingTimeAfterLandingCurrent = 0;
-                baseScript.UIScript.EnableGameSummaryScreen();
+                baseScript.UIScript.EnableGameOverScreen();
             }
         }
     }
@@ -145,10 +145,12 @@ public class FlightController : MonoBehaviour
         baseScript.planeRendererScript.ChangeTilt();
         baseScript.audioScript.StopPlayingSound("Whistle", baseScript.audioScript.SFX);
         baseScript.audioScript.StopPlayingSound("EngineSound", baseScript.audioScript.SFX);
+        if (smokePrefab != null)
+            Instantiate(smokePrefab, smokeSpawner.transform.position, Quaternion.Euler(270, 0, 0), smokeSpawner.transform);
         if (explosionPrefab != null)
         {
             Instantiate(explosionPrefab, transform.position, Quaternion.identity, transform);
             baseScript.audioScript.PlaySound("Explosion", baseScript.audioScript.SFX);
-        }   
+        }
     }
 }
