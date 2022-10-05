@@ -8,7 +8,8 @@ public class Sound
     public AudioClip clip;
     public string name;
     [Range(0,1)]
-    public float volume;
+    public float volumeSetInEditor;
+    internal float volume;
     [Range(-3f, 3f)]
     public float pitch;
     public bool looping;

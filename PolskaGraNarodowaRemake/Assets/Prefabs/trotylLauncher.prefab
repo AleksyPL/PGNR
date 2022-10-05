@@ -133,9 +133,8 @@ MonoBehaviour:
   lauchingPoint: {fileID: 1503522993}
   trotylPrefab: {fileID: 2771468909368673902, guid: 96a2bd41f142fd64ab160ae0a77fa362, type: 3}
   rateOfFire: 5
+  maxLaunchDelay: 3
   launchForce: 850
-  audioManagerGameObject: {fileID: 0}
-  audioScript: {fileID: 0}
 --- !u!61 &1877591846
 BoxCollider2D:
   m_ObjectHideFlags: 0

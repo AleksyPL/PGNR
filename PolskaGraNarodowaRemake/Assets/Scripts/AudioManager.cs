@@ -18,6 +18,8 @@ public class AudioManager : MonoBehaviour
     internal bool tiresSFXPlayed;
     internal bool landingSpeechPlayed;
     internal List<Sound> pausedSounds;
+    public GameplaySettings mySettings;
+    public GameObject optionsMenuGameObject;
     void Awake()
     {
         LoadSounds(oneLinersSounds);
@@ -41,6 +43,8 @@ public class AudioManager : MonoBehaviour
     }
     void Update()
     {
+        if (optionsMenuGameObject.activeSelf)
+            UpdateAllSoundsVolume();
         if (planeGameObject != null && planeBaseScript != null && (planeBaseScript.currentPlaneState == PlaneBase.StateMachine.standard || planeBaseScript.currentPlaneState == PlaneBase.StateMachine.wheelsOn))
         {
             if(!planeBaseScript.flightControllScript.isTouchingAirport)
@@ -78,7 +82,8 @@ public class AudioManager : MonoBehaviour
                 if(planeBaseScript.flightControllScript.currentPlaneSpeed == 0 && !landingSpeechPlayed)
                 {
                     landingSpeechPlayed = true;
-                    StopPlayingAllSounds();
+                    StopPlayingSound("Tires", SFX);
+                    StopPlayingSoundsFromTheSpecificSoundBank(oneLinersSounds);
                     int randomSoundEffect = Random.Range(0, landingSounds.Length);
                     PlaySound("Landing" + randomSoundEffect.ToString(), landingSounds);
                     planeBaseScript.flightControllScript.waitingTimeAfterLandingCombinedWithSoundLength = ReturnSoundDuration("Landing" + randomSoundEffect.ToString(), landingSounds);
@@ -92,10 +97,23 @@ public class AudioManager : MonoBehaviour
         {
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
-            s.source.volume = s.volume;
+            s.source.volume = s.volumeSetInEditor;
             s.source.pitch = s.pitch;
             s.source.loop = s.looping;
         }
+    }
+    public void UpdateAllSoundsVolume()
+    {
+        foreach (Sound s in oneLinersSounds)
+            s.source.volume = mySettings.volumeQuotes * s.volumeSetInEditor;
+        foreach (Sound s in hitReactionSounds)
+            s.source.volume = mySettings.volumeQuotes * s.volumeSetInEditor;
+        foreach (Sound s in landingSounds)
+            s.source.volume = mySettings.volumeQuotes * s.volumeSetInEditor;
+        foreach (Sound s in SFX)
+            s.source.volume = mySettings.volumeSFX * s.volumeSetInEditor;
+        foreach (Sound s in otherSounds)
+            s.source.volume = mySettings.volumeMusic * s.volumeSetInEditor;
     }
     public void PlaySound(string soundName, Sound[] soundsBank)
     {
@@ -164,6 +182,15 @@ public class AudioManager : MonoBehaviour
         foreach (Sound s in otherSounds)
             if (s.source.isPlaying)
                 s.source.Stop();
+    }
+    public void PausePlayingSoundsFromTheSpecificSoundBank(Sound[] soundsBank)
+    {
+        foreach (Sound s in soundsBank)
+            if (s.source.isPlaying)
+            {
+                s.source.Pause();
+                pausedSounds.Add(s);
+            }
     }
     public void PausePlayingAllSounds()
     {

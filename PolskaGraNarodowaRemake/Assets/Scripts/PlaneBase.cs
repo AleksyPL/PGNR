@@ -35,6 +35,7 @@ public class PlaneBase : MonoBehaviour
         flightControllScript = GetComponent<FlightController>();
         planeRendererScript = GetComponent<PlaneRenderer>();
         difficultyScript = GetComponent<DifficultyManager>();
+        audioScript.PlaySound("TopGunTheme", audioScript.otherSounds);
     }
     void Update()
     {

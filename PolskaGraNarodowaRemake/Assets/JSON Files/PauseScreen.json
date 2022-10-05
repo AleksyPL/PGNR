@@ -1,0 +1,16 @@
+{
+	"DrunkBottles": [ "Wszystkie wypite butelki: ", "All drunk bottles: " ],
+	"Year": [ "Doleciałeś do roku: ", "You've reached the year: " ],
+	"Earned0": [ "Zarobiłeś: ", "Earned: " ],
+	"Earned1": [ "zł", "PLN" ],
+	"Pause": [ "PAUZA", "GAME PAUSED" ],
+	"GameOver": [ "KONIEC GRY", "GAME OVER" ],
+	"PauseButton0": [ "OPCJE", "OPTIONS" ],
+	"PauseButton1": [ "POWRÓT DO GRY", "BACK TO THE GAME" ],
+	"PauseButton2": [ "WRÓĆ DO GŁÓWNEGO MENU", "BACK TO MAIN MENU" ],
+	"GameOverButton0": [ "SPRÓBUJ JESZCZE RAZ", "TRY AGAIN" ],
+	"GameOverButton1": [ "WRÓĆ DO GŁÓWNEGO MENU", "BACK TO MAIN MENU" ],
+	"Warning0": [ "POSTĘP NIE ZOSTANIE ZACHOWANY, CZY CHCESZ KONTYNUOWAĆ?", "PROGRESS WILL NOT BE SAVED, DO YOU WANT TO CONTINUE?" ],
+	"Warning1": [ "TAK", "YES" ],
+	"Warning2": [ "NIE", "NO" ]
+}

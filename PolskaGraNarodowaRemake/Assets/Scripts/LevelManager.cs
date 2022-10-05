@@ -23,10 +23,8 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
-        levelCounter = 1;
         planeBaseScript = planeGameObject.GetComponent<PlaneBase>();
-        gameScore = 0;
-        LoadLevel();
+        RestartGame();
     }
     void Update()
     {
@@ -56,6 +54,20 @@ public class LevelManager : MonoBehaviour
             }
         }
     }
+    public void RestartGame()
+    {
+        levelCounter = 1;
+        gameScore = 0;
+        planeBaseScript.flightControllScript.drunkBottlesInTotal = 0;
+        planeBaseScript.difficultyScript.difficultyMultiplier = 0;
+        planeBaseScript.flightControllScript.waitingTimeAfterLandingCurrent = 0;
+        if (planeBaseScript.flightControllScript.smokeSpawner.transform.childCount != 0)
+        {
+            foreach (Transform child in planeBaseScript.flightControllScript.smokeSpawner.transform)
+                GameObject.Destroy(child.gameObject);
+        }
+        LoadLevel();
+    }
     internal void LoadLevel()
     {
         if(planeBaseScript.flightControllScript.toNewLevel)
@@ -71,10 +83,12 @@ public class LevelManager : MonoBehaviour
             planeBaseScript.audioScript.tiresSFXPlayed = false;
             planeBaseScript.audioScript.landingSpeechPlayed = false;
             planeBaseScript.flightControllScript.altitudeChangeForceCurrent = planeBaseScript.flightControllScript.altitudeChangeForce;
-            foreach (Transform child in transform)
-                GameObject.Destroy(child.gameObject);
         }
-        planeBaseScript.audioScript.PlaySound("EngineSound", planeBaseScript.audioScript.SFX);
+        foreach (Transform child in transform)
+            GameObject.Destroy(child.gameObject);
+        if(!planeBaseScript.audioScript.IsTheSoundCurrentlyPlaying("EngineSound", planeBaseScript.audioScript.SFX))
+            planeBaseScript.audioScript.PlaySound("EngineSound", planeBaseScript.audioScript.SFX);
+        planeBaseScript.UIScript.DisablePauseScreen();
         levelProgress = 0;
         scorePointsCounter = 0;
         currentlevelDistance = 100 + levelCounter * 10;
@@ -134,11 +148,7 @@ public class LevelManager : MonoBehaviour
     private void CheckIfThePlayerIsBehindTheAirport()
     {
         if (afterAirportDestroyPointGameObject != null && Physics2D.Raycast(afterAirportDestroyPointGameObject.transform.position, Vector2.up, Mathf.Infinity, planeLayer))
-        {
             if (planeBaseScript.currentPlaneState == PlaneBase.StateMachine.standard || planeBaseScript.currentPlaneState == PlaneBase.StateMachine.wheelsOn)
-            {
                 planeBaseScript.flightControllScript.DamageThePlane();
-            }
-        }
     }
 }

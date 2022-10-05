@@ -126,7 +126,7 @@ public class FlightController : MonoBehaviour
         baseScript.currentPlaneState = PlaneBase.StateMachine.damaged;
         baseScript.planeRendererScript.ChangePlaneSprite();
         baseScript.planeRendererScript.ChangeTilt();
-        baseScript.audioScript.StopPlayingAllSounds();
+        baseScript.audioScript.StopPlayingSoundsFromTheSpecificSoundBank(baseScript.audioScript.oneLinersSounds);
         baseScript.audioScript.PlaySound("Whistle", baseScript.audioScript.SFX);
         if (smokePrefab != null)
             Instantiate(smokePrefab, smokeSpawner.transform.position, Quaternion.Euler(270,0,0), smokeSpawner.transform);

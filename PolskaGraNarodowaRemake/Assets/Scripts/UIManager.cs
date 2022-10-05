@@ -20,7 +20,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject pauseScreenGameObject;
     [SerializeField] private GameObject fadePanelGameObject;
     [SerializeField] private GameObject pauseScreenRegularButtonsGameObject;
-    [SerializeField] private GameObject gameOverScreenButtonsGameObject;
     [SerializeField] private GameObject pauseScreenWarningGameObject;
     [SerializeField] private GameObject pauseScreenTitleGameObject;
     [Header("Game Statistics")]
@@ -28,6 +27,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject gameSummaryYearGameObject;
     [SerializeField] private GameObject gameSummaryScoreGameObject;
     [SerializeField] private GameObject gameSummaryBottlesGameObject;
+    [Header("Options Menu")]
+    [SerializeField] private GameObject optionsMenuGameObject;
+    [Header("Game Over Screen")]
+    [SerializeField] private GameObject gameOverScreenButtonsGameObject;
 
     void Start()
     {
@@ -38,10 +41,10 @@ public class UIManager : MonoBehaviour
     {
         if (!pauseScreenEnabled)
             UpdateRegularHUD();
-        else
-            UpdatePauseScreenHUD();
         if (pauseScreenWarningGameObject.activeSelf && planeBaseScript.inputScript.ESCpressed)
             DisableExitWarning();
+        else if (optionsMenuGameObject.activeSelf && planeBaseScript.inputScript.ESCpressed)
+            DisableOptionsMenu();
         else if (planeBaseScript.currentPlaneState != PlaneBase.StateMachine.crashed && planeBaseScript.inputScript.ESCpressed)
         {
             if (!pauseScreenEnabled)
@@ -86,16 +89,21 @@ public class UIManager : MonoBehaviour
     }
     private void EnablePauseScreen()
     {
+        UpdatePauseScreenHUD();
         Time.timeScale = 0;
         pauseScreenTitleGameObject.GetComponentInChildren<Text>().text = "PAUZA";
         fadePanelGameObject.SetActive(true);
         pauseScreenGameObject.SetActive(true);
         regularHUDMainGameObject.SetActive(false);
-        planeBaseScript.audioScript.PausePlayingAllSounds();
+        planeBaseScript.audioScript.PausePlayingSoundsFromTheSpecificSoundBank(planeBaseScript.audioScript.SFX);
+        planeBaseScript.audioScript.PausePlayingSoundsFromTheSpecificSoundBank(planeBaseScript.audioScript.oneLinersSounds);
+        planeBaseScript.audioScript.PausePlayingSoundsFromTheSpecificSoundBank(planeBaseScript.audioScript.hitReactionSounds);
+        planeBaseScript.audioScript.PausePlayingSoundsFromTheSpecificSoundBank(planeBaseScript.audioScript.landingSounds);
         pauseScreenEnabled = true;
     }
     internal void EnableGameOverScreen()
     {
+        UpdatePauseScreenHUD();
         pauseScreenTitleGameObject.GetComponentInChildren<Text>().text = "KONIEC GRY";
         pauseScreenRegularButtonsGameObject.SetActive(false);
         gameOverScreenButtonsGameObject.SetActive(true);
@@ -123,6 +131,22 @@ public class UIManager : MonoBehaviour
         gameStatsGameObject.SetActive(true);
         pauseScreenRegularButtonsGameObject.SetActive(true);
         pauseScreenWarningGameObject.SetActive(false);
+    }
+    public void EnableOptionsMenu()
+    {
+        pauseScreenTitleGameObject.GetComponentInChildren<Text>().text = "OPCJE";
+        optionsMenuGameObject.SetActive(true);
+        pauseScreenRegularButtonsGameObject.SetActive(false);
+        pauseScreenGameObject.SetActive(false);
+        regularHUDMainGameObject.SetActive(false);
+    }
+    public void DisableOptionsMenu()
+    {
+        optionsMenuGameObject.SetActive(false);
+        pauseScreenGameObject.SetActive(true);
+        gameStatsGameObject.SetActive(true);
+        pauseScreenRegularButtonsGameObject.SetActive(true);
+        pauseScreenTitleGameObject.GetComponentInChildren<Text>().text = "PAUZA";
     }
     public void BackToMainMenu()
     {

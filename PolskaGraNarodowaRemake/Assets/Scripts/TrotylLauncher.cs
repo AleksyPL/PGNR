@@ -7,13 +7,16 @@ public class TrotylLauncher : MonoBehaviour
     public GameObject lauchingPoint;
     [SerializeField] private GameObject trotylPrefab;
     [SerializeField] private float rateOfFire;
+    [SerializeField] private float maxLaunchDelay;
     [SerializeField] private float launchForce;
     private GameObject audioManagerGameObject;
     private AudioManager audioScript;
     private float rateOfFireCounter;
     void Start()
     {
-        rateOfFireCounter = 0;
+        if(maxLaunchDelay>rateOfFire)
+            rateOfFire=maxLaunchDelay;
+        rateOfFireCounter = Random.Range(0, maxLaunchDelay);
         audioManagerGameObject = GameObject.Find("AudioManager");
         audioScript = audioManagerGameObject.GetComponent<AudioManager>();
     }
