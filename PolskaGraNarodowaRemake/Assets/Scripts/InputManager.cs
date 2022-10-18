@@ -7,11 +7,12 @@ public class InputManager : MonoBehaviour
     internal Vector3 position;
     internal bool spaceHold;
     internal bool spaceReleased;
+    public GameObject planeControlCenterGameObject;
     internal PlaneBase baseScript;
     internal bool ESCpressed;
     void Start()
     {
-        baseScript = GetComponent<PlaneBase>();
+        baseScript = planeControlCenterGameObject.GetComponent<PlaneBase>();
         position = Vector3.zero;
         spaceHold = false;
         ESCpressed = false;

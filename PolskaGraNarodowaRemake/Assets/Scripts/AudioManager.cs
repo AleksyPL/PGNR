@@ -10,7 +10,7 @@ public class AudioManager : MonoBehaviour
     public Sound[] landingSounds;
     public Sound[] SFX;
     public Sound[] otherSounds;
-    [SerializeField] internal GameObject planeGameObject;
+    [SerializeField] internal GameObject planeControlCenterGameObject;
     internal PlaneBase planeBaseScript;
     [SerializeField] internal float waitingTimeForOneLiner;
     private float waitingTimeForOneLinerCurrent;
@@ -20,22 +20,24 @@ public class AudioManager : MonoBehaviour
     internal List<Sound> pausedSounds;
     public GameplaySettings mySettings;
     public GameObject optionsMenuGameObject;
-    void Awake()
+    private int lastPlayedOneLiner;
+    private int lastPlayedLandingSound;
+
+    void OnEnable()
     {
         LoadSounds(oneLinersSounds);
         LoadSounds(hitReactionSounds);
         LoadSounds(landingSounds);
         LoadSounds(SFX);
         LoadSounds(otherSounds);
-    }
-    void Start()
-    {
-        if (planeGameObject != null)
+        if (planeControlCenterGameObject != null)
         {
-            planeBaseScript = planeGameObject.GetComponent<PlaneBase>();
+            planeBaseScript = planeControlCenterGameObject.GetComponent<PlaneBase>();
         }
         if (waitingTimeForOneLiner == 0)
             waitingTimeForOneLiner = 5f;
+        lastPlayedLandingSound = -1;
+        lastPlayedOneLiner = -1;
         canPlayOneLiner = false;
         tiresSFXPlayed = false;
         landingSpeechPlayed = false;
@@ -45,7 +47,7 @@ public class AudioManager : MonoBehaviour
     {
         if (optionsMenuGameObject.activeSelf)
             UpdateAllSoundsVolume();
-        if (planeGameObject != null && planeBaseScript != null && (planeBaseScript.currentPlaneState == PlaneBase.StateMachine.standard || planeBaseScript.currentPlaneState == PlaneBase.StateMachine.wheelsOn))
+        if (planeControlCenterGameObject != null && planeBaseScript != null && (planeBaseScript.currentPlaneState == PlaneBase.StateMachine.standard || planeBaseScript.currentPlaneState == PlaneBase.StateMachine.wheelsOn))
         {
             if(!planeBaseScript.flightControllScript.isTouchingAirport)
             {
@@ -65,6 +67,9 @@ public class AudioManager : MonoBehaviour
                     if (canPlayOneLiner)
                     {
                         int randomSoundEffect = Random.Range(0, oneLinersSounds.Length);
+                        while (randomSoundEffect == lastPlayedOneLiner)
+                            randomSoundEffect = Random.Range(0, oneLinersSounds.Length);
+                        lastPlayedOneLiner = randomSoundEffect;
                         PlaySound("OneLiner" + randomSoundEffect.ToString(), oneLinersSounds);
                         waitingTimeForOneLinerCurrent -= ReturnSoundDuration("OneLiner" + randomSoundEffect, oneLinersSounds);
                     }
@@ -85,6 +90,9 @@ public class AudioManager : MonoBehaviour
                     StopPlayingSound("Tires", SFX);
                     StopPlayingSoundsFromTheSpecificSoundBank(oneLinersSounds);
                     int randomSoundEffect = Random.Range(0, landingSounds.Length);
+                    while (randomSoundEffect == lastPlayedLandingSound)
+                        randomSoundEffect = Random.Range(0, landingSounds.Length);
+                    lastPlayedLandingSound = randomSoundEffect;
                     PlaySound("Landing" + randomSoundEffect.ToString(), landingSounds);
                     planeBaseScript.flightControllScript.waitingTimeAfterLandingCombinedWithSoundLength = ReturnSoundDuration("Landing" + randomSoundEffect.ToString(), landingSounds);
                 }

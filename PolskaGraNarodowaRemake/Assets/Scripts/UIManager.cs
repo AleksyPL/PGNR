@@ -8,7 +8,7 @@ using System;
 public class UIManager : MonoBehaviour
 {
     internal PlaneBase planeBaseScript;
-    public GameObject planeGameObject;
+    public GameObject planeControlCenterGameObject;
     private bool pauseScreenEnabled;
     [Header("Regular HUD")]
     [SerializeField] private GameObject regularHUDMainGameObject;
@@ -34,7 +34,7 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        planeBaseScript = planeGameObject.GetComponent<PlaneBase>();
+        planeBaseScript = planeControlCenterGameObject.GetComponent<PlaneBase>();
         pauseScreenEnabled = false;
     }
     void Update()
@@ -110,6 +110,12 @@ public class UIManager : MonoBehaviour
         regularHUDMainGameObject.SetActive(false);
         pauseScreenGameObject.SetActive(true);
         pauseScreenEnabled = true;
+    }
+    internal void DisableGameOverScreen()
+    {
+        gameOverScreenButtonsGameObject.SetActive(false);
+        pauseScreenGameObject.SetActive(false);
+        pauseScreenEnabled = false;
     }
     public void DisablePauseScreen()
     {

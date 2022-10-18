@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DifficultyManager : MonoBehaviour
 {
+    public GameObject planeGameObject;
     internal PlaneBase baseScript;
     internal float difficultyMultiplier;
     internal float difficultyImpulsTimeMin;
@@ -51,9 +52,9 @@ public class DifficultyManager : MonoBehaviour
                 altitudeChangeForceOverrided = false;
             }
             difficultuImpulseCounter -= Time.deltaTime;
-            transform.position += new Vector3(0, difficultyImpulseDirection * difficultyImpulseForce * difficultyMultiplier * Time.deltaTime, 0);
-            if (transform.position.y > baseScript.levelManagerScript.topScreenHeight)
-                transform.position = new Vector3(transform.position.x, baseScript.levelManagerScript.topScreenHeight, 0);
+            planeGameObject.transform.position += new Vector3(0, difficultyImpulseDirection * difficultyImpulseForce * difficultyMultiplier * Time.deltaTime, 0);
+            if (planeGameObject.transform.position.y > baseScript.levelManagerScript.topScreenHeight)
+                planeGameObject.transform.position = new Vector3(planeGameObject.transform.position.x, baseScript.levelManagerScript.topScreenHeight, 0);
             if (difficultuImpulseCounter <= 0)
             {
                 difficultyImpulsTimeCurrent = Random.Range(difficultyImpulsTimeMin, difficultyImpulsTimeMax);

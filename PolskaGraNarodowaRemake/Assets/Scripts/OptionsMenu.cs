@@ -13,6 +13,10 @@ public class OptionsMenu : MonoBehaviour
     {
         LoadValuesFromSettings();
     }
+    private void Update()
+    {
+        UpdateSettingsUsingSliderValues();
+    }
     public void LoadValuesFromSettings()
     {
         volumeMusicSliderGameObject.GetComponent<Slider>().value = mySettings.volumeMusic;

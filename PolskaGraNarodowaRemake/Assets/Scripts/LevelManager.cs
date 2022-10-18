@@ -8,6 +8,7 @@ public class LevelManager : MonoBehaviour
     public GameObject treePrefab;
     public GameObject trotylLauncherPrefab;
     public GameObject fogPrefab;
+    public GameObject planeControlCenterGameObject;
     public GameObject planeGameObject;
     public LayerMask planeLayer;
     public float groundLevelHeight;
@@ -23,7 +24,8 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
-        planeBaseScript = planeGameObject.GetComponent<PlaneBase>();
+        planeBaseScript = planeControlCenterGameObject.GetComponent<PlaneBase>();
+        planeBaseScript.audioScript.PlaySound("TopGunTheme", planeBaseScript.audioScript.otherSounds);
         RestartGame();
     }
     void Update()
@@ -70,7 +72,11 @@ public class LevelManager : MonoBehaviour
     }
     internal void LoadLevel()
     {
-        if(planeBaseScript.flightControllScript.toNewLevel)
+        planeBaseScript.currentPlaneState = PlaneBase.StateMachine.standard;
+        planeBaseScript.planeRendererScript.ChangePlaneSprite();
+        planeBaseScript.UIScript.DisableOptionsMenu();
+        planeBaseScript.UIScript.DisableGameOverScreen();
+        if (planeBaseScript.flightControllScript.toNewLevel)
         {
             planeBaseScript.flightControllScript.toNewLevel = false;
             levelCounter++;
@@ -94,8 +100,6 @@ public class LevelManager : MonoBehaviour
         currentlevelDistance = 100 + levelCounter * 10;
         numberOfObstacles = 1 + levelCounter * 2;
         planeGameObject.transform.position = new Vector3(0, (topScreenHeight - groundLevelHeight) / 2, 0);
-        planeBaseScript.currentPlaneState = PlaneBase.StateMachine.standard;
-        planeBaseScript.planeRendererScript.ChangePlaneSprite();
         SpawnObstacles();
         SpawnAirpot();
     }

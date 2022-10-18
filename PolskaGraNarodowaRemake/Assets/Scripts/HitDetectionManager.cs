@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class HitDetectionManager : MonoBehaviour
 {
-    public GameObject planeGameObject;
-    private PlaneBase planeBaseScript;
+    //public GameObject planeGameObject;
+    public GameObject planeControlPanelGameObject;
+    internal PlaneBase planeBaseScript;
     void Start()
     {
-        planeBaseScript = planeGameObject.GetComponent<PlaneBase>();
+        planeBaseScript = planeControlPanelGameObject.GetComponent<PlaneBase>();
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {

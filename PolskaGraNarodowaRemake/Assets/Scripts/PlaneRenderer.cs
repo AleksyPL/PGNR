@@ -8,9 +8,9 @@ public class PlaneRenderer : MonoBehaviour
     public Sprite planeWithHoles;
     public Sprite planeWithWheels;
     public Sprite planeCrashed;
-    public GameObject RendererEntity;
+    public GameObject rendererEntity;
     internal PlaneBase baseScript;
-    void Start()
+    void OnEnable()
     {
         baseScript = GetComponent<PlaneBase>();
         ChangePlaneSprite();
@@ -21,16 +21,16 @@ public class PlaneRenderer : MonoBehaviour
     }
     internal void ChangePlaneSprite()
     {
-        if(RendererEntity.GetComponent<SpriteRenderer>() && RendererEntity != null)
+        if(rendererEntity.GetComponent<SpriteRenderer>() && rendererEntity != null)
         {
             if (baseScript.currentPlaneState == PlaneBase.StateMachine.standard)
-                RendererEntity.GetComponent<SpriteRenderer>().sprite = planeWithoutWheels;
+                rendererEntity.GetComponent<SpriteRenderer>().sprite = planeWithoutWheels;
             else if (baseScript.currentPlaneState == PlaneBase.StateMachine.crashed)
-                RendererEntity.GetComponent<SpriteRenderer>().sprite = planeCrashed;
+                rendererEntity.GetComponent<SpriteRenderer>().sprite = planeCrashed;
             else if (baseScript.currentPlaneState == PlaneBase.StateMachine.wheelsOn)
-                RendererEntity.GetComponent<SpriteRenderer>().sprite = planeWithWheels;
+                rendererEntity.GetComponent<SpriteRenderer>().sprite = planeWithWheels;
             else if (baseScript.currentPlaneState == PlaneBase.StateMachine.damaged)
-                RendererEntity.GetComponent<SpriteRenderer>().sprite = planeWithHoles;
+                rendererEntity.GetComponent<SpriteRenderer>().sprite = planeWithHoles;
         }
     }
     internal void ChangeTilt()
@@ -38,15 +38,15 @@ public class PlaneRenderer : MonoBehaviour
         if(baseScript.currentPlaneState == PlaneBase.StateMachine.standard)
         {
             if (baseScript.inputScript.position.y > 0)
-                RendererEntity.transform.rotation = Quaternion.Euler(0, 0, 15f);
+                rendererEntity.transform.rotation = Quaternion.Euler(0, 0, 15f);
             else if (baseScript.inputScript.position.y == 0)
-                RendererEntity.transform.rotation = Quaternion.Euler(0, 0, 0);
+                rendererEntity.transform.rotation = Quaternion.Euler(0, 0, 0);
             if (baseScript.inputScript.position.y < 0)
-                RendererEntity.transform.rotation = Quaternion.Euler(0, 0, -15f);
+                rendererEntity.transform.rotation = Quaternion.Euler(0, 0, -15f);
         }
         else if (baseScript.currentPlaneState == PlaneBase.StateMachine.wheelsOn || baseScript.currentPlaneState == PlaneBase.StateMachine.crashed)
-            RendererEntity.transform.rotation = Quaternion.Euler(0, 0, 0);
+            rendererEntity.transform.rotation = Quaternion.Euler(0, 0, 0);
         else if (baseScript.currentPlaneState == PlaneBase.StateMachine.damaged)
-            RendererEntity.transform.rotation = Quaternion.Euler(0, 0, -15f);
+            rendererEntity.transform.rotation = Quaternion.Euler(0, 0, -15f);
     }
 }

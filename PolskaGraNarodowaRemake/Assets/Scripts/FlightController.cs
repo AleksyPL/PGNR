@@ -9,6 +9,8 @@ public class FlightController : MonoBehaviour
     public GameObject bottlePrefab;
     public GameObject smokePrefab;
     public GameObject explosionPrefab;
+    public GameObject planeControlPanelGameObject;
+    public GameObject planeGameObject;
     public int rewardForLanding;
     internal PlaneBase baseScript;
     [SerializeField] internal float defaultPlaneSpeed;
@@ -34,7 +36,7 @@ public class FlightController : MonoBehaviour
 
     void Start()
     {
-        baseScript = GetComponent<PlaneBase>();
+        baseScript = planeControlPanelGameObject.GetComponent<PlaneBase>();
         isTouchingAirport = false;
         isTouchingGround = false;
         rewardForLandingAdded = false;
@@ -49,9 +51,9 @@ public class FlightController : MonoBehaviour
     {
         if (baseScript.currentPlaneState == PlaneBase.StateMachine.standard || baseScript.currentPlaneState == PlaneBase.StateMachine.wheelsOn)
         {
-            transform.position += new Vector3(currentPlaneSpeed * Time.deltaTime, baseScript.inputScript.position.y * altitudeChangeForceCurrent * Time.deltaTime, 0);
-            if (transform.position.y > baseScript.levelManagerScript.topScreenHeight)
-                transform.position = new Vector3(transform.position.x, baseScript.levelManagerScript.topScreenHeight, 0);
+            planeGameObject.transform.position += new Vector3(currentPlaneSpeed * Time.deltaTime, baseScript.inputScript.position.y * altitudeChangeForceCurrent * Time.deltaTime, 0);
+            if (planeGameObject.transform.position.y > baseScript.levelManagerScript.topScreenHeight)
+                planeGameObject.transform.position = new Vector3(planeGameObject.transform.position.x, baseScript.levelManagerScript.topScreenHeight, 0);
             if (isTouchingAirport)
             {
                 baseScript.inputScript.position.y = 0;
@@ -98,7 +100,7 @@ public class FlightController : MonoBehaviour
         else if (baseScript.currentPlaneState == PlaneBase.StateMachine.damaged)
         {
             baseScript.difficultyScript.enableDifficultyImpulses = false;
-            transform.position += new Vector3(currentPlaneSpeed * Time.deltaTime, -fallingForce * Time.deltaTime, 0);
+            planeGameObject.transform.position += new Vector3(currentPlaneSpeed * Time.deltaTime, -fallingForce * Time.deltaTime, 0);
         }
         else if (baseScript.currentPlaneState == PlaneBase.StateMachine.crashed)
         {
@@ -132,7 +134,7 @@ public class FlightController : MonoBehaviour
             Instantiate(smokePrefab, smokeSpawner.transform.position, Quaternion.Euler(270,0,0), smokeSpawner.transform);
         if (explosionPrefab != null)
         {
-            Instantiate(explosionPrefab, transform.position, Quaternion.identity, transform);
+            Instantiate(explosionPrefab, planeGameObject.transform.position, Quaternion.identity, transform);
             baseScript.audioScript.PlaySound("Explosion", baseScript.audioScript.SFX);
         }
         int randomSoundEffect = Random.Range(0, baseScript.audioScript.hitReactionSounds.Length);
@@ -149,7 +151,7 @@ public class FlightController : MonoBehaviour
             Instantiate(smokePrefab, smokeSpawner.transform.position, Quaternion.Euler(270, 0, 0), smokeSpawner.transform);
         if (explosionPrefab != null)
         {
-            Instantiate(explosionPrefab, transform.position, Quaternion.identity, transform);
+            Instantiate(explosionPrefab, planeGameObject.transform.position, Quaternion.identity, transform);
             baseScript.audioScript.PlaySound("Explosion", baseScript.audioScript.SFX);
         }
     }

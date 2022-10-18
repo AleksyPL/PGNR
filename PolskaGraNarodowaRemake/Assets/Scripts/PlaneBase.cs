@@ -11,34 +11,30 @@ public class PlaneBase : MonoBehaviour
         damaged,
         crashed
     }
-    public GameObject cameraGameObject;
+    
+    public GameObject inputManagerGameObject;
     public GameObject UIGameObject;
     public GameObject levelManagerGameObject;
     public GameObject audioManagerGameObject;
-    public float cameraPositionXOffset;
-
+    public GameObject flighControllerGameObject;
+    
     [SerializeField] internal StateMachine currentPlaneState;
     internal InputManager inputScript;
     internal AudioManager audioScript;
+    internal DifficultyManager difficultyScript;
+    internal LevelManager levelManagerScript;
     internal FlightController flightControllScript;
     internal UIManager UIScript;
     internal PlaneRenderer planeRendererScript;
-    internal DifficultyManager difficultyScript;
-    internal LevelManager levelManagerScript;
     void OnEnable()
     {
         Application.targetFrameRate = 144;
-        audioScript = audioManagerGameObject.GetComponent<AudioManager>();
-        UIScript = UIGameObject.GetComponent<UIManager>();
-        levelManagerScript = levelManagerGameObject.GetComponent<LevelManager>();
-        inputScript = GetComponent<InputManager>();
-        flightControllScript = GetComponent<FlightController>();
+        flightControllScript = flighControllerGameObject.GetComponent<FlightController>();
         planeRendererScript = GetComponent<PlaneRenderer>();
         difficultyScript = GetComponent<DifficultyManager>();
-        audioScript.PlaySound("TopGunTheme", audioScript.otherSounds);
-    }
-    void Update()
-    {
-        cameraGameObject.transform.position = new Vector3(transform.position.x + cameraPositionXOffset, cameraGameObject.transform.position.y, cameraGameObject.transform.position.z);
+        levelManagerScript = levelManagerGameObject.GetComponent<LevelManager>();
+        audioScript = audioManagerGameObject.GetComponent<AudioManager>();
+        UIScript = UIGameObject.GetComponent<UIManager>();
+        inputScript = inputManagerGameObject.GetComponent<InputManager>();
     }
 }

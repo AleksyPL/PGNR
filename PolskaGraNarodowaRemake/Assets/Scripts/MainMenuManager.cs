@@ -9,6 +9,7 @@ public class MainMenuManager : MonoBehaviour
     internal AudioManager audioScript;
     public GameObject regularMenuButtons;
     public GameObject optionsMenuButtons;
+    public GameObject howToPlayPanel;
     void Start()
     {
         Application.targetFrameRate = 144;
@@ -20,6 +21,8 @@ public class MainMenuManager : MonoBehaviour
     {
         if(optionsMenuButtons.activeSelf && Input.GetButtonDown("Cancel"))
             DisableOptionsMenu();
+        else if (howToPlayPanel.activeSelf && Input.GetButtonDown("Cancel"))
+            DisableHowToPlayPanel();
     }
     public void StartGame()
     {
@@ -38,5 +41,15 @@ public class MainMenuManager : MonoBehaviour
     {
         regularMenuButtons.SetActive(true);
         optionsMenuButtons.SetActive(false);
+    }
+    public void EnableHowToPlayPanel()
+    {
+        regularMenuButtons.SetActive(false);
+        howToPlayPanel.SetActive(true);
+    }
+    public void DisableHowToPlayPanel()
+    {
+        regularMenuButtons.SetActive(true);
+        howToPlayPanel.SetActive(false);
     }
 }
