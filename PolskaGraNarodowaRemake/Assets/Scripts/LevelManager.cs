@@ -10,9 +10,8 @@ public class LevelManager : MonoBehaviour
     public GameObject fogPrefab;
     public GameObject planeControlCenterGameObject;
     public GameObject planeGameObject;
+    public GameplaySettings gameplaySettings;
     public LayerMask planeLayer;
-    public float groundLevelHeight;
-    public float topScreenHeight;
     internal PlaneBase planeBaseScript;
     internal int levelCounter;
     internal float currentlevelDistance;
@@ -80,7 +79,7 @@ public class LevelManager : MonoBehaviour
         {
             planeBaseScript.flightControllScript.toNewLevel = false;
             levelCounter++;
-            planeBaseScript.flightControllScript.currentPlaneSpeed = planeBaseScript.flightControllScript.defaultPlaneSpeed;
+            planeBaseScript.flightControllScript.currentPlaneSpeed = gameplaySettings.defaultPlaneSpeed;
             planeBaseScript.flightControllScript.isTouchingAirport = false;
             planeBaseScript.flightControllScript.isTouchingGround = false;
             planeBaseScript.flightControllScript.waitingTimeAfterLandingCombinedWithSoundLength = 3f;
@@ -88,7 +87,7 @@ public class LevelManager : MonoBehaviour
             planeBaseScript.difficultyScript.difficultyMultiplier = 0;
             planeBaseScript.audioScript.tiresSFXPlayed = false;
             planeBaseScript.audioScript.landingSpeechPlayed = false;
-            planeBaseScript.flightControllScript.altitudeChangeForceCurrent = planeBaseScript.flightControllScript.altitudeChangeForce;
+            planeBaseScript.flightControllScript.altitudeChangeForceCurrent = gameplaySettings.altitudeChangeForce;
         }
         foreach (Transform child in transform)
             GameObject.Destroy(child.gameObject);
@@ -99,7 +98,7 @@ public class LevelManager : MonoBehaviour
         scorePointsCounter = 0;
         currentlevelDistance = 100 + levelCounter * 10;
         numberOfObstacles = 1 + levelCounter * 2;
-        planeGameObject.transform.position = new Vector3(0, (topScreenHeight - groundLevelHeight) / 2, 0);
+        planeGameObject.transform.position = new Vector3(0, (gameplaySettings.topScreenHeight - gameplaySettings.groundLevelHeight) / 2, 0);
         SpawnObstacles();
         SpawnAirpot();
     }
@@ -112,8 +111,8 @@ public class LevelManager : MonoBehaviour
             if (obstacle == 0) //TREE
             {
                 float offsetY = treePrefab.GetComponent<SpriteRenderer>().bounds.size.y / 2;
-                GameObject tree = Instantiate(treePrefab, new Vector3((float)((0.1 * currentlevelDistance) + (i * sectorWidth)), groundLevelHeight, 0), Quaternion.identity, transform);
-                tree.gameObject.name = "birchTree";
+                GameObject tree = Instantiate(treePrefab, new Vector3((float)((0.1 * currentlevelDistance) + (i * sectorWidth)), gameplaySettings.groundLevelHeight, 0), Quaternion.identity, transform);
+                tree.name = "birchTree";
                 int treeHeight = Random.Range(0, 3);
                 if (treeHeight == 0)
                 {
@@ -132,21 +131,22 @@ public class LevelManager : MonoBehaviour
             }
             else if (obstacle == 1) //TROTYLLAUNCHER
             {
-                GameObject trotylLauncher = Instantiate(trotylLauncherPrefab, new Vector3((float)((0.1 * currentlevelDistance) + (i * sectorWidth)), groundLevelHeight, 0), Quaternion.identity, transform);
-                trotylLauncher.gameObject.name = "trotylLauncher";
+                GameObject trotylLauncher = Instantiate(trotylLauncherPrefab, new Vector3((float)((0.1 * currentlevelDistance) + (i * sectorWidth)), gameplaySettings.groundLevelHeight, 0), Quaternion.identity, transform);
+                trotylLauncher.name = "trotylLauncher";
             }
         }
         int numberOfFogInstances = numberOfObstacles / 4;
         for(int i= 0; i < numberOfFogInstances; i++)
         {
             float fogPlacementX = Random.Range((float)0.1 * currentlevelDistance, (float)0.9 * currentlevelDistance);
-            GameObject fog = Instantiate(fogPrefab, new Vector3(fogPlacementX, (topScreenHeight - groundLevelHeight) / 2, 0), Quaternion.identity, transform);
-            fog.gameObject.name = "fog";
+            GameObject fog = Instantiate(fogPrefab, new Vector3(fogPlacementX, (gameplaySettings.topScreenHeight - gameplaySettings.groundLevelHeight) / 2, 0), Quaternion.identity, transform);
+            fog.name = "fog";
         }
     }
     private void SpawnAirpot()
     {
-        GameObject airport = Instantiate(airportPrefab, new Vector3((float)1.25 * currentlevelDistance, groundLevelHeight, 0), Quaternion.identity, transform);
+        GameObject airport = Instantiate(airportPrefab, new Vector3((float)1.25 * currentlevelDistance, gameplaySettings.groundLevelHeight, 0), Quaternion.identity, transform);
+        airport.name = "airport";
         afterAirportDestroyPointGameObject = airport.transform.Find("DestroyPlanePoint").gameObject;
     }
     private void CheckIfThePlayerIsBehindTheAirport()

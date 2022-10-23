@@ -17,6 +17,7 @@ public class PlaneBase : MonoBehaviour
     public GameObject levelManagerGameObject;
     public GameObject audioManagerGameObject;
     public GameObject flighControllerGameObject;
+    public GameObject planeRendererGameObject;
     
     [SerializeField] internal StateMachine currentPlaneState;
     internal InputManager inputScript;
@@ -30,7 +31,7 @@ public class PlaneBase : MonoBehaviour
     {
         Application.targetFrameRate = 144;
         flightControllScript = flighControllerGameObject.GetComponent<FlightController>();
-        planeRendererScript = GetComponent<PlaneRenderer>();
+        planeRendererScript = planeRendererGameObject.GetComponent<PlaneRenderer>();
         difficultyScript = GetComponent<DifficultyManager>();
         levelManagerScript = levelManagerGameObject.GetComponent<LevelManager>();
         audioScript = audioManagerGameObject.GetComponent<AudioManager>();

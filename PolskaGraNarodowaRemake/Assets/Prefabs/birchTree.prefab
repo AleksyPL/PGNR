@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4648496904955391817}
   - component: {fileID: 779112744462703098}
   - component: {fileID: 1388180391373037488}
-  - component: {fileID: 6483644054274575299}
+  - component: {fileID: -564152502760738892}
   m_Layer: 7
   m_Name: birchTree
   m_TagString: Obstacle
@@ -112,7 +112,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.93941665, y: 6.53}
   m_EdgeRadius: 0
---- !u!114 &6483644054274575299
+--- !u!114 &-564152502760738892
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,9 +121,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7111739764834294617}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 219f16f7cfe4ec7448d2445f56814826, type: 3}
+  m_Script: {fileID: 11500000, guid: 6075b78efceb2114daf14a4e60597cc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeTime: 1
-  enableFading: 1
-  cameraGameObject: {fileID: 0}
+  gameplaySettings: {fileID: 11400000, guid: d338db95f60174b41bd6e219f61b651f, type: 2}

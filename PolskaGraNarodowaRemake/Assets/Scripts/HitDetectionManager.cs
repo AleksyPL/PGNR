@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class HitDetectionManager : MonoBehaviour
 {
-    //public GameObject planeGameObject;
     public GameObject planeControlPanelGameObject;
     internal PlaneBase planeBaseScript;
     void Start()
@@ -25,10 +24,10 @@ public class HitDetectionManager : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Obstacle"))
         {
+            if (collision.gameObject.GetComponent<FadeOutTool>())
+                collision.gameObject.GetComponent<FadeOutTool>().enabled = true;
             if (planeBaseScript.currentPlaneState != PlaneBase.StateMachine.damaged)
                 planeBaseScript.flightControllScript.DamageThePlane();
-            if (collision.gameObject.GetComponent<DestroyAfterTime>())
-                collision.gameObject.GetComponent<DestroyAfterTime>().enabled = true;
         }
     }
 }

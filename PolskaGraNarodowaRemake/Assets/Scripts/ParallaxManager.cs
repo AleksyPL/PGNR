@@ -7,7 +7,6 @@ public class ParallaxManager : MonoBehaviour
     private Transform cameraTransform;
     private Vector3 lastCameraPosition;
     private float textureUnitSizeX;
-    //public GameObject objectToFollow;
     public float parallaxEffectMultipler;
     void Start()
     {

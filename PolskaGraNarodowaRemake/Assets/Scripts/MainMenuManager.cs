@@ -26,7 +26,7 @@ public class MainMenuManager : MonoBehaviour
     }
     public void StartGame()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("SinglePlayerMode");
     }
     public void QuitGame()
     {

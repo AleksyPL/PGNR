@@ -11,18 +11,8 @@ public class FlightController : MonoBehaviour
     public GameObject explosionPrefab;
     public GameObject planeControlPanelGameObject;
     public GameObject planeGameObject;
-    public int rewardForLanding;
+    public GameplaySettings gameplaySettings;
     internal PlaneBase baseScript;
-    [SerializeField] internal float defaultPlaneSpeed;
-    [SerializeField] internal float altitudeChangeForce;
-    [SerializeField] internal float fallingForce;
-    [SerializeField] internal float airportSlowingForce;
-    [SerializeField] private float bottleThrowForceMin;
-    [SerializeField] private float bottleThrowForceMax;
-    [SerializeField] internal float timeToFullyChargeBottleThrow;
-    [SerializeField] internal float waitingTimeAfterLanding;
-    [SerializeField] private Vector2 bottleThrowAngleMin;
-    [SerializeField] private Vector2 bottleThrowAngleMax;
     internal float altitudeChangeForceCurrent;
     internal float waitingTimeAfterLandingCurrent;
     internal float waitingTimeAfterLandingCombinedWithSoundLength;
@@ -40,24 +30,24 @@ public class FlightController : MonoBehaviour
         isTouchingAirport = false;
         isTouchingGround = false;
         rewardForLandingAdded = false;
-        currentPlaneSpeed = defaultPlaneSpeed;
-        altitudeChangeForceCurrent = altitudeChangeForce;
+        currentPlaneSpeed = gameplaySettings.defaultPlaneSpeed;
+        altitudeChangeForceCurrent = gameplaySettings.altitudeChangeForce;
         drunkBottlesInTotal = 0;
-        if (waitingTimeAfterLanding <= 0)
-            waitingTimeAfterLanding = 3f;
-        waitingTimeAfterLandingCombinedWithSoundLength = waitingTimeAfterLanding;
+        if (gameplaySettings.waitingTimeAfterLanding <= 0)
+            gameplaySettings.waitingTimeAfterLanding = 3f;
+        waitingTimeAfterLandingCombinedWithSoundLength = gameplaySettings.waitingTimeAfterLanding;
     }
     void Update()
     {
         if (baseScript.currentPlaneState == PlaneBase.StateMachine.standard || baseScript.currentPlaneState == PlaneBase.StateMachine.wheelsOn)
         {
             planeGameObject.transform.position += new Vector3(currentPlaneSpeed * Time.deltaTime, baseScript.inputScript.position.y * altitudeChangeForceCurrent * Time.deltaTime, 0);
-            if (planeGameObject.transform.position.y > baseScript.levelManagerScript.topScreenHeight)
-                planeGameObject.transform.position = new Vector3(planeGameObject.transform.position.x, baseScript.levelManagerScript.topScreenHeight, 0);
+            if (planeGameObject.transform.position.y > gameplaySettings.topScreenHeight)
+                planeGameObject.transform.position = new Vector3(planeGameObject.transform.position.x, gameplaySettings.topScreenHeight, 0);
             if (isTouchingAirport)
             {
                 baseScript.inputScript.position.y = 0;
-                currentPlaneSpeed -= airportSlowingForce * Time.deltaTime;
+                currentPlaneSpeed -= gameplaySettings.airportSlowingForce * Time.deltaTime;
                 baseScript.difficultyScript.enableDifficultyImpulses = false;
                 if (currentPlaneSpeed <= 0)
                 {
@@ -65,7 +55,7 @@ public class FlightController : MonoBehaviour
                     if (!rewardForLandingAdded)
                     {
                         rewardForLandingAdded = true;
-                        baseScript.levelManagerScript.gameScore += rewardForLanding;
+                        baseScript.levelManagerScript.gameScore += gameplaySettings.rewardForLanding;
                     }
                     if (!toNewLevel)
                     {
@@ -74,7 +64,7 @@ public class FlightController : MonoBehaviour
                         {
                             toNewLevel = true;
                             waitingTimeAfterLandingCurrent = 0;
-                            waitingTimeAfterLandingCombinedWithSoundLength = waitingTimeAfterLanding;
+                            waitingTimeAfterLandingCombinedWithSoundLength = gameplaySettings.waitingTimeAfterLanding;
                             baseScript.levelManagerScript.LoadLevel();
                         }
                     }
@@ -84,13 +74,13 @@ public class FlightController : MonoBehaviour
             {
                 if (baseScript.inputScript.spaceHold)
                 {
-                    if (timeToFullyChargeBottleThrowCounter < timeToFullyChargeBottleThrow)
+                    if (timeToFullyChargeBottleThrowCounter < gameplaySettings.timeToFullyChargeBottleThrow)
                         timeToFullyChargeBottleThrowCounter += Time.deltaTime;
                 }
                 if (baseScript.inputScript.spaceReleased)
                 {
-                    float bottleThrowForceCurrent = Mathf.Lerp(bottleThrowForceMin, bottleThrowForceMax, timeToFullyChargeBottleThrowCounter / timeToFullyChargeBottleThrow);
-                    Vector2 bottleThrowAngleCurrent = Vector2.Lerp(bottleThrowAngleMin, bottleThrowAngleMax, timeToFullyChargeBottleThrowCounter / timeToFullyChargeBottleThrow);
+                    float bottleThrowForceCurrent = Mathf.Lerp(gameplaySettings.bottleThrowForceMin, gameplaySettings.bottleThrowForceMax, timeToFullyChargeBottleThrowCounter / gameplaySettings.timeToFullyChargeBottleThrow);
+                    Vector2 bottleThrowAngleCurrent = Vector2.Lerp(gameplaySettings.bottleThrowAngleMin, gameplaySettings.bottleThrowAngleMax, timeToFullyChargeBottleThrowCounter / gameplaySettings.timeToFullyChargeBottleThrow);
                     ThrowBottleOfVodka(bottleThrowForceCurrent, bottleThrowAngleCurrent);
                     drunkBottlesInTotal++;
                     timeToFullyChargeBottleThrowCounter = 0;
@@ -100,12 +90,12 @@ public class FlightController : MonoBehaviour
         else if (baseScript.currentPlaneState == PlaneBase.StateMachine.damaged)
         {
             baseScript.difficultyScript.enableDifficultyImpulses = false;
-            planeGameObject.transform.position += new Vector3(currentPlaneSpeed * Time.deltaTime, -fallingForce * Time.deltaTime, 0);
+            planeGameObject.transform.position += new Vector3(currentPlaneSpeed * Time.deltaTime, -gameplaySettings.fallingForce * Time.deltaTime, 0);
         }
         else if (baseScript.currentPlaneState == PlaneBase.StateMachine.crashed)
         {
             waitingTimeAfterLandingCurrent += Time.deltaTime;
-            if(waitingTimeAfterLandingCurrent >= waitingTimeAfterLanding)
+            if(waitingTimeAfterLandingCurrent >= gameplaySettings.waitingTimeAfterLanding)
             {
                 waitingTimeAfterLandingCurrent = 0;
                 baseScript.UIScript.EnableGameOverScreen();
@@ -116,7 +106,7 @@ public class FlightController : MonoBehaviour
     {
         if (baseScript.currentPlaneState == PlaneBase.StateMachine.standard)
         {
-            GameObject bottle = Instantiate(bottlePrefab, bottleSpawner.transform.position, Quaternion.identity);
+            GameObject bottle = Instantiate(bottlePrefab, bottleSpawner.transform.position, Quaternion.identity, baseScript.levelManagerGameObject.transform);
             bottle.GetComponent<Rigidbody2D>().AddForce(bottleThrowAngle * bottleThrowForce);
             baseScript.difficultyScript.difficultyMultiplier++;
             if (!baseScript.difficultyScript.enableDifficultyImpulses)

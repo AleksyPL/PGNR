@@ -5,25 +5,23 @@ using UnityEngine;
 public class TrotylLauncher : MonoBehaviour
 {
     public GameObject lauchingPoint;
-    [SerializeField] private GameObject trotylPrefab;
-    [SerializeField] private float rateOfFire;
-    [SerializeField] private float maxLaunchDelay;
-    [SerializeField] private float launchForce;
+    public GameObject trotylPrefab;
+    public GameplaySettings gameplaySettings;
     private GameObject audioManagerGameObject;
     private AudioManager audioScript;
     private float rateOfFireCounter;
     void Start()
     {
-        if(maxLaunchDelay>rateOfFire)
-            rateOfFire=maxLaunchDelay;
-        rateOfFireCounter = Random.Range(0, maxLaunchDelay);
+        if(gameplaySettings.maxLaunchDelay > gameplaySettings.rateOfFire)
+            gameplaySettings.rateOfFire = gameplaySettings.maxLaunchDelay;
+        rateOfFireCounter = Random.Range(0, gameplaySettings.maxLaunchDelay);
         audioManagerGameObject = GameObject.Find("AudioManager");
         audioScript = audioManagerGameObject.GetComponent<AudioManager>();
     }
     void Update()
     {
         rateOfFireCounter += Time.deltaTime;
-        if (rateOfFireCounter >= rateOfFire)
+        if (rateOfFireCounter >= gameplaySettings.rateOfFire)
         {
             LaunchTheProjectile();
             rateOfFireCounter = 0;
@@ -33,9 +31,9 @@ public class TrotylLauncher : MonoBehaviour
     {
         if (trotylPrefab != null && lauchingPoint != null)
         {
-            GameObject trotyl = Instantiate(trotylPrefab, lauchingPoint.transform.position, Quaternion.identity);
-            trotyl.gameObject.name = "trotyl";
-            trotyl.GetComponent<Rigidbody2D>().AddForce(Vector2.up * launchForce);
+            GameObject trotyl = Instantiate(trotylPrefab, lauchingPoint.transform.position, Quaternion.identity, transform.parent);
+            trotyl.name = "trotyl";
+            trotyl.GetComponent<Rigidbody2D>().AddForce(Vector2.up * gameplaySettings.launchForce);
             audioScript.PlaySound("Cannon", audioScript.SFX);
         }
     }

@@ -9,10 +9,11 @@ public class PlaneRenderer : MonoBehaviour
     public Sprite planeWithWheels;
     public Sprite planeCrashed;
     public GameObject rendererEntity;
+    public GameObject planeControlCenterGameObject;
     internal PlaneBase baseScript;
     void OnEnable()
     {
-        baseScript = GetComponent<PlaneBase>();
+        baseScript = planeControlCenterGameObject.GetComponent<PlaneBase>();
         ChangePlaneSprite();
     }
     private void Update()

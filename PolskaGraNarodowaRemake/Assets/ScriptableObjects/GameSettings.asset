@@ -13,3 +13,28 @@ MonoBehaviour:
   m_Name: GameSettings
   m_EditorClassIdentifier: 
   langauageIndex: 0
+  volumeSFX: 1
+  volumeQuotes: 1
+  volumeMusic: 1
+  waitingTimeForOneLiner: 5
+  debrisSplashForce: 500
+  rewardForLanding: 100
+  rewardForHittingATarget: 50
+  cameraPositionXOffset: 12
+  cameraDespawnDisatance: 20
+  fadeOutLifeTime: 1
+  groundLevelHeight: 0.6
+  topScreenHeight: 15
+  defaultPlaneSpeed: 6.5
+  altitudeChangeForce: 5
+  fallingForce: 5
+  airportSlowingForce: 9
+  waitingTimeAfterLanding: 3
+  timeToFullyChargeBottleThrow: 1
+  bottleThrowForceMin: 300
+  bottleThrowForceMax: 1000
+  bottleThrowAngleMin: {x: 1, y: -1}
+  bottleThrowAngleMax: {x: 1, y: 0}
+  rateOfFire: 5
+  maxLaunchDelay: 5
+  launchForce: 850

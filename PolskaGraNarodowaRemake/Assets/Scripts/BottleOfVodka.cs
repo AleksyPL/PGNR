@@ -6,8 +6,7 @@ public class BottleOfVodka : MonoBehaviour
 {
     public GameObject crackedVersionPrefab;
     public GameObject explosionPrefab;
-    public float debrisSplashForce;
-    public int rewardForHittingATarget;
+    public GameplaySettings gameplaySettings;
     private GameObject audioManagerGameObject;
     private AudioManager audioScript;
     private GameObject levelManagerGameObject;
@@ -27,22 +26,26 @@ public class BottleOfVodka : MonoBehaviour
             audioScript.PlaySound("BreakingGlass", audioScript.SFX);
             if (collision.gameObject.transform.name == "birchTree")
             {
-                levelManagerScript.gameScore += rewardForHittingATarget;
-                collision.gameObject.GetComponent<DestroyAfterTime>().enabled = true;
+                levelManagerScript.gameScore += gameplaySettings.rewardForHittingATarget;
+                collision.gameObject.GetComponent<FadeOutTool>().enabled = true;
             }
             else if (collision.gameObject.transform.name == "trotyl" || collision.gameObject.transform.name == "trotylLauncher")
             {
-                levelManagerScript.gameScore += rewardForHittingATarget;
+                levelManagerScript.gameScore += gameplaySettings.rewardForHittingATarget;
                 Destroy(collision.gameObject);
                 if(explosionPrefab != null)
-                    Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+                {
+                    GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity, levelManagerGameObject.transform);
+                    explosion.name = "explosion";
+                }
             }
             if(crackedVersionPrefab !=null)
             {
-                GameObject bottle = Instantiate(crackedVersionPrefab, transform.position, Quaternion.identity);
+                GameObject bottle = Instantiate(crackedVersionPrefab, transform.position, Quaternion.identity, levelManagerGameObject.transform);
+                bottle.name = "vodkaBottleCracked";
                 foreach (Transform child in bottle.transform)
                 {
-                    child.gameObject.GetComponent<Rigidbody2D>().AddForce(Random.insideUnitCircle.normalized * debrisSplashForce);
+                    child.gameObject.GetComponent<Rigidbody2D>().AddForce(Random.insideUnitCircle.normalized * gameplaySettings.debrisSplashForce);
                 }
             }
             Destroy(gameObject);
