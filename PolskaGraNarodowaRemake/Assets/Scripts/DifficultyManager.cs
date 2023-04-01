@@ -6,64 +6,66 @@ public class DifficultyManager : MonoBehaviour
 {
     public GameObject planeGameObject;
     public GameplaySettings gameplaySettings;
-    internal PlaneBase baseScript;
+    //internal PlaneScript baseScript;
     internal float difficultyMultiplier;
     internal float difficultyImpulsTimeMin;
     internal float difficultyImpulsTimeMax;
     private float difficultyImpulsTimeCurrent;
     private float difficultuImpulseCounter;
     internal float difficultyImpulseDirection;
-    internal bool enableDifficultyImpulses;
+    internal bool enableDifficultyImpulsesPlayerOne;
+    internal bool enableDifficultyImpulsesPlayerTwo;
     internal bool altitudeChangeForceOverrided;
     [SerializeField] internal float altitudeChangeForceOverridedMultiplier;
     [SerializeField] internal float difficultyImpulseForce;
 
     void Start()
     {
-        baseScript = GetComponent<PlaneBase>();
+        //baseScript = GetComponent<PlaneScript>();
         difficultyImpulseDirection = 1f;
         difficultyMultiplier = 0;
-        difficultyImpulsTimeMin = baseScript.levelManagerScript.levelCounter * 0.1f;
+        //difficultyImpulsTimeMin = baseScript.levelManagerScript.levelCounter * 0.1f;
         difficultyImpulsTimeMax = 2 * difficultyImpulsTimeMin;
         difficultyImpulsTimeCurrent = Random.Range(difficultyImpulsTimeMin, difficultyImpulsTimeMax);
         difficultuImpulseCounter = difficultyImpulsTimeCurrent;
-        enableDifficultyImpulses = false;
+        enableDifficultyImpulsesPlayerOne = false;
+        enableDifficultyImpulsesPlayerTwo = false;
         altitudeChangeForceOverrided = false;
     }
 
     void Update()
     {
-        if (baseScript.currentPlaneState == PlaneBase.StateMachine.standard || baseScript.currentPlaneState == PlaneBase.StateMachine.wheelsOn)
+        //if (baseScript.currentPlaneState == PlaneScript.StateMachine.standard || baseScript.currentPlaneState == PlaneScript.StateMachine.wheelsOn)
         {
             ApplyDifficultyImpulse();
         }
     }
     internal void ApplyDifficultyImpulse()
     {
-        if (enableDifficultyImpulses)
-        {
-            if (baseScript.inputScript.position.y != difficultyImpulseDirection && baseScript.inputScript.position.y !=0 && !altitudeChangeForceOverrided)
-            {
-                baseScript.flightControllScript.altitudeChangeForceCurrent *= altitudeChangeForceOverridedMultiplier;
-                altitudeChangeForceOverrided = true;
-            }    
-            else if ((baseScript.inputScript.position.y == difficultyImpulseDirection && altitudeChangeForceOverrided) || (baseScript.inputScript.position.y == 0 && altitudeChangeForceOverrided))
-            {
-                baseScript.flightControllScript.altitudeChangeForceCurrent /= altitudeChangeForceOverridedMultiplier;
-                altitudeChangeForceOverrided = false;
-            }
-            difficultuImpulseCounter -= Time.deltaTime;
-            planeGameObject.transform.position += new Vector3(0, difficultyImpulseDirection * difficultyImpulseForce * difficultyMultiplier * Time.deltaTime, 0);
-            if (planeGameObject.transform.position.y > gameplaySettings.topScreenHeight)
-                planeGameObject.transform.position = new Vector3(planeGameObject.transform.position.x, gameplaySettings.topScreenHeight, 0);
-            if (difficultuImpulseCounter <= 0)
-            {
-                difficultyImpulsTimeCurrent = Random.Range(difficultyImpulsTimeMin, difficultyImpulsTimeMax);
-                difficultuImpulseCounter = difficultyImpulsTimeCurrent;
-                difficultyImpulseDirection = Random.Range(-1, 1);
-                if (difficultyImpulseDirection == 0)
-                    difficultyImpulseDirection = 1;
-            }
-        }
+        //if (enableDifficultyImpulses)
+        //{
+        //    //if (baseScript.inputScript.position.y != difficultyImpulseDirection && baseScript.inputScript.position.y !=0 && !altitudeChangeForceOverrided)
+        //    {
+        //        //baseScript.flightControllScript.altitudeChangeForceCurrent *= altitudeChangeForceOverridedMultiplier;
+        //        altitudeChangeForceOverrided = true;
+        //    }    
+        //    //else if ((baseScript.inputScript.position.y == difficultyImpulseDirection && altitudeChangeForceOverrided) || (baseScript.inputScript.position.y == 0 && altitudeChangeForceOverrided))
+        //    {
+        //        //baseScript.flightControllScript.altitudeChangeForceCurrent /= altitudeChangeForceOverridedMultiplier;
+        //        altitudeChangeForceOverrided = false;
+        //    }
+        //    difficultuImpulseCounter -= Time.deltaTime;
+        //    planeGameObject.transform.position += new Vector3(0, difficultyImpulseDirection * difficultyImpulseForce * difficultyMultiplier * Time.deltaTime, 0);
+        //    if (planeGameObject.transform.position.y > gameplaySettings.topScreenHeight)
+        //        planeGameObject.transform.position = new Vector3(planeGameObject.transform.position.x, gameplaySettings.topScreenHeight, 0);
+        //    if (difficultuImpulseCounter <= 0)
+        //    {
+        //        difficultyImpulsTimeCurrent = Random.Range(difficultyImpulsTimeMin, difficultyImpulsTimeMax);
+        //        difficultuImpulseCounter = difficultyImpulsTimeCurrent;
+        //        difficultyImpulseDirection = Random.Range(-1, 1);
+        //        if (difficultyImpulseDirection == 0)
+        //            difficultyImpulseDirection = 1;
+        //    }
+        //}
     }
 }

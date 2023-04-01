@@ -7,7 +7,7 @@ using System;
 
 public class UIManager : MonoBehaviour
 {
-    internal PlaneBase planeBaseScript;
+    //internal PlaneScript PlaneScriptScript;
     public GameObject planeControlCenterGameObject;
     private bool pauseScreenEnabled;
     [Header("Regular HUD")]
@@ -34,72 +34,72 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        planeBaseScript = planeControlCenterGameObject.GetComponent<PlaneBase>();
+        //PlaneScriptScript = planeControlCenterGameObject.GetComponent<PlaneScript>();
         pauseScreenEnabled = false;
     }
     void Update()
     {
-        if (!pauseScreenEnabled)
-            UpdateRegularHUD();
-        if (pauseScreenWarningGameObject.activeSelf && planeBaseScript.inputScript.ESCpressed)
-            DisableExitWarning();
-        else if (optionsMenuGameObject.activeSelf && planeBaseScript.inputScript.ESCpressed)
-            DisableOptionsMenu();
-        else if (planeBaseScript.currentPlaneState != PlaneBase.StateMachine.crashed && planeBaseScript.inputScript.ESCpressed)
-        {
-            if (!pauseScreenEnabled)
-                EnablePauseScreen();
-            else
-                DisablePauseScreen();
-        }
+        //if (!pauseScreenEnabled)
+        //    UpdateRegularHUD();
+        //if (pauseScreenWarningGameObject.activeSelf && PlaneScriptScript.inputScript.ESCpressed)
+        //    DisableExitWarning();
+        //else if (optionsMenuGameObject.activeSelf && PlaneScriptScript.inputScript.ESCpressed)
+        //    DisableOptionsMenu();
+        //else if (PlaneScriptScript.currentPlaneState != PlaneScript.StateMachine.crashed && PlaneScriptScript.inputScript.ESCpressed)
+        //{
+        //    if (!pauseScreenEnabled)
+        //        EnablePauseScreen();
+        //    else
+        //        DisablePauseScreen();
+        //}
     }
 
     private void UpdatePauseScreenHUD()
     {
-        gameSummaryBottlesGameObject.GetComponent<Text>().text = ("Wszystkie wypite butelki: " + planeBaseScript.flightControllScript.drunkBottlesInTotal).ToString();
-        gameSummaryYearGameObject.GetComponent<Text>().text = ("Dolecia³eœ do roku: " + (2009 + planeBaseScript.levelManagerScript.levelCounter)).ToString();
-        gameSummaryScoreGameObject.GetComponent<Text>().text = ("Zarobi³eœ: " + planeBaseScript.levelManagerScript.gameScore + " z³").ToString();
+        //gameSummaryBottlesGameObject.GetComponent<Text>().text = ("Wszystkie wypite butelki: " + PlaneScriptScript.flightControllScript.drunkBottlesInTotal).ToString();
+        //gameSummaryYearGameObject.GetComponent<Text>().text = ("Dolecia³eœ do roku: " + (2009 + PlaneScriptScript.levelManagerScript.levelCounter)).ToString();
+        //gameSummaryScoreGameObject.GetComponent<Text>().text = ("Zarobi³eœ: " + PlaneScriptScript.levelManagerScript.gameScore + " z³").ToString();
     }
     private void UpdateRegularHUD()
     {
-        //current year
-        regularHUDYearGameObject.GetComponent<Text>().text = ("Rok: " + (2009 + planeBaseScript.levelManagerScript.levelCounter)).ToString();
-        //level progress
-        if (planeBaseScript.currentPlaneState == PlaneBase.StateMachine.standard || planeBaseScript.currentPlaneState == PlaneBase.StateMachine.wheelsOn)
-        {
-            if (planeBaseScript.levelManagerScript.levelProgress < planeBaseScript.levelManagerScript.currentlevelDistance)
-            {
-                int levelProgress = (int)(planeBaseScript.levelManagerScript.levelProgress / planeBaseScript.levelManagerScript.currentlevelDistance * 100);
-                regularHUDLevelProgressGameObject.GetComponent<Text>().text = ("Panie Prezydencie, przelecieliœmy ju¿: " + levelProgress + "% trasy. Jakoœ to bêdzie!").ToString();
-            }
-            else if (planeBaseScript.levelManagerScript.levelProgress >= planeBaseScript.levelManagerScript.currentlevelDistance)
-                regularHUDLevelProgressGameObject.GetComponent<Text>().text = "Panie Prezydencie, l¹dujemy!";
-        }
-        else if (planeBaseScript.currentPlaneState == PlaneBase.StateMachine.damaged)
-            regularHUDLevelProgressGameObject.GetComponent<Text>().text = "Panie Prezydencie, obawiam siê, ¿e siê rozpierdolimy";
-        else if (planeBaseScript.currentPlaneState == PlaneBase.StateMachine.crashed)
-            regularHUDLevelProgressGameObject.GetComponent<Text>().text = "Niestety, kolejny prezydent zostanie bohaterem";
-        //bottles
-        if (planeBaseScript.difficultyScript.difficultyMultiplier == 0)
-            regularHUDBottlesGameObject.GetComponent<Text>().text = "Wypite butelki: nic";
-        else
-            regularHUDBottlesGameObject.GetComponent<Text>().text = ("Wypite butelki: " + planeBaseScript.difficultyScript.difficultyMultiplier).ToString();
-        //score
-        regularHUDScoreGameObject.GetComponent<Text>().text = ("Zarobi³eœ: " + planeBaseScript.levelManagerScript.gameScore + " z³").ToString();
+        ////current year
+        //regularHUDYearGameObject.GetComponent<Text>().text = ("Rok: " + (2009 + PlaneScriptScript.levelManagerScript.levelCounter)).ToString();
+        ////level progress
+        //if (PlaneScriptScript.currentPlaneState == PlaneScript.StateMachine.standard || PlaneScriptScript.currentPlaneState == PlaneScript.StateMachine.wheelsOn)
+        //{
+        //    if (PlaneScriptScript.levelManagerScript.levelProgress < PlaneScriptScript.levelManagerScript.currentlevelDistance)
+        //    {
+        //        int levelProgress = (int)(PlaneScriptScript.levelManagerScript.levelProgress / PlaneScriptScript.levelManagerScript.currentlevelDistance * 100);
+        //        regularHUDLevelProgressGameObject.GetComponent<Text>().text = ("Panie Prezydencie, przelecieliœmy ju¿: " + levelProgress + "% trasy. Jakoœ to bêdzie!").ToString();
+        //    }
+        //    else if (PlaneScriptScript.levelManagerScript.levelProgress >= PlaneScriptScript.levelManagerScript.currentlevelDistance)
+        //        regularHUDLevelProgressGameObject.GetComponent<Text>().text = "Panie Prezydencie, l¹dujemy!";
+        //}
+        //else if (PlaneScriptScript.currentPlaneState == PlaneScript.StateMachine.damaged)
+        //    regularHUDLevelProgressGameObject.GetComponent<Text>().text = "Panie Prezydencie, obawiam siê, ¿e siê rozpierdolimy";
+        //else if (PlaneScriptScript.currentPlaneState == PlaneScript.StateMachine.crashed)
+        //    regularHUDLevelProgressGameObject.GetComponent<Text>().text = "Niestety, kolejny prezydent zostanie bohaterem";
+        ////bottles
+        //if (PlaneScriptScript.difficultyScript.difficultyMultiplier == 0)
+        //    regularHUDBottlesGameObject.GetComponent<Text>().text = "Wypite butelki: nic";
+        //else
+        //    regularHUDBottlesGameObject.GetComponent<Text>().text = ("Wypite butelki: " + PlaneScriptScript.difficultyScript.difficultyMultiplier).ToString();
+        ////score
+        //regularHUDScoreGameObject.GetComponent<Text>().text = ("Zarobi³eœ: " + PlaneScriptScript.levelManagerScript.gameScore + " z³").ToString();
     }
     private void EnablePauseScreen()
     {
-        UpdatePauseScreenHUD();
-        Time.timeScale = 0;
-        pauseScreenTitleGameObject.GetComponentInChildren<Text>().text = "PAUZA";
-        fadePanelGameObject.SetActive(true);
-        pauseScreenGameObject.SetActive(true);
-        regularHUDMainGameObject.SetActive(false);
-        planeBaseScript.audioScript.PausePlayingSoundsFromTheSpecificSoundBank(planeBaseScript.audioScript.SFX);
-        planeBaseScript.audioScript.PausePlayingSoundsFromTheSpecificSoundBank(planeBaseScript.audioScript.oneLinersSounds);
-        planeBaseScript.audioScript.PausePlayingSoundsFromTheSpecificSoundBank(planeBaseScript.audioScript.hitReactionSounds);
-        planeBaseScript.audioScript.PausePlayingSoundsFromTheSpecificSoundBank(planeBaseScript.audioScript.landingSounds);
-        pauseScreenEnabled = true;
+        //UpdatePauseScreenHUD();
+        //Time.timeScale = 0;
+        //pauseScreenTitleGameObject.GetComponentInChildren<Text>().text = "PAUZA";
+        //fadePanelGameObject.SetActive(true);
+        //pauseScreenGameObject.SetActive(true);
+        //regularHUDMainGameObject.SetActive(false);
+        //PlaneScriptScript.audioScript.PausePlayingSoundsFromTheSpecificSoundBank(PlaneScriptScript.audioScript.SFX);
+        //PlaneScriptScript.audioScript.PausePlayingSoundsFromTheSpecificSoundBank(PlaneScriptScript.audioScript.oneLinersSounds);
+        //PlaneScriptScript.audioScript.PausePlayingSoundsFromTheSpecificSoundBank(PlaneScriptScript.audioScript.hitReactionSounds);
+        //PlaneScriptScript.audioScript.PausePlayingSoundsFromTheSpecificSoundBank(PlaneScriptScript.audioScript.landingSounds);
+        //pauseScreenEnabled = true;
     }
     internal void EnableGameOverScreen()
     {
@@ -119,12 +119,12 @@ public class UIManager : MonoBehaviour
     }
     public void DisablePauseScreen()
     {
-        Time.timeScale = 1;
-        fadePanelGameObject.SetActive(false);
-        pauseScreenGameObject.SetActive(false);
-        regularHUDMainGameObject.SetActive(true);
-        planeBaseScript.audioScript.ResumeAllPausedSounds();
-        pauseScreenEnabled = false;
+        //Time.timeScale = 1;
+        //fadePanelGameObject.SetActive(false);
+        //pauseScreenGameObject.SetActive(false);
+        //regularHUDMainGameObject.SetActive(true);
+        //PlaneScriptScript.audioScript.ResumeAllPausedSounds();
+        //pauseScreenEnabled = false;
     }
     public void EnableExitWarning()
     {

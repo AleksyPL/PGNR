@@ -3639,6 +3639,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8657606410379598683, guid: e3f9bbec2259e164babd95c86d901eb8, type: 3}
+      propertyPath: cameraObject
+      value: 
+      objectReference: {fileID: 519420028}
     - target: {fileID: 8657606411223057766, guid: e3f9bbec2259e164babd95c86d901eb8, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -3687,6 +3691,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background
       objectReference: {fileID: 0}
+    - target: {fileID: 8657606411472102641, guid: e3f9bbec2259e164babd95c86d901eb8, type: 3}
+      propertyPath: cameraObject
+      value: 
+      objectReference: {fileID: 519420028}
+    - target: {fileID: 8657606411529941433, guid: e3f9bbec2259e164babd95c86d901eb8, type: 3}
+      propertyPath: cameraObject
+      value: 
+      objectReference: {fileID: 519420028}
+    - target: {fileID: 8657606411625689427, guid: e3f9bbec2259e164babd95c86d901eb8, type: 3}
+      propertyPath: cameraObject
+      value: 
+      objectReference: {fileID: 519420028}
+    - target: {fileID: 8657606411672503222, guid: e3f9bbec2259e164babd95c86d901eb8, type: 3}
+      propertyPath: cameraObject
+      value: 
+      objectReference: {fileID: 519420028}
+    - target: {fileID: 8657606411852324920, guid: e3f9bbec2259e164babd95c86d901eb8, type: 3}
+      propertyPath: cameraObject
+      value: 
+      objectReference: {fileID: 519420028}
+    - target: {fileID: 8657606412044337510, guid: e3f9bbec2259e164babd95c86d901eb8, type: 3}
+      propertyPath: cameraObject
+      value: 
+      objectReference: {fileID: 519420028}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: e3f9bbec2259e164babd95c86d901eb8, type: 3}

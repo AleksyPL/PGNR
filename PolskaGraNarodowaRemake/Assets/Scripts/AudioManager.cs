@@ -12,7 +12,7 @@ public class AudioManager : MonoBehaviour
     public Sound[] otherSounds;
     public GameObject planeControlCenterGameObject;
     public GameplaySettings gameplaySettings;
-    internal PlaneBase planeBaseScript;
+    //internal PlaneScript PlaneScriptScript;
     private float waitingTimeForOneLinerCurrent;
     private bool canPlayOneLiner;
     internal bool tiresSFXPlayed;
@@ -29,10 +29,10 @@ public class AudioManager : MonoBehaviour
         LoadSounds(landingSounds);
         LoadSounds(SFX);
         LoadSounds(otherSounds);
-        if (planeControlCenterGameObject != null)
-        {
-            planeBaseScript = planeControlCenterGameObject.GetComponent<PlaneBase>();
-        }
+        //if (planeControlCenterGameObject != null)
+        //{
+        //    PlaneScriptScript = planeControlCenterGameObject.GetComponent<PlaneScript>();
+        //}
         if (gameplaySettings.waitingTimeForOneLiner == 0)
             gameplaySettings.waitingTimeForOneLiner = 5f;
         lastPlayedLandingSound = -1;
@@ -44,59 +44,59 @@ public class AudioManager : MonoBehaviour
     }
     void Update()
     {
-        if (optionsMenuGameObject.activeSelf)
-            UpdateAllSoundsVolume();
-        if (planeControlCenterGameObject != null && planeBaseScript != null && (planeBaseScript.currentPlaneState == PlaneBase.StateMachine.standard || planeBaseScript.currentPlaneState == PlaneBase.StateMachine.wheelsOn))
-        {
-            if(!planeBaseScript.flightControllScript.isTouchingAirport)
-            {
-                waitingTimeForOneLinerCurrent += Time.deltaTime;
-                if (waitingTimeForOneLinerCurrent >= gameplaySettings.waitingTimeForOneLiner)
-                {
-                    canPlayOneLiner = true;
-                    waitingTimeForOneLinerCurrent = 0;
-                    for (int i = 0; i < oneLinersSounds.Length; i++)
-                    {
-                        if (IsTheSoundCurrentlyPlaying("OneLiner" + i, oneLinersSounds))
-                        {
-                            canPlayOneLiner = false;
-                            break;
-                        }
-                    }
-                    if (canPlayOneLiner)
-                    {
-                        int randomSoundEffect = Random.Range(0, oneLinersSounds.Length);
-                        while (randomSoundEffect == lastPlayedOneLiner)
-                            randomSoundEffect = Random.Range(0, oneLinersSounds.Length);
-                        lastPlayedOneLiner = randomSoundEffect;
-                        PlaySound("OneLiner" + randomSoundEffect.ToString(), oneLinersSounds);
-                        waitingTimeForOneLinerCurrent -= ReturnSoundDuration("OneLiner" + randomSoundEffect, oneLinersSounds);
-                    }
-                }
-            }
-            else
-            {
-                if(!tiresSFXPlayed)
-                {
-                    tiresSFXPlayed = true;
-                    StopPlayingSoundsFromTheSpecificSoundBank(oneLinersSounds);
-                    StopPlayingSound("EngineSound", SFX);
-                    PlaySound("Tires", SFX);
-                }
-                if(planeBaseScript.flightControllScript.currentPlaneSpeed == 0 && !landingSpeechPlayed)
-                {
-                    landingSpeechPlayed = true;
-                    StopPlayingSound("Tires", SFX);
-                    StopPlayingSoundsFromTheSpecificSoundBank(oneLinersSounds);
-                    int randomSoundEffect = Random.Range(0, landingSounds.Length);
-                    while (randomSoundEffect == lastPlayedLandingSound)
-                        randomSoundEffect = Random.Range(0, landingSounds.Length);
-                    lastPlayedLandingSound = randomSoundEffect;
-                    PlaySound("Landing" + randomSoundEffect.ToString(), landingSounds);
-                    planeBaseScript.flightControllScript.waitingTimeAfterLandingCombinedWithSoundLength = ReturnSoundDuration("Landing" + randomSoundEffect.ToString(), landingSounds);
-                }
-            }
-        }
+        //if (optionsMenuGameObject.activeSelf)
+        //    UpdateAllSoundsVolume();
+        //if (planeControlCenterGameObject != null && PlaneScriptScript != null && (PlaneScriptScript.currentPlaneState == PlaneScript.StateMachine.standard || PlaneScriptScript.currentPlaneState == PlaneScript.StateMachine.wheelsOn))
+        //{
+        //    if(!PlaneScriptScript.flightControllScript.isTouchingAirport)
+        //    {
+        //        waitingTimeForOneLinerCurrent += Time.deltaTime;
+        //        if (waitingTimeForOneLinerCurrent >= gameplaySettings.waitingTimeForOneLiner)
+        //        {
+        //            canPlayOneLiner = true;
+        //            waitingTimeForOneLinerCurrent = 0;
+        //            for (int i = 0; i < oneLinersSounds.Length; i++)
+        //            {
+        //                if (IsTheSoundCurrentlyPlaying("OneLiner" + i, oneLinersSounds))
+        //                {
+        //                    canPlayOneLiner = false;
+        //                    break;
+        //                }
+        //            }
+        //            if (canPlayOneLiner)
+        //            {
+        //                int randomSoundEffect = Random.Range(0, oneLinersSounds.Length);
+        //                while (randomSoundEffect == lastPlayedOneLiner)
+        //                    randomSoundEffect = Random.Range(0, oneLinersSounds.Length);
+        //                lastPlayedOneLiner = randomSoundEffect;
+        //                PlaySound("OneLiner" + randomSoundEffect.ToString(), oneLinersSounds);
+        //                waitingTimeForOneLinerCurrent -= ReturnSoundDuration("OneLiner" + randomSoundEffect, oneLinersSounds);
+        //            }
+        //        }
+        //    }
+        //    else
+        //    {
+        //        if(!tiresSFXPlayed)
+        //        {
+        //            tiresSFXPlayed = true;
+        //            StopPlayingSoundsFromTheSpecificSoundBank(oneLinersSounds);
+        //            StopPlayingSound("EngineSound", SFX);
+        //            PlaySound("Tires", SFX);
+        //        }
+        //        if(PlaneScriptScript.flightControllScript.currentPlaneSpeed == 0 && !landingSpeechPlayed)
+        //        {
+        //            landingSpeechPlayed = true;
+        //            StopPlayingSound("Tires", SFX);
+        //            StopPlayingSoundsFromTheSpecificSoundBank(oneLinersSounds);
+        //            int randomSoundEffect = Random.Range(0, landingSounds.Length);
+        //            while (randomSoundEffect == lastPlayedLandingSound)
+        //                randomSoundEffect = Random.Range(0, landingSounds.Length);
+        //            lastPlayedLandingSound = randomSoundEffect;
+        //            PlaySound("Landing" + randomSoundEffect.ToString(), landingSounds);
+        //            PlaneScriptScript.flightControllScript.waitingTimeAfterLandingCombinedWithSoundLength = ReturnSoundDuration("Landing" + randomSoundEffect.ToString(), landingSounds);
+        //        }
+        //    }
+        //}
     }
     private void LoadSounds(Sound [] sounds)
     {

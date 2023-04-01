@@ -12,7 +12,7 @@ public class LevelManager : MonoBehaviour
     public GameObject planeGameObject;
     public GameplaySettings gameplaySettings;
     public LayerMask planeLayer;
-    internal PlaneBase planeBaseScript;
+    //internal PlaneScript PlaneScriptScript;
     internal int levelCounter;
     internal float currentlevelDistance;
     internal float levelProgress;
@@ -23,77 +23,77 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
-        planeBaseScript = planeControlCenterGameObject.GetComponent<PlaneBase>();
-        planeBaseScript.audioScript.PlaySound("TopGunTheme", planeBaseScript.audioScript.otherSounds);
+        //PlaneScriptScript = planeControlCenterGameObject.GetComponent<PlaneScript>();
+        //PlaneScriptScript.audioScript.PlaySound("TopGunTheme", PlaneScriptScript.audioScript.otherSounds);
         RestartGame();
     }
     void Update()
     {
-        if (planeBaseScript.flightControllScript.currentPlaneSpeed > 0 && (planeBaseScript.currentPlaneState == PlaneBase.StateMachine.standard || planeBaseScript.currentPlaneState == PlaneBase.StateMachine.wheelsOn))
-        {
-            scorePointsCounter += Time.deltaTime;
-            if (scorePointsCounter > 1)
-            {
-                scorePointsCounter = 0;
-                gameScore++;
-            }
-            if (planeBaseScript.currentPlaneState == PlaneBase.StateMachine.standard)
-            {
-                if (levelProgress < currentlevelDistance)
-                    levelProgress += planeBaseScript.flightControllScript.currentPlaneSpeed * Time.deltaTime;
-                if (levelProgress >= currentlevelDistance)
-                {
-                    levelProgress = currentlevelDistance;
-                    planeBaseScript.currentPlaneState = PlaneBase.StateMachine.wheelsOn;
-                    planeBaseScript.planeRendererScript.ChangePlaneSprite();
-                }
-            }
-            else if(planeBaseScript.currentPlaneState == PlaneBase.StateMachine.wheelsOn)
-            {
-                if (levelProgress >= currentlevelDistance)
-                    CheckIfThePlayerIsBehindTheAirport();
-            }
-        }
+        //if (PlaneScriptScript.flightControllScript.currentPlaneSpeed > 0 && (PlaneScriptScript.currentPlaneState == PlaneScript.PlaneState.standard || PlaneScriptScript.currentPlaneState == PlaneScript.PlaneState.wheelsOn))
+        //{
+        //    scorePointsCounter += Time.deltaTime;
+        //    if (scorePointsCounter > 1)
+        //    {
+        //        scorePointsCounter = 0;
+        //        gameScore++;
+        //    }
+        //    if (PlaneScriptScript.currentPlaneState == PlaneScript.PlaneState.standard)
+        //    {
+        //        if (levelProgress < currentlevelDistance)
+        //            levelProgress += PlaneScriptScript.flightControllScript.currentPlaneSpeed * Time.deltaTime;
+        //        if (levelProgress >= currentlevelDistance)
+        //        {
+        //            levelProgress = currentlevelDistance;
+        //            PlaneScriptScript.currentPlaneState = PlaneScript.PlaneState.wheelsOn;
+        //            PlaneScriptScript.planeRendererScript.ChangePlaneSprite();
+        //        }
+        //    }
+        //    else if(PlaneScriptScript.currentPlaneState == PlaneScript.PlaneState.wheelsOn)
+        //    {
+        //        if (levelProgress >= currentlevelDistance)
+        //            CheckIfThePlayerIsBehindTheAirport();
+        //    }
+        //}
     }
     public void RestartGame()
     {
-        levelCounter = 1;
-        gameScore = 0;
-        planeBaseScript.flightControllScript.drunkBottlesInTotal = 0;
-        planeBaseScript.difficultyScript.difficultyMultiplier = 0;
-        planeBaseScript.flightControllScript.waitingTimeAfterLandingCurrent = 0;
-        if (planeBaseScript.flightControllScript.smokeSpawner.transform.childCount != 0)
-        {
-            foreach (Transform child in planeBaseScript.flightControllScript.smokeSpawner.transform)
-                GameObject.Destroy(child.gameObject);
-        }
-        LoadLevel();
+       // levelCounter = 1;
+       // gameScore = 0;
+       // PlaneScriptScript.flightControllScript.drunkBottlesInTotal = 0;
+       //// PlaneScriptScript.difficultyScript.difficultyMultiplier = 0;
+       // PlaneScriptScript.flightControllScript.waitingTimeAfterLandingCurrent = 0;
+       // if (PlaneScriptScript.smokeSpawner.transform.childCount != 0)
+       // {
+       //     foreach (Transform child in PlaneScriptScript.smokeSpawner.transform)
+       //         GameObject.Destroy(child.gameObject);
+       // }
+       // LoadLevel();
     }
     internal void LoadLevel()
     {
-        planeBaseScript.currentPlaneState = PlaneBase.StateMachine.standard;
-        planeBaseScript.planeRendererScript.ChangePlaneSprite();
-        planeBaseScript.UIScript.DisableOptionsMenu();
-        planeBaseScript.UIScript.DisableGameOverScreen();
-        if (planeBaseScript.flightControllScript.toNewLevel)
-        {
-            planeBaseScript.flightControllScript.toNewLevel = false;
-            levelCounter++;
-            planeBaseScript.flightControllScript.currentPlaneSpeed = gameplaySettings.defaultPlaneSpeed;
-            planeBaseScript.flightControllScript.isTouchingAirport = false;
-            planeBaseScript.flightControllScript.isTouchingGround = false;
-            planeBaseScript.flightControllScript.waitingTimeAfterLandingCombinedWithSoundLength = 3f;
-            planeBaseScript.flightControllScript.rewardForLandingAdded = false;
-            planeBaseScript.difficultyScript.difficultyMultiplier = 0;
-            planeBaseScript.audioScript.tiresSFXPlayed = false;
-            planeBaseScript.audioScript.landingSpeechPlayed = false;
-            planeBaseScript.flightControllScript.altitudeChangeForceCurrent = gameplaySettings.altitudeChangeForce;
-        }
+        //PlaneScriptScript.currentPlaneState = PlaneScript.PlaneState.standard;
+        //PlaneScriptScript.planeRendererScript.ChangePlaneSprite();
+        //PlaneScriptScript.UIScript.DisableOptionsMenu();
+        //PlaneScriptScript.UIScript.DisableGameOverScreen();
+        //if (PlaneScriptScript.flightControllScript.toNewLevel)
+        //{
+        //    PlaneScriptScript.flightControllScript.toNewLevel = false;
+        //    levelCounter++;
+        //    PlaneScriptScript.flightControllScript.currentPlaneSpeed = gameplaySettings.defaultPlaneSpeed;
+        //    PlaneScriptScript.flightControllScript.isTouchingAirport = false;
+        //    PlaneScriptScript.flightControllScript.isTouchingGround = false;
+        //    PlaneScriptScript.flightControllScript.waitingTimeAfterLandingCombinedWithSoundLength = 3f;
+        //    PlaneScriptScript.flightControllScript.rewardForLandingAdded = false;
+        //    //PlaneScriptScript.difficultyScript.difficultyMultiplier = 0;
+        //    //PlaneScriptScript.audioScript.tiresSFXPlayed = false;
+        //    //PlaneScriptScript.audioScript.landingSpeechPlayed = false;
+        //    PlaneScriptScript.flightControllScript.altitudeChangeForceCurrent = gameplaySettings.altitudeChangeForce;
+        //}
         foreach (Transform child in transform)
             GameObject.Destroy(child.gameObject);
-        if(!planeBaseScript.audioScript.IsTheSoundCurrentlyPlaying("EngineSound", planeBaseScript.audioScript.SFX))
-            planeBaseScript.audioScript.PlaySound("EngineSound", planeBaseScript.audioScript.SFX);
-        planeBaseScript.UIScript.DisablePauseScreen();
+        //if(!PlaneScriptScript.audioScript.IsTheSoundCurrentlyPlaying("EngineSound", PlaneScriptScript.audioScript.SFX))
+        //    PlaneScriptScript.audioScript.PlaySound("EngineSound", PlaneScriptScript.audioScript.SFX);
+        //PlaneScriptScript.UIScript.DisablePauseScreen();
         levelProgress = 0;
         scorePointsCounter = 0;
         currentlevelDistance = 100 + levelCounter * 10;
@@ -151,8 +151,8 @@ public class LevelManager : MonoBehaviour
     }
     private void CheckIfThePlayerIsBehindTheAirport()
     {
-        if (afterAirportDestroyPointGameObject != null && Physics2D.Raycast(afterAirportDestroyPointGameObject.transform.position, Vector2.up, Mathf.Infinity, planeLayer))
-            if (planeBaseScript.currentPlaneState == PlaneBase.StateMachine.standard || planeBaseScript.currentPlaneState == PlaneBase.StateMachine.wheelsOn)
-                planeBaseScript.flightControllScript.DamageThePlane();
+        //if (afterAirportDestroyPointGameObject != null && Physics2D.Raycast(afterAirportDestroyPointGameObject.transform.position, Vector2.up, Mathf.Infinity, planeLayer))
+            //if (PlaneScriptScript.currentPlaneState == PlaneScript.PlaneState.standard || PlaneScriptScript.currentPlaneState == PlaneScript.PlaneState.wheelsOn)
+                //PlaneScriptScript.flightControllScript.DamageThePlane();
     }
 }

@@ -25,7 +25,7 @@ public class Trotyl : MonoBehaviour
         }
         if(collision.gameObject.CompareTag("Plane"))
         {
-            collision.gameObject.GetComponentInChildren<HitDetectionManager>().planeBaseScript.flightControllScript.DamageThePlane();
+            //collision.gameObject.GetComponentInChildren<HitDetectionManager>().planeBaseScript.flightControllScript.DamageThePlane();
             Destroy(gameObject);
         }
     }

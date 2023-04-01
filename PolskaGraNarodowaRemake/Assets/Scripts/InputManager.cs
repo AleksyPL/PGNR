@@ -4,29 +4,40 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    internal Vector3 position;
-    internal bool spaceHold;
-    internal bool spaceReleased;
-    public GameObject planeControlCenterGameObject;
-    internal PlaneBase baseScript;
+    internal float positionPlayerOne;
+    internal float positionPlayerTwo;
+    internal bool spaceHoldPlayerOne;
+    internal bool spaceHoldPlayerTwo;
+    internal bool spaceReleasedPlayerOne;
+    internal bool spaceReleasedPlayerTwo;
+    internal FlightController flightControllerScript;
     internal bool ESCpressed;
     void Start()
     {
-        baseScript = planeControlCenterGameObject.GetComponent<PlaneBase>();
-        position = Vector3.zero;
-        spaceHold = false;
+        flightControllerScript = GetComponent<FlightController>();
+        positionPlayerOne = 0;
+        positionPlayerTwo = 0;
+        spaceHoldPlayerOne = false;
+        spaceHoldPlayerTwo = false;
         ESCpressed = false;
     }
     void Update()
     {
-        if(!baseScript.flightControllScript.isTouchingAirport && baseScript.currentPlaneState != PlaneBase.StateMachine.damaged && baseScript.currentPlaneState != PlaneBase.StateMachine.crashed)
+        if(!flightControllerScript.gameModeScript.playerOnePlane.isTouchingAirport && flightControllerScript.gameModeScript.playerOnePlane.currentPlaneState != PlaneState.damaged && flightControllerScript.gameModeScript.playerOnePlane.currentPlaneState != PlaneState.crashed)
         {
-            position.y = Input.GetAxisRaw("Vertical");
-            position.Normalize();
-            spaceHold = Input.GetButton("Jump");
-            spaceReleased = Input.GetButtonUp("Jump");
+            positionPlayerOne = Input.GetAxisRaw("Vertical");
+            spaceHoldPlayerOne = Input.GetButton("Jump");
+            spaceReleasedPlayerOne = Input.GetButtonUp("Jump");
         }
-        if(baseScript.currentPlaneState != PlaneBase.StateMachine.crashed)
+        if(flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer && !flightControllerScript.gameModeScript.playerTwoPlane.isTouchingAirport && flightControllerScript.gameModeScript.playerTwoPlane.currentPlaneState != PlaneState.damaged && flightControllerScript.gameModeScript.playerTwoPlane.currentPlaneState != PlaneState.crashed)
+        {
+            positionPlayerTwo = Input.GetAxisRaw("Vertical1");
+            spaceHoldPlayerTwo = Input.GetButton("Jump1");
+            spaceReleasedPlayerTwo = Input.GetButtonUp("Jump1");
+        }
+        if (flightControllerScript.gameModeScript.playerOnePlane.currentPlaneState != PlaneState.crashed || flightControllerScript.gameModeScript.playerTwoPlane.currentPlaneState != PlaneState.crashed)
+        {
             ESCpressed = Input.GetButtonDown("Cancel");
+        }
     }
 }

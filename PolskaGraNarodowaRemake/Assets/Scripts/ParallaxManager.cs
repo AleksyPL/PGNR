@@ -7,10 +7,11 @@ public class ParallaxManager : MonoBehaviour
     private Transform cameraTransform;
     private Vector3 lastCameraPosition;
     private float textureUnitSizeX;
+    public GameObject cameraObject;
     public float parallaxEffectMultipler;
     void Start()
     {
-        cameraTransform = Camera.main.transform;
+        cameraTransform = cameraObject.transform;
         lastCameraPosition = cameraTransform.position;
         textureUnitSizeX = GetComponent<SpriteRenderer>().sprite.texture.width / GetComponent<SpriteRenderer>().sprite.pixelsPerUnit;
     }
