@@ -7,41 +7,42 @@ public class BottleOfVodka : MonoBehaviour
     public GameObject crackedVersionPrefab;
     public GameObject explosionPrefab;
     public GameplaySettings gameplaySettings;
-    private GameObject audioManagerGameObject;
-    private AudioManager audioScript;
-    private GameObject levelManagerGameObject;
-    private LevelManager levelManagerScript;
+    private GameObject projectileParentGameObject;
+    //private GameObject audioManagerGameObject;
+    //private AudioManager audioScript;
+    //private GameObject levelManagerGameObject;
+    //private LevelManager levelManagerScript;
 
     void Start()
     {
-        audioManagerGameObject = GameObject.Find("AudioManager");
-        audioScript = audioManagerGameObject.GetComponent<AudioManager>();
-        levelManagerGameObject = GameObject.Find("LevelManager");
-        levelManagerScript = levelManagerGameObject.GetComponent<LevelManager>();
+        //audioManagerGameObject = GameObject.Find("AudioManager");
+        //audioScript = audioManagerGameObject.GetComponent<AudioManager>();
+        projectileParentGameObject = GameObject.Find("ObstaclesAndProjectiles");
+        //levelManagerScript = levelManagerGameObject.GetComponent<LevelManager>();
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Obstacle") || collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Obstacle") || collision.gameObject.CompareTag("Ground"))
         {
-            audioScript.PlaySound("BreakingGlass", audioScript.SFX);
+            //audioScript.PlaySound("BreakingGlass", audioScript.SFX);
             if (collision.gameObject.transform.name == "birchTree")
             {
-                levelManagerScript.gameScore += gameplaySettings.rewardForHittingATarget;
+                //levelManagerScript.gameScore += gameplaySettings.rewardForHittingATarget;
                 collision.gameObject.GetComponent<FadeOutTool>().enabled = true;
             }
             else if (collision.gameObject.transform.name == "trotyl" || collision.gameObject.transform.name == "trotylLauncher")
             {
-                levelManagerScript.gameScore += gameplaySettings.rewardForHittingATarget;
+                //levelManagerScript.gameScore += gameplaySettings.rewardForHittingATarget;
                 Destroy(collision.gameObject);
-                if(explosionPrefab != null)
+                if (explosionPrefab != null)
                 {
-                    GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity, levelManagerGameObject.transform);
+                    GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity, projectileParentGameObject.transform);
                     explosion.name = "explosion";
                 }
             }
-            if(crackedVersionPrefab !=null)
+            if (crackedVersionPrefab != null)
             {
-                GameObject bottle = Instantiate(crackedVersionPrefab, transform.position, Quaternion.identity, levelManagerGameObject.transform);
+                GameObject bottle = Instantiate(crackedVersionPrefab, transform.position, Quaternion.identity, projectileParentGameObject.transform);
                 bottle.name = "vodkaBottleCracked";
                 foreach (Transform child in bottle.transform)
                 {

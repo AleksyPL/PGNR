@@ -12,7 +12,7 @@ public class GameModeManager : MonoBehaviour
     [SerializeField] internal Plane playerOnePlane;
     [SerializeField] internal Plane playerTwoPlane;
     internal FlightController flightController;
-    internal FadeOutTool fadeOutToolscript;
+    //internal FadeOutTool fadeOutToolscript;
     public GameMode currentGameMode;
     
     private void OnEnable()
@@ -21,10 +21,8 @@ public class GameModeManager : MonoBehaviour
     }
     private void Start()
     {
-        playerOnePlane = new Plane();
-        playerTwoPlane = new Plane();
-        playerOnePlane.playerNumber = 0;
-        playerTwoPlane.playerNumber = 1;
+        playerOnePlane.LoadPlaneData(0);
+        playerTwoPlane.LoadPlaneData(1);
         flightController = GetComponent<FlightController>();
     }
 }

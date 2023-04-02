@@ -35,7 +35,7 @@ public class InputManager : MonoBehaviour
             spaceHoldPlayerTwo = Input.GetButton("Jump1");
             spaceReleasedPlayerTwo = Input.GetButtonUp("Jump1");
         }
-        if (flightControllerScript.gameModeScript.playerOnePlane.currentPlaneState != PlaneState.crashed || flightControllerScript.gameModeScript.playerTwoPlane.currentPlaneState != PlaneState.crashed)
+        if(flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer && (flightControllerScript.gameModeScript.playerOnePlane.currentPlaneState != PlaneState.crashed || flightControllerScript.gameModeScript.playerTwoPlane.currentPlaneState != PlaneState.crashed))
         {
             ESCpressed = Input.GetButtonDown("Cancel");
         }

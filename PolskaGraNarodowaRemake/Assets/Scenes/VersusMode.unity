@@ -196,6 +196,7 @@ GameObject:
   m_Component:
   - component: {fileID: 199547953}
   - component: {fileID: 199547952}
+  - component: {fileID: 199547954}
   m_Layer: 0
   m_Name: CameraDown
   m_TagString: MainCamera
@@ -254,7 +255,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 199547950}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.425491, y: -26.776514, z: -24.072147}
+  m_LocalPosition: {x: -2.2000003, y: -8.799999, z: -24.072147}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -263,6 +264,20 @@ Transform:
   m_Father: {fileID: 260097929}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &199547954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199547950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a25e721fb23e644aa217ad5b71e2c4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToFollow: {fileID: 372025643}
+  gameplaySettings: {fileID: 11400000, guid: d338db95f60174b41bd6e219f61b651f, type: 2}
 --- !u!1 &260097928
 GameObject:
   m_ObjectHideFlags: 0
@@ -287,7 +302,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 260097928}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.425491, y: 17.776514, z: 14.072147}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1062,6 +1077,22 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7876854574752454001, guid: b00c10a37d9feba4782aad5cb3128a96, type: 3}
   m_PrefabInstance: {fileID: 1411442962}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1562720033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1562720028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc402cd01476ce649a1652a64523f455, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planeWithoutWheels: {fileID: 21300000, guid: 9161532a2d4ab554db1bba4df1da5e2a, type: 3}
+  planeWithHoles: {fileID: 21300000, guid: a15b5524045c60448be12e1b53d6f139, type: 3}
+  planeWithWheels: {fileID: 21300000, guid: 23a7ea00ef007bb4fbf176c1c23486b5, type: 3}
+  planeCrashed: {fileID: 21300000, guid: f516c2bc80d0877439d08d2d3a892abd, type: 3}
 --- !u!1001 &1664150486
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1440,6 +1471,7 @@ GameObject:
   - component: {fileID: 1810758766}
   - component: {fileID: 1810758765}
   - component: {fileID: 1810758764}
+  - component: {fileID: 1810758767}
   m_Layer: 0
   m_Name: CameraUp
   m_TagString: MainCamera
@@ -1506,7 +1538,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1810758763}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.425491, y: 6.723486, z: -24.072147}
+  m_LocalPosition: {x: -2.2, y: 24.7, z: -24.072147}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1515,11 +1547,41 @@ Transform:
   m_Father: {fileID: 260097929}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1810758767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1810758763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a25e721fb23e644aa217ad5b71e2c4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToFollow: {fileID: 78618947}
+  gameplaySettings: {fileID: 11400000, guid: d338db95f60174b41bd6e219f61b651f, type: 2}
 --- !u!1 &1878046767 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7876854574752454001, guid: b00c10a37d9feba4782aad5cb3128a96, type: 3}
   m_PrefabInstance: {fileID: 736955559}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1878046772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1878046767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc402cd01476ce649a1652a64523f455, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planeWithoutWheels: {fileID: 21300000, guid: 9161532a2d4ab554db1bba4df1da5e2a, type: 3}
+  planeWithHoles: {fileID: 21300000, guid: a15b5524045c60448be12e1b53d6f139, type: 3}
+  planeWithWheels: {fileID: 21300000, guid: 23a7ea00ef007bb4fbf176c1c23486b5, type: 3}
+  planeCrashed: {fileID: 21300000, guid: f516c2bc80d0877439d08d2d3a892abd, type: 3}
 --- !u!1 &2134856608
 GameObject:
   m_ObjectHideFlags: 0
@@ -1532,6 +1594,8 @@ GameObject:
   - component: {fileID: 2134856611}
   - component: {fileID: 2134856610}
   - component: {fileID: 2134856612}
+  - component: {fileID: 2134856613}
+  - component: {fileID: 2134856614}
   m_Layer: 0
   m_Name: MasterController
   m_TagString: Untagged
@@ -1589,6 +1653,7 @@ MonoBehaviour:
     smokeSpawnerGameObject: {fileID: 1499929550}
     planeRendererGameObject: {fileID: 1562720028}
     projectilesParentGameObject: {fileID: 1172776397}
+    cameraGameObject: {fileID: 1810758763}
     bottlePrefab: {fileID: 7997397083522814020, guid: dc51cdc406a34804c9562f02baf278d7, type: 3}
     smokePrefab: {fileID: 3160574352092641783, guid: 070ad948d9e93f940adbc5350b5de6f1, type: 3}
     explosionPrefab: {fileID: 3555890799097804707, guid: c87b6386b15942e4c8eb26d445727a4e, type: 3}
@@ -1599,6 +1664,7 @@ MonoBehaviour:
     smokeSpawnerGameObject: {fileID: 1710715763}
     planeRendererGameObject: {fileID: 1878046767}
     projectilesParentGameObject: {fileID: 1172776397}
+    cameraGameObject: {fileID: 199547950}
     bottlePrefab: {fileID: 7997397083522814020, guid: dc51cdc406a34804c9562f02baf278d7, type: 3}
     smokePrefab: {fileID: 3160574352092641783, guid: 070ad948d9e93f940adbc5350b5de6f1, type: 3}
     explosionPrefab: {fileID: 3555890799097804707, guid: c87b6386b15942e4c8eb26d445727a4e, type: 3}
@@ -1613,5 +1679,34 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 784b541a5fda6484389958e33ccc4b54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2134856613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2134856608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ea3634533466444cb05ae88d5c3fad7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  airportPrefab: {fileID: 5789956881310506299, guid: b6909e430ea5f1841b1ce737fe3a9c4d, type: 3}
+  treePrefab: {fileID: 7111739764834294617, guid: d435a386ed3bb624e87f1ed0d2c80949, type: 3}
+  trotylLauncherPrefab: {fileID: 2449576941250485145, guid: 69b0d68d52dc25f43aebf67166c6a6b2, type: 3}
+  fogPrefab: {fileID: 4663679174155961175, guid: 9311617b76dd8d049b198314d66ddeb5, type: 3}
+  ObstaclesAndProjectilesGameObject: {fileID: 1172776397}
+--- !u!114 &2134856614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2134856608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72bfa3db4628d8941a536b19e1773525, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

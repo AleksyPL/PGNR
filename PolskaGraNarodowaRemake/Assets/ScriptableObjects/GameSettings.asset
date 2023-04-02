@@ -20,7 +20,7 @@ MonoBehaviour:
   debrisSplashForce: 500
   rewardForLanding: 100
   rewardForHittingATarget: 50
-  cameraPositionXOffset: 12
+  cameraPositionXOffset: 25
   cameraDespawnDisatance: 20
   fadeOutLifeTime: 1
   groundLevelHeight: 0.6

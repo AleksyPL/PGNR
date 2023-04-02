@@ -21,9 +21,12 @@ internal class Plane
     public GameObject smokeSpawnerGameObject;
     public GameObject planeRendererGameObject;
     public GameObject projectilesParentGameObject;
+    public GameObject cameraGameObject;
     public GameObject bottlePrefab;
     public GameObject smokePrefab;
     public GameObject explosionPrefab;
+    internal float groundLevelHeight;
+    internal float topScreenHeight;
     internal bool isTouchingAirport;
     internal bool isTouchingGround;
     internal int bottleDrunkCounter;
@@ -31,7 +34,9 @@ internal class Plane
     internal float currentPlaneSpeed;
     internal float altitudeChangeForce;
     internal PlaneRenderer planeRendererScript;
-    internal Plane()
+    internal float timeToFullyChargeBottleThrowCounter;
+    internal int gameScore;
+    internal void LoadPlaneData(int numberOfThePlayer)
     {
         isTouchingAirport = false;
         isTouchingGround = false;
@@ -40,7 +45,9 @@ internal class Plane
         currentPlaneSpeed = gameplaySettings.defaultPlaneSpeed;
         altitudeChangeForce = gameplaySettings.altitudeChangeForce;
         planeRendererScript = planeRendererGameObject.GetComponent<PlaneRenderer>();
-        planeRendererScript.ChangeTilt(currentPlaneState, 0);
+        playerNumber = numberOfThePlayer;
+        timeToFullyChargeBottleThrowCounter = 0;
+        gameScore = 0;
     }
     internal void ThrowBottleOfVodka(float bottleThrowForce, Vector2 bottleThrowAngle)
     {
