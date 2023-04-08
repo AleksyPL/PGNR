@@ -2,11 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Languages
+{
+    Polish,
+    English
+}
+
 [CreateAssetMenu(menuName ="ScriptableObjects/GameplaySettings")]
 public class GameplaySettings : ScriptableObject
 {
     [Header("Language Settings")]
-    public int langauageIndex;
+    public Languages currentLanguage;
+    internal int langauageIndex;
     [Header("Audio Settings")]
     public float volumeSFX;
     public float volumeQuotes;
@@ -17,14 +24,12 @@ public class GameplaySettings : ScriptableObject
     [Header("Rewards")]
     public int rewardForLanding;
     public int rewardForHittingATarget;
+    public int rewardPerSecond;
     [Header("Camera Manager Settings")]
     public float cameraPositionXOffset;
     public float cameraDespawnDisatance;
     [Header("Fade Out Tool Settings")]
     public float fadeOutLifeTime;
-    [Header("Level Manager Settings")]
-    public float groundLevelHeight;
-    public float topScreenHeight;
     [Header("Flight Controller Settings")]
     public float defaultPlaneSpeed;
     public float altitudeChangeForce;
@@ -40,4 +45,14 @@ public class GameplaySettings : ScriptableObject
     public float rateOfFire;
     public float maxLaunchDelay;
     public float launchForce;
+    [Header("Difficulty Manager Settings")]
+    public float altitudeChangeForceOverridedMultiplier;
+    public float difficultyImpulseForce;
+    private void OnEnable()
+    {
+        if (currentLanguage == Languages.Polish)
+            langauageIndex = 0;
+        else if (currentLanguage == Languages.English)
+            langauageIndex = 1;
+    }
 }

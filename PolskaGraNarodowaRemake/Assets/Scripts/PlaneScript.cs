@@ -14,42 +14,74 @@ internal enum PlaneState
 [System.Serializable]
 internal class Plane
 {
+    //Plane State
     internal PlaneState currentPlaneState;
+    //Settings
     public GameplaySettings gameplaySettings;
+    //Game Objects - Spawners etc
+    internal int playerNumber;
     public GameObject planeGameObject;
     public GameObject bottleSpawnerGameObject;
     public GameObject smokeSpawnerGameObject;
     public GameObject planeRendererGameObject;
     public GameObject projectilesParentGameObject;
     public GameObject cameraGameObject;
+    //Prefabs
     public GameObject bottlePrefab;
     public GameObject smokePrefab;
     public GameObject explosionPrefab;
+    //Scripts
+    internal PlaneRenderer planeRendererScript;
+    //Difficulty
+    internal bool difficultyImpulseEnabled;
+    internal int difficultyImpulseDirection;
+    internal float difficultyImpulsTimeCurrent;
+    internal float difficultuImpulseCounter;
+    internal int bottleDrunkCounter;
+    //Camera borders
     internal float groundLevelHeight;
     internal float topScreenHeight;
+    //Flight controller settings
     internal bool isTouchingAirport;
     internal bool isTouchingGround;
-    internal int bottleDrunkCounter;
-    internal int playerNumber;
     internal float currentPlaneSpeed;
     internal float altitudeChangeForce;
-    internal PlaneRenderer planeRendererScript;
     internal float timeToFullyChargeBottleThrowCounter;
+    //Input
+    internal float verticalMovementKeys;
+    internal bool attackKeyPressed;
+    internal bool attackKeyReleased;
+    //Score
     internal int gameScore;
     internal void LoadPlaneData(int numberOfThePlayer)
     {
-        isTouchingAirport = false;
-        isTouchingGround = false;
-        currentPlaneState = PlaneState.standard;
-        bottleDrunkCounter = 0;
-        currentPlaneSpeed = gameplaySettings.defaultPlaneSpeed;
-        altitudeChangeForce = gameplaySettings.altitudeChangeForce;
         planeRendererScript = planeRendererGameObject.GetComponent<PlaneRenderer>();
         playerNumber = numberOfThePlayer;
-        timeToFullyChargeBottleThrowCounter = 0;
-        gameScore = 0;
+        ResetPlaneData();
     }
-    internal void ThrowBottleOfVodka(float bottleThrowForce, Vector2 bottleThrowAngle)
+    internal void ResetPlaneData()
+    {
+        attackKeyPressed = false;
+        attackKeyReleased = false;
+        verticalMovementKeys = 0;
+        isTouchingAirport = false;
+        isTouchingGround = false;
+        currentPlaneSpeed = gameplaySettings.defaultPlaneSpeed;
+        altitudeChangeForce = gameplaySettings.altitudeChangeForce;
+        bottleDrunkCounter = 0;
+        difficultyImpulseEnabled = false;
+        difficultyImpulseDirection = 1;
+        difficultyImpulsTimeCurrent = 0;
+        gameScore = 0;
+        timeToFullyChargeBottleThrowCounter = 0;
+        currentPlaneState = PlaneState.standard;
+        planeRendererScript.ChangePlaneSprite(currentPlaneState);
+        planeRendererScript.ChangeTilt(currentPlaneState, 0);
+        if (smokeSpawnerGameObject.transform.childCount != 0)
+            foreach (Transform child in smokeSpawnerGameObject.transform)
+                GameObject.Destroy(child.gameObject);
+    }
+    internal void SpawnBottleOfVodka(float bottleThrowForce, Vector2 bottleThrowAngle)
     {
         if (currentPlaneState == PlaneState.standard)
         {
@@ -82,7 +114,7 @@ internal class Plane
         planeRendererScript.ChangeTilt(currentPlaneState, -1);
         //baseScript.audioScript.StopPlayingSound("Whistle", baseScript.audioScript.SFX);
         //baseScript.audioScript.StopPlayingSound("EngineSound", baseScript.audioScript.SFX);
-        if (smokePrefab != null)
+        if (smokePrefab != null && smokeSpawnerGameObject.transform.childCount == 0)
             Object.Instantiate(smokePrefab, smokeSpawnerGameObject.transform.position, Quaternion.Euler(270, 0, 0), smokeSpawnerGameObject.transform);
         if (explosionPrefab != null)
         {
@@ -91,39 +123,3 @@ internal class Plane
         }
     }
 }
-
-
-//public class PlaneScript : MonoBehaviour
-//{
-//    //[SerializeField] internal Plane plane11 = new Plane();
-//    //public GameObject inputManagerGameObject;
-//    //public GameObject UIGameObject;
-//    //public GameObject levelManagerGameObject;
-//    //public GameObject audioManagerGameObject;
-//    public GameObject gameModeManagerObject;
-//    public GameObject flighControllerGameObject;
-    
-
-    
-//    internal GameModeManager gameModeScript;
-//    internal int playerNumber;
-//    //internal InputManager inputScript;
-//    //internal AudioManager audioScript;
-    
-//    //internal LevelManager levelManagerScript;
-//    internal FlightController flightControllScript;
-//    //internal UIManager UIScript;
-//    //internal PlaneRenderer planeRendererScript;
-//    void OnEnable()
-//    {
-//        gameModeScript = gameModeManagerObject.GetComponent<GameModeManager>();
-//        //planeRendererScript = planeRendererGameObject.GetComponent<PlaneRenderer>();
-//        flightControllScript = flighControllerGameObject.GetComponent<FlightController>();
-//        //difficultyScript = GetComponent<DifficultyManager>();
-//        //levelManagerScript = levelManagerGameObject.GetComponent<LevelManager>();
-//        //audioScript = audioManagerGameObject.GetComponent<AudioManager>();
-//        //UIScript = UIGameObject.GetComponent<UIManager>();
-//        //inputScript = inputManagerGameObject.GetComponent<InputManager>();
-//    }
-    
-//}

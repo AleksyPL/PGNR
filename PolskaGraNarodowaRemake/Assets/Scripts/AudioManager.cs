@@ -10,15 +10,16 @@ public class AudioManager : MonoBehaviour
     public Sound[] landingSounds;
     public Sound[] SFX;
     public Sound[] otherSounds;
-    public GameObject planeControlCenterGameObject;
+    //public GameObject planeControlCenterGameObject;
     public GameplaySettings gameplaySettings;
+    internal FlightController flightControllerScript;
     //internal PlaneScript PlaneScriptScript;
     private float waitingTimeForOneLinerCurrent;
     private bool canPlayOneLiner;
     internal bool tiresSFXPlayed;
     internal bool landingSpeechPlayed;
     internal List<Sound> pausedSounds;
-    public GameObject optionsMenuGameObject;
+    public GameObject UIManagerGameObject;
     private int lastPlayedOneLiner;
     private int lastPlayedLandingSound;
 
@@ -29,6 +30,7 @@ public class AudioManager : MonoBehaviour
         LoadSounds(landingSounds);
         LoadSounds(SFX);
         LoadSounds(otherSounds);
+        flightControllerScript = GetComponent<FlightController>();
         //if (planeControlCenterGameObject != null)
         //{
         //    PlaneScriptScript = planeControlCenterGameObject.GetComponent<PlaneScript>();
@@ -125,7 +127,7 @@ public class AudioManager : MonoBehaviour
     public void PlaySound(string soundName, Sound[] soundsBank)
     {
         Sound s = System.Array.Find(soundsBank, sound => sound.name == soundName);
-        if(s == null)
+        if (s == null)
         {
             Debug.LogWarning(soundName + " sound is missing in the " + soundsBank.ToString() + " soundsBank");
             return;

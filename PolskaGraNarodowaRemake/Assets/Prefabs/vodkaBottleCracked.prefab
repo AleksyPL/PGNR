@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5855151004404506503}
   m_Layer: 10
   m_Name: vodkaBottleParts_0
-  m_TagString: Vodka
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 5855151004682842020}
   m_Layer: 10
   m_Name: vodkaBottleParts_1
-  m_TagString: Vodka
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -352,7 +352,7 @@ GameObject:
   - component: {fileID: 5855151004956493635}
   m_Layer: 10
   m_Name: vodkaBottleCracked
-  m_TagString: Vodka
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -391,7 +391,7 @@ GameObject:
   - component: {fileID: 5855151004992711313}
   m_Layer: 10
   m_Name: vodkaBottleParts_4
-  m_TagString: Vodka
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -561,7 +561,7 @@ GameObject:
   - component: {fileID: 5855151005152581403}
   m_Layer: 10
   m_Name: vodkaBottleParts_3
-  m_TagString: Vodka
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -759,7 +759,7 @@ GameObject:
   - component: {fileID: 5855151005490765387}
   m_Layer: 10
   m_Name: vodkaBottleParts_2
-  m_TagString: Vodka
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
