@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum Languages
 {
-    Polish,
+    Polski,
     English
 }
 
@@ -14,6 +14,7 @@ public class GameplaySettings : ScriptableObject
     [Header("Language Settings")]
     public Languages currentLanguage;
     internal int langauageIndex;
+    public Localization[] localizationsStrings;
     [Header("Audio Settings")]
     public float volumeSFX;
     public float volumeQuotes;
@@ -50,7 +51,7 @@ public class GameplaySettings : ScriptableObject
     public float difficultyImpulseForce;
     private void OnEnable()
     {
-        if (currentLanguage == Languages.Polish)
+        if (currentLanguage == Languages.Polski)
             langauageIndex = 0;
         else if (currentLanguage == Languages.English)
             langauageIndex = 1;

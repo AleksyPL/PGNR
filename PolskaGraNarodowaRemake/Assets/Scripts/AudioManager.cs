@@ -10,9 +10,9 @@ public class AudioManager : MonoBehaviour
     public Sound[] landingSounds;
     public Sound[] SFX;
     public Sound[] otherSounds;
-    //public GameObject planeControlCenterGameObject;
     public GameplaySettings gameplaySettings;
     internal FlightController flightControllerScript;
+    //public GameObject planeControlCenterGameObject;
     //internal PlaneScript PlaneScriptScript;
     private float waitingTimeForOneLinerCurrent;
     private bool canPlayOneLiner;

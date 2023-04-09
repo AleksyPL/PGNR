@@ -20,7 +20,7 @@ public class Trotyl : MonoBehaviour
         {
             if (explosionPrefab != null)
             {
-                Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+                Instantiate(explosionPrefab, transform.position, Quaternion.identity, gameModeManagerScript.transform.Find("ObstaclesAndProjectiles").transform);
                 //audioScript.PlaySound("Explosion", audioScript.SFX);
             }
             Destroy(gameObject);

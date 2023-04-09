@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: GameSettings
   m_EditorClassIdentifier: 
   currentLanguage: 0
+  localizationsStrings:
+  - {fileID: 11400000, guid: 0f9bd656d084a05489812542daadc1dd, type: 2}
+  - {fileID: 11400000, guid: 6f3d82aa6f6afb549b75a30004dfdc74, type: 2}
   volumeSFX: 1
   volumeQuotes: 1
   volumeMusic: 1

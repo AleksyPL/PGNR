@@ -43,8 +43,8 @@ public class LevelManager : MonoBehaviour
     {
         foreach (Transform child in ObstaclesAndProjectilesGameObject.transform)
             GameObject.Destroy(child.gameObject);
-        //PlaneScriptScript.UIScript.DisableOptionsMenu();
-        //PlaneScriptScript.UIScript.DisableGameOverScreen();
+        //flightControllerScript.uiManagerScript.DisableOptionsMenu();
+        //flightControllerScript.uiManagerScript.DisableGameOverScreen();
         if (toNewLevel)
         {
             toNewLevel = false;
