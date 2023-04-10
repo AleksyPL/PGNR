@@ -30,7 +30,8 @@ public class HitDetectionManager : MonoBehaviour
             }
             else if(transform.tag == "Ground")
             {
-                gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).DestroyThePlane();
+                if(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).currentPlaneState!= PlaneState.crashed)
+                    gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).DestroyThePlane();
             }
             else if(transform.tag == "KillPlane")
             {

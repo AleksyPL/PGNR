@@ -18,6 +18,7 @@ public class OptionsMenu : MonoBehaviour
     private void Update()
     {
         UpdateSettingsUsingSliderValues();
+        UpdateUIWithNewLanguage();
     }
     public void LoadValuesFromSettings()
     {
@@ -45,15 +46,13 @@ public class OptionsMenu : MonoBehaviour
     public void NextLanguage()
     {
         gameplaySettings.langauageIndex++;
-        if (gameplaySettings.langauageIndex > System.Enum.GetValues(typeof(Languages)).Length)
+        if (gameplaySettings.langauageIndex > System.Enum.GetValues(typeof(Languages)).Length - 1)
             gameplaySettings.langauageIndex = 0;
-        UpdateUIWithNewLanguage();
     }
     public void PreviousLanguage()
     {
         gameplaySettings.langauageIndex--;
         if (gameplaySettings.langauageIndex < 0)
-            gameplaySettings.langauageIndex = System.Enum.GetValues(typeof(Languages)).Length;
-        UpdateUIWithNewLanguage();
+            gameplaySettings.langauageIndex = System.Enum.GetValues(typeof(Languages)).Length - 1;
     }
 }

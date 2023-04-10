@@ -573,11 +573,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 117288236}
   m_CullTransparentMesh: 1
---- !u!1 &137823829 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 133455585652434663, guid: d106925ab1a24b74d9f8dcd8bb083c05, type: 3}
-  m_PrefabInstance: {fileID: 1664150486}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &199547950
 GameObject:
   m_ObjectHideFlags: 0
@@ -1209,7 +1204,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 536180783}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -40, y: 33.5, z: 0}
+  m_LocalPosition: {x: -40, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2380,11 +2375,6 @@ Transform:
   m_Father: {fileID: 2134856609}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1200628913 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 133455585586949142, guid: d106925ab1a24b74d9f8dcd8bb083c05, type: 3}
-  m_PrefabInstance: {fileID: 1664150486}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1210908537 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 133455584487155263, guid: d106925ab1a24b74d9f8dcd8bb083c05, type: 3}
@@ -3470,6 +3460,18 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 133455585484151061, guid: d106925ab1a24b74d9f8dcd8bb083c05, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2134856618}
+    - target: {fileID: 133455585484151061, guid: d106925ab1a24b74d9f8dcd8bb083c05, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: DisableOptionsMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 133455585484151061, guid: d106925ab1a24b74d9f8dcd8bb083c05, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UIManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 133455585684772007, guid: d106925ab1a24b74d9f8dcd8bb083c05, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
@@ -4207,11 +4209,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToFollow: {fileID: 78618947}
   gameplaySettings: {fileID: 11400000, guid: d338db95f60174b41bd6e219f61b651f, type: 2}
---- !u!1 &1854962646 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 133455584996673484, guid: d106925ab1a24b74d9f8dcd8bb083c05, type: 3}
-  m_PrefabInstance: {fileID: 1664150486}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1855784947
 GameObject:
   m_ObjectHideFlags: 0
@@ -5078,13 +5075,12 @@ GameObject:
   - component: {fileID: 2134856609}
   - component: {fileID: 2134856611}
   - component: {fileID: 2134856610}
+  - component: {fileID: 2134856618}
   - component: {fileID: 2134856612}
   - component: {fileID: 2134856613}
   - component: {fileID: 2134856614}
   - component: {fileID: 2134856615}
-  - component: {fileID: 2134856616}
   - component: {fileID: 2134856617}
-  - component: {fileID: 2134856618}
   m_Layer: 0
   m_Name: MasterController
   m_TagString: Untagged
@@ -5206,7 +5202,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2134856608}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2237e657e9e034b458395414a067e260, type: 3}
   m_Name: 
@@ -5361,25 +5357,7 @@ MonoBehaviour:
     looping: 1
     source: {fileID: 0}
   gameplaySettings: {fileID: 11400000, guid: d338db95f60174b41bd6e219f61b651f, type: 2}
-  UIManagerGameObject: {fileID: 0}
---- !u!114 &2134856616
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2134856608}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb052ecac6e4b194796eb1fd4a5b1145, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameplaySettings: {fileID: 0}
-  volumeSFXSliderGameObject: {fileID: 1200628913}
-  volumeMusicSliderGameObject: {fileID: 1854962646}
-  volumeQuotesSliderGameObject: {fileID: 137823829}
-  languageSelectorGameObject: {fileID: 0}
-  activeLanguageGameObject: {fileID: 0}
+  UIManagerGameObject: {fileID: 1292206221}
 --- !u!114 &2134856617
 MonoBehaviour:
   m_ObjectHideFlags: 0

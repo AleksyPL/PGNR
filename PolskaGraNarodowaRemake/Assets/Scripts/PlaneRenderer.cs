@@ -8,17 +8,12 @@ public class PlaneRenderer : MonoBehaviour
     public Sprite planeWithHoles;
     public Sprite planeWithWheels;
     public Sprite planeCrashed;
-    //public GameObject rendererEntity;
-    //public GameObject planeControlCenterGameObject;
-    //internal PlaneScript baseScript;
     void OnEnable()
     {
-        //baseScript = planeControlCenterGameObject.GetComponent<PlaneScript>();
-        //ChangePlaneSprite();
     }
     private void Update()
     {
-        //ChangeTilt();
+        
     }
     internal void ChangePlaneSprite(PlaneState currentPlaneState)
     {

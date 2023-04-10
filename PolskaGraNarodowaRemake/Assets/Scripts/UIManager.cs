@@ -9,8 +9,6 @@ public class UIManager : MonoBehaviour
 {
     public GameplaySettings gameplaySettings;
     internal FlightController flightControllerScript;
-    //internal PlaneScript PlaneScriptScript;
-    //public GameObject planeControlCenterGameObject;
     private bool pauseScreenEnabled;
     [Header("Regular HUD")]
     [SerializeField] private GameObject regularHUDMainGameObject;
@@ -18,14 +16,14 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject regularHUDLevelProgressPlayerOneGameObject;
     [SerializeField] private GameObject regularHUDScorePlayerOneGameObject;
     [SerializeField] private GameObject regularHUDBottlesPlayerOneGameObject;
-    [SerializeField] private GameObject regularHUDColorPanelPlayerOneGameObject;
+    [SerializeField] internal GameObject regularHUDColorPanelPlayerOneGameObject;
     [SerializeField] private GameObject regularHUDYearPlayerTwoGameObject;
     [SerializeField] private GameObject regularHUDLevelProgressPlayerTwoGameObject;
     [SerializeField] private GameObject regularHUDScorePlayerTwoGameObject;
     [SerializeField] private GameObject regularHUDBottlesPlayerTwoGameObject;
-    [SerializeField] private GameObject regularHUDColorPanelPlayerTwoGameObject;
-    [SerializeField] private Color winColor;
-    [SerializeField] private Color loseColor;
+    [SerializeField] internal GameObject regularHUDColorPanelPlayerTwoGameObject;
+    [SerializeField] internal Color winColor;
+    [SerializeField] internal Color loseColor;
     [Header("Pause Screen")]
     [SerializeField] private GameObject pauseScreenGameObject;
     [SerializeField] private GameObject fadePanelGameObject;
@@ -53,7 +51,6 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         flightControllerScript = GetComponent<FlightController>();
-        //PlaneScriptScript = planeControlCenterGameObject.GetComponent<PlaneScript>();
         pauseScreenEnabled = false;
         if(flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayer)
         {
@@ -75,7 +72,7 @@ public class UIManager : MonoBehaviour
             DisableExitWarning();
         else if (optionsMenuGameObject.activeSelf && flightControllerScript.inputManagerScript.ESCpressed)
             DisableOptionsMenu();
-        else if (flightControllerScript.gameModeScript.currentPlaythrough != GameModeManager.Playthrough.finished)
+        else if (flightControllerScript.gameModeScript.playerOneState != GameModeManager.PlayerState.crashed || (flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer && (flightControllerScript.gameModeScript.playerOneState != GameModeManager.PlayerState.crashed || flightControllerScript.gameModeScript.playerTwoState != GameModeManager.PlayerState.crashed)))
         {
             if (!pauseScreenEnabled && !pauseScreenGameObject.activeSelf && flightControllerScript.inputManagerScript.ESCpressed)
                 EnablePauseScreen();
@@ -163,10 +160,10 @@ public class UIManager : MonoBehaviour
         {
 
         }
-        //PlaneScriptScript.audioScript.PausePlayingSoundsFromTheSpecificSoundBank(PlaneScriptScript.audioScript.SFX);
-        //PlaneScriptScript.audioScript.PausePlayingSoundsFromTheSpecificSoundBank(PlaneScriptScript.audioScript.oneLinersSounds);
-        //PlaneScriptScript.audioScript.PausePlayingSoundsFromTheSpecificSoundBank(PlaneScriptScript.audioScript.hitReactionSounds);
-        //PlaneScriptScript.audioScript.PausePlayingSoundsFromTheSpecificSoundBank(PlaneScriptScript.audioScript.landingSounds);
+        flightControllerScript.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightControllerScript.audioManagerScript.SFX);
+        flightControllerScript.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightControllerScript.audioManagerScript.oneLinersSounds);
+        flightControllerScript.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightControllerScript.audioManagerScript.hitReactionSounds);
+        flightControllerScript.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightControllerScript.audioManagerScript.landingSounds);
         pauseScreenEnabled = true;
         UpdatePauseScreenHUD();
     }
@@ -192,7 +189,7 @@ public class UIManager : MonoBehaviour
         fadePanelGameObject.SetActive(false);
         pauseScreenGameObject.SetActive(false);
         regularHUDMainGameObject.SetActive(true);
-        //PlaneScriptScript.audioScript.ResumeAllPausedSounds();
+        flightControllerScript.audioManagerScript.ResumeAllPausedSounds();
         pauseScreenEnabled = false;
     }
     public void EnableExitWarning()
@@ -223,6 +220,15 @@ public class UIManager : MonoBehaviour
         pauseScreenRegularButtonsGameObject.SetActive(true);
         pauseScreenTitleGameObject.GetComponentInChildren<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].pauseScreenPauseMainTitle;
     }
+    internal void TurnOnColorPanel(GameObject colorPanel, Color panelColor)
+    {
+        colorPanel.SetActive(true);
+        colorPanel.GetComponent<Image>().color = panelColor;
+    }
+    internal void TurnOffColorPanel(GameObject colorPanel)
+    {
+        colorPanel.SetActive(false);
+    }    
     public void BackToMainMenu()
     {
         Time.timeScale = 1;

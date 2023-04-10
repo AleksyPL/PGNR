@@ -10,27 +10,22 @@ public class FlightController : MonoBehaviour
     internal InputManager inputManagerScript;
     internal LevelManager levelManagerScript;
     internal RewardAndProgressionManager rewardAndProgressionManagerScript;
+    internal AudioManager audioManagerScript;
     internal UIManager uiManagerScript;
-    public GameObject uiManagerGameObject;
-    //internal float waitingTimeAfterLandingCurrent;
-    //internal float waitingTimeAfterLandingCombinedWithSoundLength;
-    //internal bool rewardForLandingAdded;
-    //private float timeToFullyChargeBottleThrowCounter;
 
     void OnEnable()
     {
+        uiManagerScript = GetComponent<UIManager>();
         gameModeScript = GetComponent<GameModeManager>();
         difficultyScript = GetComponent<DifficultyManager>();
         inputManagerScript = GetComponent<InputManager>();
         levelManagerScript = GetComponent<LevelManager>();
-        uiManagerScript = uiManagerGameObject.GetComponent<UIManager>();
+        audioManagerScript = GetComponent<AudioManager>();
         rewardAndProgressionManagerScript = GetComponent<RewardAndProgressionManager>();
-        //rewardForLandingAdded = false;
+        
 
         //drunkBottlesInTotal = 0;
-        //if (gameplaySettings.waitingTimeAfterLanding <= 0)
-        //    gameplaySettings.waitingTimeAfterLanding = 3f;
-        //waitingTimeAfterLandingCombinedWithSoundLength = gameplaySettings.waitingTimeAfterLanding;
+        
     }
     private void ThrowBottleOfVodka(Plane plane)
     {
@@ -63,28 +58,29 @@ public class FlightController : MonoBehaviour
             plane.planeGameObject.transform.position = new Vector3(plane.planeGameObject.transform.position.x, plane.topScreenHeight, 0);
         if (plane.isTouchingAirport)
         {
+            plane.verticalMovementKeys = 0;
             plane.planeRendererScript.ChangeTilt(plane.currentPlaneState, 0);
             plane.currentPlaneSpeed -= gameplaySettings.airportSlowingForce * Time.deltaTime;
             plane.difficultyImpulseEnabled = false;
             if (plane.currentPlaneSpeed <= 0)
             {
                 plane.currentPlaneSpeed = 0;
-                //if (!rewardForLandingAdded)
-                //{
-                //    rewardForLandingAdded = true;
-                //    baseScript.levelManagerScript.gameScore += gameplaySettings.rewardForLanding;
-                //}
-                //if (!toNewLevel)
-                //{
-                //    waitingTimeAfterLandingCurrent += Time.deltaTime;
-                //    if (waitingTimeAfterLandingCurrent >= waitingTimeAfterLandingCombinedWithSoundLength)
-                //    {
-                //        toNewLevel = true;
-                //        waitingTimeAfterLandingCurrent = 0;
-                //        waitingTimeAfterLandingCombinedWithSoundLength = gameplaySettings.waitingTimeAfterLanding;
-                //        baseScript.levelManagerScript.LoadLevel();
-                //    }
-                //}
+                if (!rewardAndProgressionManagerScript.rewardForLandingAdded)
+                {
+                    rewardAndProgressionManagerScript.rewardForLandingAdded = true;
+                    plane.gameScore += gameplaySettings.rewardForLanding;
+                }
+                if (!rewardAndProgressionManagerScript.toNewLevel)
+                {
+                    //waitingTimeAfterLandingCurrent += Time.deltaTime;
+                    //if (waitingTimeAfterLandingCurrent >= waitingTimeAfterLandingCombinedWithSoundLength)
+                    //{
+                    //    toNewLevel = true;
+                    //    waitingTimeAfterLandingCurrent = 0;
+                    //    waitingTimeAfterLandingCombinedWithSoundLength = gameplaySettings.waitingTimeAfterLanding;
+                    //    baseScript.levelManagerScript.LoadLevel();
+                    //}
+                }
             }
         }
     }
@@ -101,12 +97,14 @@ public class FlightController : MonoBehaviour
         if(gameModeScript.playerOnePlane.currentPlaneState == PlaneState.standard || gameModeScript.playerOnePlane.currentPlaneState == PlaneState.wheelsOn)
         {
             MovePlaneStandardAndWheels(gameModeScript.playerOnePlane);
-            ThrowBottleOfVodka(gameModeScript.playerOnePlane);
+            if(gameModeScript.playerOnePlane.currentPlaneState != PlaneState.wheelsOn)
+                ThrowBottleOfVodka(gameModeScript.playerOnePlane);
         }
         if(gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer && (gameModeScript.playerTwoPlane.currentPlaneState == PlaneState.standard || gameModeScript.playerTwoPlane.currentPlaneState == PlaneState.wheelsOn))
         {
             MovePlaneStandardAndWheels(gameModeScript.playerTwoPlane);
-            ThrowBottleOfVodka(gameModeScript.playerTwoPlane);
+            if(gameModeScript.playerTwoPlane.currentPlaneState != PlaneState.wheelsOn)
+                ThrowBottleOfVodka(gameModeScript.playerTwoPlane);
         }
         if(gameModeScript.playerOnePlane.currentPlaneState == PlaneState.damaged)
             MovePlaneDamaged(gameModeScript.playerOnePlane);

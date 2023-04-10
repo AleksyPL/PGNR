@@ -53,9 +53,13 @@ internal class Plane
     internal bool attackKeyReleased;
     //Score
     internal int gameScore;
+    //Others
+    internal AudioManager audioManagerScript;
+    internal bool GodMode;
     internal void LoadPlaneData(int numberOfThePlayer)
     {
         planeRendererScript = planeRendererGameObject.GetComponent<PlaneRenderer>();
+        audioManagerScript = GameObject.Find("MasterController").GetComponent<AudioManager>();
         playerNumber = numberOfThePlayer;
         ResetPlaneData();
     }
@@ -86,6 +90,7 @@ internal class Plane
         if (currentPlaneState == PlaneState.standard)
         {
             GameObject bottle = Object.Instantiate(bottlePrefab, bottleSpawnerGameObject.transform.position, Quaternion.identity, projectilesParentGameObject.transform);
+            bottle.GetComponent<BottleOfVodka>().SetParentObject(this);
             bottle.GetComponent<Rigidbody2D>().AddForce(bottleThrowAngle * bottleThrowForce);
             bottleDrunkCounter++;
         }
@@ -95,31 +100,31 @@ internal class Plane
         currentPlaneState = PlaneState.damaged;
         planeRendererScript.ChangePlaneSprite(currentPlaneState);
         planeRendererScript.ChangeTilt(currentPlaneState, -1);
-        //baseScript.audioScript.StopPlayingSoundsFromTheSpecificSoundBank(baseScript.audioScript.oneLinersSounds);
-        //baseScript.audioScript.PlaySound("Whistle", baseScript.audioScript.SFX);
+        audioManagerScript.StopPlayingSoundsFromTheSpecificSoundBank(audioManagerScript.oneLinersSounds);
+        audioManagerScript.PlaySound("Whistle", audioManagerScript.SFX);
         if (smokePrefab != null)
             Object.Instantiate(smokePrefab, smokeSpawnerGameObject.transform.position, Quaternion.Euler(270, 0, 0), smokeSpawnerGameObject.transform);
         if (explosionPrefab != null)
         {
             Object.Instantiate(explosionPrefab, planeGameObject.transform.position, Quaternion.identity, planeGameObject.transform);
-            //baseScript.audioScript.PlaySound("Explosion", baseScript.audioScript.SFX);
+            audioManagerScript.PlaySound("Explosion", audioManagerScript.SFX);
         }
-        //int randomSoundEffect = Random.Range(0, baseScript.audioScript.hitReactionSounds.Length);
-        //baseScript.audioScript.PlaySound("HitReaction" + randomSoundEffect, baseScript.audioScript.hitReactionSounds);
+        int randomSoundEffect = Random.Range(0, audioManagerScript.hitReactionSounds.Length);
+        audioManagerScript.PlaySound("HitReaction" + randomSoundEffect, audioManagerScript.hitReactionSounds);
     }
     internal void DestroyThePlane()
     {
         currentPlaneState = PlaneState.crashed;
         planeRendererScript.ChangePlaneSprite(currentPlaneState);
         planeRendererScript.ChangeTilt(currentPlaneState, -1);
-        //baseScript.audioScript.StopPlayingSound("Whistle", baseScript.audioScript.SFX);
-        //baseScript.audioScript.StopPlayingSound("EngineSound", baseScript.audioScript.SFX);
+        audioManagerScript.StopPlayingSound("Whistle", audioManagerScript.SFX);
+        audioManagerScript.StopPlayingSound("EngineSound", audioManagerScript.SFX);
         if (smokePrefab != null && smokeSpawnerGameObject.transform.childCount == 0)
             Object.Instantiate(smokePrefab, smokeSpawnerGameObject.transform.position, Quaternion.Euler(270, 0, 0), smokeSpawnerGameObject.transform);
         if (explosionPrefab != null)
         {
             Object.Instantiate(explosionPrefab, planeGameObject.transform.position, Quaternion.identity, planeGameObject.transform);
-            //baseScript.audioScript.PlaySound("Explosion", baseScript.audioScript.SFX);
+            audioManagerScript.PlaySound("Explosion", audioManagerScript.SFX);
         }
     }
 }

@@ -15,10 +15,19 @@ public class RewardAndProgressionManager : MonoBehaviour
     internal int totalBottlesDrunkPlayerTwo;
     internal int totalScorePlayerOne;
     internal int totalScorePlayerTwo;
+    internal bool rewardForLandingAdded;
+    internal bool toNewLevel;
+    internal float waitingTimeAfterLandingCurrent;
+    internal float waitingTimeAfterLandingCombinedWithSoundLength;
     void Start()
     {
         flightControllerScript = GetComponent<FlightController>();
         currentlevelDistance = 100 + levelCounter * 10;
+        toNewLevel = false;
+        rewardForLandingAdded = false;
+        if (flightControllerScript.gameplaySettings.waitingTimeAfterLanding <= 0)
+            flightControllerScript.gameplaySettings.waitingTimeAfterLanding = 3f;
+        waitingTimeAfterLandingCombinedWithSoundLength = flightControllerScript.gameplaySettings.waitingTimeAfterLanding;
         RestartGame();
     }
     private void CalculateScore(Plane plane, ref float counter)
@@ -59,7 +68,10 @@ public class RewardAndProgressionManager : MonoBehaviour
         scorePointsCounterPlayerTwoCounter = 0;
         flightControllerScript.gameModeScript.playerOnePlane.ResetPlaneData();
         flightControllerScript.gameModeScript.playerTwoPlane.ResetPlaneData();
-        //PlaneScriptScript.flightControllScript.waitingTimeAfterLandingCurrent = 0;
+        //flightControllerScript.uiManagerScript.DisableOptionsMenu();
+        //flightControllerScript.uiManagerScript.DisableGameOverScreen();
+        //flightControllerScript.uiManagerScript.DisablePauseScreen();
+        waitingTimeAfterLandingCurrent = 0;
         flightControllerScript.levelManagerScript.LoadLevel();
     }
     void Update()

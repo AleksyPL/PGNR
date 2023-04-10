@@ -43,8 +43,6 @@ public class LevelManager : MonoBehaviour
     {
         foreach (Transform child in ObstaclesAndProjectilesGameObject.transform)
             GameObject.Destroy(child.gameObject);
-        //flightControllerScript.uiManagerScript.DisableOptionsMenu();
-        //flightControllerScript.uiManagerScript.DisableGameOverScreen();
         if (toNewLevel)
         {
             toNewLevel = false;
@@ -58,9 +56,8 @@ public class LevelManager : MonoBehaviour
             //PlaneScriptScript.audioScript.tiresSFXPlayed = false;
             //PlaneScriptScript.audioScript.landingSpeechPlayed = false;
         }
-        //if(!PlaneScriptScript.audioScript.IsTheSoundCurrentlyPlaying("EngineSound", PlaneScriptScript.audioScript.SFX))
-        //    PlaneScriptScript.audioScript.PlaySound("EngineSound", PlaneScriptScript.audioScript.SFX);
-        //PlaneScriptScript.UIScript.DisablePauseScreen();
+        if(!flightControllerScript.audioManagerScript.IsTheSoundCurrentlyPlaying("EngineSound", flightControllerScript.audioManagerScript.SFX))
+            flightControllerScript.audioManagerScript.PlaySound("EngineSound", flightControllerScript.audioManagerScript.SFX);
         numberOfObstacles = 1 + flightControllerScript.rewardAndProgressionManagerScript.levelCounter * 2;
         flightControllerScript.gameModeScript.playerOnePlane.planeGameObject.transform.position = new Vector3(0, (flightControllerScript.gameModeScript.playerOnePlane.topScreenHeight + flightControllerScript.gameModeScript.playerOnePlane.groundLevelHeight) / 2, 0);
         if (flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer)
@@ -157,10 +154,4 @@ public class LevelManager : MonoBehaviour
         GameObject airport = Instantiate(airportPrefab, new Vector3((float)1.25 * flightControllerScript.rewardAndProgressionManagerScript.currentlevelDistance, plane.groundLevelHeight, 0), Quaternion.identity, ObstaclesAndProjectilesGameObject.transform);
         airport.name = "airport";
     }
-    //private void CheckIfThePlayerIsBehindTheAirport()
-    //{
-    //    if (afterAirportDestroyPointGameObject != null && Physics2D.Raycast(afterAirportDestroyPointGameObject.transform.position, Vector2.up, Mathf.Infinity, planeLayer))
-    //        if (PlaneScriptScript.currentPlaneState == PlaneScript.PlaneState.standard || PlaneScriptScript.currentPlaneState == PlaneScript.PlaneState.wheelsOn)
-    //            PlaneScriptScript.flightControllScript.DamageThePlane();
-    //}
 }

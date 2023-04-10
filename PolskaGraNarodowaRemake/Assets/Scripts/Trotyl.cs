@@ -6,13 +6,11 @@ public class Trotyl : MonoBehaviour
 {
     public GameObject explosionPrefab;
     private GameModeManager gameModeManagerScript;
-    private GameObject audioManagerGameObject;
     private AudioManager audioScript;
     void Start()
     {
         gameModeManagerScript = GameObject.Find("MasterController").GetComponent<GameModeManager>();
-        //audioManagerGameObject = GameObject.Find("AudioManager");
-        //audioScript = audioManagerGameObject.GetComponent<AudioManager>();
+        audioScript = GameObject.Find("MasterController").GetComponent<AudioManager>();
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -21,7 +19,7 @@ public class Trotyl : MonoBehaviour
             if (explosionPrefab != null)
             {
                 Instantiate(explosionPrefab, transform.position, Quaternion.identity, gameModeManagerScript.transform.Find("ObstaclesAndProjectiles").transform);
-                //audioScript.PlaySound("Explosion", audioScript.SFX);
+                audioScript.PlaySound("Explosion", audioScript.SFX);
             }
             Destroy(gameObject);
         }
