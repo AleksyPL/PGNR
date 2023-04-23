@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 3616667789544663812}
   - component: {fileID: 1877591846}
   - component: {fileID: -3072812586623136276}
+  - component: {fileID: 26265350811652144}
   m_Layer: 7
   m_Name: trotylLauncher
   m_TagString: Obstacle
@@ -172,7 +173,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 10000
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -180,4 +181,16 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 7
+--- !u!114 &26265350811652144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2449576941250485145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62438c9299537e14983fd45a275e3833, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

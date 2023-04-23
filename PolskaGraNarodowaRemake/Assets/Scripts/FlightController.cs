@@ -22,10 +22,6 @@ public class FlightController : MonoBehaviour
         levelManagerScript = GetComponent<LevelManager>();
         audioManagerScript = GetComponent<AudioManager>();
         rewardAndProgressionManagerScript = GetComponent<RewardAndProgressionManager>();
-        
-
-        //drunkBottlesInTotal = 0;
-        
     }
     private void ThrowBottleOfVodka(Plane plane)
     {
@@ -53,11 +49,20 @@ public class FlightController : MonoBehaviour
             plane.planeRendererScript.ChangeTilt(plane.currentPlaneState, plane.verticalMovementKeys);
         else
             plane.planeRendererScript.ChangeTilt(plane.currentPlaneState, 0);
-        plane.planeGameObject.transform.position += new Vector3(plane.currentPlaneSpeed * Time.deltaTime, plane.verticalMovementKeys * plane.altitudeChangeForce * Time.deltaTime, 0);
+        if(plane.verticalMovementKeys != plane.difficultyImpulseDirection && plane.verticalMovementKeys != 0)
+            plane.planeGameObject.transform.position += new Vector3(plane.currentPlaneSpeed * Time.deltaTime, plane.verticalMovementKeys * plane.altitudeChangeForce * gameplaySettings.altitudeChangeForceOverridedMultiplier * Time.deltaTime, 0);
+        else
+            plane.planeGameObject.transform.position += new Vector3(plane.currentPlaneSpeed * Time.deltaTime, plane.verticalMovementKeys * plane.altitudeChangeForce * Time.deltaTime, 0);
         if (plane.planeGameObject.transform.position.y > plane.topScreenHeight)
             plane.planeGameObject.transform.position = new Vector3(plane.planeGameObject.transform.position.x, plane.topScreenHeight, 0);
         if (plane.isTouchingAirport)
         {
+            audioManagerScript.StopPlayingSoundsFromTheSpecificSoundBank(audioManagerScript.oneLinersSounds);
+            if(!plane.tiresSFXPlayed)
+            {
+                audioManagerScript.PlaySound("Tires", audioManagerScript.SFX);
+                plane.tiresSFXPlayed = true;
+            }
             plane.verticalMovementKeys = 0;
             plane.planeRendererScript.ChangeTilt(plane.currentPlaneState, 0);
             plane.currentPlaneSpeed -= gameplaySettings.airportSlowingForce * Time.deltaTime;
@@ -65,9 +70,9 @@ public class FlightController : MonoBehaviour
             if (plane.currentPlaneSpeed <= 0)
             {
                 plane.currentPlaneSpeed = 0;
-                if (!rewardAndProgressionManagerScript.rewardForLandingAdded)
+                if (!plane.rewardForLandingAdded)
                 {
-                    rewardAndProgressionManagerScript.rewardForLandingAdded = true;
+                    plane.rewardForLandingAdded = true;
                     plane.gameScore += gameplaySettings.rewardForLanding;
                 }
                 if (!rewardAndProgressionManagerScript.toNewLevel)

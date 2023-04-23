@@ -23,40 +23,103 @@ public class GameModeManager : MonoBehaviour
     public GameMode currentGameMode;
     internal PlayerState playerOneState;
     internal PlayerState playerTwoState;
-
+    internal bool someoneWon;
+    private float waitingTimeForOneLinerCurrent;
+    
     private void OnEnable()
     {
         Application.targetFrameRate = 144;
     }
     private void Start()
     {
+        flightController = GetComponent<FlightController>();
         playerOnePlane.LoadPlaneData(0);
         playerTwoPlane.LoadPlaneData(1);
-        flightController = GetComponent<FlightController>();
+        waitingTimeForOneLinerCurrent = 0;
+        someoneWon = false;
+    }
+    private void CalculateWiningAndLosing(float gameOverTimer)
+    {
+        if(currentGameMode == GameMode.singleplayer)
+        {
+            if (playerOneState != PlayerState.crashed)
+            {
+                flightController.uiManagerScript.TurnOnColorPanel(flightController.uiManagerScript.colorPanelPlayerOneGameObject, flightController.uiManagerScript.loseColor);
+                flightController.uiManagerScript.SetTheTextOnTheColorPanel(flightController.uiManagerScript.colorPanelPlayerOneGameObject, flightController.uiManagerScript.gameplaySettings.localizationsStrings[flightController.uiManagerScript.gameplaySettings.langauageIndex].colorPanelPlayerLosesSinglePlayer);
+                flightController.audioManagerScript.StopPlayingSound("EngineSound", flightController.audioManagerScript.SFX);
+                flightController.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightController.audioManagerScript.oneLinersSounds);
+                flightController.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightController.audioManagerScript.hitReactionSounds);
+                flightController.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightController.audioManagerScript.landingSounds);
+                flightController.uiManagerScript.regularHUDMainGameObject.SetActive(false);
+                flightController.uiManagerScript.TurnOnTheTimer(gameOverTimer);
+            } 
+        }
+        else
+        {
+            if (playerOneState != PlayerState.crashed && playerTwoState == PlayerState.crashed)
+            {
+                playerOnePlane.currentPlaneSpeed = 0;
+                playerOnePlane.verticalMovementKeys = 0;
+                playerOnePlane.difficultyImpulseEnabled = false;
+                playerOnePlane.godMode = true;
+                flightController.uiManagerScript.TurnOnColorPanel(flightController.uiManagerScript.colorPanelPlayerOneGameObject, flightController.uiManagerScript.winColor);
+                flightController.uiManagerScript.SetTheTextOnTheColorPanel(flightController.uiManagerScript.colorPanelPlayerOneGameObject, flightController.uiManagerScript.gameplaySettings.localizationsStrings[flightController.uiManagerScript.gameplaySettings.langauageIndex].playerOneIndicator + " " + flightController.uiManagerScript.gameplaySettings.localizationsStrings[flightController.uiManagerScript.gameplaySettings.langauageIndex].colorPanelPlayerWins);
+                flightController.uiManagerScript.TurnOnColorPanel(flightController.uiManagerScript.colorPanelPlayerTwoGameObject, flightController.uiManagerScript.loseColor);
+                flightController.uiManagerScript.SetTheTextOnTheColorPanel(flightController.uiManagerScript.colorPanelPlayerTwoGameObject, flightController.uiManagerScript.gameplaySettings.localizationsStrings[flightController.uiManagerScript.gameplaySettings.langauageIndex].playerTwoIndicator + " " + flightController.uiManagerScript.gameplaySettings.localizationsStrings[flightController.uiManagerScript.gameplaySettings.langauageIndex].colorPanelPlayerLoses);
+                flightController.audioManagerScript.StopPlayingSound("EngineSound", flightController.audioManagerScript.SFX);
+                flightController.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightController.audioManagerScript.oneLinersSounds);
+                flightController.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightController.audioManagerScript.hitReactionSounds);
+                flightController.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightController.audioManagerScript.landingSounds);
+                flightController.uiManagerScript.regularHUDMainGameObject.SetActive(false);
+                flightController.uiManagerScript.TurnOnTheTimer(gameOverTimer);
+            }
+            else if (playerTwoState != PlayerState.crashed && playerOneState == PlayerState.crashed)
+            {
+                playerTwoPlane.currentPlaneSpeed = 0;
+                playerTwoPlane.verticalMovementKeys = 0;
+                playerTwoPlane.difficultyImpulseEnabled = false;
+                playerOnePlane.godMode = false;
+                flightController.uiManagerScript.TurnOnColorPanel(flightController.uiManagerScript.colorPanelPlayerTwoGameObject, flightController.uiManagerScript.winColor);
+                flightController.uiManagerScript.SetTheTextOnTheColorPanel(flightController.uiManagerScript.colorPanelPlayerTwoGameObject, flightController.uiManagerScript.gameplaySettings.localizationsStrings[flightController.uiManagerScript.gameplaySettings.langauageIndex].playerTwoIndicator + " " + flightController.uiManagerScript.gameplaySettings.localizationsStrings[flightController.uiManagerScript.gameplaySettings.langauageIndex].colorPanelPlayerWins);
+                flightController.uiManagerScript.TurnOnColorPanel(flightController.uiManagerScript.colorPanelPlayerOneGameObject, flightController.uiManagerScript.loseColor);
+                flightController.uiManagerScript.SetTheTextOnTheColorPanel(flightController.uiManagerScript.colorPanelPlayerOneGameObject, flightController.uiManagerScript.gameplaySettings.localizationsStrings[flightController.uiManagerScript.gameplaySettings.langauageIndex].playerOneIndicator + " " + flightController.uiManagerScript.gameplaySettings.localizationsStrings[flightController.uiManagerScript.gameplaySettings.langauageIndex].colorPanelPlayerLoses);
+                flightController.audioManagerScript.StopPlayingSound("EngineSound", flightController.audioManagerScript.SFX);
+                flightController.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightController.audioManagerScript.oneLinersSounds);
+                flightController.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightController.audioManagerScript.hitReactionSounds);
+                flightController.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightController.audioManagerScript.landingSounds);
+                flightController.uiManagerScript.regularHUDMainGameObject.SetActive(false);
+                flightController.uiManagerScript.TurnOnTheTimer(gameOverTimer);
+            }
+        }
+    }
+    private void CheckAndPlayOneLinerSound()
+    {
+        if ((currentGameMode == GameMode.singleplayer && playerOneState == PlayerState.flying) || (currentGameMode == GameMode.versus && playerOneState == PlayerState.flying && playerTwoState == PlayerState.flying))
+        {
+            waitingTimeForOneLinerCurrent += Time.deltaTime;
+            if (waitingTimeForOneLinerCurrent >= flightController.gameplaySettings.waitingTimeForOneLiner)
+            {
+                flightController.audioManagerScript.DrawAndPlayASound(flightController.audioManagerScript.oneLinersSounds, "OneLiner", ref flightController.audioManagerScript.lastPlayedOneLiner);
+                waitingTimeForOneLinerCurrent -= (flightController.audioManagerScript.ReturnSoundDuration("OneLiner" + flightController.audioManagerScript.lastPlayedOneLiner, flightController.audioManagerScript.oneLinersSounds) + flightController.gameplaySettings.waitingTimeForOneLiner);
+            }
+        }
     }
     private void Update()
     {
         SetProgressionFlags(playerOnePlane);
         if (currentGameMode != GameMode.singleplayer)
             SetProgressionFlags(playerTwoPlane);
-        if(playerOneState != PlayerState.crashed && playerTwoState == PlayerState.crashed)
+        CheckAndPlayOneLinerSound();
+        if(!flightController.rewardAndProgressionManagerScript.toNewLevel && ((currentGameMode == GameMode.singleplayer && playerOneState == PlayerState.landed) || (currentGameMode == GameMode.versus && playerOneState == PlayerState.landed && playerTwoState == PlayerState.landed)))
         {
-            flightController.uiManagerScript.TurnOnColorPanel(flightController.uiManagerScript.regularHUDColorPanelPlayerOneGameObject, flightController.uiManagerScript.winColor);
-            flightController.uiManagerScript.TurnOnColorPanel(flightController.uiManagerScript.regularHUDColorPanelPlayerTwoGameObject, flightController.uiManagerScript.loseColor);
-        }        
-        else if(playerTwoState != PlayerState.crashed && playerOneState == PlayerState.crashed)
-        {
-            flightController.uiManagerScript.TurnOnColorPanel(flightController.uiManagerScript.regularHUDColorPanelPlayerTwoGameObject, flightController.uiManagerScript.winColor);
-            flightController.uiManagerScript.TurnOnColorPanel(flightController.uiManagerScript.regularHUDColorPanelPlayerOneGameObject, flightController.uiManagerScript.loseColor);
+            flightController.rewardAndProgressionManagerScript.toNewLevel = true;
+            playerOneState = PlayerState.flying;
+            if (currentGameMode != GameMode.singleplayer)
+                playerTwoState = PlayerState.flying;
+            flightController.audioManagerScript.StopPlayingSoundsFromTheSpecificSoundBank(flightController.audioManagerScript.oneLinersSounds);
+            flightController.audioManagerScript.DrawAndPlayASound(flightController.audioManagerScript.landingSounds, "Landing", ref flightController.audioManagerScript.lastPlayedLandingSound);
+            flightController.uiManagerScript.TurnOnTheTimer(flightController.audioManagerScript.ReturnSoundDuration("Landing" + flightController.audioManagerScript.lastPlayedLandingSound, flightController.audioManagerScript.landingSounds) + flightController.gameplaySettings.waitingTimeAfterLanding);
         }
-
-        //if(currentGameMode == GameMode.versus)
-        //{
-        //    if(playerOnePlane.currentPlaneState == PlaneState.crashed && playerTwoPlane.currentPlaneState == PlaneState.crashed)
-        //    {
-        //        currentPlaythrough = Playthrough.finished;
-        //    }
-        //}
     }
     private void SetProgressionFlags(Plane plane)
     {
@@ -68,8 +131,12 @@ public class GameModeManager : MonoBehaviour
             ReturnPlayerStateObject(plane) = PlayerState.landed;
         if (plane.currentPlaneState == PlaneState.damaged)
             ReturnPlayerStateObject(plane) = PlayerState.damaged;
-        if (plane.currentPlaneState == PlaneState.crashed)
+        if (!someoneWon && plane.currentPlaneState == PlaneState.crashed)
+        {
             ReturnPlayerStateObject(plane) = PlayerState.crashed;
+            someoneWon = true;
+            CalculateWiningAndLosing(3f);
+        }
     }
     internal ref PlayerState ReturnPlayerStateObject(Plane plane)
     {
@@ -87,11 +154,10 @@ public class GameModeManager : MonoBehaviour
     }
     internal void AudioFunction()
     {
-        //if (optionsMenuGameObject.activeSelf)
-        //    UpdateAllSoundsVolume();
+        
         //if (planeControlCenterGameObject != null && PlaneScriptScript != null && (PlaneScriptScript.currentPlaneState == PlaneScript.StateMachine.standard || PlaneScriptScript.currentPlaneState == PlaneScript.StateMachine.wheelsOn))
         //{
-        //    if(!PlaneScriptScript.flightControllScript.isTouchingAirport)
+        //    if (!PlaneScriptScript.flightControllScript.isTouchingAirport)
         //    {
         //        waitingTimeForOneLinerCurrent += Time.deltaTime;
         //        if (waitingTimeForOneLinerCurrent >= gameplaySettings.waitingTimeForOneLiner)
@@ -119,14 +185,14 @@ public class GameModeManager : MonoBehaviour
         //    }
         //    else
         //    {
-        //        if(!tiresSFXPlayed)
+        //        if (!tiresSFXPlayed)
         //        {
         //            tiresSFXPlayed = true;
         //            StopPlayingSoundsFromTheSpecificSoundBank(oneLinersSounds);
         //            StopPlayingSound("EngineSound", SFX);
-        //            PlaySound("Tires", SFX);
-        //        }
-        //        if(PlaneScriptScript.flightControllScript.currentPlaneSpeed == 0 && !landingSpeechPlayed)
+        //                PlaySound("Tires", SFX);
+        //            }
+        //        if (PlaneScriptScript.flightControllScript.currentPlaneSpeed == 0 && !landingSpeechPlayed)
         //        {
         //            landingSpeechPlayed = true;
         //            StopPlayingSound("Tires", SFX);

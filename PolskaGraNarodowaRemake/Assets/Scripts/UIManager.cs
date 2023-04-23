@@ -2,34 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using System;
 
 public class UIManager : MonoBehaviour
 {
     public GameplaySettings gameplaySettings;
     internal FlightController flightControllerScript;
-    private bool pauseScreenEnabled;
+    internal bool pauseScreenEnabled;
     [Header("Regular HUD")]
-    [SerializeField] private GameObject regularHUDMainGameObject;
+    [SerializeField] internal GameObject regularHUDMainGameObject;
     [SerializeField] private GameObject regularHUDYearPlayerOneGameObject;
     [SerializeField] private GameObject regularHUDLevelProgressPlayerOneGameObject;
     [SerializeField] private GameObject regularHUDScorePlayerOneGameObject;
     [SerializeField] private GameObject regularHUDBottlesPlayerOneGameObject;
-    [SerializeField] internal GameObject regularHUDColorPanelPlayerOneGameObject;
     [SerializeField] private GameObject regularHUDYearPlayerTwoGameObject;
     [SerializeField] private GameObject regularHUDLevelProgressPlayerTwoGameObject;
     [SerializeField] private GameObject regularHUDScorePlayerTwoGameObject;
     [SerializeField] private GameObject regularHUDBottlesPlayerTwoGameObject;
-    [SerializeField] internal GameObject regularHUDColorPanelPlayerTwoGameObject;
+    [Header("Color Panels")]
     [SerializeField] internal Color winColor;
     [SerializeField] internal Color loseColor;
+    [SerializeField] internal GameObject colorPanelPlayerOneGameObject;
+    [SerializeField] internal GameObject colorPanelPlayerTwoGameObject;
     [Header("Pause Screen")]
-    [SerializeField] private GameObject pauseScreenGameObject;
     [SerializeField] private GameObject fadePanelGameObject;
+    [SerializeField] private GameObject pauseScreenGameObject;
     [SerializeField] private GameObject pauseScreenRegularButtonsGameObject;
     [SerializeField] private GameObject pauseScreenWarningGameObject;
     [SerializeField] private GameObject pauseScreenTitleGameObject;
+    [SerializeField] private GameObject pasueScreenOptionsButtonGameObject;
+    [SerializeField] private GameObject pasueScreenBackToMainMenuButtonGameObject;
+    [SerializeField] private GameObject pasueScreenResumeGameButtonGameObject;
     [Header("Game Statistics")]
     [SerializeField] private GameObject gameStatsGameObject;
     [SerializeField] private GameObject gameSummaryYearTitle;
@@ -45,6 +48,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject gameSummaryBottlesPlayerTwoGameObject;
     [Header("Options Menu")]
     [SerializeField] private GameObject optionsMenuGameObject;
+    [Header("TimerCircle")]
+    [SerializeField] internal GameObject mainTimerCircleGameObject;
+    private float timeCounter;
     [Header("Game Over Screen")]
     [SerializeField] private GameObject gameOverScreenButtonsGameObject;
 
@@ -62,6 +68,8 @@ public class UIManager : MonoBehaviour
     }
     void Update()
     {
+        if (optionsMenuGameObject.activeSelf)
+            flightControllerScript.audioManagerScript.UpdateAllSoundsVolume();
         if (!pauseScreenEnabled)
         {
             UpdateRegularHUD(flightControllerScript.gameModeScript.playerOnePlane, regularHUDYearPlayerOneGameObject, regularHUDBottlesPlayerOneGameObject, regularHUDLevelProgressPlayerOneGameObject, regularHUDScorePlayerOneGameObject);
@@ -72,15 +80,60 @@ public class UIManager : MonoBehaviour
             DisableExitWarning();
         else if (optionsMenuGameObject.activeSelf && flightControllerScript.inputManagerScript.ESCpressed)
             DisableOptionsMenu();
-        else if (flightControllerScript.gameModeScript.playerOneState != GameModeManager.PlayerState.crashed || (flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer && (flightControllerScript.gameModeScript.playerOneState != GameModeManager.PlayerState.crashed || flightControllerScript.gameModeScript.playerTwoState != GameModeManager.PlayerState.crashed)))
+        else if ((flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayer && flightControllerScript.gameModeScript.playerOneState != GameModeManager.PlayerState.crashed) || (flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer && flightControllerScript.gameModeScript.playerOneState != GameModeManager.PlayerState.crashed && flightControllerScript.gameModeScript.playerTwoState != GameModeManager.PlayerState.crashed))
         {
             if (!pauseScreenEnabled && !pauseScreenGameObject.activeSelf && flightControllerScript.inputManagerScript.ESCpressed)
                 EnablePauseScreen();
             else if (pauseScreenEnabled && pauseScreenGameObject.activeSelf && flightControllerScript.inputManagerScript.ESCpressed)
                 DisablePauseScreen();
         }
+        if (mainTimerCircleGameObject.activeSelf)
+            UpdateTimer();
     }
-
+    internal void TurnOnTheTimer(float time)
+    {
+        mainTimerCircleGameObject.SetActive(true);
+        ResetTimer(time);
+    }
+    internal void TurnOffTheTimer()
+    {
+        flightControllerScript = GetComponent<FlightController>();
+        mainTimerCircleGameObject.SetActive(false);
+        if(flightControllerScript.gameModeScript.someoneWon)
+        {
+            SetTheTextOnTheColorPanel(colorPanelPlayerOneGameObject, "");
+            if (flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer)
+                SetTheTextOnTheColorPanel(colorPanelPlayerTwoGameObject, "");
+            EnableGameOverScreen();
+        }
+        else if(flightControllerScript.rewardAndProgressionManagerScript.toNewLevel)
+        {
+            flightControllerScript.levelManagerScript.LoadLevel();
+        }
+        else
+        {
+            Time.timeScale = 1;
+            regularHUDMainGameObject.SetActive(true);
+            flightControllerScript.audioManagerScript.ResumeAllPausedSounds();
+            pauseScreenEnabled = false;
+        }
+    }
+    private void UpdateTimer()
+    {
+        timeCounter -= Time.unscaledDeltaTime;
+        //mainTimerCircleGameObject.transform.Find("Text").GetComponent<Text>().text = (Mathf.Round(timeCounter * 100) / 100).ToString();
+        mainTimerCircleGameObject.transform.Find("Text").GetComponent<Text>().text = ((int)timeCounter).ToString();
+        mainTimerCircleGameObject.transform.Find("Fill").GetComponent<Image>().fillAmount = Mathf.InverseLerp(0, 1, timeCounter - (int)timeCounter);
+        if (timeCounter <= 0)
+        {
+            timeCounter = 0;
+            TurnOffTheTimer();
+        }
+    }
+    private void ResetTimer(float time)
+    {
+        timeCounter = time;
+    }
     private void UpdatePauseScreenHUD()
     {
         gameSummaryBottlesTitle.GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].pauseScreenBottlesTitle;
@@ -89,16 +142,10 @@ public class UIManager : MonoBehaviour
         gameSummaryBottlesPlayerOneGameObject.GetComponent<Text>().text = (flightControllerScript.gameModeScript.playerOnePlane.bottleDrunkCounter + flightControllerScript.rewardAndProgressionManagerScript.totalBottlesDrunkPlayerOne).ToString();
         gameSummaryScorePlayerOneGameObject.GetComponent<Text>().text = (flightControllerScript.gameModeScript.playerOnePlane.gameScore + gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].regularHudEarned1).ToString();
         gameSummaryYearPlayerOneGameObject.GetComponent<Text>().text = (2009 + flightControllerScript.rewardAndProgressionManagerScript.levelCounter).ToString();
-        if (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayer)
-        {
-            gameSummaryBottlesPlayerOneGameObject.GetComponent<RectTransform>().position = new Vector3(gameSummaryBottlesPlayerOneGameObject.GetComponent<RectTransform>().position.x + 125, gameSummaryBottlesPlayerOneGameObject.GetComponent<RectTransform>().position.y, gameSummaryBottlesPlayerOneGameObject.GetComponent<RectTransform>().position.z);
-            gameSummaryScorePlayerOneGameObject.GetComponent<RectTransform>().position = new Vector3(gameSummaryScorePlayerOneGameObject.GetComponent<RectTransform>().position.x + 125, gameSummaryScorePlayerOneGameObject.GetComponent<RectTransform>().position.y, gameSummaryScorePlayerOneGameObject.GetComponent<RectTransform>().position.z);
-            gameSummaryYearPlayerTwoGameObject.GetComponent<RectTransform>().position = new Vector3(gameSummaryYearPlayerTwoGameObject.GetComponent<RectTransform>().position.x + 125, gameSummaryYearPlayerTwoGameObject.GetComponent<RectTransform>().position.y, gameSummaryYearPlayerTwoGameObject.GetComponent<RectTransform>().position.z);
-            gameSummaryBottlesTitle.GetComponent<RectTransform>().position = new Vector3(gameSummaryBottlesTitle.GetComponent<RectTransform>().position.x + 125, gameSummaryBottlesTitle.GetComponent<RectTransform>().position.y, gameSummaryBottlesTitle.GetComponent<RectTransform>().position.z);
-            gameSummaryScoreTitle.GetComponent<RectTransform>().position = new Vector3(gameSummaryScoreTitle.GetComponent<RectTransform>().position.x + 125, gameSummaryScoreTitle.GetComponent<RectTransform>().position.y, gameSummaryScoreTitle.GetComponent<RectTransform>().position.z);
-            gameSummaryYearTitle.GetComponent<RectTransform>().position = new Vector3(gameSummaryYearTitle.GetComponent<RectTransform>().position.x + 125, gameSummaryYearTitle.GetComponent<RectTransform>().position.y, gameSummaryYearTitle.GetComponent<RectTransform>().position.z);
-        }
-        else
+        pasueScreenOptionsButtonGameObject.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].pauseScreenButton0;
+        pasueScreenResumeGameButtonGameObject.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].pauseScreenButton1;
+        pasueScreenBackToMainMenuButtonGameObject.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].backToMainMenuButton;
+        if (flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer)
         {
             gameSummaryPlayerOneIndicator.GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].playerOneIndicator;
             gameSummaryPlayerTwoIndicator.GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].playerTwoIndicator;
@@ -155,10 +202,12 @@ public class UIManager : MonoBehaviour
         {
             gameSummaryPlayerOneIndicator.SetActive(false);
             gameSummaryPlayerTwoIndicator.SetActive(false);
-        }
-        else
-        {
-
+            gameSummaryBottlesPlayerOneGameObject.GetComponent<RectTransform>().position = new Vector3(gameSummaryBottlesPlayerOneGameObject.GetComponent<RectTransform>().position.x + 125, gameSummaryBottlesPlayerOneGameObject.GetComponent<RectTransform>().position.y, gameSummaryBottlesPlayerOneGameObject.GetComponent<RectTransform>().position.z);
+            gameSummaryScorePlayerOneGameObject.GetComponent<RectTransform>().position = new Vector3(gameSummaryScorePlayerOneGameObject.GetComponent<RectTransform>().position.x + 125, gameSummaryScorePlayerOneGameObject.GetComponent<RectTransform>().position.y, gameSummaryScorePlayerOneGameObject.GetComponent<RectTransform>().position.z);
+            gameSummaryYearPlayerTwoGameObject.GetComponent<RectTransform>().position = new Vector3(gameSummaryYearPlayerTwoGameObject.GetComponent<RectTransform>().position.x + 125, gameSummaryYearPlayerTwoGameObject.GetComponent<RectTransform>().position.y, gameSummaryYearPlayerTwoGameObject.GetComponent<RectTransform>().position.z);
+            gameSummaryBottlesTitle.GetComponent<RectTransform>().position = new Vector3(gameSummaryBottlesTitle.GetComponent<RectTransform>().position.x + 125, gameSummaryBottlesTitle.GetComponent<RectTransform>().position.y, gameSummaryBottlesTitle.GetComponent<RectTransform>().position.z);
+            gameSummaryScoreTitle.GetComponent<RectTransform>().position = new Vector3(gameSummaryScoreTitle.GetComponent<RectTransform>().position.x + 125, gameSummaryScoreTitle.GetComponent<RectTransform>().position.y, gameSummaryScoreTitle.GetComponent<RectTransform>().position.z);
+            gameSummaryYearTitle.GetComponent<RectTransform>().position = new Vector3(gameSummaryYearTitle.GetComponent<RectTransform>().position.x + 125, gameSummaryYearTitle.GetComponent<RectTransform>().position.y, gameSummaryYearTitle.GetComponent<RectTransform>().position.z);
         }
         flightControllerScript.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightControllerScript.audioManagerScript.SFX);
         flightControllerScript.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightControllerScript.audioManagerScript.oneLinersSounds);
@@ -185,12 +234,9 @@ public class UIManager : MonoBehaviour
     }
     public void DisablePauseScreen()
     {
-        Time.timeScale = 1;
         fadePanelGameObject.SetActive(false);
         pauseScreenGameObject.SetActive(false);
-        regularHUDMainGameObject.SetActive(true);
-        flightControllerScript.audioManagerScript.ResumeAllPausedSounds();
-        pauseScreenEnabled = false;
+        TurnOnTheTimer(3f);
     }
     public void EnableExitWarning()
     {
@@ -219,6 +265,8 @@ public class UIManager : MonoBehaviour
         gameStatsGameObject.SetActive(true);
         pauseScreenRegularButtonsGameObject.SetActive(true);
         pauseScreenTitleGameObject.GetComponentInChildren<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].pauseScreenPauseMainTitle;
+        if (pauseScreenEnabled)
+            EnablePauseScreen();
     }
     internal void TurnOnColorPanel(GameObject colorPanel, Color panelColor)
     {
@@ -228,11 +276,10 @@ public class UIManager : MonoBehaviour
     internal void TurnOffColorPanel(GameObject colorPanel)
     {
         colorPanel.SetActive(false);
-    }    
-    public void BackToMainMenu()
+    }
+    internal void SetTheTextOnTheColorPanel(GameObject colorPanel, string text)
     {
-        Time.timeScale = 1;
-        SceneManager.LoadScene("MainMenu");
+        colorPanel.transform.Find("Text").gameObject.GetComponent<Text>().text = text;
     }
     public void QuitGame()
     {

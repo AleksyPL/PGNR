@@ -11,14 +11,11 @@ public class AudioManager : MonoBehaviour
     public Sound[] SFX;
     public Sound[] otherSounds;
     public GameplaySettings gameplaySettings;
-    private float waitingTimeForOneLinerCurrent;
-    private bool canPlayOneLiner;
-    internal bool tiresSFXPlayed;
-    internal bool landingSpeechPlayed;
-    internal List<Sound> pausedSounds;
     public GameObject UIManagerGameObject;
-    private int lastPlayedOneLiner;
-    private int lastPlayedLandingSound;
+    internal List<Sound> pausedSounds;
+    internal bool landingSpeechPlayed;
+    internal int lastPlayedOneLiner;
+    internal int lastPlayedLandingSound;
 
     void OnEnable()
     {
@@ -27,18 +24,13 @@ public class AudioManager : MonoBehaviour
         LoadSounds(landingSounds);
         LoadSounds(SFX);
         LoadSounds(otherSounds);
+        PlaySound("TopGunTheme", otherSounds);
         if (gameplaySettings.waitingTimeForOneLiner == 0)
             gameplaySettings.waitingTimeForOneLiner = 5f;
         lastPlayedLandingSound = -1;
         lastPlayedOneLiner = -1;
-        canPlayOneLiner = false;
-        tiresSFXPlayed = false;
         landingSpeechPlayed = false;
         pausedSounds = new List<Sound>();
-    }
-    void Update()
-    {
-        
     }
     private void LoadSounds(Sound [] sounds)
     {
@@ -74,6 +66,20 @@ public class AudioManager : MonoBehaviour
         }
         s.source.Play();
     }
+    public void DrawAndPlayASound(Sound[] soundsBank, string fileNameBeginning, ref int excludedNumber)
+    {
+        if(!IsAnySoundFromTheSoundBankCurrentyPlaying(soundsBank, fileNameBeginning))
+        {
+            int randomSoundEffect = Random.Range(0, soundsBank.Length);
+            if (excludedNumber != -1)
+            {
+                while (randomSoundEffect == excludedNumber)
+                    randomSoundEffect = Random.Range(0, soundsBank.Length);
+            }
+            PlaySound(fileNameBeginning + randomSoundEffect.ToString(), soundsBank);
+            excludedNumber = randomSoundEffect;
+        }
+    }
     public float ReturnSoundDuration(string soundName, Sound[] soundsBank)
     {
         Sound s = System.Array.Find(soundsBank, sound => sound.name == soundName);
@@ -96,6 +102,15 @@ public class AudioManager : MonoBehaviour
             return false;
         else
             return true;
+    }
+    public bool IsAnySoundFromTheSoundBankCurrentyPlaying(Sound[] soundsBank, string fileNameBeginning)
+    {
+        for(int i=0;i<soundsBank.Length;i++)
+        {
+            if (IsTheSoundCurrentlyPlaying(fileNameBeginning + i.ToString(), soundsBank))
+                return true;
+        }
+        return false;
     }
     public void StopPlayingSound(string soundName, Sound[] soundsBank)
     {

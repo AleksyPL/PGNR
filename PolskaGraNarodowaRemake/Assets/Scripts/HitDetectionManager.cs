@@ -20,18 +20,31 @@ public class HitDetectionManager : MonoBehaviour
             }
             else if(transform.tag == "Obstacle")
             {
-                if(transform.name == "birchTree")
+                if(transform.name == "birchTree" || transform.name == "trotylLauncher")
                 {
-                    if(transform.GetComponent<FadeOutTool>())
-                        transform.gameObject.GetComponent<FadeOutTool>().enabled = true;
-                    if (gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).currentPlaneState != PlaneState.damaged)
-                        gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).DamageThePlane();
+                    if(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).godMode == false)
+                    {
+                        if (transform.GetComponent<FadeOutTool>())
+                            transform.gameObject.GetComponent<FadeOutTool>().enabled = true;
+                        if (gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).currentPlaneState != PlaneState.damaged)
+                            gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).DamageThePlane();
+                    }
+                    else
+                    {
+                        if (transform.GetComponent<FadeOutTool>())
+                            transform.gameObject.GetComponent<FadeOutTool>().enabled = true;
+                        else
+                            Destroy(transform.gameObject);
+                    }
                 }
             }
             else if(transform.tag == "Ground")
             {
-                if(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).currentPlaneState!= PlaneState.crashed)
-                    gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).DestroyThePlane();
+                if (gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).godMode == false || gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).currentPlaneState == PlaneState.damaged)
+                {
+                    if (gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).currentPlaneState!= PlaneState.crashed)
+                        gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).DestroyThePlane();
+                }
             }
             else if(transform.tag == "KillPlane")
             {

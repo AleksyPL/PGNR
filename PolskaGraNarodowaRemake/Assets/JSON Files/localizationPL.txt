@@ -68,3 +68,9 @@ POSTĘP NIE ZOSTANIE ZACHOWANY, CZY CHCESZ KONTYNUOWAĆ?
 TAK
 //Warning2
 NIE
+//Color Panel - Wygrana
+wygrywa
+//Color Panel - Przegrana
+przegrywa
+//Color Panel - Przegrana - SinglePlayer
+Przegrywasz

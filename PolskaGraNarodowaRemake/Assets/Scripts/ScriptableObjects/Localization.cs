@@ -47,6 +47,10 @@ public class Localization : ScriptableObject
     internal string warningTitle;
     internal string warningYes;
     internal string warningNo;
+    //color panel
+    internal string colorPanelPlayerWins;
+    internal string colorPanelPlayerLoses;
+    internal string colorPanelPlayerLosesSinglePlayer;
     private void OnEnable()
     {
         LoadData();
@@ -101,6 +105,9 @@ public class Localization : ScriptableObject
             warningTitle = listOfAll[65];
             warningYes = listOfAll[67];
             warningNo = listOfAll[69];
+            colorPanelPlayerWins = listOfAll[71];
+            colorPanelPlayerLoses = listOfAll[73];
+            colorPanelPlayerLosesSinglePlayer = listOfAll[75];
         }
     }
 }

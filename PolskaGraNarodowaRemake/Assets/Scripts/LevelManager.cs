@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
@@ -10,18 +11,8 @@ public class LevelManager : MonoBehaviour
     public GameObject fogPrefab;
     public GameObject ObstaclesAndProjectilesGameObject;
     internal FlightController flightControllerScript;
-    internal bool toNewLevel;
-    private bool sameObstaclesForBothPlayes;
+    public bool sameObstaclesForBothPlayes;
     private float distanceBetweenPlayers;
-    //public GameplaySettings gameplaySettings;
-    //public GameObject planeControlCenterGameObject;
-    //public GameObject planeGameObject;
-    //public LayerMask planeLayer;
-    //internal PlaneScript PlaneScriptScript;
-
-
-    //private GameObject afterAirportDestroyPointGameObject;
-
     private int numberOfObstacles;
 
     void Start()
@@ -29,10 +20,7 @@ public class LevelManager : MonoBehaviour
         flightControllerScript = GetComponent<FlightController>();
         CalculatePlayerBoundries(flightControllerScript.gameModeScript.playerOnePlane);
         CalculatePlayerBoundries(flightControllerScript.gameModeScript.playerTwoPlane);
-        distanceBetweenPlayers = Vector2.Distance(new Vector2(flightControllerScript.gameModeScript.playerOnePlane.groundLevelHeight, 0), new Vector2(flightControllerScript.gameModeScript.playerTwoPlane.groundLevelHeight, 0)); 
-        sameObstaclesForBothPlayes = true;
-        //PlaneScriptScript = planeControlCenterGameObject.GetComponent<PlaneScript>();
-        //PlaneScriptScript.audioScript.PlaySound("TopGunTheme", PlaneScriptScript.audioScript.otherSounds);
+        distanceBetweenPlayers = Vector2.Distance(new Vector2(flightControllerScript.gameModeScript.playerOnePlane.groundLevelHeight, 0), new Vector2(flightControllerScript.gameModeScript.playerTwoPlane.groundLevelHeight, 0));
     }
     void Update()
     {
@@ -41,16 +29,21 @@ public class LevelManager : MonoBehaviour
     
     internal void LoadLevel()
     {
-        foreach (Transform child in ObstaclesAndProjectilesGameObject.transform)
-            GameObject.Destroy(child.gameObject);
-        if (toNewLevel)
+        while (ObstaclesAndProjectilesGameObject.transform.childCount > 0)
+            DestroyImmediate(ObstaclesAndProjectilesGameObject.transform.GetChild(0).gameObject);
+        if (flightControllerScript.rewardAndProgressionManagerScript.toNewLevel)
         {
-            toNewLevel = false;
+            flightControllerScript.rewardAndProgressionManagerScript.toNewLevel = false;
             flightControllerScript.rewardAndProgressionManagerScript.levelCounter++;
             flightControllerScript.rewardAndProgressionManagerScript.totalBottlesDrunkPlayerOne = flightControllerScript.gameModeScript.playerOnePlane.bottleDrunkCounter;
             flightControllerScript.rewardAndProgressionManagerScript.totalBottlesDrunkPlayerTwo = flightControllerScript.gameModeScript.playerTwoPlane.bottleDrunkCounter;
             flightControllerScript.gameModeScript.playerOnePlane.ResetPlaneData();
-            flightControllerScript.gameModeScript.playerTwoPlane.ResetPlaneData();
+            flightControllerScript.rewardAndProgressionManagerScript.levelProgressPlayerOneCounter = 0;
+            if (flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer)
+            {
+                flightControllerScript.gameModeScript.playerTwoPlane.ResetPlaneData();
+                flightControllerScript.rewardAndProgressionManagerScript.levelProgressPlayerTwoCounter = 0;
+            }
             //PlaneScriptScript.flightControllScript.waitingTimeAfterLandingCombinedWithSoundLength = 3f;
             //PlaneScriptScript.flightControllScript.rewardForLandingAdded = false;
             //PlaneScriptScript.audioScript.tiresSFXPlayed = false;
@@ -145,7 +138,7 @@ public class LevelManager : MonoBehaviour
         for (int i = 0; i < numberOfFogInstances; i++)
         {
             float fogPlacementX = Random.Range((float)0.1 * flightControllerScript.rewardAndProgressionManagerScript.currentlevelDistance, (float)0.9 * flightControllerScript.rewardAndProgressionManagerScript.currentlevelDistance);
-            GameObject fog = Instantiate(fogPrefab, new Vector3(fogPlacementX, (plane.topScreenHeight - plane.groundLevelHeight) / 2, 0), Quaternion.identity, ObstaclesAndProjectilesGameObject.transform);
+            GameObject fog = Instantiate(fogPrefab, new Vector3(fogPlacementX, (plane.topScreenHeight + plane.groundLevelHeight) / 2, 0), Quaternion.identity, ObstaclesAndProjectilesGameObject.transform);
             fog.name = "fog";
         }
     }
@@ -153,5 +146,10 @@ public class LevelManager : MonoBehaviour
     {
         GameObject airport = Instantiate(airportPrefab, new Vector3((float)1.25 * flightControllerScript.rewardAndProgressionManagerScript.currentlevelDistance, plane.groundLevelHeight, 0), Quaternion.identity, ObstaclesAndProjectilesGameObject.transform);
         airport.name = "airport";
+    }
+    public void BackToMainMenu()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("MainMenu");
     }
 }

@@ -25,8 +25,11 @@ public class Trotyl : MonoBehaviour
         }
         if(collision.gameObject.CompareTag("Plane"))
         {
-            if (gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).currentPlaneState != PlaneState.damaged)
-                gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).DamageThePlane();
+            if(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).godMode == false)
+            {
+                if (gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).currentPlaneState != PlaneState.damaged)
+                    gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).DamageThePlane();
+            }
             Destroy(gameObject);
         }
     }

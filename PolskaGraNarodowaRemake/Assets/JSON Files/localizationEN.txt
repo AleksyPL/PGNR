@@ -68,3 +68,9 @@ PROGRESS WILL NOT BE SAVED, DO YOU WANT TO CONTINUE?
 YES
 //Warning2
 NO
+//Color Panel - Wygrana
+wins
+//Color Panel - Przegrana
+loses
+//Color Panel - Przegrana - SinglePlayer
+You lose

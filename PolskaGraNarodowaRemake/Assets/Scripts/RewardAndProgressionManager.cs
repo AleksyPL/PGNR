@@ -15,7 +15,6 @@ public class RewardAndProgressionManager : MonoBehaviour
     internal int totalBottlesDrunkPlayerTwo;
     internal int totalScorePlayerOne;
     internal int totalScorePlayerTwo;
-    internal bool rewardForLandingAdded;
     internal bool toNewLevel;
     internal float waitingTimeAfterLandingCurrent;
     internal float waitingTimeAfterLandingCombinedWithSoundLength;
@@ -24,7 +23,6 @@ public class RewardAndProgressionManager : MonoBehaviour
         flightControllerScript = GetComponent<FlightController>();
         currentlevelDistance = 100 + levelCounter * 10;
         toNewLevel = false;
-        rewardForLandingAdded = false;
         if (flightControllerScript.gameplaySettings.waitingTimeAfterLanding <= 0)
             flightControllerScript.gameplaySettings.waitingTimeAfterLanding = 3f;
         waitingTimeAfterLandingCombinedWithSoundLength = flightControllerScript.gameplaySettings.waitingTimeAfterLanding;
@@ -68,9 +66,14 @@ public class RewardAndProgressionManager : MonoBehaviour
         scorePointsCounterPlayerTwoCounter = 0;
         flightControllerScript.gameModeScript.playerOnePlane.ResetPlaneData();
         flightControllerScript.gameModeScript.playerTwoPlane.ResetPlaneData();
-        //flightControllerScript.uiManagerScript.DisableOptionsMenu();
-        //flightControllerScript.uiManagerScript.DisableGameOverScreen();
-        //flightControllerScript.uiManagerScript.DisablePauseScreen();
+        flightControllerScript.gameModeScript.someoneWon = false;
+        flightControllerScript.uiManagerScript.DisableOptionsMenu();
+        flightControllerScript.uiManagerScript.DisableGameOverScreen();
+        flightControllerScript.uiManagerScript.DisablePauseScreen();
+        flightControllerScript.uiManagerScript.TurnOffColorPanel(flightControllerScript.uiManagerScript.colorPanelPlayerOneGameObject);
+        if(flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer)
+            flightControllerScript.uiManagerScript.TurnOffColorPanel(flightControllerScript.uiManagerScript.colorPanelPlayerTwoGameObject);
+        flightControllerScript.uiManagerScript.TurnOffTheTimer();
         waitingTimeAfterLandingCurrent = 0;
         flightControllerScript.levelManagerScript.LoadLevel();
     }

@@ -44,6 +44,7 @@ internal class Plane
     //Flight controller settings
     internal bool isTouchingAirport;
     internal bool isTouchingGround;
+    internal bool tiresSFXPlayed;
     internal float currentPlaneSpeed;
     internal float altitudeChangeForce;
     internal float timeToFullyChargeBottleThrowCounter;
@@ -53,9 +54,10 @@ internal class Plane
     internal bool attackKeyReleased;
     //Score
     internal int gameScore;
+    internal bool rewardForLandingAdded;
     //Others
     internal AudioManager audioManagerScript;
-    internal bool GodMode;
+    public bool godMode;
     internal void LoadPlaneData(int numberOfThePlayer)
     {
         planeRendererScript = planeRendererGameObject.GetComponent<PlaneRenderer>();
@@ -70,6 +72,7 @@ internal class Plane
         verticalMovementKeys = 0;
         isTouchingAirport = false;
         isTouchingGround = false;
+        tiresSFXPlayed = false;
         currentPlaneSpeed = gameplaySettings.defaultPlaneSpeed;
         altitudeChangeForce = gameplaySettings.altitudeChangeForce;
         bottleDrunkCounter = 0;
@@ -77,6 +80,7 @@ internal class Plane
         difficultyImpulseDirection = 1;
         difficultyImpulsTimeCurrent = 0;
         gameScore = 0;
+        rewardForLandingAdded = false;
         timeToFullyChargeBottleThrowCounter = 0;
         currentPlaneState = PlaneState.standard;
         planeRendererScript.ChangePlaneSprite(currentPlaneState);

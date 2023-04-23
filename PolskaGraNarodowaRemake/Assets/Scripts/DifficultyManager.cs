@@ -8,7 +8,6 @@ public class DifficultyManager : MonoBehaviour
     internal FlightController flightControllerScript;
     private float difficultyImpulsTimeMin;
     private float difficultyImpulsTimeMax;
-    private bool altitudeChangeForceOverrided;
 
     void Start()
     {
@@ -22,7 +21,6 @@ public class DifficultyManager : MonoBehaviour
             flightControllerScript.gameModeScript.playerTwoPlane.difficultyImpulsTimeCurrent = Random.Range(difficultyImpulsTimeMin, difficultyImpulsTimeMax);
             flightControllerScript.gameModeScript.playerTwoPlane.difficultuImpulseCounter = flightControllerScript.gameModeScript.playerTwoPlane.difficultyImpulsTimeCurrent;
         }
-        altitudeChangeForceOverrided = false;
     }
 
     void Update()
@@ -36,16 +34,6 @@ public class DifficultyManager : MonoBehaviour
     {
         if (plane.difficultyImpulseEnabled)
         {
-            if (plane.verticalMovementKeys != plane.difficultyImpulseDirection && plane.verticalMovementKeys != 0 && !altitudeChangeForceOverrided)
-            {
-                plane.altitudeChangeForce *= gameplaySettings.altitudeChangeForceOverridedMultiplier;
-                altitudeChangeForceOverrided = true;
-            }
-            else if ((plane.verticalMovementKeys == plane.difficultyImpulseDirection && altitudeChangeForceOverrided) || (plane.verticalMovementKeys == 0 && altitudeChangeForceOverrided))
-            {
-                plane.altitudeChangeForce /= gameplaySettings.altitudeChangeForceOverridedMultiplier;
-                altitudeChangeForceOverrided = false;
-            }
             plane.difficultuImpulseCounter -= Time.deltaTime;
             plane.planeGameObject.transform.position += new Vector3(0, plane.difficultyImpulseDirection * gameplaySettings.difficultyImpulseForce * plane.bottleDrunkCounter * Time.deltaTime, 0);
             if (plane.planeGameObject.transform.position.y > plane.topScreenHeight)
