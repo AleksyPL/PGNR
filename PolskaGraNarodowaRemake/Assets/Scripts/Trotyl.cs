@@ -5,12 +5,12 @@ using UnityEngine;
 public class Trotyl : MonoBehaviour
 {
     public GameObject explosionPrefab;
-    private GameObject audioManagerGameObject;
+    private GameModeManager gameModeManagerScript;
     private AudioManager audioScript;
     void Start()
     {
-        audioManagerGameObject = GameObject.Find("AudioManager");
-        audioScript = audioManagerGameObject.GetComponent<AudioManager>();
+        gameModeManagerScript = GameObject.Find("MasterController").GetComponent<GameModeManager>();
+        audioScript = GameObject.Find("MasterController").GetComponent<AudioManager>();
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -18,14 +18,18 @@ public class Trotyl : MonoBehaviour
         {
             if (explosionPrefab != null)
             {
-                Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+                Instantiate(explosionPrefab, transform.position, Quaternion.identity, gameModeManagerScript.transform.Find("ObstaclesAndProjectiles").transform);
                 audioScript.PlaySound("Explosion", audioScript.SFX);
             }
             Destroy(gameObject);
         }
         if(collision.gameObject.CompareTag("Plane"))
         {
-            collision.gameObject.GetComponentInChildren<HitDetectionManager>().planeBaseScript.flightControllScript.DamageThePlane();
+            if(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).godMode == false)
+            {
+                if (gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).currentPlaneState != PlaneState.damaged)
+                    gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).DamageThePlane();
+            }
             Destroy(gameObject);
         }
     }

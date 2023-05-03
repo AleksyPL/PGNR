@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7aa23677339836344a1a78d0986b469a, type: 3}
+  m_Name: PolishPlane
+  m_EditorClassIdentifier: 
+  planeWithoutWheels: {fileID: 21300000, guid: a79a41839d26a0b4ea3dda42c8a2d68f, type: 3}
+  planeWithHoles: {fileID: 21300000, guid: 0abc313909c1b86499f8de4c251904c9, type: 3}
+  planeWithWheels: {fileID: 21300000, guid: f969eb0e4b54e3f47930843ca1e3412c, type: 3}
+  planeCrashed: {fileID: 21300000, guid: 133e6b65c7dc554488d69a3b9b326107, type: 3}

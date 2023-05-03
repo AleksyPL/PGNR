@@ -1,0 +1,78 @@
+//Main menu - Button0
+GRA KLASYCZNA
+//Main menu - Button1
+GRA PRZERZIWKO INNEMU GRACZOWI
+//Main menu - Button2
+JAK GRAĆ
+//Main menu - Button3
+OPCJE
+//Main menu - Button4
+ZAKOŃCZ GRĘ
+//How to play - Title
+Pilocie, Ojczyzna Wzywa!
+//How to play - Story
+Musisz polecieć nowym polskim Narodowym Drimlajnerem daleko na Wschód z Panem Prezydętem na pokładzie.\nNie licz jednak na to, że Wschód pozwoli ci tak łatwo wylądować! Omiń mgły, zetnij brzozy, zniszcz trotyl.\nTwoją bronią jest wódka. Nieograniczone ilości, bo to polski samolot.\nAle pamiętaj: im więcej pijesz, tym trudniej się leci...\nPrzed wyrzuceniem wódki, wypij trochę. Lżejsza butelka dalej leci.\nPokaż Panu Prezydętowi, że Polak potrafi!
+//How to play - Controls - Player 1
+W oraz S - sterowanie/nSpacja - pijesz/nSpacja(Przytrzymaj) - butelka poleci dalej
+//How to play - Controls - Player 2
+Strzałki góra i dół - sterowanie/n0 klaw. num. lub P.Ctrl - pijesz/n0 klaw. num. lub P.Ctrl(Przytrzymaj) - butelka poleci dalej
+//How to play - Controls - Player 1 indicator
+Gracz 1
+//How to play - Controls - Player 2 indicator
+Gracz 2
+//How to play - Back To Menu Button
+WRÓĆ DO MENU GŁÓWNEGO
+//Options - SFX slider
+GŁOŚNOŚĆ EFEKTÓW
+//Options - Music slider
+GŁOŚNOŚĆ MUZYKI
+//Options - quotes slider
+GŁOŚNOŚĆ WYPOWIEDZI
+//Options - Language
+AKTYWNY JĘZYK
+//Regular HUD - Year
+Rok: 
+//Regular HUD - LevelProgressStory0
+Panie Prezydencie, przelecieliśmy już 
+//Regular HUD - LevelProgressStory1
+% procent trasy. Jakoś to będzie!
+//Regular HUD - landing message
+Panie Prezydencie, lądujemy!
+//Regular HUD - plane hit
+Panie Prezydencie, obawiam się, że się rozpierdolimy
+//Regular HUD - plane destroyed
+Niestety, kolejny prezydent zostanie bohaterem
+//Regular HUD - bottle drunk
+Wypite butelki: 
+//Regular HUD - earned0
+Zarobiłeś: 
+//Regular HUD - earned1
+zł
+//Pause Screen - Year title
+Doleciałeś do roku:
+//Pause Screen - Bottles title
+Wszystkie wypite butelki:
+//Pause Screen - Main Title - Pause
+PAUZA
+//Pause Screen - Main Title - Game Over
+KONIEC GRY
+//Pause Screen - Button0
+OPCJE
+//Pause Screen - Button1
+POWRÓT DO GRY
+//Game Over Screen - Button0
+SPRÓBUJ JESZCZE RAZ
+//Warning0
+POSTĘP NIE ZOSTANIE ZACHOWANY, CZY CHCESZ KONTYNUOWAĆ?
+//Warning1
+TAK
+//Warning2
+NIE
+//Color Panel - Winning
+wygrywa
+//Color Panel - Loosing
+przegrywa
+//Color Panel - Loosing - SinglePlayer
+Przegrywasz
+//Active Bottle Warning
+Rzut butelką aktywny przed zapauzowaniem gry, przytrzymaj przycisk ataku kontynuować ładowanie ataku, w przeciwnym razie butelka zostanie wystrzelona

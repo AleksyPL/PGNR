@@ -4,65 +4,47 @@ using UnityEngine;
 
 public class DifficultyManager : MonoBehaviour
 {
-    public GameObject planeGameObject;
     public GameplaySettings gameplaySettings;
-    internal PlaneBase baseScript;
-    internal float difficultyMultiplier;
-    internal float difficultyImpulsTimeMin;
-    internal float difficultyImpulsTimeMax;
-    private float difficultyImpulsTimeCurrent;
-    private float difficultuImpulseCounter;
-    internal float difficultyImpulseDirection;
-    internal bool enableDifficultyImpulses;
-    internal bool altitudeChangeForceOverrided;
-    [SerializeField] internal float altitudeChangeForceOverridedMultiplier;
-    [SerializeField] internal float difficultyImpulseForce;
+    internal FlightController flightControllerScript;
+    private float difficultyImpulsTimeMin;
+    private float difficultyImpulsTimeMax;
 
     void Start()
     {
-        baseScript = GetComponent<PlaneBase>();
-        difficultyImpulseDirection = 1f;
-        difficultyMultiplier = 0;
-        difficultyImpulsTimeMin = baseScript.levelManagerScript.levelCounter * 0.1f;
+        flightControllerScript = GetComponent<FlightController>();
+        difficultyImpulsTimeMin = flightControllerScript.rewardAndProgressionManagerScript.levelCounter * 0.1f;
         difficultyImpulsTimeMax = 2 * difficultyImpulsTimeMin;
-        difficultyImpulsTimeCurrent = Random.Range(difficultyImpulsTimeMin, difficultyImpulsTimeMax);
-        difficultuImpulseCounter = difficultyImpulsTimeCurrent;
-        enableDifficultyImpulses = false;
-        altitudeChangeForceOverrided = false;
+        flightControllerScript.gameModeScript.playerOnePlane.difficultyImpulsTimeCurrent = Random.Range(difficultyImpulsTimeMin, difficultyImpulsTimeMax);
+        flightControllerScript.gameModeScript.playerOnePlane.difficultuImpulseCounter = flightControllerScript.gameModeScript.playerOnePlane.difficultyImpulsTimeCurrent;
+        if (flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer)
+        {
+            flightControllerScript.gameModeScript.playerTwoPlane.difficultyImpulsTimeCurrent = Random.Range(difficultyImpulsTimeMin, difficultyImpulsTimeMax);
+            flightControllerScript.gameModeScript.playerTwoPlane.difficultuImpulseCounter = flightControllerScript.gameModeScript.playerTwoPlane.difficultyImpulsTimeCurrent;
+        }
     }
 
     void Update()
     {
-        if (baseScript.currentPlaneState == PlaneBase.StateMachine.standard || baseScript.currentPlaneState == PlaneBase.StateMachine.wheelsOn)
-        {
-            ApplyDifficultyImpulse();
-        }
+        if(flightControllerScript.gameModeScript.playerOnePlane.currentPlaneState == PlaneState.standard || (flightControllerScript.gameModeScript.playerOnePlane.currentPlaneState == PlaneState.wheelsOn && !flightControllerScript.gameModeScript.playerOnePlane.isTouchingAirport))
+            ApplyDifficultyImpulse(flightControllerScript.gameModeScript.playerOnePlane);
+        if(flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer && (flightControllerScript.gameModeScript.playerTwoPlane.currentPlaneState == PlaneState.standard || (flightControllerScript.gameModeScript.playerTwoPlane.currentPlaneState == PlaneState.wheelsOn && !flightControllerScript.gameModeScript.playerTwoPlane.isTouchingAirport)))
+            ApplyDifficultyImpulse(flightControllerScript.gameModeScript.playerTwoPlane);
     }
-    internal void ApplyDifficultyImpulse()
+    internal void ApplyDifficultyImpulse(Plane plane)
     {
-        if (enableDifficultyImpulses)
+        if (plane.difficultyImpulseEnabled)
         {
-            if (baseScript.inputScript.position.y != difficultyImpulseDirection && baseScript.inputScript.position.y !=0 && !altitudeChangeForceOverrided)
+            plane.difficultuImpulseCounter -= Time.deltaTime;
+            plane.planeGameObject.transform.position += new Vector3(0, plane.difficultyImpulseDirection * gameplaySettings.difficultyImpulseForce * plane.bottleDrunkCounter * Time.deltaTime, 0);
+            if (plane.planeGameObject.transform.position.y > plane.topScreenHeight)
+                plane.planeGameObject.transform.position = new Vector3(plane.planeGameObject.transform.position.x, plane.topScreenHeight, 0);
+            if (plane.difficultuImpulseCounter <= 0)
             {
-                baseScript.flightControllScript.altitudeChangeForceCurrent *= altitudeChangeForceOverridedMultiplier;
-                altitudeChangeForceOverrided = true;
-            }    
-            else if ((baseScript.inputScript.position.y == difficultyImpulseDirection && altitudeChangeForceOverrided) || (baseScript.inputScript.position.y == 0 && altitudeChangeForceOverrided))
-            {
-                baseScript.flightControllScript.altitudeChangeForceCurrent /= altitudeChangeForceOverridedMultiplier;
-                altitudeChangeForceOverrided = false;
-            }
-            difficultuImpulseCounter -= Time.deltaTime;
-            planeGameObject.transform.position += new Vector3(0, difficultyImpulseDirection * difficultyImpulseForce * difficultyMultiplier * Time.deltaTime, 0);
-            if (planeGameObject.transform.position.y > gameplaySettings.topScreenHeight)
-                planeGameObject.transform.position = new Vector3(planeGameObject.transform.position.x, gameplaySettings.topScreenHeight, 0);
-            if (difficultuImpulseCounter <= 0)
-            {
-                difficultyImpulsTimeCurrent = Random.Range(difficultyImpulsTimeMin, difficultyImpulsTimeMax);
-                difficultuImpulseCounter = difficultyImpulsTimeCurrent;
-                difficultyImpulseDirection = Random.Range(-1, 1);
-                if (difficultyImpulseDirection == 0)
-                    difficultyImpulseDirection = 1;
+                plane.difficultyImpulsTimeCurrent = Random.Range(difficultyImpulsTimeMin, difficultyImpulsTimeMax);
+                plane.difficultuImpulseCounter = plane.difficultyImpulsTimeCurrent;
+                plane.difficultyImpulseDirection = Random.Range(-1, 1);
+                if (plane.difficultyImpulseDirection == 0)
+                    plane.difficultyImpulseDirection = 1;
             }
         }
     }

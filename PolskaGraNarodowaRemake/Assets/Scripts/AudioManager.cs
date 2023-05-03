@@ -10,17 +10,12 @@ public class AudioManager : MonoBehaviour
     public Sound[] landingSounds;
     public Sound[] SFX;
     public Sound[] otherSounds;
-    public GameObject planeControlCenterGameObject;
     public GameplaySettings gameplaySettings;
-    internal PlaneBase planeBaseScript;
-    private float waitingTimeForOneLinerCurrent;
-    private bool canPlayOneLiner;
-    internal bool tiresSFXPlayed;
-    internal bool landingSpeechPlayed;
+    public GameObject UIManagerGameObject;
     internal List<Sound> pausedSounds;
-    public GameObject optionsMenuGameObject;
-    private int lastPlayedOneLiner;
-    private int lastPlayedLandingSound;
+    internal bool landingSpeechPlayed;
+    internal int lastPlayedOneLiner;
+    internal int lastPlayedLandingSound;
 
     void OnEnable()
     {
@@ -29,74 +24,13 @@ public class AudioManager : MonoBehaviour
         LoadSounds(landingSounds);
         LoadSounds(SFX);
         LoadSounds(otherSounds);
-        if (planeControlCenterGameObject != null)
-        {
-            planeBaseScript = planeControlCenterGameObject.GetComponent<PlaneBase>();
-        }
+        PlaySound("TopGunTheme", otherSounds);
         if (gameplaySettings.waitingTimeForOneLiner == 0)
             gameplaySettings.waitingTimeForOneLiner = 5f;
         lastPlayedLandingSound = -1;
         lastPlayedOneLiner = -1;
-        canPlayOneLiner = false;
-        tiresSFXPlayed = false;
         landingSpeechPlayed = false;
         pausedSounds = new List<Sound>();
-    }
-    void Update()
-    {
-        if (optionsMenuGameObject.activeSelf)
-            UpdateAllSoundsVolume();
-        if (planeControlCenterGameObject != null && planeBaseScript != null && (planeBaseScript.currentPlaneState == PlaneBase.StateMachine.standard || planeBaseScript.currentPlaneState == PlaneBase.StateMachine.wheelsOn))
-        {
-            if(!planeBaseScript.flightControllScript.isTouchingAirport)
-            {
-                waitingTimeForOneLinerCurrent += Time.deltaTime;
-                if (waitingTimeForOneLinerCurrent >= gameplaySettings.waitingTimeForOneLiner)
-                {
-                    canPlayOneLiner = true;
-                    waitingTimeForOneLinerCurrent = 0;
-                    for (int i = 0; i < oneLinersSounds.Length; i++)
-                    {
-                        if (IsTheSoundCurrentlyPlaying("OneLiner" + i, oneLinersSounds))
-                        {
-                            canPlayOneLiner = false;
-                            break;
-                        }
-                    }
-                    if (canPlayOneLiner)
-                    {
-                        int randomSoundEffect = Random.Range(0, oneLinersSounds.Length);
-                        while (randomSoundEffect == lastPlayedOneLiner)
-                            randomSoundEffect = Random.Range(0, oneLinersSounds.Length);
-                        lastPlayedOneLiner = randomSoundEffect;
-                        PlaySound("OneLiner" + randomSoundEffect.ToString(), oneLinersSounds);
-                        waitingTimeForOneLinerCurrent -= ReturnSoundDuration("OneLiner" + randomSoundEffect, oneLinersSounds);
-                    }
-                }
-            }
-            else
-            {
-                if(!tiresSFXPlayed)
-                {
-                    tiresSFXPlayed = true;
-                    StopPlayingSoundsFromTheSpecificSoundBank(oneLinersSounds);
-                    StopPlayingSound("EngineSound", SFX);
-                    PlaySound("Tires", SFX);
-                }
-                if(planeBaseScript.flightControllScript.currentPlaneSpeed == 0 && !landingSpeechPlayed)
-                {
-                    landingSpeechPlayed = true;
-                    StopPlayingSound("Tires", SFX);
-                    StopPlayingSoundsFromTheSpecificSoundBank(oneLinersSounds);
-                    int randomSoundEffect = Random.Range(0, landingSounds.Length);
-                    while (randomSoundEffect == lastPlayedLandingSound)
-                        randomSoundEffect = Random.Range(0, landingSounds.Length);
-                    lastPlayedLandingSound = randomSoundEffect;
-                    PlaySound("Landing" + randomSoundEffect.ToString(), landingSounds);
-                    planeBaseScript.flightControllScript.waitingTimeAfterLandingCombinedWithSoundLength = ReturnSoundDuration("Landing" + randomSoundEffect.ToString(), landingSounds);
-                }
-            }
-        }
     }
     private void LoadSounds(Sound [] sounds)
     {
@@ -125,12 +59,26 @@ public class AudioManager : MonoBehaviour
     public void PlaySound(string soundName, Sound[] soundsBank)
     {
         Sound s = System.Array.Find(soundsBank, sound => sound.name == soundName);
-        if(s == null)
+        if (s == null)
         {
             Debug.LogWarning(soundName + " sound is missing in the " + soundsBank.ToString() + " soundsBank");
             return;
         }
         s.source.Play();
+    }
+    public void DrawAndPlayASound(Sound[] soundsBank, string fileNameBeginning, ref int excludedNumber)
+    {
+        if(!IsAnySoundFromTheSoundBankCurrentyPlaying(soundsBank, fileNameBeginning))
+        {
+            int randomSoundEffect = Random.Range(0, soundsBank.Length);
+            if (excludedNumber != -1)
+            {
+                while (randomSoundEffect == excludedNumber)
+                    randomSoundEffect = Random.Range(0, soundsBank.Length);
+            }
+            PlaySound(fileNameBeginning + randomSoundEffect.ToString(), soundsBank);
+            excludedNumber = randomSoundEffect;
+        }
     }
     public float ReturnSoundDuration(string soundName, Sound[] soundsBank)
     {
@@ -154,6 +102,15 @@ public class AudioManager : MonoBehaviour
             return false;
         else
             return true;
+    }
+    public bool IsAnySoundFromTheSoundBankCurrentyPlaying(Sound[] soundsBank, string fileNameBeginning)
+    {
+        for(int i=0;i<soundsBank.Length;i++)
+        {
+            if (IsTheSoundCurrentlyPlaying(fileNameBeginning + i.ToString(), soundsBank))
+                return true;
+        }
+        return false;
     }
     public void StopPlayingSound(string soundName, Sound[] soundsBank)
     {

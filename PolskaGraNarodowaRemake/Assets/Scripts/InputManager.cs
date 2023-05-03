@@ -4,29 +4,33 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    internal Vector3 position;
-    internal bool spaceHold;
-    internal bool spaceReleased;
-    public GameObject planeControlCenterGameObject;
-    internal PlaneBase baseScript;
+    internal FlightController flightControllerScript;
     internal bool ESCpressed;
     void Start()
     {
-        baseScript = planeControlCenterGameObject.GetComponent<PlaneBase>();
-        position = Vector3.zero;
-        spaceHold = false;
+        flightControllerScript = GetComponent<FlightController>();
         ESCpressed = false;
     }
     void Update()
     {
-        if(!baseScript.flightControllScript.isTouchingAirport && baseScript.currentPlaneState != PlaneBase.StateMachine.damaged && baseScript.currentPlaneState != PlaneBase.StateMachine.crashed)
+        if(!flightControllerScript.uiManagerScript.pauseScreenEnabled && !flightControllerScript.gameModeScript.playerOnePlane.isTouchingAirport && flightControllerScript.gameModeScript.playerOnePlane.currentPlaneState != PlaneState.damaged && flightControllerScript.gameModeScript.playerOnePlane.currentPlaneState != PlaneState.crashed)
         {
-            position.y = Input.GetAxisRaw("Vertical");
-            position.Normalize();
-            spaceHold = Input.GetButton("Jump");
-            spaceReleased = Input.GetButtonUp("Jump");
+            if ((flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer && flightControllerScript.gameModeScript.playerTwoPlane.currentPlaneState != PlaneState.crashed) || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayer)
+            {
+                flightControllerScript.gameModeScript.playerOnePlane.verticalMovementKeys = Input.GetAxisRaw("Vertical");
+                flightControllerScript.gameModeScript.playerOnePlane.attackKeyPressed = Input.GetButton("Jump");
+                flightControllerScript.gameModeScript.playerOnePlane.attackKeyReleased = Input.GetButtonUp("Jump");
+            }
         }
-        if(baseScript.currentPlaneState != PlaneBase.StateMachine.crashed)
+        if(!flightControllerScript.uiManagerScript.pauseScreenEnabled && flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer && !flightControllerScript.gameModeScript.playerTwoPlane.isTouchingAirport && flightControllerScript.gameModeScript.playerTwoPlane.currentPlaneState != PlaneState.damaged && flightControllerScript.gameModeScript.playerTwoPlane.currentPlaneState != PlaneState.crashed && flightControllerScript.gameModeScript.playerOnePlane.currentPlaneState != PlaneState.crashed)
+        {
+            flightControllerScript.gameModeScript.playerTwoPlane.verticalMovementKeys = Input.GetAxisRaw("Vertical1");
+            flightControllerScript.gameModeScript.playerTwoPlane.attackKeyPressed = Input.GetButton("Jump1");
+            flightControllerScript.gameModeScript.playerTwoPlane.attackKeyReleased = Input.GetButtonUp("Jump1");
+        }
+        if(flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer && (flightControllerScript.gameModeScript.playerOnePlane.currentPlaneState != PlaneState.crashed || flightControllerScript.gameModeScript.playerTwoPlane.currentPlaneState != PlaneState.crashed))
+        {
             ESCpressed = Input.GetButtonDown("Cancel");
+        }
     }
 }

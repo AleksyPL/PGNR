@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7aa23677339836344a1a78d0986b469a, type: 3}
+  m_Name: AmericanPlane
+  m_EditorClassIdentifier: 
+  planeWithoutWheels: {fileID: 21300000, guid: 4d2e038d3209fb844b0c3bb40a88831e, type: 3}
+  planeWithHoles: {fileID: 21300000, guid: da7e4123cbe21fb4eb6b3abe920729c0, type: 3}
+  planeWithWheels: {fileID: 21300000, guid: b6893fa2a49377940938cae5bcca7729, type: 3}
+  planeCrashed: {fileID: 21300000, guid: c3d875509baf7c9418348ddbf4379e15, type: 3}

@@ -12,7 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 008f793a96cb4ae4ebfb6201c09887ae, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: 
-  langauageIndex: 0
+  currentLanguage: 0
+  localizationsStrings:
+  - {fileID: 11400000, guid: 0f9bd656d084a05489812542daadc1dd, type: 2}
+  - {fileID: 11400000, guid: 6f3d82aa6f6afb549b75a30004dfdc74, type: 2}
+  currentPlayerOnePlaneSkin: 0
+  currentPlayerTwoPlaneSkin: 1
+  planeSkins:
+  - {fileID: 11400000, guid: 696b5ea809eac4644ba7f7ee97ed913f, type: 2}
+  - {fileID: 11400000, guid: cffa560e6db4a8540bd2aff7063367f2, type: 2}
   volumeSFX: 1
   volumeQuotes: 1
   volumeMusic: 1
@@ -20,11 +28,10 @@ MonoBehaviour:
   debrisSplashForce: 500
   rewardForLanding: 100
   rewardForHittingATarget: 50
-  cameraPositionXOffset: 12
+  rewardPerSecond: 1
+  cameraPositionXOffset: 25
   cameraDespawnDisatance: 20
   fadeOutLifeTime: 1
-  groundLevelHeight: 0.6
-  topScreenHeight: 15
   defaultPlaneSpeed: 6.5
   altitudeChangeForce: 5
   fallingForce: 5
@@ -38,3 +45,5 @@ MonoBehaviour:
   rateOfFire: 5
   maxLaunchDelay: 5
   launchForce: 850
+  altitudeChangeForceOverridedMultiplier: 2
+  difficultyImpulseForce: 1

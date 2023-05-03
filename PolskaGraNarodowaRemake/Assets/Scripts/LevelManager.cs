@@ -1,158 +1,116 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
     public GameObject airportPrefab;
-    public GameObject treePrefab;
+    public GameObject[] treePrefab;
     public GameObject trotylLauncherPrefab;
     public GameObject fogPrefab;
-    public GameObject planeControlCenterGameObject;
-    public GameObject planeGameObject;
-    public GameplaySettings gameplaySettings;
-    public LayerMask planeLayer;
-    internal PlaneBase planeBaseScript;
-    internal int levelCounter;
-    internal float currentlevelDistance;
-    internal float levelProgress;
-    internal int gameScore;
-    private GameObject afterAirportDestroyPointGameObject;
-    private float scorePointsCounter;
+    public GameObject ObstaclesAndProjectilesGameObject;
+    internal FlightController flightControllerScript;
+    public bool sameObstaclesForBothPlayes;
+    private float distanceBetweenPlayers;
     private int numberOfObstacles;
 
     void Start()
     {
-        planeBaseScript = planeControlCenterGameObject.GetComponent<PlaneBase>();
-        planeBaseScript.audioScript.PlaySound("TopGunTheme", planeBaseScript.audioScript.otherSounds);
-        RestartGame();
-    }
-    void Update()
-    {
-        if (planeBaseScript.flightControllScript.currentPlaneSpeed > 0 && (planeBaseScript.currentPlaneState == PlaneBase.StateMachine.standard || planeBaseScript.currentPlaneState == PlaneBase.StateMachine.wheelsOn))
-        {
-            scorePointsCounter += Time.deltaTime;
-            if (scorePointsCounter > 1)
-            {
-                scorePointsCounter = 0;
-                gameScore++;
-            }
-            if (planeBaseScript.currentPlaneState == PlaneBase.StateMachine.standard)
-            {
-                if (levelProgress < currentlevelDistance)
-                    levelProgress += planeBaseScript.flightControllScript.currentPlaneSpeed * Time.deltaTime;
-                if (levelProgress >= currentlevelDistance)
-                {
-                    levelProgress = currentlevelDistance;
-                    planeBaseScript.currentPlaneState = PlaneBase.StateMachine.wheelsOn;
-                    planeBaseScript.planeRendererScript.ChangePlaneSprite();
-                }
-            }
-            else if(planeBaseScript.currentPlaneState == PlaneBase.StateMachine.wheelsOn)
-            {
-                if (levelProgress >= currentlevelDistance)
-                    CheckIfThePlayerIsBehindTheAirport();
-            }
-        }
-    }
-    public void RestartGame()
-    {
-        levelCounter = 1;
-        gameScore = 0;
-        planeBaseScript.flightControllScript.drunkBottlesInTotal = 0;
-        planeBaseScript.difficultyScript.difficultyMultiplier = 0;
-        planeBaseScript.flightControllScript.waitingTimeAfterLandingCurrent = 0;
-        if (planeBaseScript.flightControllScript.smokeSpawner.transform.childCount != 0)
-        {
-            foreach (Transform child in planeBaseScript.flightControllScript.smokeSpawner.transform)
-                GameObject.Destroy(child.gameObject);
-        }
-        LoadLevel();
+        flightControllerScript = GetComponent<FlightController>();
+        CalculatePlayerBoundries(flightControllerScript.gameModeScript.playerOnePlane);
+        CalculatePlayerBoundries(flightControllerScript.gameModeScript.playerTwoPlane);
+        distanceBetweenPlayers = Vector2.Distance(new Vector2(flightControllerScript.gameModeScript.playerOnePlane.groundLevelHeight, 0), new Vector2(flightControllerScript.gameModeScript.playerTwoPlane.groundLevelHeight, 0));
     }
     internal void LoadLevel()
     {
-        planeBaseScript.currentPlaneState = PlaneBase.StateMachine.standard;
-        planeBaseScript.planeRendererScript.ChangePlaneSprite();
-        planeBaseScript.UIScript.DisableOptionsMenu();
-        planeBaseScript.UIScript.DisableGameOverScreen();
-        if (planeBaseScript.flightControllScript.toNewLevel)
+        while (ObstaclesAndProjectilesGameObject.transform.childCount > 0)
+            DestroyImmediate(ObstaclesAndProjectilesGameObject.transform.GetChild(0).gameObject);
+        if (flightControllerScript.rewardAndProgressionManagerScript.toNewLevel)
         {
-            planeBaseScript.flightControllScript.toNewLevel = false;
-            levelCounter++;
-            planeBaseScript.flightControllScript.currentPlaneSpeed = gameplaySettings.defaultPlaneSpeed;
-            planeBaseScript.flightControllScript.isTouchingAirport = false;
-            planeBaseScript.flightControllScript.isTouchingGround = false;
-            planeBaseScript.flightControllScript.waitingTimeAfterLandingCombinedWithSoundLength = 3f;
-            planeBaseScript.flightControllScript.rewardForLandingAdded = false;
-            planeBaseScript.difficultyScript.difficultyMultiplier = 0;
-            planeBaseScript.audioScript.tiresSFXPlayed = false;
-            planeBaseScript.audioScript.landingSpeechPlayed = false;
-            planeBaseScript.flightControllScript.altitudeChangeForceCurrent = gameplaySettings.altitudeChangeForce;
+            flightControllerScript.rewardAndProgressionManagerScript.toNewLevel = false;
+            flightControllerScript.rewardAndProgressionManagerScript.levelCounter++;
+            flightControllerScript.gameModeScript.playerOnePlane.ResetPlaneData();
+            flightControllerScript.rewardAndProgressionManagerScript.levelProgressPlayerOneCounter = 0;
+            flightControllerScript.rewardAndProgressionManagerScript.totalBottlesDrunkPlayerOne = flightControllerScript.gameModeScript.playerOnePlane.bottleDrunkCounter;
+            if (flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer)
+            {
+                flightControllerScript.gameModeScript.playerTwoPlane.ResetPlaneData();
+                flightControllerScript.rewardAndProgressionManagerScript.levelProgressPlayerTwoCounter = 0;
+                flightControllerScript.rewardAndProgressionManagerScript.totalBottlesDrunkPlayerTwo = flightControllerScript.gameModeScript.playerTwoPlane.bottleDrunkCounter;
+            }
         }
-        foreach (Transform child in transform)
-            GameObject.Destroy(child.gameObject);
-        if(!planeBaseScript.audioScript.IsTheSoundCurrentlyPlaying("EngineSound", planeBaseScript.audioScript.SFX))
-            planeBaseScript.audioScript.PlaySound("EngineSound", planeBaseScript.audioScript.SFX);
-        planeBaseScript.UIScript.DisablePauseScreen();
-        levelProgress = 0;
-        scorePointsCounter = 0;
-        currentlevelDistance = 100 + levelCounter * 10;
-        numberOfObstacles = 1 + levelCounter * 2;
-        planeGameObject.transform.position = new Vector3(0, (gameplaySettings.topScreenHeight - gameplaySettings.groundLevelHeight) / 2, 0);
-        SpawnObstacles();
-        SpawnAirpot();
+        if(!flightControllerScript.audioManagerScript.IsTheSoundCurrentlyPlaying("EngineSound", flightControllerScript.audioManagerScript.SFX))
+            flightControllerScript.audioManagerScript.PlaySound("EngineSound", flightControllerScript.audioManagerScript.SFX);
+        numberOfObstacles = 1 + flightControllerScript.rewardAndProgressionManagerScript.levelCounter * 2;
+        flightControllerScript.gameModeScript.playerOnePlane.planeGameObject.transform.position = new Vector3(0, (flightControllerScript.gameModeScript.playerOnePlane.topScreenHeight + flightControllerScript.gameModeScript.playerOnePlane.groundLevelHeight) / 2, 0);
+        if (flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer)
+            flightControllerScript.gameModeScript.playerTwoPlane.planeGameObject.transform.position = new Vector3(0, (flightControllerScript.gameModeScript.playerTwoPlane.topScreenHeight + flightControllerScript.gameModeScript.playerTwoPlane.groundLevelHeight) / 2, 0);
+        SpawnObstacles(flightControllerScript.gameModeScript.playerOnePlane);
+        if (flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer)
+        {
+            if (sameObstaclesForBothPlayes)
+                CopyObstaclesFromPlayerOne();
+            else
+                SpawnObstacles(flightControllerScript.gameModeScript.playerTwoPlane);
+            SpawnAirpot(flightControllerScript.gameModeScript.playerTwoPlane);
+        } 
+        SpawnAirpot(flightControllerScript.gameModeScript.playerOnePlane);
     }
-    private void SpawnObstacles()
+    internal void CalculatePlayerBoundries(Plane plane)
     {
-        double sectorWidth = 0.8 * currentlevelDistance / numberOfObstacles;
+        float cameraH = plane.cameraGameObject.GetComponent<Camera>().orthographicSize;
+        plane.topScreenHeight = plane.cameraGameObject.transform.position.y + cameraH - 1;
+        //plane.groundLevelHeight = plane.cameraGameObject.transform.position.y - cameraH + 1;
+        plane.groundLevelHeight = plane.cameraGameObject.transform.Find("Ground").position.y + plane.cameraGameObject.transform.Find("Ground").GetComponent<BoxCollider2D>().size.y / 2;
+    }
+    private void CopyObstaclesFromPlayerOne()
+    {
+        List<GameObject> clonedObjects = new List<GameObject>();
+        foreach (Transform child in ObstaclesAndProjectilesGameObject.transform)
+        {
+            clonedObjects.Add(Instantiate(child.gameObject, new Vector3(child.position.x, child.position.y - distanceBetweenPlayers, 0), Quaternion.identity));
+            clonedObjects[clonedObjects.Count - 1].transform.name = child.name;
+            if (child.GetComponent<TrotylLauncher>())
+                clonedObjects[clonedObjects.Count - 1].GetComponent<TrotylLauncher>().rateOfFireCounter = child.GetComponent<TrotylLauncher>().rateOfFireCounter;
+        }
+        foreach (GameObject child in clonedObjects)
+            child.transform.parent = ObstaclesAndProjectilesGameObject.transform;
+    }
+    private void SpawnObstacles(Plane plane)
+    {
+        double sectorWidth = 0.8 * flightControllerScript.rewardAndProgressionManagerScript.currentlevelDistance / numberOfObstacles;
         for (int i = 1; i < numberOfObstacles + 1; i++)
         {
             int obstacle = Random.Range(0, 2);
             if (obstacle == 0) //TREE
             {
-                float offsetY = treePrefab.GetComponent<SpriteRenderer>().bounds.size.y / 2;
-                GameObject tree = Instantiate(treePrefab, new Vector3((float)((0.1 * currentlevelDistance) + (i * sectorWidth)), gameplaySettings.groundLevelHeight, 0), Quaternion.identity, transform);
+                int treeHeight = Random.Range(0, treePrefab.Length);
+                GameObject tree = Instantiate(treePrefab[treeHeight], new Vector3((float)((0.1 * flightControllerScript.rewardAndProgressionManagerScript.currentlevelDistance) + (i * sectorWidth)), plane.groundLevelHeight + treePrefab[treeHeight].GetComponent<BoxCollider2D>().size.y / 2, 0), Quaternion.identity, ObstaclesAndProjectilesGameObject.transform);
                 tree.name = "birchTree";
-                int treeHeight = Random.Range(0, 3);
-                if (treeHeight == 0)
-                {
-                    tree.transform.position += new Vector3(0, offsetY - 1f, 0);
-                }
-                if (treeHeight == 1)
-                {
-                    tree.transform.localScale = new Vector3(2, 2, 1);
-                    tree.transform.position += new Vector3(0, 2 * offsetY - 1f, 0);
-                }
-                else if (treeHeight == 2)
-                {
-                    tree.transform.localScale = new Vector3(3, 3, 1);
-                    tree.transform.position += new Vector3(0, 3 * offsetY - 1f, 0);
-                }
             }
             else if (obstacle == 1) //TROTYLLAUNCHER
             {
-                GameObject trotylLauncher = Instantiate(trotylLauncherPrefab, new Vector3((float)((0.1 * currentlevelDistance) + (i * sectorWidth)), gameplaySettings.groundLevelHeight, 0), Quaternion.identity, transform);
+                GameObject trotylLauncher = Instantiate(trotylLauncherPrefab, new Vector3((float)((0.1 * flightControllerScript.rewardAndProgressionManagerScript.currentlevelDistance) + (i * sectorWidth)), plane.groundLevelHeight + trotylLauncherPrefab.GetComponent<BoxCollider2D>().size.y / 2, 0), Quaternion.identity, ObstaclesAndProjectilesGameObject.transform);
                 trotylLauncher.name = "trotylLauncher";
             }
         }
         int numberOfFogInstances = numberOfObstacles / 4;
-        for(int i= 0; i < numberOfFogInstances; i++)
+        for (int i = 0; i < numberOfFogInstances; i++)
         {
-            float fogPlacementX = Random.Range((float)0.1 * currentlevelDistance, (float)0.9 * currentlevelDistance);
-            GameObject fog = Instantiate(fogPrefab, new Vector3(fogPlacementX, (gameplaySettings.topScreenHeight - gameplaySettings.groundLevelHeight) / 2, 0), Quaternion.identity, transform);
+            float fogPlacementX = Random.Range((float)0.1 * flightControllerScript.rewardAndProgressionManagerScript.currentlevelDistance, (float)0.9 * flightControllerScript.rewardAndProgressionManagerScript.currentlevelDistance);
+            GameObject fog = Instantiate(fogPrefab, new Vector3(fogPlacementX, (plane.topScreenHeight + plane.groundLevelHeight) / 2, 0), Quaternion.identity, ObstaclesAndProjectilesGameObject.transform);
             fog.name = "fog";
         }
     }
-    private void SpawnAirpot()
+    private void SpawnAirpot(Plane plane)
     {
-        GameObject airport = Instantiate(airportPrefab, new Vector3((float)1.25 * currentlevelDistance, gameplaySettings.groundLevelHeight, 0), Quaternion.identity, transform);
+        GameObject airport = Instantiate(airportPrefab, new Vector3((float)1.25 * flightControllerScript.rewardAndProgressionManagerScript.currentlevelDistance, plane.groundLevelHeight + airportPrefab.GetComponent<BoxCollider2D>().size.y / 2, 0), Quaternion.identity, ObstaclesAndProjectilesGameObject.transform);
         airport.name = "airport";
-        afterAirportDestroyPointGameObject = airport.transform.Find("DestroyPlanePoint").gameObject;
     }
-    private void CheckIfThePlayerIsBehindTheAirport()
+    public void BackToMainMenu()
     {
-        if (afterAirportDestroyPointGameObject != null && Physics2D.Raycast(afterAirportDestroyPointGameObject.transform.position, Vector2.up, Mathf.Infinity, planeLayer))
-            if (planeBaseScript.currentPlaneState == PlaneBase.StateMachine.standard || planeBaseScript.currentPlaneState == PlaneBase.StateMachine.wheelsOn)
-                planeBaseScript.flightControllScript.DamageThePlane();
+        Time.timeScale = 1;
+        SceneManager.LoadScene("MainMenu");
     }
 }

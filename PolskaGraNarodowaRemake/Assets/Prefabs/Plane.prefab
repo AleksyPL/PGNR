@@ -41,8 +41,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7876854574752454000}
   - component: {fileID: 7876854574752454003}
-  - component: {fileID: 7876854574752454005}
   - component: {fileID: 7876854574752454002}
+  - component: {fileID: 1562720033}
   m_Layer: 6
   m_Name: Renderer
   m_TagString: Plane
@@ -119,19 +119,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7876854574752454005
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7876854574752454001}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62438c9299537e14983fd45a275e3833, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  planeControlPanelGameObject: {fileID: 0}
 --- !u!60 &7876854574752454002
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -171,6 +158,22 @@ PolygonCollider2D:
       - {x: 1.6596326, y: -0.20290422}
       - {x: 1.6487324, y: -0.050180495}
   m_UseDelaunayMesh: 0
+--- !u!114 &1562720033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7876854574752454001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc402cd01476ce649a1652a64523f455, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planeWithoutWheels: {fileID: 21300000, guid: 9161532a2d4ab554db1bba4df1da5e2a, type: 3}
+  planeWithHoles: {fileID: 21300000, guid: a15b5524045c60448be12e1b53d6f139, type: 3}
+  planeWithWheels: {fileID: 21300000, guid: 23a7ea00ef007bb4fbf176c1c23486b5, type: 3}
+  planeCrashed: {fileID: 21300000, guid: f516c2bc80d0877439d08d2d3a892abd, type: 3}
 --- !u!1 &7876854575269858844
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,7 +205,7 @@ Transform:
   m_Children:
   - {fileID: 7876854574752454000}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &7876854575269858825
 Rigidbody2D:

@@ -7,16 +7,14 @@ public class TrotylLauncher : MonoBehaviour
     public GameObject lauchingPoint;
     public GameObject trotylPrefab;
     public GameplaySettings gameplaySettings;
-    private GameObject audioManagerGameObject;
     private AudioManager audioScript;
-    private float rateOfFireCounter;
-    void Start()
+    internal float rateOfFireCounter;
+    void OnEnable()
     {
         if(gameplaySettings.maxLaunchDelay > gameplaySettings.rateOfFire)
             gameplaySettings.rateOfFire = gameplaySettings.maxLaunchDelay;
         rateOfFireCounter = Random.Range(0, gameplaySettings.maxLaunchDelay);
-        audioManagerGameObject = GameObject.Find("AudioManager");
-        audioScript = audioManagerGameObject.GetComponent<AudioManager>();
+        audioScript = GameObject.Find("MasterController").GetComponent<AudioManager>();
     }
     void Update()
     {

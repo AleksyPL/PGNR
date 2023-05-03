@@ -4,50 +4,39 @@ using UnityEngine;
 
 public class PlaneRenderer : MonoBehaviour
 {
-    public Sprite planeWithoutWheels;
-    public Sprite planeWithHoles;
-    public Sprite planeWithWheels;
-    public Sprite planeCrashed;
-    public GameObject rendererEntity;
-    public GameObject planeControlCenterGameObject;
-    internal PlaneBase baseScript;
-    void OnEnable()
+    internal SkinManager planeSkin;
+    internal void LoadPlaneSkin()
     {
-        baseScript = planeControlCenterGameObject.GetComponent<PlaneBase>();
-        ChangePlaneSprite();
+        this.GetComponent<SpriteRenderer>().sprite = planeSkin.planeWithoutWheels;
     }
-    private void Update()
+    internal void ChangePlaneSprite(PlaneState currentPlaneState)
     {
-        ChangeTilt();
-    }
-    internal void ChangePlaneSprite()
-    {
-        if(rendererEntity.GetComponent<SpriteRenderer>() && rendererEntity != null)
+        if (this.GetComponent<SpriteRenderer>())
         {
-            if (baseScript.currentPlaneState == PlaneBase.StateMachine.standard)
-                rendererEntity.GetComponent<SpriteRenderer>().sprite = planeWithoutWheels;
-            else if (baseScript.currentPlaneState == PlaneBase.StateMachine.crashed)
-                rendererEntity.GetComponent<SpriteRenderer>().sprite = planeCrashed;
-            else if (baseScript.currentPlaneState == PlaneBase.StateMachine.wheelsOn)
-                rendererEntity.GetComponent<SpriteRenderer>().sprite = planeWithWheels;
-            else if (baseScript.currentPlaneState == PlaneBase.StateMachine.damaged)
-                rendererEntity.GetComponent<SpriteRenderer>().sprite = planeWithHoles;
+            if (currentPlaneState == PlaneState.standard)
+                this.GetComponent<SpriteRenderer>().sprite = planeSkin.planeWithoutWheels;
+            else if (currentPlaneState == PlaneState.crashed)
+                this.GetComponent<SpriteRenderer>().sprite = planeSkin.planeCrashed;
+            else if (currentPlaneState == PlaneState.wheelsOn)
+                this.GetComponent<SpriteRenderer>().sprite = planeSkin.planeWithWheels;
+            else if (currentPlaneState == PlaneState.damaged)
+                this.GetComponent<SpriteRenderer>().sprite = planeSkin.planeWithHoles;
         }
     }
-    internal void ChangeTilt()
+    internal void ChangeTilt(PlaneState currentPlaneState, float direction)
     {
-        if(baseScript.currentPlaneState == PlaneBase.StateMachine.standard)
+        if (currentPlaneState == PlaneState.standard)
         {
-            if (baseScript.inputScript.position.y > 0)
-                rendererEntity.transform.rotation = Quaternion.Euler(0, 0, 15f);
-            else if (baseScript.inputScript.position.y == 0)
-                rendererEntity.transform.rotation = Quaternion.Euler(0, 0, 0);
-            if (baseScript.inputScript.position.y < 0)
-                rendererEntity.transform.rotation = Quaternion.Euler(0, 0, -15f);
+            if (direction > 0)
+                this.transform.rotation = Quaternion.Euler(0, 0, 15f);
+            else if (direction == 0)
+                this.transform.rotation = Quaternion.Euler(0, 0, 0);
+            if (direction < 0)
+                this.transform.rotation = Quaternion.Euler(0, 0, -15f);
         }
-        else if (baseScript.currentPlaneState == PlaneBase.StateMachine.wheelsOn || baseScript.currentPlaneState == PlaneBase.StateMachine.crashed)
-            rendererEntity.transform.rotation = Quaternion.Euler(0, 0, 0);
-        else if (baseScript.currentPlaneState == PlaneBase.StateMachine.damaged)
-            rendererEntity.transform.rotation = Quaternion.Euler(0, 0, -15f);
+        else if (currentPlaneState == PlaneState.wheelsOn || currentPlaneState == PlaneState.crashed)
+            this.transform.rotation = Quaternion.Euler(0, 0, 0);
+        else if (currentPlaneState == PlaneState.damaged)
+            this.transform.rotation = Quaternion.Euler(0, 0, -15f);
     }
 }

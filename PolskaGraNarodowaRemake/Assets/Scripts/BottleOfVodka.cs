@@ -7,46 +7,45 @@ public class BottleOfVodka : MonoBehaviour
     public GameObject crackedVersionPrefab;
     public GameObject explosionPrefab;
     public GameplaySettings gameplaySettings;
-    private GameObject audioManagerGameObject;
-    private AudioManager audioScript;
-    private GameObject levelManagerGameObject;
-    private LevelManager levelManagerScript;
+    private GameObject projectileParentGameObject;
+    private FlightController flightControllerScript;
+    internal Plane parentObject;
 
     void Start()
     {
-        audioManagerGameObject = GameObject.Find("AudioManager");
-        audioScript = audioManagerGameObject.GetComponent<AudioManager>();
-        levelManagerGameObject = GameObject.Find("LevelManager");
-        levelManagerScript = levelManagerGameObject.GetComponent<LevelManager>();
+        flightControllerScript = GameObject.Find("MasterController").GetComponent<FlightController>();
+        projectileParentGameObject = GameObject.Find("ObstaclesAndProjectiles");
+    }
+    internal void SetParentObject(Plane plane)
+    {
+        parentObject = plane;
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Obstacle") || collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Obstacle") || collision.gameObject.CompareTag("Ground"))
         {
-            audioScript.PlaySound("BreakingGlass", audioScript.SFX);
+            flightControllerScript.audioManagerScript.PlaySound("BreakingGlass", flightControllerScript.audioManagerScript.SFX);
             if (collision.gameObject.transform.name == "birchTree")
             {
-                levelManagerScript.gameScore += gameplaySettings.rewardForHittingATarget;
+                parentObject.gameScore += gameplaySettings.rewardForHittingATarget;
                 collision.gameObject.GetComponent<FadeOutTool>().enabled = true;
             }
             else if (collision.gameObject.transform.name == "trotyl" || collision.gameObject.transform.name == "trotylLauncher")
             {
-                levelManagerScript.gameScore += gameplaySettings.rewardForHittingATarget;
+                parentObject.gameScore += gameplaySettings.rewardForHittingATarget;
                 Destroy(collision.gameObject);
-                if(explosionPrefab != null)
+                if (explosionPrefab != null)
                 {
-                    GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity, levelManagerGameObject.transform);
+                    GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity, projectileParentGameObject.transform);
                     explosion.name = "explosion";
                 }
             }
-            if(crackedVersionPrefab !=null)
+            if (crackedVersionPrefab != null)
             {
-                GameObject bottle = Instantiate(crackedVersionPrefab, transform.position, Quaternion.identity, levelManagerGameObject.transform);
+                GameObject bottle = Instantiate(crackedVersionPrefab, transform.position, Quaternion.identity, projectileParentGameObject.transform);
                 bottle.name = "vodkaBottleCracked";
                 foreach (Transform child in bottle.transform)
-                {
                     child.gameObject.GetComponent<Rigidbody2D>().AddForce(Random.insideUnitCircle.normalized * gameplaySettings.debrisSplashForce);
-                }
             }
             Destroy(gameObject);
         }
