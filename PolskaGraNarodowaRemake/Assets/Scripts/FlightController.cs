@@ -23,7 +23,7 @@ public class FlightController : MonoBehaviour
         audioManagerScript = GetComponent<AudioManager>();
         rewardAndProgressionManagerScript = GetComponent<RewardAndProgressionManager>();
     }
-    private void ThrowBottleOfVodka(Plane plane)
+    internal void ThrowBottleOfVodka(Plane plane, bool pressedBeforePauseScreen = false)
     {
         if (plane.currentPlaneState == PlaneState.standard)
         {
@@ -32,7 +32,7 @@ public class FlightController : MonoBehaviour
                 if (plane.timeToFullyChargeBottleThrowCounter < gameplaySettings.timeToFullyChargeBottleThrow)
                     plane.timeToFullyChargeBottleThrowCounter += Time.deltaTime;
             }
-            if (plane.attackKeyReleased)
+            if (plane.attackKeyReleased || pressedBeforePauseScreen)
             {
                 float bottleThrowForceCurrent = Mathf.Lerp(gameplaySettings.bottleThrowForceMin, gameplaySettings.bottleThrowForceMax, plane.timeToFullyChargeBottleThrowCounter / gameplaySettings.timeToFullyChargeBottleThrow);
                 Vector2 bottleThrowAngleCurrent = Vector2.Lerp(gameplaySettings.bottleThrowAngleMin, gameplaySettings.bottleThrowAngleMax, plane.timeToFullyChargeBottleThrowCounter / gameplaySettings.timeToFullyChargeBottleThrow);
@@ -75,17 +75,6 @@ public class FlightController : MonoBehaviour
                     plane.rewardForLandingAdded = true;
                     plane.gameScore += gameplaySettings.rewardForLanding;
                 }
-                if (!rewardAndProgressionManagerScript.toNewLevel)
-                {
-                    //waitingTimeAfterLandingCurrent += Time.deltaTime;
-                    //if (waitingTimeAfterLandingCurrent >= waitingTimeAfterLandingCombinedWithSoundLength)
-                    //{
-                    //    toNewLevel = true;
-                    //    waitingTimeAfterLandingCurrent = 0;
-                    //    waitingTimeAfterLandingCombinedWithSoundLength = gameplaySettings.waitingTimeAfterLanding;
-                    //    baseScript.levelManagerScript.LoadLevel();
-                    //}
-                }
             }
         }
     }
@@ -115,14 +104,5 @@ public class FlightController : MonoBehaviour
             MovePlaneDamaged(gameModeScript.playerOnePlane);
         if(gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer && gameModeScript.playerTwoPlane.currentPlaneState == PlaneState.damaged)
             MovePlaneDamaged(gameModeScript.playerTwoPlane);
-        //else if (baseScript.currentPlaneState == PlaneScript.StateMachine.crashed)
-        //{
-        //    waitingTimeAfterLandingCurrent += Time.deltaTime;
-        //    if (waitingTimeAfterLandingCurrent >= gameplaySettings.waitingTimeAfterLanding)
-        //    {
-        //        waitingTimeAfterLandingCurrent = 0;
-        //        baseScript.UIScript.EnableGameOverScreen();
-        //    }
-        //}
     }
 }

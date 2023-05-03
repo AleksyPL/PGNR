@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
     public GameObject airportPrefab;
-    public GameObject treePrefab;
+    public GameObject[] treePrefab;
     public GameObject trotylLauncherPrefab;
     public GameObject fogPrefab;
     public GameObject ObstaclesAndProjectilesGameObject;
@@ -22,11 +22,6 @@ public class LevelManager : MonoBehaviour
         CalculatePlayerBoundries(flightControllerScript.gameModeScript.playerTwoPlane);
         distanceBetweenPlayers = Vector2.Distance(new Vector2(flightControllerScript.gameModeScript.playerOnePlane.groundLevelHeight, 0), new Vector2(flightControllerScript.gameModeScript.playerTwoPlane.groundLevelHeight, 0));
     }
-    void Update()
-    {
-        
-    }
-    
     internal void LoadLevel()
     {
         while (ObstaclesAndProjectilesGameObject.transform.childCount > 0)
@@ -35,19 +30,15 @@ public class LevelManager : MonoBehaviour
         {
             flightControllerScript.rewardAndProgressionManagerScript.toNewLevel = false;
             flightControllerScript.rewardAndProgressionManagerScript.levelCounter++;
-            flightControllerScript.rewardAndProgressionManagerScript.totalBottlesDrunkPlayerOne = flightControllerScript.gameModeScript.playerOnePlane.bottleDrunkCounter;
-            flightControllerScript.rewardAndProgressionManagerScript.totalBottlesDrunkPlayerTwo = flightControllerScript.gameModeScript.playerTwoPlane.bottleDrunkCounter;
             flightControllerScript.gameModeScript.playerOnePlane.ResetPlaneData();
             flightControllerScript.rewardAndProgressionManagerScript.levelProgressPlayerOneCounter = 0;
+            flightControllerScript.rewardAndProgressionManagerScript.totalBottlesDrunkPlayerOne = flightControllerScript.gameModeScript.playerOnePlane.bottleDrunkCounter;
             if (flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer)
             {
                 flightControllerScript.gameModeScript.playerTwoPlane.ResetPlaneData();
                 flightControllerScript.rewardAndProgressionManagerScript.levelProgressPlayerTwoCounter = 0;
+                flightControllerScript.rewardAndProgressionManagerScript.totalBottlesDrunkPlayerTwo = flightControllerScript.gameModeScript.playerTwoPlane.bottleDrunkCounter;
             }
-            //PlaneScriptScript.flightControllScript.waitingTimeAfterLandingCombinedWithSoundLength = 3f;
-            //PlaneScriptScript.flightControllScript.rewardForLandingAdded = false;
-            //PlaneScriptScript.audioScript.tiresSFXPlayed = false;
-            //PlaneScriptScript.audioScript.landingSpeechPlayed = false;
         }
         if(!flightControllerScript.audioManagerScript.IsTheSoundCurrentlyPlaying("EngineSound", flightControllerScript.audioManagerScript.SFX))
             flightControllerScript.audioManagerScript.PlaySound("EngineSound", flightControllerScript.audioManagerScript.SFX);
@@ -70,35 +61,21 @@ public class LevelManager : MonoBehaviour
     {
         float cameraH = plane.cameraGameObject.GetComponent<Camera>().orthographicSize;
         plane.topScreenHeight = plane.cameraGameObject.transform.position.y + cameraH - 1;
-        plane.groundLevelHeight = plane.cameraGameObject.transform.position.y - cameraH + 1;
+        //plane.groundLevelHeight = plane.cameraGameObject.transform.position.y - cameraH + 1;
+        plane.groundLevelHeight = plane.cameraGameObject.transform.Find("Ground").position.y + plane.cameraGameObject.transform.Find("Ground").GetComponent<BoxCollider2D>().size.y / 2;
     }
     private void CopyObstaclesFromPlayerOne()
     {
-        GameObject[] clonedObjects = new GameObject[ObstaclesAndProjectilesGameObject.transform.childCount];
-        int i = 0;
+        List<GameObject> clonedObjects = new List<GameObject>();
         foreach (Transform child in ObstaclesAndProjectilesGameObject.transform)
         {
-            clonedObjects[i] = Instantiate(child.gameObject, new Vector3(child.position.x, child.position.y - distanceBetweenPlayers, 0), Quaternion.identity);
-            clonedObjects[i].transform.name = child.name;
+            clonedObjects.Add(Instantiate(child.gameObject, new Vector3(child.position.x, child.position.y - distanceBetweenPlayers, 0), Quaternion.identity));
+            clonedObjects[clonedObjects.Count - 1].transform.name = child.name;
             if (child.GetComponent<TrotylLauncher>())
-                clonedObjects[i].GetComponent<TrotylLauncher>().rateOfFireCounter = child.GetComponent<TrotylLauncher>().rateOfFireCounter;
-            i++;
+                clonedObjects[clonedObjects.Count - 1].GetComponent<TrotylLauncher>().rateOfFireCounter = child.GetComponent<TrotylLauncher>().rateOfFireCounter;
         }
-        for (i = 0; i < clonedObjects.Length; i++)
-            clonedObjects[i].transform.parent = ObstaclesAndProjectilesGameObject.transform;
-
-        //var aaa = new List<GameObject>();
-        //foreach (Transform child in ObstaclesAndProjectilesGameObject.transform)
-        //{
-
-        //    var aa = Instantiate(child.gameObject, new Vector3(child.position.x, child.position.y - distanceBetweenPlayers, 0), Quaternion.identity);
-        //    aaa.Add(aa);
-        //}
-
-        //foreach (var a in aaa)
-        //{
-        //    a.transform.parent = ObstaclesAndProjectilesGameObject.transform;
-        //}
+        foreach (GameObject child in clonedObjects)
+            child.transform.parent = ObstaclesAndProjectilesGameObject.transform;
     }
     private void SpawnObstacles(Plane plane)
     {
@@ -108,29 +85,13 @@ public class LevelManager : MonoBehaviour
             int obstacle = Random.Range(0, 2);
             if (obstacle == 0) //TREE
             {
-                int treeHeight = Random.Range(0, 3);
-                float offsetY = treePrefab.GetComponent<SpriteRenderer>().bounds.size.y / 2;
-                GameObject tree = Instantiate(treePrefab, new Vector3((float)((0.1 * flightControllerScript.rewardAndProgressionManagerScript.currentlevelDistance) + (i * sectorWidth)), flightControllerScript.gameModeScript.playerOnePlane.groundLevelHeight, 0), Quaternion.identity, ObstaclesAndProjectilesGameObject.transform);
+                int treeHeight = Random.Range(0, treePrefab.Length);
+                GameObject tree = Instantiate(treePrefab[treeHeight], new Vector3((float)((0.1 * flightControllerScript.rewardAndProgressionManagerScript.currentlevelDistance) + (i * sectorWidth)), plane.groundLevelHeight + treePrefab[treeHeight].GetComponent<BoxCollider2D>().size.y / 2, 0), Quaternion.identity, ObstaclesAndProjectilesGameObject.transform);
                 tree.name = "birchTree";
-                if (treeHeight == 0)
-                {
-                    tree.transform.position += new Vector3(0, offsetY - 1f, 0);
-                }
-                if (treeHeight == 1)
-                {
-                    tree.transform.localScale = new Vector3(2, 2, 1);
-                    tree.transform.position += new Vector3(0, 2 * offsetY - 1f, 0);
-                }
-                else if (treeHeight == 2)
-                {
-                    tree.transform.localScale = new Vector3(3, 3, 1);
-                    tree.transform.position += new Vector3(0, 3 * offsetY - 1f, 0);
-                }
-
             }
             else if (obstacle == 1) //TROTYLLAUNCHER
             {
-                GameObject trotylLauncher = Instantiate(trotylLauncherPrefab, new Vector3((float)((0.1 * flightControllerScript.rewardAndProgressionManagerScript.currentlevelDistance) + (i * sectorWidth)), plane.groundLevelHeight, 0), Quaternion.identity, ObstaclesAndProjectilesGameObject.transform);
+                GameObject trotylLauncher = Instantiate(trotylLauncherPrefab, new Vector3((float)((0.1 * flightControllerScript.rewardAndProgressionManagerScript.currentlevelDistance) + (i * sectorWidth)), plane.groundLevelHeight + trotylLauncherPrefab.GetComponent<BoxCollider2D>().size.y / 2, 0), Quaternion.identity, ObstaclesAndProjectilesGameObject.transform);
                 trotylLauncher.name = "trotylLauncher";
             }
         }
@@ -144,7 +105,7 @@ public class LevelManager : MonoBehaviour
     }
     private void SpawnAirpot(Plane plane)
     {
-        GameObject airport = Instantiate(airportPrefab, new Vector3((float)1.25 * flightControllerScript.rewardAndProgressionManagerScript.currentlevelDistance, plane.groundLevelHeight, 0), Quaternion.identity, ObstaclesAndProjectilesGameObject.transform);
+        GameObject airport = Instantiate(airportPrefab, new Vector3((float)1.25 * flightControllerScript.rewardAndProgressionManagerScript.currentlevelDistance, plane.groundLevelHeight + airportPrefab.GetComponent<BoxCollider2D>().size.y / 2, 0), Quaternion.identity, ObstaclesAndProjectilesGameObject.transform);
         airport.name = "airport";
     }
     public void BackToMainMenu()

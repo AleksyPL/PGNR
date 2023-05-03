@@ -50,7 +50,14 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject optionsMenuGameObject;
     [Header("TimerCircle")]
     [SerializeField] internal GameObject mainTimerCircleGameObject;
-    private float timeCounter;
+    private float timerCircleTimeCounter;
+    [Header("ActiveBottleWarning")]
+    [SerializeField] private GameObject activeBottleWarningMainGameObject;
+    [SerializeField] private GameObject activeBottleWarningPlayerOneGameObject;
+    [SerializeField] private GameObject activeBottleWarningPlayerTwoGameObject;
+    private bool bottleWarningPlayerOne;
+    private bool bottleWarningPlayerTwo;
+    private float bottleWarningTimeCounter;
     [Header("Game Over Screen")]
     [SerializeField] private GameObject gameOverScreenButtonsGameObject;
 
@@ -83,12 +90,18 @@ public class UIManager : MonoBehaviour
         else if ((flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayer && flightControllerScript.gameModeScript.playerOneState != GameModeManager.PlayerState.crashed) || (flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer && flightControllerScript.gameModeScript.playerOneState != GameModeManager.PlayerState.crashed && flightControllerScript.gameModeScript.playerTwoState != GameModeManager.PlayerState.crashed))
         {
             if (!pauseScreenEnabled && !pauseScreenGameObject.activeSelf && flightControllerScript.inputManagerScript.ESCpressed)
+            {
                 EnablePauseScreen();
+                bottleWarningPlayerOne = flightControllerScript.gameModeScript.playerOnePlane.attackKeyPressed;
+                bottleWarningPlayerTwo = flightControllerScript.gameModeScript.playerTwoPlane.attackKeyPressed;
+            }
             else if (pauseScreenEnabled && pauseScreenGameObject.activeSelf && flightControllerScript.inputManagerScript.ESCpressed)
                 DisablePauseScreen();
         }
         if (mainTimerCircleGameObject.activeSelf)
             UpdateTimer();
+        if (activeBottleWarningMainGameObject)
+            UpdateBottleWarning();
     }
     internal void TurnOnTheTimer(float time)
     {
@@ -113,26 +126,70 @@ public class UIManager : MonoBehaviour
         else
         {
             Time.timeScale = 1;
+            if (activeBottleWarningMainGameObject.activeSelf)
+            {
+                activeBottleWarningMainGameObject.SetActive(false);
+                //hack
+                flightControllerScript.gameModeScript.playerOnePlane.attackKeyPressed = Input.GetButton("Jump");
+                flightControllerScript.gameModeScript.playerTwoPlane.attackKeyPressed = Input.GetButton("Jump1");
+                //endOfHack
+                if (!flightControllerScript.gameModeScript.playerOnePlane.attackKeyPressed && bottleWarningPlayerOne)
+                {
+                    flightControllerScript.ThrowBottleOfVodka(flightControllerScript.gameModeScript.playerOnePlane, true);
+                    bottleWarningPlayerOne = false;
+                }
+                if (!flightControllerScript.gameModeScript.playerTwoPlane.attackKeyPressed && bottleWarningPlayerTwo)
+                {
+                    flightControllerScript.ThrowBottleOfVodka(flightControllerScript.gameModeScript.playerTwoPlane, true);
+                    bottleWarningPlayerTwo = false;
+                }
+            }
             regularHUDMainGameObject.SetActive(true);
             flightControllerScript.audioManagerScript.ResumeAllPausedSounds();
             pauseScreenEnabled = false;
         }
     }
+    internal void TurnOnBottleWarning()
+    {
+        activeBottleWarningMainGameObject.SetActive(true);
+        if(bottleWarningPlayerOne)
+        {
+            activeBottleWarningPlayerOneGameObject.SetActive(true);
+            activeBottleWarningPlayerOneGameObject.GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].activeBottleWarning;
+        }
+        if(bottleWarningPlayerTwo)
+        {
+            activeBottleWarningPlayerTwoGameObject.SetActive(true);
+            activeBottleWarningPlayerTwoGameObject.GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].activeBottleWarning;
+        }
+    }
+    internal void UpdateBottleWarning()
+    {
+        bottleWarningTimeCounter += Time.unscaledDeltaTime;
+        if (bottleWarningTimeCounter > 0.5f)
+        {
+            bottleWarningTimeCounter = 0;
+            if (bottleWarningPlayerOne)
+                activeBottleWarningPlayerOneGameObject.SetActive(!activeBottleWarningPlayerOneGameObject.activeSelf);
+            if (bottleWarningPlayerTwo)
+                activeBottleWarningPlayerTwoGameObject.SetActive(!activeBottleWarningPlayerTwoGameObject.activeSelf);
+        }
+    }
     private void UpdateTimer()
     {
-        timeCounter -= Time.unscaledDeltaTime;
-        //mainTimerCircleGameObject.transform.Find("Text").GetComponent<Text>().text = (Mathf.Round(timeCounter * 100) / 100).ToString();
-        mainTimerCircleGameObject.transform.Find("Text").GetComponent<Text>().text = ((int)timeCounter).ToString();
-        mainTimerCircleGameObject.transform.Find("Fill").GetComponent<Image>().fillAmount = Mathf.InverseLerp(0, 1, timeCounter - (int)timeCounter);
-        if (timeCounter <= 0)
+        timerCircleTimeCounter -= Time.unscaledDeltaTime;
+        //mainTimerCircleGameObject.transform.Find("Text").GetComponent<Text>().text = (Mathf.Round(timerCircleTimeCounter * 100) / 100).ToString();
+        mainTimerCircleGameObject.transform.Find("Text").GetComponent<Text>().text = ((int)timerCircleTimeCounter).ToString();
+        mainTimerCircleGameObject.transform.Find("Fill").GetComponent<Image>().fillAmount = Mathf.InverseLerp(0, 1, timerCircleTimeCounter - (int)timerCircleTimeCounter);
+        if (timerCircleTimeCounter <= 0)
         {
-            timeCounter = 0;
+            timerCircleTimeCounter = 0;
             TurnOffTheTimer();
         }
     }
     private void ResetTimer(float time)
     {
-        timeCounter = time;
+        timerCircleTimeCounter = time;
     }
     private void UpdatePauseScreenHUD()
     {
@@ -236,6 +293,8 @@ public class UIManager : MonoBehaviour
     {
         fadePanelGameObject.SetActive(false);
         pauseScreenGameObject.SetActive(false);
+        if (bottleWarningPlayerOne || bottleWarningPlayerTwo)
+            TurnOnBottleWarning();
         TurnOnTheTimer(3f);
     }
     public void EnableExitWarning()

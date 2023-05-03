@@ -13,8 +13,6 @@ public class RewardAndProgressionManager : MonoBehaviour
     private float scorePointsCounterPlayerTwoCounter;
     internal int totalBottlesDrunkPlayerOne;
     internal int totalBottlesDrunkPlayerTwo;
-    internal int totalScorePlayerOne;
-    internal int totalScorePlayerTwo;
     internal bool toNewLevel;
     internal float waitingTimeAfterLandingCurrent;
     internal float waitingTimeAfterLandingCombinedWithSoundLength;
@@ -36,10 +34,7 @@ public class RewardAndProgressionManager : MonoBehaviour
             if (counter > 1)
             {
                 counter = 0;
-                if(plane.playerNumber==0)
-                    totalScorePlayerOne += flightControllerScript.gameplaySettings.rewardPerSecond;
-                else
-                    totalScorePlayerTwo += flightControllerScript.gameplaySettings.rewardPerSecond;
+                plane.gameScore += flightControllerScript.gameplaySettings.rewardPerSecond;
             }
         }
     }
@@ -64,8 +59,13 @@ public class RewardAndProgressionManager : MonoBehaviour
         levelProgressPlayerTwoCounter = 0;
         scorePointsCounterPlayerOneCounter = 0;
         scorePointsCounterPlayerTwoCounter = 0;
+        flightControllerScript.gameModeScript.playerOnePlane.gameScore = 0;
         flightControllerScript.gameModeScript.playerOnePlane.ResetPlaneData();
-        flightControllerScript.gameModeScript.playerTwoPlane.ResetPlaneData();
+        if(flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer)
+        {
+            flightControllerScript.gameModeScript.playerTwoPlane.gameScore = 0;
+            flightControllerScript.gameModeScript.playerTwoPlane.ResetPlaneData();
+        }
         flightControllerScript.gameModeScript.someoneWon = false;
         flightControllerScript.uiManagerScript.DisableOptionsMenu();
         flightControllerScript.uiManagerScript.DisableGameOverScreen();

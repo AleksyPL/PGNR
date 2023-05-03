@@ -4,8 +4,13 @@ using UnityEngine;
 
 public enum Languages
 {
-    Polski,
+    Polish,
     English
+}
+public enum PlaneSkin
+{
+    Polish,
+    American
 }
 
 [CreateAssetMenu(menuName ="ScriptableObjects/GameplaySettings")]
@@ -15,6 +20,11 @@ public class GameplaySettings : ScriptableObject
     public Languages currentLanguage;
     internal int langauageIndex;
     public Localization[] localizationsStrings;
+    [Header("Plane Skins")]
+    public PlaneSkin currentPlayerOnePlaneSkin;
+    public PlaneSkin currentPlayerTwoPlaneSkin;
+    internal int [] playersPlaneSkins = new int[2];
+    public SkinManager[] planeSkins;
     [Header("Audio Settings")]
     public float volumeSFX;
     public float volumeQuotes;
@@ -51,9 +61,17 @@ public class GameplaySettings : ScriptableObject
     public float difficultyImpulseForce;
     private void OnEnable()
     {
-        if (currentLanguage == Languages.Polski)
+        if (currentLanguage == Languages.Polish)
             langauageIndex = 0;
         else if (currentLanguage == Languages.English)
             langauageIndex = 1;
+        if (currentPlayerOnePlaneSkin == PlaneSkin.Polish)
+            playersPlaneSkins[0] = 0;
+        else if (currentPlayerOnePlaneSkin == PlaneSkin.American)
+            playersPlaneSkins[0] = 1;
+        if (currentPlayerTwoPlaneSkin == PlaneSkin.Polish)
+            playersPlaneSkins[1] = 0;
+        else if (currentPlayerTwoPlaneSkin == PlaneSkin.American)
+            playersPlaneSkins[1] = 1;
     }
 }

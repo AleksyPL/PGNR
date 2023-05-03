@@ -44,6 +44,7 @@ public class Localization : ScriptableObject
     internal string pauseScreenButton0;
     internal string pauseScreenButton1;
     internal string gameOverScreenButton0;
+    internal string activeBottleWarning;
     internal string warningTitle;
     internal string warningYes;
     internal string warningNo;
@@ -60,7 +61,7 @@ public class Localization : ScriptableObject
         List<string> listOfAll = new List<string>();
         if(localizationTextFile != null)
         {
-            StreamReader inp_stm = new StreamReader(Application.dataPath + "/JSON Files/" + localizationTextFile.name + ".txt");
+            StreamReader inp_stm = new StreamReader(Application.dataPath + "/Localization Files/" + localizationTextFile.name + ".txt");
             while (!inp_stm.EndOfStream)
             {
                 string inp_ln = inp_stm.ReadLine();
@@ -108,6 +109,7 @@ public class Localization : ScriptableObject
             colorPanelPlayerWins = listOfAll[71];
             colorPanelPlayerLoses = listOfAll[73];
             colorPanelPlayerLosesSinglePlayer = listOfAll[75];
+            activeBottleWarning = listOfAll[77];
         }
     }
 }

@@ -47,9 +47,9 @@ public class GameModeManager : MonoBehaviour
                 flightController.uiManagerScript.TurnOnColorPanel(flightController.uiManagerScript.colorPanelPlayerOneGameObject, flightController.uiManagerScript.loseColor);
                 flightController.uiManagerScript.SetTheTextOnTheColorPanel(flightController.uiManagerScript.colorPanelPlayerOneGameObject, flightController.uiManagerScript.gameplaySettings.localizationsStrings[flightController.uiManagerScript.gameplaySettings.langauageIndex].colorPanelPlayerLosesSinglePlayer);
                 flightController.audioManagerScript.StopPlayingSound("EngineSound", flightController.audioManagerScript.SFX);
-                flightController.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightController.audioManagerScript.oneLinersSounds);
-                flightController.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightController.audioManagerScript.hitReactionSounds);
-                flightController.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightController.audioManagerScript.landingSounds);
+                flightController.audioManagerScript.StopPlayingSoundsFromTheSpecificSoundBank(flightController.audioManagerScript.oneLinersSounds);
+                flightController.audioManagerScript.StopPlayingSoundsFromTheSpecificSoundBank(flightController.audioManagerScript.hitReactionSounds);
+                flightController.audioManagerScript.StopPlayingSoundsFromTheSpecificSoundBank(flightController.audioManagerScript.landingSounds);
                 flightController.uiManagerScript.regularHUDMainGameObject.SetActive(false);
                 flightController.uiManagerScript.TurnOnTheTimer(gameOverTimer);
             } 
@@ -67,9 +67,9 @@ public class GameModeManager : MonoBehaviour
                 flightController.uiManagerScript.TurnOnColorPanel(flightController.uiManagerScript.colorPanelPlayerTwoGameObject, flightController.uiManagerScript.loseColor);
                 flightController.uiManagerScript.SetTheTextOnTheColorPanel(flightController.uiManagerScript.colorPanelPlayerTwoGameObject, flightController.uiManagerScript.gameplaySettings.localizationsStrings[flightController.uiManagerScript.gameplaySettings.langauageIndex].playerTwoIndicator + " " + flightController.uiManagerScript.gameplaySettings.localizationsStrings[flightController.uiManagerScript.gameplaySettings.langauageIndex].colorPanelPlayerLoses);
                 flightController.audioManagerScript.StopPlayingSound("EngineSound", flightController.audioManagerScript.SFX);
-                flightController.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightController.audioManagerScript.oneLinersSounds);
-                flightController.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightController.audioManagerScript.hitReactionSounds);
-                flightController.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightController.audioManagerScript.landingSounds);
+                flightController.audioManagerScript.StopPlayingSoundsFromTheSpecificSoundBank(flightController.audioManagerScript.oneLinersSounds);
+                flightController.audioManagerScript.StopPlayingSoundsFromTheSpecificSoundBank(flightController.audioManagerScript.hitReactionSounds);
+                flightController.audioManagerScript.StopPlayingSoundsFromTheSpecificSoundBank(flightController.audioManagerScript.landingSounds);
                 flightController.uiManagerScript.regularHUDMainGameObject.SetActive(false);
                 flightController.uiManagerScript.TurnOnTheTimer(gameOverTimer);
             }
@@ -84,9 +84,9 @@ public class GameModeManager : MonoBehaviour
                 flightController.uiManagerScript.TurnOnColorPanel(flightController.uiManagerScript.colorPanelPlayerOneGameObject, flightController.uiManagerScript.loseColor);
                 flightController.uiManagerScript.SetTheTextOnTheColorPanel(flightController.uiManagerScript.colorPanelPlayerOneGameObject, flightController.uiManagerScript.gameplaySettings.localizationsStrings[flightController.uiManagerScript.gameplaySettings.langauageIndex].playerOneIndicator + " " + flightController.uiManagerScript.gameplaySettings.localizationsStrings[flightController.uiManagerScript.gameplaySettings.langauageIndex].colorPanelPlayerLoses);
                 flightController.audioManagerScript.StopPlayingSound("EngineSound", flightController.audioManagerScript.SFX);
-                flightController.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightController.audioManagerScript.oneLinersSounds);
-                flightController.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightController.audioManagerScript.hitReactionSounds);
-                flightController.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightController.audioManagerScript.landingSounds);
+                flightController.audioManagerScript.StopPlayingSoundsFromTheSpecificSoundBank(flightController.audioManagerScript.oneLinersSounds);
+                flightController.audioManagerScript.StopPlayingSoundsFromTheSpecificSoundBank(flightController.audioManagerScript.hitReactionSounds);
+                flightController.audioManagerScript.StopPlayingSoundsFromTheSpecificSoundBank(flightController.audioManagerScript.landingSounds);
                 flightController.uiManagerScript.regularHUDMainGameObject.SetActive(false);
                 flightController.uiManagerScript.TurnOnTheTimer(gameOverTimer);
             }
@@ -151,60 +151,5 @@ public class GameModeManager : MonoBehaviour
             return ref playerOnePlane;
         else
             return ref playerTwoPlane;
-    }
-    internal void AudioFunction()
-    {
-        
-        //if (planeControlCenterGameObject != null && PlaneScriptScript != null && (PlaneScriptScript.currentPlaneState == PlaneScript.StateMachine.standard || PlaneScriptScript.currentPlaneState == PlaneScript.StateMachine.wheelsOn))
-        //{
-        //    if (!PlaneScriptScript.flightControllScript.isTouchingAirport)
-        //    {
-        //        waitingTimeForOneLinerCurrent += Time.deltaTime;
-        //        if (waitingTimeForOneLinerCurrent >= gameplaySettings.waitingTimeForOneLiner)
-        //        {
-        //            canPlayOneLiner = true;
-        //            waitingTimeForOneLinerCurrent = 0;
-        //            for (int i = 0; i < oneLinersSounds.Length; i++)
-        //            {
-        //                if (IsTheSoundCurrentlyPlaying("OneLiner" + i, oneLinersSounds))
-        //                {
-        //                    canPlayOneLiner = false;
-        //                    break;
-        //                }
-        //            }
-        //            if (canPlayOneLiner)
-        //            {
-        //                int randomSoundEffect = Random.Range(0, oneLinersSounds.Length);
-        //                while (randomSoundEffect == lastPlayedOneLiner)
-        //                    randomSoundEffect = Random.Range(0, oneLinersSounds.Length);
-        //                lastPlayedOneLiner = randomSoundEffect;
-        //                PlaySound("OneLiner" + randomSoundEffect.ToString(), oneLinersSounds);
-        //                waitingTimeForOneLinerCurrent -= ReturnSoundDuration("OneLiner" + randomSoundEffect, oneLinersSounds);
-        //            }
-        //        }
-        //    }
-        //    else
-        //    {
-        //        if (!tiresSFXPlayed)
-        //        {
-        //            tiresSFXPlayed = true;
-        //            StopPlayingSoundsFromTheSpecificSoundBank(oneLinersSounds);
-        //            StopPlayingSound("EngineSound", SFX);
-        //                PlaySound("Tires", SFX);
-        //            }
-        //        if (PlaneScriptScript.flightControllScript.currentPlaneSpeed == 0 && !landingSpeechPlayed)
-        //        {
-        //            landingSpeechPlayed = true;
-        //            StopPlayingSound("Tires", SFX);
-        //            StopPlayingSoundsFromTheSpecificSoundBank(oneLinersSounds);
-        //            int randomSoundEffect = Random.Range(0, landingSounds.Length);
-        //            while (randomSoundEffect == lastPlayedLandingSound)
-        //                randomSoundEffect = Random.Range(0, landingSounds.Length);
-        //            lastPlayedLandingSound = randomSoundEffect;
-        //            PlaySound("Landing" + randomSoundEffect.ToString(), landingSounds);
-        //            PlaneScriptScript.flightControllScript.waitingTimeAfterLandingCombinedWithSoundLength = ReturnSoundDuration("Landing" + randomSoundEffect.ToString(), landingSounds);
-        //        }
-        //    }
-        //}
     }
 }

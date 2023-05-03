@@ -27,7 +27,7 @@ internal class Plane
     public GameObject projectilesParentGameObject;
     public GameObject cameraGameObject;
     //Prefabs
-    public GameObject bottlePrefab;
+    public GameObject[] bottlePrefab;
     public GameObject smokePrefab;
     public GameObject explosionPrefab;
     //Scripts
@@ -63,6 +63,9 @@ internal class Plane
         planeRendererScript = planeRendererGameObject.GetComponent<PlaneRenderer>();
         audioManagerScript = GameObject.Find("MasterController").GetComponent<AudioManager>();
         playerNumber = numberOfThePlayer;
+        planeRendererScript.planeSkin = gameplaySettings.planeSkins[playerNumber];
+        planeRendererScript.LoadPlaneSkin();
+        gameScore = 0;
         ResetPlaneData();
     }
     internal void ResetPlaneData()
@@ -79,7 +82,6 @@ internal class Plane
         difficultyImpulseEnabled = false;
         difficultyImpulseDirection = 1;
         difficultyImpulsTimeCurrent = 0;
-        gameScore = 0;
         rewardForLandingAdded = false;
         timeToFullyChargeBottleThrowCounter = 0;
         currentPlaneState = PlaneState.standard;
@@ -93,9 +95,15 @@ internal class Plane
     {
         if (currentPlaneState == PlaneState.standard)
         {
-            GameObject bottle = Object.Instantiate(bottlePrefab, bottleSpawnerGameObject.transform.position, Quaternion.identity, projectilesParentGameObject.transform);
+            int bottleVariant = Random.Range(0, bottlePrefab.Length);
+            GameObject bottle = Object.Instantiate(bottlePrefab[bottleVariant], bottleSpawnerGameObject.transform.position, Quaternion.identity, projectilesParentGameObject.transform);
             bottle.GetComponent<BottleOfVodka>().SetParentObject(this);
             bottle.GetComponent<Rigidbody2D>().AddForce(bottleThrowAngle * bottleThrowForce);
+            int randomDirection = Random.Range(0, 2);
+            if (randomDirection == 0)
+                bottle.GetComponent<Rigidbody2D>().AddTorque(180);
+            else
+                bottle.GetComponent<Rigidbody2D>().AddTorque(-180);
             bottleDrunkCounter++;
         }
     }

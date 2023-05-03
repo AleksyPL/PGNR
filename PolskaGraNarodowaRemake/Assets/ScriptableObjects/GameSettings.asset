@@ -16,6 +16,11 @@ MonoBehaviour:
   localizationsStrings:
   - {fileID: 11400000, guid: 0f9bd656d084a05489812542daadc1dd, type: 2}
   - {fileID: 11400000, guid: 6f3d82aa6f6afb549b75a30004dfdc74, type: 2}
+  currentPlayerOnePlaneSkin: 0
+  currentPlayerTwoPlaneSkin: 1
+  planeSkins:
+  - {fileID: 11400000, guid: 696b5ea809eac4644ba7f7ee97ed913f, type: 2}
+  - {fileID: 11400000, guid: cffa560e6db4a8540bd2aff7063367f2, type: 2}
   volumeSFX: 1
   volumeQuotes: 1
   volumeMusic: 1
