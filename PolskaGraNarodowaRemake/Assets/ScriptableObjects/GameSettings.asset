@@ -16,8 +16,8 @@ MonoBehaviour:
   localizationsStrings:
   - {fileID: 11400000, guid: 0f9bd656d084a05489812542daadc1dd, type: 2}
   - {fileID: 11400000, guid: 6f3d82aa6f6afb549b75a30004dfdc74, type: 2}
-  currentPlayerOnePlaneSkin: 0
-  currentPlayerTwoPlaneSkin: 1
+  currentPlayerOnePlaneSkin: 1
+  currentPlayerTwoPlaneSkin: 0
   planeSkins:
   - {fileID: 11400000, guid: 696b5ea809eac4644ba7f7ee97ed913f, type: 2}
   - {fileID: 11400000, guid: cffa560e6db4a8540bd2aff7063367f2, type: 2}
@@ -29,7 +29,8 @@ MonoBehaviour:
   rewardForLanding: 100
   rewardForHittingATarget: 50
   rewardPerSecond: 1
-  cameraPositionXOffset: 25
+  cameraPositionXOffsetSingle: 12
+  cameraPositionXOffsetMulti: 25
   cameraDespawnDisatance: 20
   fadeOutLifeTime: 1
   defaultPlaneSpeed: 6.5

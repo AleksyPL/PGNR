@@ -65,13 +65,8 @@ public class UIManager : MonoBehaviour
     {
         flightControllerScript = GetComponent<FlightController>();
         pauseScreenEnabled = false;
-        if(flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayer)
-        {
-            regularHUDYearPlayerTwoGameObject = null;
-            regularHUDLevelProgressPlayerTwoGameObject = null;
-            regularHUDScorePlayerTwoGameObject = null;
-            regularHUDBottlesPlayerTwoGameObject = null;
-        }
+        if (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayer)
+            MoveUiElementsSinglePlayer();
     }
     void Update()
     {
@@ -93,7 +88,8 @@ public class UIManager : MonoBehaviour
             {
                 EnablePauseScreen();
                 bottleWarningPlayerOne = flightControllerScript.gameModeScript.playerOnePlane.attackKeyPressed;
-                bottleWarningPlayerTwo = flightControllerScript.gameModeScript.playerTwoPlane.attackKeyPressed;
+                if(flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer)
+                    bottleWarningPlayerTwo = flightControllerScript.gameModeScript.playerTwoPlane.attackKeyPressed;
             }
             else if (pauseScreenEnabled && pauseScreenGameObject.activeSelf && flightControllerScript.inputManagerScript.ESCpressed)
                 DisablePauseScreen();
@@ -102,6 +98,17 @@ public class UIManager : MonoBehaviour
             UpdateTimer();
         if (activeBottleWarningMainGameObject)
             UpdateBottleWarning();
+    }
+    private void MoveUiElementsSinglePlayer()
+    {
+        gameSummaryPlayerOneIndicator.SetActive(false);
+        gameSummaryPlayerTwoIndicator.SetActive(false);
+        gameSummaryBottlesPlayerOneGameObject.GetComponent<RectTransform>().position = new Vector3(gameSummaryBottlesPlayerOneGameObject.GetComponent<RectTransform>().position.x + 75, gameSummaryBottlesPlayerOneGameObject.GetComponent<RectTransform>().position.y, gameSummaryBottlesPlayerOneGameObject.GetComponent<RectTransform>().position.z);
+        gameSummaryScorePlayerOneGameObject.GetComponent<RectTransform>().position = new Vector3(gameSummaryScorePlayerOneGameObject.GetComponent<RectTransform>().position.x + 75, gameSummaryScorePlayerOneGameObject.GetComponent<RectTransform>().position.y, gameSummaryScorePlayerOneGameObject.GetComponent<RectTransform>().position.z);
+        gameSummaryYearPlayerOneGameObject.GetComponent<RectTransform>().position = new Vector3(gameSummaryYearPlayerOneGameObject.GetComponent<RectTransform>().position.x + 75, gameSummaryYearPlayerOneGameObject.GetComponent<RectTransform>().position.y, gameSummaryYearPlayerOneGameObject.GetComponent<RectTransform>().position.z);
+        gameSummaryBottlesTitle.GetComponent<RectTransform>().position = new Vector3(gameSummaryBottlesTitle.GetComponent<RectTransform>().position.x + 75, gameSummaryBottlesTitle.GetComponent<RectTransform>().position.y, gameSummaryBottlesTitle.GetComponent<RectTransform>().position.z);
+        gameSummaryScoreTitle.GetComponent<RectTransform>().position = new Vector3(gameSummaryScoreTitle.GetComponent<RectTransform>().position.x + 75, gameSummaryScoreTitle.GetComponent<RectTransform>().position.y, gameSummaryScoreTitle.GetComponent<RectTransform>().position.z);
+        gameSummaryYearTitle.GetComponent<RectTransform>().position = new Vector3(gameSummaryYearTitle.GetComponent<RectTransform>().position.x + 75, gameSummaryYearTitle.GetComponent<RectTransform>().position.y, gameSummaryYearTitle.GetComponent<RectTransform>().position.z);
     }
     internal void TurnOnTheTimer(float time)
     {
@@ -131,14 +138,15 @@ public class UIManager : MonoBehaviour
                 activeBottleWarningMainGameObject.SetActive(false);
                 //hack
                 flightControllerScript.gameModeScript.playerOnePlane.attackKeyPressed = Input.GetButton("Jump");
-                flightControllerScript.gameModeScript.playerTwoPlane.attackKeyPressed = Input.GetButton("Jump1");
+                if(flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer)
+                    flightControllerScript.gameModeScript.playerTwoPlane.attackKeyPressed = Input.GetButton("Jump1");
                 //endOfHack
                 if (!flightControllerScript.gameModeScript.playerOnePlane.attackKeyPressed && bottleWarningPlayerOne)
                 {
                     flightControllerScript.ThrowBottleOfVodka(flightControllerScript.gameModeScript.playerOnePlane, true);
                     bottleWarningPlayerOne = false;
                 }
-                if (!flightControllerScript.gameModeScript.playerTwoPlane.attackKeyPressed && bottleWarningPlayerTwo)
+                if (flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer && !flightControllerScript.gameModeScript.playerTwoPlane.attackKeyPressed && bottleWarningPlayerTwo)
                 {
                     flightControllerScript.ThrowBottleOfVodka(flightControllerScript.gameModeScript.playerTwoPlane, true);
                     bottleWarningPlayerTwo = false;
@@ -255,17 +263,6 @@ public class UIManager : MonoBehaviour
         fadePanelGameObject.SetActive(true);
         pauseScreenGameObject.SetActive(true);
         regularHUDMainGameObject.SetActive(false);
-        if (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayer)
-        {
-            gameSummaryPlayerOneIndicator.SetActive(false);
-            gameSummaryPlayerTwoIndicator.SetActive(false);
-            gameSummaryBottlesPlayerOneGameObject.GetComponent<RectTransform>().position = new Vector3(gameSummaryBottlesPlayerOneGameObject.GetComponent<RectTransform>().position.x + 125, gameSummaryBottlesPlayerOneGameObject.GetComponent<RectTransform>().position.y, gameSummaryBottlesPlayerOneGameObject.GetComponent<RectTransform>().position.z);
-            gameSummaryScorePlayerOneGameObject.GetComponent<RectTransform>().position = new Vector3(gameSummaryScorePlayerOneGameObject.GetComponent<RectTransform>().position.x + 125, gameSummaryScorePlayerOneGameObject.GetComponent<RectTransform>().position.y, gameSummaryScorePlayerOneGameObject.GetComponent<RectTransform>().position.z);
-            gameSummaryYearPlayerTwoGameObject.GetComponent<RectTransform>().position = new Vector3(gameSummaryYearPlayerTwoGameObject.GetComponent<RectTransform>().position.x + 125, gameSummaryYearPlayerTwoGameObject.GetComponent<RectTransform>().position.y, gameSummaryYearPlayerTwoGameObject.GetComponent<RectTransform>().position.z);
-            gameSummaryBottlesTitle.GetComponent<RectTransform>().position = new Vector3(gameSummaryBottlesTitle.GetComponent<RectTransform>().position.x + 125, gameSummaryBottlesTitle.GetComponent<RectTransform>().position.y, gameSummaryBottlesTitle.GetComponent<RectTransform>().position.z);
-            gameSummaryScoreTitle.GetComponent<RectTransform>().position = new Vector3(gameSummaryScoreTitle.GetComponent<RectTransform>().position.x + 125, gameSummaryScoreTitle.GetComponent<RectTransform>().position.y, gameSummaryScoreTitle.GetComponent<RectTransform>().position.z);
-            gameSummaryYearTitle.GetComponent<RectTransform>().position = new Vector3(gameSummaryYearTitle.GetComponent<RectTransform>().position.x + 125, gameSummaryYearTitle.GetComponent<RectTransform>().position.y, gameSummaryYearTitle.GetComponent<RectTransform>().position.z);
-        }
         flightControllerScript.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightControllerScript.audioManagerScript.SFX);
         flightControllerScript.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightControllerScript.audioManagerScript.oneLinersSounds);
         flightControllerScript.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightControllerScript.audioManagerScript.hitReactionSounds);
@@ -276,6 +273,8 @@ public class UIManager : MonoBehaviour
     internal void EnableGameOverScreen()
     {
         UpdatePauseScreenHUD();
+        TurnOffColorPanel(colorPanelPlayerOneGameObject);
+        TurnOffColorPanel(colorPanelPlayerTwoGameObject);
         pauseScreenTitleGameObject.GetComponentInChildren<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].pauseScreenGameOverMainTitle;
         pauseScreenRegularButtonsGameObject.SetActive(false);
         gameOverScreenButtonsGameObject.SetActive(true);

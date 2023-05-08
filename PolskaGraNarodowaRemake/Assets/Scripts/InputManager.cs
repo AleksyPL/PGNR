@@ -28,7 +28,7 @@ public class InputManager : MonoBehaviour
             flightControllerScript.gameModeScript.playerTwoPlane.attackKeyPressed = Input.GetButton("Jump1");
             flightControllerScript.gameModeScript.playerTwoPlane.attackKeyReleased = Input.GetButtonUp("Jump1");
         }
-        if(flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer && (flightControllerScript.gameModeScript.playerOnePlane.currentPlaneState != PlaneState.crashed || flightControllerScript.gameModeScript.playerTwoPlane.currentPlaneState != PlaneState.crashed))
+        if((flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayer && flightControllerScript.gameModeScript.playerOnePlane.currentPlaneState != PlaneState.crashed) || (flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer && (flightControllerScript.gameModeScript.playerOnePlane.currentPlaneState != PlaneState.crashed || flightControllerScript.gameModeScript.playerTwoPlane.currentPlaneState != PlaneState.crashed)))
         {
             ESCpressed = Input.GetButtonDown("Cancel");
         }

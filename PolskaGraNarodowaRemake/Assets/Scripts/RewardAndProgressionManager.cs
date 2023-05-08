@@ -14,7 +14,6 @@ public class RewardAndProgressionManager : MonoBehaviour
     internal int totalBottlesDrunkPlayerOne;
     internal int totalBottlesDrunkPlayerTwo;
     internal bool toNewLevel;
-    internal float waitingTimeAfterLandingCurrent;
     internal float waitingTimeAfterLandingCombinedWithSoundLength;
     void Start()
     {
@@ -56,32 +55,33 @@ public class RewardAndProgressionManager : MonoBehaviour
     {
         levelCounter = 1;
         levelProgressPlayerOneCounter = 0;
-        levelProgressPlayerTwoCounter = 0;
         scorePointsCounterPlayerOneCounter = 0;
-        scorePointsCounterPlayerTwoCounter = 0;
+        flightControllerScript.gameModeScript.someoneWon = false;
         flightControllerScript.gameModeScript.playerOnePlane.gameScore = 0;
         flightControllerScript.gameModeScript.playerOnePlane.ResetPlaneData();
+        flightControllerScript.uiManagerScript.TurnOffColorPanel(flightControllerScript.uiManagerScript.colorPanelPlayerOneGameObject);
         if(flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer)
         {
             flightControllerScript.gameModeScript.playerTwoPlane.gameScore = 0;
             flightControllerScript.gameModeScript.playerTwoPlane.ResetPlaneData();
+            levelProgressPlayerTwoCounter = 0;
+            scorePointsCounterPlayerTwoCounter = 0;
+            flightControllerScript.uiManagerScript.TurnOffColorPanel(flightControllerScript.uiManagerScript.colorPanelPlayerTwoGameObject);
         }
-        flightControllerScript.gameModeScript.someoneWon = false;
         flightControllerScript.uiManagerScript.DisableOptionsMenu();
         flightControllerScript.uiManagerScript.DisableGameOverScreen();
         flightControllerScript.uiManagerScript.DisablePauseScreen();
-        flightControllerScript.uiManagerScript.TurnOffColorPanel(flightControllerScript.uiManagerScript.colorPanelPlayerOneGameObject);
-        if(flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer)
-            flightControllerScript.uiManagerScript.TurnOffColorPanel(flightControllerScript.uiManagerScript.colorPanelPlayerTwoGameObject);
         flightControllerScript.uiManagerScript.TurnOffTheTimer();
-        waitingTimeAfterLandingCurrent = 0;
         flightControllerScript.levelManagerScript.LoadLevel();
     }
     void Update()
     {
         CalculateScore(flightControllerScript.gameModeScript.playerOnePlane, ref scorePointsCounterPlayerOneCounter);
-        CalculateScore(flightControllerScript.gameModeScript.playerTwoPlane, ref scorePointsCounterPlayerTwoCounter);
         CalculateLevelProgress(flightControllerScript.gameModeScript.playerOnePlane, ref levelProgressPlayerOneCounter);
-        CalculateLevelProgress(flightControllerScript.gameModeScript.playerTwoPlane, ref levelProgressPlayerTwoCounter);
+        if(flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer)
+        {
+            CalculateScore(flightControllerScript.gameModeScript.playerTwoPlane, ref scorePointsCounterPlayerTwoCounter);
+            CalculateLevelProgress(flightControllerScript.gameModeScript.playerTwoPlane, ref levelProgressPlayerTwoCounter);
+        }
     }
 }

@@ -29,12 +29,15 @@ public class GameModeManager : MonoBehaviour
     private void OnEnable()
     {
         Application.targetFrameRate = 144;
-    }
-    private void Start()
-    {
         flightController = GetComponent<FlightController>();
         playerOnePlane.LoadPlaneData(0);
-        playerTwoPlane.LoadPlaneData(1);
+        if (currentGameMode != GameMode.singleplayer)
+        {
+            playerTwoPlane.LoadPlaneData(1);
+            flightController.gameplaySettings.cameraPositionXOffset = flightController.gameplaySettings.cameraPositionXOffsetMulti;
+        }
+        else
+            flightController.gameplaySettings.cameraPositionXOffset = flightController.gameplaySettings.cameraPositionXOffsetSingle;
         waitingTimeForOneLinerCurrent = 0;
         someoneWon = false;
     }
@@ -42,9 +45,10 @@ public class GameModeManager : MonoBehaviour
     {
         if(currentGameMode == GameMode.singleplayer)
         {
-            if (playerOneState != PlayerState.crashed)
+            if (playerOneState == PlayerState.crashed)
             {
                 flightController.uiManagerScript.TurnOnColorPanel(flightController.uiManagerScript.colorPanelPlayerOneGameObject, flightController.uiManagerScript.loseColor);
+                flightController.uiManagerScript.TurnOnColorPanel(flightController.uiManagerScript.colorPanelPlayerTwoGameObject, flightController.uiManagerScript.loseColor);
                 flightController.uiManagerScript.SetTheTextOnTheColorPanel(flightController.uiManagerScript.colorPanelPlayerOneGameObject, flightController.uiManagerScript.gameplaySettings.localizationsStrings[flightController.uiManagerScript.gameplaySettings.langauageIndex].colorPanelPlayerLosesSinglePlayer);
                 flightController.audioManagerScript.StopPlayingSound("EngineSound", flightController.audioManagerScript.SFX);
                 flightController.audioManagerScript.StopPlayingSoundsFromTheSpecificSoundBank(flightController.audioManagerScript.oneLinersSounds);

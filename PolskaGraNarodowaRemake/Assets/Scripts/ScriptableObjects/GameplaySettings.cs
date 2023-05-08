@@ -37,8 +37,10 @@ public class GameplaySettings : ScriptableObject
     public int rewardForHittingATarget;
     public int rewardPerSecond;
     [Header("Camera Manager Settings")]
-    public float cameraPositionXOffset;
+    public float cameraPositionXOffsetSingle;
+    public float cameraPositionXOffsetMulti;
     public float cameraDespawnDisatance;
+    internal float cameraPositionXOffset;
     [Header("Fade Out Tool Settings")]
     public float fadeOutLifeTime;
     [Header("Flight Controller Settings")]

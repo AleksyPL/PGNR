@@ -15,15 +15,19 @@ public class LevelManager : MonoBehaviour
     private float distanceBetweenPlayers;
     private int numberOfObstacles;
 
-    void Start()
+    void OnEnable()
     {
         flightControllerScript = GetComponent<FlightController>();
-        CalculatePlayerBoundries(flightControllerScript.gameModeScript.playerOnePlane);
-        CalculatePlayerBoundries(flightControllerScript.gameModeScript.playerTwoPlane);
-        distanceBetweenPlayers = Vector2.Distance(new Vector2(flightControllerScript.gameModeScript.playerOnePlane.groundLevelHeight, 0), new Vector2(flightControllerScript.gameModeScript.playerTwoPlane.groundLevelHeight, 0));
+        CalculatePlayerBoundries(flightControllerScript.GetComponent<GameModeManager>().playerOnePlane);
+        if (flightControllerScript.GetComponent<GameModeManager>().currentGameMode != GameModeManager.GameMode.singleplayer)
+        {
+            CalculatePlayerBoundries(flightControllerScript.gameModeScript.playerTwoPlane);
+            distanceBetweenPlayers = Vector2.Distance(new Vector2(flightControllerScript.gameModeScript.playerOnePlane.groundLevelHeight, 0), new Vector2(flightControllerScript.gameModeScript.playerTwoPlane.groundLevelHeight, 0));
+        }
     }
     internal void LoadLevel()
     {
+        flightControllerScript = GetComponent<FlightController>();
         while (ObstaclesAndProjectilesGameObject.transform.childCount > 0)
             DestroyImmediate(ObstaclesAndProjectilesGameObject.transform.GetChild(0).gameObject);
         if (flightControllerScript.rewardAndProgressionManagerScript.toNewLevel)
@@ -44,12 +48,11 @@ public class LevelManager : MonoBehaviour
             flightControllerScript.audioManagerScript.PlaySound("EngineSound", flightControllerScript.audioManagerScript.SFX);
         numberOfObstacles = 1 + flightControllerScript.rewardAndProgressionManagerScript.levelCounter * 2;
         flightControllerScript.gameModeScript.playerOnePlane.planeGameObject.transform.position = new Vector3(0, (flightControllerScript.gameModeScript.playerOnePlane.topScreenHeight + flightControllerScript.gameModeScript.playerOnePlane.groundLevelHeight) / 2, 0);
-        if (flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer)
-            flightControllerScript.gameModeScript.playerTwoPlane.planeGameObject.transform.position = new Vector3(0, (flightControllerScript.gameModeScript.playerTwoPlane.topScreenHeight + flightControllerScript.gameModeScript.playerTwoPlane.groundLevelHeight) / 2, 0);
         SpawnObstacles(flightControllerScript.gameModeScript.playerOnePlane);
         if (flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer)
         {
-            if (sameObstaclesForBothPlayes)
+                flightControllerScript.gameModeScript.playerTwoPlane.planeGameObject.transform.position = new Vector3(0, (flightControllerScript.gameModeScript.playerTwoPlane.topScreenHeight + flightControllerScript.gameModeScript.playerTwoPlane.groundLevelHeight) / 2, 0);
+                if (sameObstaclesForBothPlayes)
                 CopyObstaclesFromPlayerOne();
             else
                 SpawnObstacles(flightControllerScript.gameModeScript.playerTwoPlane);
