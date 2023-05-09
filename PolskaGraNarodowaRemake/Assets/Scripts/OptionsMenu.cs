@@ -11,6 +11,7 @@ public class OptionsMenu : MonoBehaviour
     public GameObject volumeQuotesSliderGameObject;
     public GameObject languageSelectorGameObject;
     public GameObject activeLanguageGameObject;
+    public GameObject backToMainMenuButton;
     private void OnEnable()
     {
         LoadValuesFromSettings();
@@ -42,6 +43,7 @@ public class OptionsMenu : MonoBehaviour
         volumeMusicSliderGameObject.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].musicVolumeSlider;
         volumeQuotesSliderGameObject.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].quotesVolumeSlider;
         languageSelectorGameObject.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].activeLanguage;
+        backToMainMenuButton.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].backToMainMenuButton;
     }
     public void NextLanguage()
     {

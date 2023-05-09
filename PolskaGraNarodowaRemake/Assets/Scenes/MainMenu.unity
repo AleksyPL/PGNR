@@ -183,7 +183,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 70
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
@@ -656,7 +656,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 70
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
@@ -811,10 +811,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb6bac6f1db45f643b688ba6ade69b2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameplaySettings: {fileID: 11400000, guid: d338db95f60174b41bd6e219f61b651f, type: 2}
   audioManagerGameObject: {fileID: 535110958}
-  regularMenuButtons: {fileID: 1930139619}
-  optionsMenuButtons: {fileID: 578825357}
-  howToPlayPanel: {fileID: 2127317489}
+  optionsMenuGameObject: {fileID: 578825357}
+  howToPlayPanelMenuGameObject: {fileID: 2127317489}
+  menuButtonsMainGameObject: {fileID: 1930139619}
+  startSinglePlayerModeMenuButton: {fileID: 1653566685}
+  startMultiPlayerModeMenuButton: {fileID: 1771388309}
+  optionsMenuButton: {fileID: 712218396}
+  howToPlayPanelMenuButton: {fileID: 1564071925}
+  exitGameMenuButton: {fileID: 761427425}
 --- !u!1 &712218396
 GameObject:
   m_ObjectHideFlags: 0
@@ -1277,7 +1283,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 70
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
@@ -1474,6 +1480,14 @@ PrefabInstance:
       propertyPath: mySettings
       value: 
       objectReference: {fileID: 11400000, guid: d338db95f60174b41bd6e219f61b651f, type: 2}
+    - target: {fileID: 5961415093726692383, guid: 03ef519fc35c46a4eaadc7545d8d0dca, type: 3}
+      propertyPath: gameplaySettings
+      value: 
+      objectReference: {fileID: 11400000, guid: d338db95f60174b41bd6e219f61b651f, type: 2}
+    - target: {fileID: 5961415093726692383, guid: 03ef519fc35c46a4eaadc7545d8d0dca, type: 3}
+      propertyPath: UIManagerGameObject
+      value: 
+      objectReference: {fileID: 649934967}
     - target: {fileID: 5961415093726692383, guid: 03ef519fc35c46a4eaadc7545d8d0dca, type: 3}
       propertyPath: optionsMenuGameObject
       value: 
@@ -1675,7 +1689,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 70
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
@@ -1819,7 +1833,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 649934972}
         m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
-        m_MethodName: StartGame
+        m_MethodName: StartGameSinglePlayer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2033,7 +2047,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 649934972}
         m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: StartGameMultiPlayer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2352,7 +2366,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 70
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
@@ -2632,6 +2646,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 649934972}
+    - target: {fileID: 133455585484151061, guid: d106925ab1a24b74d9f8dcd8bb083c05, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: DisableOptionsMenu
+      objectReference: {fileID: 0}
     - target: {fileID: 133455585684772007, guid: d106925ab1a24b74d9f8dcd8bb083c05, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1

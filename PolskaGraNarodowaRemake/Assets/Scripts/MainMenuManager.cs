@@ -2,31 +2,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenuManager : MonoBehaviour
 {
-    public GameObject audioManagerGameObject;
     internal AudioManager audioScript;
-    public GameObject regularMenuButtons;
-    public GameObject optionsMenuButtons;
-    public GameObject howToPlayPanel;
+    public GameplaySettings gameplaySettings;
+    public GameObject audioManagerGameObject;
+    public GameObject optionsMenuGameObject;
+    public GameObject howToPlayPanelMenuGameObject;
+    public GameObject menuButtonsMainGameObject;
+    //buttons
+    public GameObject startSinglePlayerModeMenuButton;
+    public GameObject startMultiPlayerModeMenuButton;
+    public GameObject optionsMenuButton;
+    public GameObject howToPlayPanelMenuButton;
+    public GameObject exitGameMenuButton;
     void Start()
     {
         Application.targetFrameRate = 144;
         audioScript = audioManagerGameObject.GetComponent<AudioManager>();
         audioScript.PlaySound("MainMenuTheme", audioScript.otherSounds);
-        regularMenuButtons.SetActive(true);
+        menuButtonsMainGameObject.SetActive(true);
+        startSinglePlayerModeMenuButton.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuButton0;
+        startMultiPlayerModeMenuButton.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuButton1;
+        howToPlayPanelMenuButton.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuButton2;
+        optionsMenuButton.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuButton3;
+        exitGameMenuButton.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuButton4;
     }
     private void Update()
     {
-        if(optionsMenuButtons.activeSelf && Input.GetButtonDown("Cancel"))
+        if(optionsMenuButton.activeSelf && Input.GetButtonDown("Cancel"))
             DisableOptionsMenu();
-        else if (howToPlayPanel.activeSelf && Input.GetButtonDown("Cancel"))
+        else if (howToPlayPanelMenuButton.activeSelf && Input.GetButtonDown("Cancel"))
             DisableHowToPlayPanel();
     }
-    public void StartGame()
+    public void StartGameSinglePlayer()
     {
         SceneManager.LoadScene("SinglePlayerMode");
+    }
+    public void StartGameMultiPlayer()
+    {
+        SceneManager.LoadScene("VersusMode");
     }
     public void QuitGame()
     {
@@ -34,22 +51,22 @@ public class MainMenuManager : MonoBehaviour
     }
     public void EnableOptionsMenu()
     {
-        regularMenuButtons.SetActive(false);
-        optionsMenuButtons.SetActive(true);
+        menuButtonsMainGameObject.SetActive(false);
+        optionsMenuGameObject.SetActive(true);
     }
     public void DisableOptionsMenu()
     {
-        regularMenuButtons.SetActive(true);
-        optionsMenuButtons.SetActive(false);
+        menuButtonsMainGameObject.SetActive(true);
+        optionsMenuGameObject.SetActive(false);
     }
     public void EnableHowToPlayPanel()
     {
-        regularMenuButtons.SetActive(false);
-        howToPlayPanel.SetActive(true);
+        menuButtonsMainGameObject.SetActive(false);
+        howToPlayPanelMenuGameObject.SetActive(true);
     }
     public void DisableHowToPlayPanel()
     {
-        regularMenuButtons.SetActive(true);
-        howToPlayPanel.SetActive(false);
+        menuButtonsMainGameObject.SetActive(true);
+        howToPlayPanelMenuGameObject.SetActive(false);
     }
 }

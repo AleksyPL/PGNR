@@ -1,7 +1,7 @@
 //Main menu - Button0
 GRA KLASYCZNA
 //Main menu - Button1
-GRA PRZERZIWKO INNEMU GRACZOWI
+GRA DWUOSOBOWA
 //Main menu - Button2
 JAK GRAĆ
 //Main menu - Button3

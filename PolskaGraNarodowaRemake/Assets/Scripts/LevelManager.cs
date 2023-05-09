@@ -64,7 +64,6 @@ public class LevelManager : MonoBehaviour
     {
         float cameraH = plane.cameraGameObject.GetComponent<Camera>().orthographicSize;
         plane.topScreenHeight = plane.cameraGameObject.transform.position.y + cameraH - 1;
-        //plane.groundLevelHeight = plane.cameraGameObject.transform.position.y - cameraH + 1;
         plane.groundLevelHeight = plane.cameraGameObject.transform.Find("Ground").position.y + plane.cameraGameObject.transform.Find("Ground").GetComponent<BoxCollider2D>().size.y / 2;
     }
     private void CopyObstaclesFromPlayerOne()

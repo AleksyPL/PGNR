@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum Languages
 {
-    Polish,
+    Polski,
     English
 }
 public enum PlaneSkin
@@ -63,7 +63,7 @@ public class GameplaySettings : ScriptableObject
     public float difficultyImpulseForce;
     private void OnEnable()
     {
-        if (currentLanguage == Languages.Polish)
+        if (currentLanguage == Languages.Polski)
             langauageIndex = 0;
         else if (currentLanguage == Languages.English)
             langauageIndex = 1;
