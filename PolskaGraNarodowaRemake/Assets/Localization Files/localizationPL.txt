@@ -76,3 +76,5 @@ przegrywa
 Przegrywasz
 //Active Bottle Warning
 Rzut butelką aktywny przed zapauzowaniem gry, przytrzymaj przycisk ataku kontynuować ładowanie ataku, w przeciwnym razie butelka zostanie wystrzelona
+//Launch game
+ROZPOCZNIJ GRĘ

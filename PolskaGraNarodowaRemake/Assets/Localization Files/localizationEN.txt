@@ -76,3 +76,5 @@ loses
 You lose
 //Active Bottle Warning
 Bottle throw was active before pausing a game, hold the attack button to continue charging the attack, otherwise, the bottle will be thrown anyway
+//Launch game
+LAUNCH THE GAME

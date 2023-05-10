@@ -63,7 +63,7 @@ internal class Plane
         planeRendererScript = planeRendererGameObject.GetComponent<PlaneRenderer>();
         audioManagerScript = GameObject.Find("MasterController").GetComponent<AudioManager>();
         playerNumber = numberOfThePlayer;
-        planeRendererScript.planeSkin = gameplaySettings.planeSkins[playerNumber];
+        planeRendererScript.planeSkin = gameplaySettings.planeSkins[gameplaySettings.playersPlaneSkins[playerNumber]];
         planeRendererScript.LoadPlaneSkin();
         gameScore = 0;
         ResetPlaneData();

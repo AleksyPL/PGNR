@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlaneRenderer : MonoBehaviour
 {
-    internal SkinManager planeSkin;
+    internal PlaneSkin planeSkin;
     internal void LoadPlaneSkin()
     {
         this.GetComponent<SpriteRenderer>().sprite = planeSkin.planeWithoutWheels;

@@ -21,6 +21,7 @@ public class Localization : ScriptableObject
     internal string playerOneIndicator;
     internal string playerTwoIndicator;
     internal string backToMainMenuButton;
+    internal string launchGameButton;
     //options
     internal string sfxVolumeSlider;
     internal string musicVolumeSlider;
@@ -110,6 +111,7 @@ public class Localization : ScriptableObject
             colorPanelPlayerLoses = listOfAll[73];
             colorPanelPlayerLosesSinglePlayer = listOfAll[75];
             activeBottleWarning = listOfAll[77];
+            launchGameButton = listOfAll[79];
         }
     }
 }

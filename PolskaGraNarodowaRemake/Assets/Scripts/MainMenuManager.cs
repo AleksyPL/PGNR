@@ -4,14 +4,23 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+public enum GameMode
+{
+    SinglePlayerClassic,
+    VersusClassic
+}
+
 public class MainMenuManager : MonoBehaviour
 {
     internal AudioManager audioScript;
+    internal PlaneSkinSelector planeSkinSelectorScript;
+    public GameMode currentGameMode;
     public GameplaySettings gameplaySettings;
     public GameObject audioManagerGameObject;
     public GameObject optionsMenuGameObject;
     public GameObject howToPlayPanelMenuGameObject;
     public GameObject menuButtonsMainGameObject;
+    public GameObject skinSelectorMenuGameObject;
     //buttons
     public GameObject startSinglePlayerModeMenuButton;
     public GameObject startMultiPlayerModeMenuButton;
@@ -21,6 +30,8 @@ public class MainMenuManager : MonoBehaviour
     void Start()
     {
         Application.targetFrameRate = 144;
+        currentGameMode = GameMode.SinglePlayerClassic;
+        planeSkinSelectorScript = GetComponent<PlaneSkinSelector>();
         audioScript = audioManagerGameObject.GetComponent<AudioManager>();
         audioScript.PlaySound("MainMenuTheme", audioScript.otherSounds);
         menuButtonsMainGameObject.SetActive(true);
@@ -68,5 +79,28 @@ public class MainMenuManager : MonoBehaviour
     {
         menuButtonsMainGameObject.SetActive(true);
         howToPlayPanelMenuGameObject.SetActive(false);
+    }
+    public void EnableSkinSelectorMenu(int newGameMode)
+    {
+        if (newGameMode == 0)
+            currentGameMode = GameMode.SinglePlayerClassic;
+        else if (newGameMode == 1)
+            currentGameMode = GameMode.VersusClassic;
+        menuButtonsMainGameObject.SetActive(false);
+        skinSelectorMenuGameObject.SetActive(true);
+        planeSkinSelectorScript.UpdateUIElements();
+    }
+    public void DisableSkinSelectorMenu()
+    {
+        menuButtonsMainGameObject.SetActive(true);
+        skinSelectorMenuGameObject.SetActive(false);
+        gameplaySettings.ResetPlayerSkins();
+    }
+    public void LaunchTheGame()
+    {
+        if (currentGameMode == GameMode.SinglePlayerClassic)
+            StartGameSinglePlayer();
+        else if (currentGameMode == GameMode.VersusClassic)
+            StartGameMultiPlayer();
     }
 }

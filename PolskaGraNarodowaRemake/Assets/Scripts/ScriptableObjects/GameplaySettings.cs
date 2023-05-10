@@ -7,11 +7,6 @@ public enum Languages
     Polski,
     English
 }
-public enum PlaneSkin
-{
-    Polish,
-    American
-}
 
 [CreateAssetMenu(menuName ="ScriptableObjects/GameplaySettings")]
 public class GameplaySettings : ScriptableObject
@@ -20,11 +15,9 @@ public class GameplaySettings : ScriptableObject
     public Languages currentLanguage;
     internal int langauageIndex;
     public Localization[] localizationsStrings;
-    [Header("Plane Skins")]
-    public PlaneSkin currentPlayerOnePlaneSkin;
-    public PlaneSkin currentPlayerTwoPlaneSkin;
+    [Header("Skins Settings")]
+    public PlaneSkin[] planeSkins;
     internal int [] playersPlaneSkins = new int[2];
-    public SkinManager[] planeSkins;
     [Header("Audio Settings")]
     public float volumeSFX;
     public float volumeQuotes;
@@ -67,13 +60,11 @@ public class GameplaySettings : ScriptableObject
             langauageIndex = 0;
         else if (currentLanguage == Languages.English)
             langauageIndex = 1;
-        if (currentPlayerOnePlaneSkin == PlaneSkin.Polish)
-            playersPlaneSkins[0] = 0;
-        else if (currentPlayerOnePlaneSkin == PlaneSkin.American)
-            playersPlaneSkins[0] = 1;
-        if (currentPlayerTwoPlaneSkin == PlaneSkin.Polish)
-            playersPlaneSkins[1] = 0;
-        else if (currentPlayerTwoPlaneSkin == PlaneSkin.American)
-            playersPlaneSkins[1] = 1;
+        ResetPlayerSkins();
+    }
+    internal void ResetPlayerSkins()
+    {
+        playersPlaneSkins[0] = 0;
+        playersPlaneSkins[1] = 1;
     }
 }

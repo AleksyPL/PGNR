@@ -16,3 +16,6 @@ MonoBehaviour:
   planeWithHoles: {fileID: 21300000, guid: da7e4123cbe21fb4eb6b3abe920729c0, type: 3}
   planeWithWheels: {fileID: 21300000, guid: b6893fa2a49377940938cae5bcca7729, type: 3}
   planeCrashed: {fileID: 21300000, guid: c3d875509baf7c9418348ddbf4379e15, type: 3}
+  skinName:
+  - USA
+  - USA
