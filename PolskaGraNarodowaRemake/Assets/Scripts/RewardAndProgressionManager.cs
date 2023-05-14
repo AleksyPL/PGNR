@@ -7,6 +7,8 @@ public class RewardAndProgressionManager : MonoBehaviour
     internal FlightController flightControllerScript;
     internal int levelCounter;
     internal float currentlevelDistance;
+    internal float levelSafeSpace;
+    internal float levelLandingSpace;
     internal float levelProgressPlayerOneCounter;
     internal float levelProgressPlayerTwoCounter;
     private float scorePointsCounterPlayerOneCounter;
@@ -14,15 +16,13 @@ public class RewardAndProgressionManager : MonoBehaviour
     internal int totalBottlesDrunkPlayerOne;
     internal int totalBottlesDrunkPlayerTwo;
     internal bool toNewLevel;
-    internal float waitingTimeAfterLandingCombinedWithSoundLength;
     void Start()
     {
         flightControllerScript = GetComponent<FlightController>();
-        currentlevelDistance = 100 + levelCounter * 10;
+        currentlevelDistance = 100;
+        levelSafeSpace = 10;
+        levelLandingSpace = 30;
         toNewLevel = false;
-        if (flightControllerScript.gameplaySettings.waitingTimeAfterLanding <= 0)
-            flightControllerScript.gameplaySettings.waitingTimeAfterLanding = 3f;
-        waitingTimeAfterLandingCombinedWithSoundLength = flightControllerScript.gameplaySettings.waitingTimeAfterLanding;
         RestartGame();
     }
     private void CalculateScore(Plane plane, ref float counter)
@@ -41,11 +41,11 @@ public class RewardAndProgressionManager : MonoBehaviour
     {
         if (plane.currentPlaneSpeed > 0 && plane.currentPlaneState == PlaneState.standard)
         {
-            if (counter < currentlevelDistance)
+            if (counter < currentlevelDistance + levelSafeSpace)
                 counter += plane.currentPlaneSpeed * Time.deltaTime;
-            if (counter >= currentlevelDistance)
+            if (counter >= currentlevelDistance + levelSafeSpace)
             {
-                counter = currentlevelDistance;
+                counter = currentlevelDistance + levelSafeSpace;
                 plane.currentPlaneState = PlaneState.wheelsOn;
                 plane.planeRendererScript.ChangePlaneSprite(PlaneState.wheelsOn);
             }
@@ -60,7 +60,7 @@ public class RewardAndProgressionManager : MonoBehaviour
         flightControllerScript.gameModeScript.playerOnePlane.gameScore = 0;
         flightControllerScript.gameModeScript.playerOnePlane.ResetPlaneData();
         flightControllerScript.uiManagerScript.TurnOffColorPanel(flightControllerScript.uiManagerScript.colorPanelPlayerOneGameObject);
-        if(flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer)
+        if(flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerClassic && flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerEndless)
         {
             flightControllerScript.gameModeScript.playerTwoPlane.gameScore = 0;
             flightControllerScript.gameModeScript.playerTwoPlane.ResetPlaneData();
@@ -72,16 +72,30 @@ public class RewardAndProgressionManager : MonoBehaviour
         flightControllerScript.uiManagerScript.DisableGameOverScreen();
         flightControllerScript.uiManagerScript.DisablePauseScreen();
         flightControllerScript.uiManagerScript.TurnOffTheTimer();
+        flightControllerScript.levelManagerScript.numberOfObstacles = 3;
+        flightControllerScript.levelManagerScript.numberOfFogInstances = 0;
         flightControllerScript.levelManagerScript.LoadLevel();
     }
     void Update()
     {
-        CalculateScore(flightControllerScript.gameModeScript.playerOnePlane, ref scorePointsCounterPlayerOneCounter);
-        CalculateLevelProgress(flightControllerScript.gameModeScript.playerOnePlane, ref levelProgressPlayerOneCounter);
-        if(flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer)
+        if (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerClassic)
         {
+            CalculateScore(flightControllerScript.gameModeScript.playerOnePlane, ref scorePointsCounterPlayerOneCounter);
+            CalculateLevelProgress(flightControllerScript.gameModeScript.playerOnePlane, ref levelProgressPlayerOneCounter);
+        }
+        else if (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerEndless)
+            CalculateScore(flightControllerScript.gameModeScript.playerOnePlane, ref scorePointsCounterPlayerOneCounter);
+        else if (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusClassic)
+        {
+            CalculateScore(flightControllerScript.gameModeScript.playerOnePlane, ref scorePointsCounterPlayerOneCounter);
+            CalculateLevelProgress(flightControllerScript.gameModeScript.playerOnePlane, ref levelProgressPlayerOneCounter);
             CalculateScore(flightControllerScript.gameModeScript.playerTwoPlane, ref scorePointsCounterPlayerTwoCounter);
             CalculateLevelProgress(flightControllerScript.gameModeScript.playerTwoPlane, ref levelProgressPlayerTwoCounter);
+        }
+        else if (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusEndless)
+        {
+            CalculateScore(flightControllerScript.gameModeScript.playerOnePlane, ref scorePointsCounterPlayerOneCounter);
+            CalculateScore(flightControllerScript.gameModeScript.playerTwoPlane, ref scorePointsCounterPlayerTwoCounter);
         }
     }
 }

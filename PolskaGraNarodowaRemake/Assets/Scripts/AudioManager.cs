@@ -24,7 +24,6 @@ public class AudioManager : MonoBehaviour
         LoadSounds(landingSounds);
         LoadSounds(SFX);
         LoadSounds(otherSounds);
-        PlaySound("TopGunTheme", otherSounds);
         if (gameplaySettings.waitingTimeForOneLiner == 0)
             gameplaySettings.waitingTimeForOneLiner = 5f;
         lastPlayedLandingSound = -1;

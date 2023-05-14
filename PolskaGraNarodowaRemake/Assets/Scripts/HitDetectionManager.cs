@@ -52,6 +52,21 @@ public class HitDetectionManager : MonoBehaviour
                     transform.gameObject.GetComponent<FadeOutTool>().enabled = true;
                 gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).DamageThePlane();
             }
+            else if(transform.name == "SpawnNewObjects")
+            {
+                //ENDLESS MODE IMPORTANT
+                gameModeManagerScript.flightController.rewardAndProgressionManagerScript.levelSafeSpace = 0;
+                foreach (Transform child in gameModeManagerScript.flightController.levelManagerScript.ObstaclesAndProjectilesGameObject.transform)
+                {
+                    if (child != transform && child.transform.name == "SpawnNewObjects")
+                        Destroy(child.gameObject);
+                }
+                gameModeManagerScript.flightController.levelManagerScript.obstacleSectorWidth = gameModeManagerScript.flightController.levelManagerScript.numberOfObstacles / gameModeManagerScript.flightController.rewardAndProgressionManagerScript.currentlevelDistance;
+                gameModeManagerScript.flightController.levelManagerScript.SpawnObstacles(gameModeManagerScript.playerOnePlane, (float)(gameModeManagerScript.flightController.levelManagerScript.obstacleSectorWidth / 2 + gameModeManagerScript.flightController.rewardAndProgressionManagerScript.currentlevelDistance));
+                //if (gameModeManagerScript.currentGameMode == GameModeManager.GameMode.versusEndless)
+                //    gameModeManagerScript.flightController.levelManagerScript.CopyObstaclesFromOnePlayerToAnother(gameModeManagerScript.flightController.levelManagerScript.ObstaclesBufferGameObject, gameModeManagerScript.ReturnAPlaneObject(collision.gameObject));
+                Destroy(transform.gameObject);
+            }
         }
         else if(collision.gameObject.CompareTag("Obstacle") && transform.tag == "KillPlane")
         {

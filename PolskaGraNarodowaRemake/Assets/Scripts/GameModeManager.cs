@@ -6,8 +6,10 @@ public class GameModeManager : MonoBehaviour
 {
     public enum GameMode
     {
-        singleplayer,
-        versus
+        singleplayerClassic,
+        singleplayerEndless,
+        versusClassic,
+        versusEndless
     }
     internal enum PlayerState
     {
@@ -31,7 +33,7 @@ public class GameModeManager : MonoBehaviour
         Application.targetFrameRate = 144;
         flightController = GetComponent<FlightController>();
         playerOnePlane.LoadPlaneData(0);
-        if (currentGameMode != GameMode.singleplayer)
+        if (currentGameMode != GameMode.singleplayerClassic && currentGameMode != GameMode.singleplayerEndless)
         {
             playerTwoPlane.LoadPlaneData(1);
             flightController.gameplaySettings.cameraPositionXOffset = flightController.gameplaySettings.cameraPositionXOffsetMulti;
@@ -43,7 +45,7 @@ public class GameModeManager : MonoBehaviour
     }
     private void CalculateWiningAndLosing(float gameOverTimer)
     {
-        if(currentGameMode == GameMode.singleplayer)
+        if(currentGameMode == GameMode.singleplayerClassic || currentGameMode == GameMode.singleplayerEndless)
         {
             if (playerOneState == PlayerState.crashed)
             {
@@ -98,7 +100,7 @@ public class GameModeManager : MonoBehaviour
     }
     private void CheckAndPlayOneLinerSound()
     {
-        if ((currentGameMode == GameMode.singleplayer && playerOneState == PlayerState.flying) || (currentGameMode == GameMode.versus && playerOneState == PlayerState.flying && playerTwoState == PlayerState.flying))
+        if (((currentGameMode == GameMode.singleplayerClassic || currentGameMode == GameMode.singleplayerEndless) && playerOneState == PlayerState.flying) || ((currentGameMode == GameMode.versusClassic || currentGameMode == GameMode.versusEndless) && playerOneState == PlayerState.flying && playerTwoState == PlayerState.flying))
         {
             waitingTimeForOneLinerCurrent += Time.deltaTime;
             if (waitingTimeForOneLinerCurrent >= flightController.gameplaySettings.waitingTimeForOneLiner)
@@ -111,18 +113,21 @@ public class GameModeManager : MonoBehaviour
     private void Update()
     {
         SetProgressionFlags(playerOnePlane);
-        if (currentGameMode != GameMode.singleplayer)
+        if (currentGameMode != GameMode.singleplayerClassic && currentGameMode != GameMode.singleplayerEndless)
             SetProgressionFlags(playerTwoPlane);
         CheckAndPlayOneLinerSound();
-        if(!flightController.rewardAndProgressionManagerScript.toNewLevel && ((currentGameMode == GameMode.singleplayer && playerOneState == PlayerState.landed) || (currentGameMode == GameMode.versus && playerOneState == PlayerState.landed && playerTwoState == PlayerState.landed)))
+        if(!flightController.rewardAndProgressionManagerScript.toNewLevel && (((currentGameMode == GameMode.singleplayerClassic || currentGameMode == GameMode.singleplayerEndless) && playerOneState == PlayerState.landed) || ((currentGameMode == GameMode.versusClassic || currentGameMode == GameMode.versusEndless) && playerOneState == PlayerState.landed && playerTwoState == PlayerState.landed)))
         {
             flightController.rewardAndProgressionManagerScript.toNewLevel = true;
             playerOneState = PlayerState.flying;
-            if (currentGameMode != GameMode.singleplayer)
+            if (currentGameMode != GameMode.singleplayerClassic && currentGameMode != GameMode.singleplayerEndless)
                 playerTwoState = PlayerState.flying;
             flightController.audioManagerScript.StopPlayingSoundsFromTheSpecificSoundBank(flightController.audioManagerScript.oneLinersSounds);
             flightController.audioManagerScript.DrawAndPlayASound(flightController.audioManagerScript.landingSounds, "Landing", ref flightController.audioManagerScript.lastPlayedLandingSound);
-            flightController.uiManagerScript.TurnOnTheTimer(flightController.audioManagerScript.ReturnSoundDuration("Landing" + flightController.audioManagerScript.lastPlayedLandingSound, flightController.audioManagerScript.landingSounds) + flightController.gameplaySettings.waitingTimeAfterLanding);
+            if (flightController.audioManagerScript.ReturnSoundDuration("Landing" + flightController.audioManagerScript.lastPlayedLandingSound, flightController.audioManagerScript.landingSounds) > 5f)
+                flightController.uiManagerScript.TurnOnTheTimer(flightController.audioManagerScript.ReturnSoundDuration("Landing" + flightController.audioManagerScript.lastPlayedLandingSound, flightController.audioManagerScript.landingSounds));
+            else
+                flightController.uiManagerScript.TurnOnTheTimer(5f);
         }
     }
     private void SetProgressionFlags(Plane plane)

@@ -16,7 +16,7 @@ public class DifficultyManager : MonoBehaviour
         difficultyImpulsTimeMax = 2 * difficultyImpulsTimeMin;
         flightControllerScript.gameModeScript.playerOnePlane.difficultyImpulsTimeCurrent = Random.Range(difficultyImpulsTimeMin, difficultyImpulsTimeMax);
         flightControllerScript.gameModeScript.playerOnePlane.difficultuImpulseCounter = flightControllerScript.gameModeScript.playerOnePlane.difficultyImpulsTimeCurrent;
-        if (flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer)
+        if (flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerClassic && flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerEndless)
         {
             flightControllerScript.gameModeScript.playerTwoPlane.difficultyImpulsTimeCurrent = Random.Range(difficultyImpulsTimeMin, difficultyImpulsTimeMax);
             flightControllerScript.gameModeScript.playerTwoPlane.difficultuImpulseCounter = flightControllerScript.gameModeScript.playerTwoPlane.difficultyImpulsTimeCurrent;
@@ -27,7 +27,7 @@ public class DifficultyManager : MonoBehaviour
     {
         if(flightControllerScript.gameModeScript.playerOnePlane.currentPlaneState == PlaneState.standard || (flightControllerScript.gameModeScript.playerOnePlane.currentPlaneState == PlaneState.wheelsOn && !flightControllerScript.gameModeScript.playerOnePlane.isTouchingAirport))
             ApplyDifficultyImpulse(flightControllerScript.gameModeScript.playerOnePlane);
-        if(flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer && (flightControllerScript.gameModeScript.playerTwoPlane.currentPlaneState == PlaneState.standard || (flightControllerScript.gameModeScript.playerTwoPlane.currentPlaneState == PlaneState.wheelsOn && !flightControllerScript.gameModeScript.playerTwoPlane.isTouchingAirport)))
+        if((flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerClassic && flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerEndless) && (flightControllerScript.gameModeScript.playerTwoPlane.currentPlaneState == PlaneState.standard || (flightControllerScript.gameModeScript.playerTwoPlane.currentPlaneState == PlaneState.wheelsOn && !flightControllerScript.gameModeScript.playerTwoPlane.isTouchingAirport)))
             ApplyDifficultyImpulse(flightControllerScript.gameModeScript.playerTwoPlane);
     }
     internal void ApplyDifficultyImpulse(Plane plane)

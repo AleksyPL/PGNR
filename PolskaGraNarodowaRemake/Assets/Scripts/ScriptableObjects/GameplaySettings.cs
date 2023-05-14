@@ -41,7 +41,6 @@ public class GameplaySettings : ScriptableObject
     public float altitudeChangeForce;
     public float fallingForce;
     public float airportSlowingForce;
-    public float waitingTimeAfterLanding;
     public float timeToFullyChargeBottleThrow;
     public float bottleThrowForceMin;
     public float bottleThrowForceMax;

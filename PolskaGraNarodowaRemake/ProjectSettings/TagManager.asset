@@ -8,6 +8,8 @@ TagManager:
   - Ground
   - Obstacle
   - Plane
+  - KillPlane
+  - Vodka
   layers:
   - Default
   - TransparentFX
@@ -20,7 +22,7 @@ TagManager:
   - Ground
   - Airport
   - Projectile
-  - 
+  - EndlessController
   - 
   - 
   - 

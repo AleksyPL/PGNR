@@ -23,6 +23,10 @@ public class FlightController : MonoBehaviour
         audioManagerScript = GetComponent<AudioManager>();
         rewardAndProgressionManagerScript = GetComponent<RewardAndProgressionManager>();
     }
+    private void Start()
+    {
+        audioManagerScript.PlaySound("TopGunTheme", audioManagerScript.otherSounds);
+    }
     internal void ThrowBottleOfVodka(Plane plane, bool pressedBeforePauseScreen = false)
     {
         if (plane.currentPlaneState == PlaneState.standard)
@@ -58,6 +62,7 @@ public class FlightController : MonoBehaviour
         if (plane.isTouchingAirport)
         {
             audioManagerScript.StopPlayingSoundsFromTheSpecificSoundBank(audioManagerScript.oneLinersSounds);
+            audioManagerScript.StopPlayingSound("EngineSound", audioManagerScript.SFX);
             if(!plane.tiresSFXPlayed)
             {
                 audioManagerScript.PlaySound("Tires", audioManagerScript.SFX);
@@ -94,7 +99,7 @@ public class FlightController : MonoBehaviour
             if(gameModeScript.playerOnePlane.currentPlaneState != PlaneState.wheelsOn)
                 ThrowBottleOfVodka(gameModeScript.playerOnePlane);
         }
-        if(gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer && (gameModeScript.playerTwoPlane.currentPlaneState == PlaneState.standard || gameModeScript.playerTwoPlane.currentPlaneState == PlaneState.wheelsOn))
+        if((gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerClassic && gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerEndless) && (gameModeScript.playerTwoPlane.currentPlaneState == PlaneState.standard || gameModeScript.playerTwoPlane.currentPlaneState == PlaneState.wheelsOn))
         {
             MovePlaneStandardAndWheels(gameModeScript.playerTwoPlane);
             if(gameModeScript.playerTwoPlane.currentPlaneState != PlaneState.wheelsOn)
@@ -102,7 +107,7 @@ public class FlightController : MonoBehaviour
         }
         if(gameModeScript.playerOnePlane.currentPlaneState == PlaneState.damaged)
             MovePlaneDamaged(gameModeScript.playerOnePlane);
-        if(gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer && gameModeScript.playerTwoPlane.currentPlaneState == PlaneState.damaged)
+        if((gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerClassic && gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerEndless) && gameModeScript.playerTwoPlane.currentPlaneState == PlaneState.damaged)
             MovePlaneDamaged(gameModeScript.playerTwoPlane);
     }
 }

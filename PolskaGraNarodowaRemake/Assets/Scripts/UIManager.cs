@@ -65,7 +65,7 @@ public class UIManager : MonoBehaviour
     {
         flightControllerScript = GetComponent<FlightController>();
         pauseScreenEnabled = false;
-        if (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayer)
+        if (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerClassic || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerEndless)
             MoveUiElementsSinglePlayer();
     }
     void Update()
@@ -75,20 +75,20 @@ public class UIManager : MonoBehaviour
         if (!pauseScreenEnabled)
         {
             UpdateRegularHUD(flightControllerScript.gameModeScript.playerOnePlane, regularHUDYearPlayerOneGameObject, regularHUDBottlesPlayerOneGameObject, regularHUDLevelProgressPlayerOneGameObject, regularHUDScorePlayerOneGameObject);
-            if(flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer)
+            if(flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerClassic && flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerEndless)
                 UpdateRegularHUD(flightControllerScript.gameModeScript.playerTwoPlane, regularHUDYearPlayerTwoGameObject, regularHUDBottlesPlayerTwoGameObject, regularHUDLevelProgressPlayerTwoGameObject, regularHUDScorePlayerTwoGameObject);
         }
         if (pauseScreenWarningGameObject.activeSelf && flightControllerScript.inputManagerScript.ESCpressed)
             DisableExitWarning();
         else if (optionsMenuGameObject.activeSelf && flightControllerScript.inputManagerScript.ESCpressed)
             DisableOptionsMenu();
-        else if ((flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayer && flightControllerScript.gameModeScript.playerOneState != GameModeManager.PlayerState.crashed) || (flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer && flightControllerScript.gameModeScript.playerOneState != GameModeManager.PlayerState.crashed && flightControllerScript.gameModeScript.playerTwoState != GameModeManager.PlayerState.crashed))
+        else if (((flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerClassic || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerEndless) && flightControllerScript.gameModeScript.playerOneState != GameModeManager.PlayerState.crashed) || ((flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerClassic && flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerEndless) && flightControllerScript.gameModeScript.playerOneState != GameModeManager.PlayerState.crashed && flightControllerScript.gameModeScript.playerTwoState != GameModeManager.PlayerState.crashed))
         {
             if (!pauseScreenEnabled && !pauseScreenGameObject.activeSelf && flightControllerScript.inputManagerScript.ESCpressed)
             {
                 EnablePauseScreen();
                 bottleWarningPlayerOne = flightControllerScript.gameModeScript.playerOnePlane.attackKeyPressed;
-                if(flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer)
+                if(flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerClassic && flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerEndless)
                     bottleWarningPlayerTwo = flightControllerScript.gameModeScript.playerTwoPlane.attackKeyPressed;
             }
             else if (pauseScreenEnabled && pauseScreenGameObject.activeSelf && flightControllerScript.inputManagerScript.ESCpressed)
@@ -122,7 +122,7 @@ public class UIManager : MonoBehaviour
         if(flightControllerScript.gameModeScript.someoneWon)
         {
             SetTheTextOnTheColorPanel(colorPanelPlayerOneGameObject, "");
-            if (flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer)
+            if (flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerClassic && flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerEndless)
                 SetTheTextOnTheColorPanel(colorPanelPlayerTwoGameObject, "");
             EnableGameOverScreen();
         }
@@ -138,7 +138,7 @@ public class UIManager : MonoBehaviour
                 activeBottleWarningMainGameObject.SetActive(false);
                 //hack
                 flightControllerScript.gameModeScript.playerOnePlane.attackKeyPressed = Input.GetButton("Jump");
-                if(flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer)
+                if(flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerClassic && flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerEndless)
                     flightControllerScript.gameModeScript.playerTwoPlane.attackKeyPressed = Input.GetButton("Jump1");
                 //endOfHack
                 if (!flightControllerScript.gameModeScript.playerOnePlane.attackKeyPressed && bottleWarningPlayerOne)
@@ -146,7 +146,7 @@ public class UIManager : MonoBehaviour
                     flightControllerScript.ThrowBottleOfVodka(flightControllerScript.gameModeScript.playerOnePlane, true);
                     bottleWarningPlayerOne = false;
                 }
-                if (flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer && !flightControllerScript.gameModeScript.playerTwoPlane.attackKeyPressed && bottleWarningPlayerTwo)
+                if ((flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerClassic && flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerEndless) && !flightControllerScript.gameModeScript.playerTwoPlane.attackKeyPressed && bottleWarningPlayerTwo)
                 {
                     flightControllerScript.ThrowBottleOfVodka(flightControllerScript.gameModeScript.playerTwoPlane, true);
                     bottleWarningPlayerTwo = false;
@@ -210,7 +210,7 @@ public class UIManager : MonoBehaviour
         pasueScreenOptionsButtonGameObject.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].pauseScreenButton0;
         pasueScreenResumeGameButtonGameObject.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].pauseScreenButton1;
         pasueScreenBackToMainMenuButtonGameObject.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].backToMainMenuButton;
-        if (flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayer)
+        if (flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerClassic && flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerEndless)
         {
             gameSummaryPlayerOneIndicator.GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].playerOneIndicator;
             gameSummaryPlayerTwoIndicator.GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].playerTwoIndicator;
@@ -228,9 +228,9 @@ public class UIManager : MonoBehaviour
         {
             if(plane == flightControllerScript.gameModeScript.playerOnePlane)
             {
-                if (flightControllerScript.rewardAndProgressionManagerScript.levelProgressPlayerOneCounter < flightControllerScript.rewardAndProgressionManagerScript.currentlevelDistance)
+                if (flightControllerScript.rewardAndProgressionManagerScript.levelProgressPlayerOneCounter < flightControllerScript.rewardAndProgressionManagerScript.currentlevelDistance + flightControllerScript.rewardAndProgressionManagerScript.levelSafeSpace)
                 {
-                    int levelProgress = (int)(flightControllerScript.rewardAndProgressionManagerScript.levelProgressPlayerOneCounter / flightControllerScript.rewardAndProgressionManagerScript.currentlevelDistance * 100);
+                    int levelProgress = (int)(flightControllerScript.rewardAndProgressionManagerScript.levelProgressPlayerOneCounter / (flightControllerScript.rewardAndProgressionManagerScript.currentlevelDistance + flightControllerScript.rewardAndProgressionManagerScript.levelSafeSpace) * 100);
                     regularHUDLevelProgressGameObject.GetComponent<Text>().text = (gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].regularHudProgression0 + levelProgress + gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].regularHudProgression1).ToString();
                 }
                 else
@@ -238,9 +238,9 @@ public class UIManager : MonoBehaviour
             }
             else
             {
-                if (flightControllerScript.rewardAndProgressionManagerScript.levelProgressPlayerTwoCounter < flightControllerScript.rewardAndProgressionManagerScript.currentlevelDistance)
+                if (flightControllerScript.rewardAndProgressionManagerScript.levelProgressPlayerTwoCounter < flightControllerScript.rewardAndProgressionManagerScript.currentlevelDistance + flightControllerScript.rewardAndProgressionManagerScript.levelSafeSpace)
                 {
-                    int levelProgress = (int)(flightControllerScript.rewardAndProgressionManagerScript.levelProgressPlayerTwoCounter / flightControllerScript.rewardAndProgressionManagerScript.currentlevelDistance * 100);
+                    int levelProgress = (int)(flightControllerScript.rewardAndProgressionManagerScript.levelProgressPlayerTwoCounter / (flightControllerScript.rewardAndProgressionManagerScript.currentlevelDistance + flightControllerScript.rewardAndProgressionManagerScript.levelSafeSpace) * 100);
                     regularHUDLevelProgressGameObject.GetComponent<Text>().text = (gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].regularHudProgression0 + levelProgress + gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].regularHudProgression1).ToString();
                 }
                 else

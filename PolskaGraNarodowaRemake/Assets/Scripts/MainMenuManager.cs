@@ -35,6 +35,10 @@ public class MainMenuManager : MonoBehaviour
         audioScript = audioManagerGameObject.GetComponent<AudioManager>();
         audioScript.PlaySound("MainMenuTheme", audioScript.otherSounds);
         menuButtonsMainGameObject.SetActive(true);
+        UpdateUIButtonsWithLocalization();
+    }
+    private void UpdateUIButtonsWithLocalization()
+    {
         startSinglePlayerModeMenuButton.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuButton0;
         startMultiPlayerModeMenuButton.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuButton1;
         howToPlayPanelMenuButton.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuButton2;
@@ -69,6 +73,7 @@ public class MainMenuManager : MonoBehaviour
     {
         menuButtonsMainGameObject.SetActive(true);
         optionsMenuGameObject.SetActive(false);
+        UpdateUIButtonsWithLocalization();
     }
     public void EnableHowToPlayPanel()
     {
@@ -79,6 +84,7 @@ public class MainMenuManager : MonoBehaviour
     {
         menuButtonsMainGameObject.SetActive(true);
         howToPlayPanelMenuGameObject.SetActive(false);
+        UpdateUIButtonsWithLocalization();
     }
     public void EnableSkinSelectorMenu(int newGameMode)
     {
@@ -94,6 +100,7 @@ public class MainMenuManager : MonoBehaviour
     {
         menuButtonsMainGameObject.SetActive(true);
         skinSelectorMenuGameObject.SetActive(false);
+        UpdateUIButtonsWithLocalization();
         gameplaySettings.ResetPlayerSkins();
     }
     public void LaunchTheGame()

@@ -5793,7 +5793,7 @@ MonoBehaviour:
     smokePrefab: {fileID: 3160574352092641783, guid: 070ad948d9e93f940adbc5350b5de6f1, type: 3}
     explosionPrefab: {fileID: 3555890799097804707, guid: c87b6386b15942e4c8eb26d445727a4e, type: 3}
     godMode: 0
-  currentGameMode: 1
+  currentGameMode: 2
 --- !u!114 &2134856612
 MonoBehaviour:
   m_ObjectHideFlags: 0

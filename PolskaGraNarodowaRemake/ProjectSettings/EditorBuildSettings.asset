@@ -9,9 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 86e884363714e4c49a2895ac25c486e4
   - enabled: 1
-    path: Assets/Scenes/SinglePlayerMode.unity
+    path: Assets/Scenes/SinglePlayerClassicMode.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/VersusMode.unity
+    path: Assets/Scenes/VersusClassicMode.unity
     guid: 8ce5b10b7034e804dbad13d42b49652b
   m_configObjects: {}

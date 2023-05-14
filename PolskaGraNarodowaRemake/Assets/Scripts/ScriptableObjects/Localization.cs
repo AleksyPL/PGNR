@@ -6,7 +6,8 @@ using System.IO;
 [CreateAssetMenu(menuName = "ScriptableObjects/Localization")]
 public class Localization : ScriptableObject
 {
-    public TextAsset localizationTextFile;
+    public string localizationTextFile;
+    //public TextAsset localizationTextFile;
     //main menu
     internal string mainMenuButton0;
     internal string mainMenuButton1;
@@ -62,7 +63,7 @@ public class Localization : ScriptableObject
         List<string> listOfAll = new List<string>();
         if(localizationTextFile != null)
         {
-            StreamReader inp_stm = new StreamReader(Application.dataPath + "/Localization Files/" + localizationTextFile.name + ".txt");
+            StreamReader inp_stm = new StreamReader(Application.streamingAssetsPath + "/" + localizationTextFile + ".txt");
             while (!inp_stm.EndOfStream)
             {
                 string inp_ln = inp_stm.ReadLine();
