@@ -5929,8 +5929,7 @@ MonoBehaviour:
   trotylLauncherPrefab: {fileID: 2449576941250485145, guid: 69b0d68d52dc25f43aebf67166c6a6b2, type: 3}
   fogPrefab: {fileID: 4663679174155961175, guid: 9311617b76dd8d049b198314d66ddeb5, type: 3}
   endlessModeSpawnerPrefab: {fileID: 4815197519027456619, guid: 07b0e2427d2e4c84e89b3ca69d913acf, type: 3}
-  ObstaclesAndProjectilesGameObject: {fileID: 546739592}
-  ObstaclesBufferGameObject: {fileID: 0}
+  obstaclesAndProjectilesGameObject: {fileID: 546739592}
   sameObstaclesForBothPlayes: 1
 --- !u!114 &2130491216
 MonoBehaviour:

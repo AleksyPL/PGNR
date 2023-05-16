@@ -52,19 +52,21 @@ public class HitDetectionManager : MonoBehaviour
                     transform.gameObject.GetComponent<FadeOutTool>().enabled = true;
                 gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).DamageThePlane();
             }
-            else if(transform.name == "SpawnNewObjects")
+            else if(transform.name == "SpawnNewObjects" && (gameModeManagerScript.currentGameMode == GameModeManager.GameMode.singleplayerEndless || gameModeManagerScript.currentGameMode == GameModeManager.GameMode.versusEndless))
             {
                 //ENDLESS MODE IMPORTANT
                 gameModeManagerScript.flightController.rewardAndProgressionManagerScript.levelSafeSpace = 0;
-                foreach (Transform child in gameModeManagerScript.flightController.levelManagerScript.ObstaclesAndProjectilesGameObject.transform)
+                foreach (Transform child in gameModeManagerScript.flightController.levelManagerScript.obstaclesAndProjectilesGameObject.transform)
                 {
                     if (child != transform && child.transform.name == "SpawnNewObjects")
                         Destroy(child.gameObject);
                 }
                 gameModeManagerScript.flightController.levelManagerScript.obstacleSectorWidth = gameModeManagerScript.flightController.levelManagerScript.numberOfObstacles / gameModeManagerScript.flightController.rewardAndProgressionManagerScript.currentlevelDistance;
-                gameModeManagerScript.flightController.levelManagerScript.SpawnObstacles(gameModeManagerScript.playerOnePlane, (float)(gameModeManagerScript.flightController.levelManagerScript.obstacleSectorWidth / 2 + gameModeManagerScript.flightController.rewardAndProgressionManagerScript.currentlevelDistance));
-                //if (gameModeManagerScript.currentGameMode == GameModeManager.GameMode.versusEndless)
-                //    gameModeManagerScript.flightController.levelManagerScript.CopyObstaclesFromOnePlayerToAnother(gameModeManagerScript.flightController.levelManagerScript.ObstaclesBufferGameObject, gameModeManagerScript.ReturnAPlaneObject(collision.gameObject));
+                gameModeManagerScript.flightController.levelManagerScript.SpawnObstacles(gameModeManagerScript.playerOnePlane, ref gameModeManagerScript.flightController.levelManagerScript.obstaclesBufferGameObject,(float)(gameModeManagerScript.flightController.levelManagerScript.obstacleSectorWidth / 2 + gameModeManagerScript.flightController.rewardAndProgressionManagerScript.currentlevelDistance));
+                if (gameModeManagerScript.currentGameMode == GameModeManager.GameMode.versusEndless)
+                    gameModeManagerScript.flightController.levelManagerScript.CopyObstaclesFromOnePlayerToAnother(ref gameModeManagerScript.flightController.levelManagerScript.obstaclesBufferGameObject, ref gameModeManagerScript.flightController.levelManagerScript.obstaclesAndProjectilesGameObject);
+                else if (gameModeManagerScript.currentGameMode == GameModeManager.GameMode.singleplayerEndless)
+                    gameModeManagerScript.flightController.levelManagerScript.MoveObstaclesFromOneObjectToAnother(ref gameModeManagerScript.flightController.levelManagerScript.obstaclesBufferGameObject, ref gameModeManagerScript.flightController.levelManagerScript.obstaclesAndProjectilesGameObject);
                 Destroy(transform.gameObject);
             }
         }
