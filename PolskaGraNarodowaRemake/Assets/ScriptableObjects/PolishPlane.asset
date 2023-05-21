@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7aa23677339836344a1a78d0986b469a, type: 3}
   m_Name: PolishPlane
   m_EditorClassIdentifier: 
-  planeWithoutWheels: {fileID: 21300000, guid: a79a41839d26a0b4ea3dda42c8a2d68f, type: 3}
-  planeWithHoles: {fileID: 21300000, guid: 0abc313909c1b86499f8de4c251904c9, type: 3}
-  planeWithWheels: {fileID: 21300000, guid: f969eb0e4b54e3f47930843ca1e3412c, type: 3}
-  planeCrashed: {fileID: 21300000, guid: 133e6b65c7dc554488d69a3b9b326107, type: 3}
+  planeStandard: {fileID: 21300000, guid: a77564c38d382db4d8950254be810499, type: 3}
+  planeHoles: {fileID: 21300000, guid: 5ec13479d777d8f46939d35766d5d307, type: 3}
+  planeWheels: {fileID: 21300000, guid: 969d80388f7903040bddb94823545895, type: 3}
+  planeCrashed: {fileID: 21300000, guid: 31678377accd80e4cba8c163865f9908, type: 3}
   skinName:
   - Polska
   - Poland

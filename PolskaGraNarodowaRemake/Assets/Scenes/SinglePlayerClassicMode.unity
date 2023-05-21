@@ -2492,6 +2492,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1019006229}
   m_CullTransparentMesh: 1
+--- !u!1 &1036441533 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9015203865458146190, guid: b00c10a37d9feba4782aad5cb3128a96, type: 3}
+  m_PrefabInstance: {fileID: 452971145}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1052587935
 GameObject:
   m_ObjectHideFlags: 0
@@ -4676,6 +4681,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1812635773}
   m_CullTransparentMesh: 1
+--- !u!1 &1828104899 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1011855235563843825, guid: b00c10a37d9feba4782aad5cb3128a96, type: 3}
+  m_PrefabInstance: {fileID: 452971145}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1976199742
 GameObject:
   m_ObjectHideFlags: 0
@@ -5361,7 +5371,8 @@ MonoBehaviour:
   - {fileID: 7111739764834294617, guid: 625d3f58cdbd8e940b99cf8bfd0192f0, type: 3}
   trotylLauncherPrefab: {fileID: 2449576941250485145, guid: 69b0d68d52dc25f43aebf67166c6a6b2, type: 3}
   fogPrefab: {fileID: 4663679174155961175, guid: 9311617b76dd8d049b198314d66ddeb5, type: 3}
-  ObstaclesAndProjectilesGameObject: {fileID: 815594488}
+  endlessModeSpawnerPrefab: {fileID: 0}
+  obstaclesAndProjectilesGameObject: {fileID: 815594488}
   sameObstaclesForBothPlayes: 1
 --- !u!114 &2084290470
 MonoBehaviour:
@@ -5456,7 +5467,9 @@ MonoBehaviour:
     gameplaySettings: {fileID: 11400000, guid: d338db95f60174b41bd6e219f61b651f, type: 2}
     planeGameObject: {fileID: 452971150}
     bottleSpawnerGameObject: {fileID: 452971149}
-    smokeSpawnerGameObject: {fileID: 452971148}
+    smokeSpawnerInAirGameObject: {fileID: 452971148}
+    smokeSpawnerOnTheGroundGameObject: {fileID: 1828104899}
+    fireSpawnerGameObject: {fileID: 1036441533}
     planeRendererGameObject: {fileID: 452971146}
     projectilesParentGameObject: {fileID: 815594488}
     cameraGameObject: {fileID: 1748445943}
@@ -5465,18 +5478,22 @@ MonoBehaviour:
     - {fileID: 7997397083522814020, guid: 407fc9b604bafcb4cb859b5cd4f4b1be, type: 3}
     - {fileID: 7997397083522814020, guid: 759b7b6eed06fc147ac9a6a6c93c3f0a, type: 3}
     smokePrefab: {fileID: 3160574352092641783, guid: 070ad948d9e93f940adbc5350b5de6f1, type: 3}
+    firePrefab: {fileID: 7367513235340081065, guid: 3ab895ccfd3e4ea46918a58ea6694917, type: 3}
     explosionPrefab: {fileID: 3555890799097804707, guid: c87b6386b15942e4c8eb26d445727a4e, type: 3}
     godMode: 0
   playerTwoPlane:
     gameplaySettings: {fileID: 0}
     planeGameObject: {fileID: 0}
     bottleSpawnerGameObject: {fileID: 0}
-    smokeSpawnerGameObject: {fileID: 0}
+    smokeSpawnerInAirGameObject: {fileID: 0}
+    smokeSpawnerOnTheGroundGameObject: {fileID: 0}
+    fireSpawnerGameObject: {fileID: 0}
     planeRendererGameObject: {fileID: 0}
     projectilesParentGameObject: {fileID: 0}
     cameraGameObject: {fileID: 0}
     bottlePrefab: []
     smokePrefab: {fileID: 0}
+    firePrefab: {fileID: 0}
     explosionPrefab: {fileID: 0}
     godMode: 0
   currentGameMode: 0

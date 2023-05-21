@@ -5,9 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObjects/Skin")]
 public class PlaneSkin : ScriptableObject
 {
-    public Sprite planeWithoutWheels;
-    public Sprite planeWithHoles;
-    public Sprite planeWithWheels;
+    public Sprite planeStandard;
+    public Sprite planeHoles;
+    public Sprite planeWheels;
     public Sprite planeCrashed;
     public string[] skinName;
 }

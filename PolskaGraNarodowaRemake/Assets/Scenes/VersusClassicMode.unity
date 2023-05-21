@@ -2065,6 +2065,16 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7876854575269858817, guid: b00c10a37d9feba4782aad5cb3128a96, type: 3}
   m_PrefabInstance: {fileID: 736955559}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &736955561 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9015203865458146190, guid: b00c10a37d9feba4782aad5cb3128a96, type: 3}
+  m_PrefabInstance: {fileID: 736955559}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &736955562 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1011855235563843825, guid: b00c10a37d9feba4782aad5cb3128a96, type: 3}
+  m_PrefabInstance: {fileID: 736955559}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &769963666
 GameObject:
   m_ObjectHideFlags: 0
@@ -3454,6 +3464,16 @@ PrefabInstance:
 --- !u!4 &1411442963 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7876854575269858817, guid: b00c10a37d9feba4782aad5cb3128a96, type: 3}
+  m_PrefabInstance: {fileID: 1411442962}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1411442964 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9015203865458146190, guid: b00c10a37d9feba4782aad5cb3128a96, type: 3}
+  m_PrefabInstance: {fileID: 1411442962}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1411442965 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1011855235563843825, guid: b00c10a37d9feba4782aad5cb3128a96, type: 3}
   m_PrefabInstance: {fileID: 1411442962}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1412674214
@@ -5767,7 +5787,9 @@ MonoBehaviour:
     gameplaySettings: {fileID: 11400000, guid: d338db95f60174b41bd6e219f61b651f, type: 2}
     planeGameObject: {fileID: 78618947}
     bottleSpawnerGameObject: {fileID: 1265020612}
-    smokeSpawnerGameObject: {fileID: 1499929550}
+    smokeSpawnerInAirGameObject: {fileID: 1499929550}
+    smokeSpawnerOnTheGroundGameObject: {fileID: 1411442965}
+    fireSpawnerGameObject: {fileID: 1411442964}
     planeRendererGameObject: {fileID: 1562720028}
     projectilesParentGameObject: {fileID: 1172776397}
     cameraGameObject: {fileID: 1810758763}
@@ -5776,13 +5798,16 @@ MonoBehaviour:
     - {fileID: 7997397083522814020, guid: 407fc9b604bafcb4cb859b5cd4f4b1be, type: 3}
     - {fileID: 7997397083522814020, guid: 759b7b6eed06fc147ac9a6a6c93c3f0a, type: 3}
     smokePrefab: {fileID: 3160574352092641783, guid: 070ad948d9e93f940adbc5350b5de6f1, type: 3}
+    firePrefab: {fileID: 7367513235340081065, guid: 3ab895ccfd3e4ea46918a58ea6694917, type: 3}
     explosionPrefab: {fileID: 3555890799097804707, guid: c87b6386b15942e4c8eb26d445727a4e, type: 3}
     godMode: 0
   playerTwoPlane:
     gameplaySettings: {fileID: 11400000, guid: d338db95f60174b41bd6e219f61b651f, type: 2}
     planeGameObject: {fileID: 372025643}
     bottleSpawnerGameObject: {fileID: 454685063}
-    smokeSpawnerGameObject: {fileID: 1710715763}
+    smokeSpawnerInAirGameObject: {fileID: 1710715763}
+    smokeSpawnerOnTheGroundGameObject: {fileID: 736955562}
+    fireSpawnerGameObject: {fileID: 736955561}
     planeRendererGameObject: {fileID: 1878046767}
     projectilesParentGameObject: {fileID: 1172776397}
     cameraGameObject: {fileID: 199547950}
@@ -5791,6 +5816,7 @@ MonoBehaviour:
     - {fileID: 7997397083522814020, guid: 407fc9b604bafcb4cb859b5cd4f4b1be, type: 3}
     - {fileID: 7997397083522814020, guid: 759b7b6eed06fc147ac9a6a6c93c3f0a, type: 3}
     smokePrefab: {fileID: 3160574352092641783, guid: 070ad948d9e93f940adbc5350b5de6f1, type: 3}
+    firePrefab: {fileID: 7367513235340081065, guid: 3ab895ccfd3e4ea46918a58ea6694917, type: 3}
     explosionPrefab: {fileID: 3555890799097804707, guid: c87b6386b15942e4c8eb26d445727a4e, type: 3}
     godMode: 0
   currentGameMode: 2
@@ -5825,7 +5851,7 @@ MonoBehaviour:
   - {fileID: 7111739764834294617, guid: 625d3f58cdbd8e940b99cf8bfd0192f0, type: 3}
   trotylLauncherPrefab: {fileID: 2449576941250485145, guid: 69b0d68d52dc25f43aebf67166c6a6b2, type: 3}
   fogPrefab: {fileID: 4663679174155961175, guid: 9311617b76dd8d049b198314d66ddeb5, type: 3}
-  endlessModeSpawnerPrefab: {fileID: 4815197519027456619, guid: 07b0e2427d2e4c84e89b3ca69d913acf, type: 3}
+  endlessModeSpawnerPrefab: {fileID: 0}
   obstaclesAndProjectilesGameObject: {fileID: 1172776397}
   sameObstaclesForBothPlayes: 1
 --- !u!114 &2134856614

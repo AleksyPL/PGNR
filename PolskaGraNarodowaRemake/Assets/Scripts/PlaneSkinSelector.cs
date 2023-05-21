@@ -29,7 +29,7 @@ public class PlaneSkinSelector : MonoBehaviour
     {
         backToMainMenuButtonGameObject.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].backToMainMenuButton;
         startGameButtonGameObject.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].launchGameButton;
-        playerOnePlaneImageGameObject.GetComponent<Image>().sprite = gameplaySettings.planeSkins[gameplaySettings.playersPlaneSkins[0]].planeWithoutWheels;
+        playerOnePlaneImageGameObject.GetComponent<Image>().sprite = gameplaySettings.planeSkins[gameplaySettings.playersPlaneSkins[0]].planeStandard;
         playerOneSkinNameGameObject.GetComponent<Text>().text = gameplaySettings.planeSkins[gameplaySettings.playersPlaneSkins[0]].skinName[gameplaySettings.langauageIndex];
         if (mainMenuManagerScript.currentGameMode == GameMode.SinglePlayerClassic)
         {
@@ -42,7 +42,7 @@ public class PlaneSkinSelector : MonoBehaviour
             playerOneIndicatorGameObject.SetActive(true);
             playerOneIndicatorGameObject.GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].playerOneIndicator;
             playerTwoIndicatorGameObject.GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].playerTwoIndicator;
-            playerTwoPlaneImageGameObject.GetComponent<Image>().sprite = gameplaySettings.planeSkins[gameplaySettings.playersPlaneSkins[1]].planeWithoutWheels;
+            playerTwoPlaneImageGameObject.GetComponent<Image>().sprite = gameplaySettings.planeSkins[gameplaySettings.playersPlaneSkins[1]].planeStandard;
             playerTwoSkinNameGameObject.GetComponent<Text>().text = gameplaySettings.planeSkins[gameplaySettings.playersPlaneSkins[1]].skinName[gameplaySettings.langauageIndex];
         }
     }

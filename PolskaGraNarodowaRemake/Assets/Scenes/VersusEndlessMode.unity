@@ -1735,6 +1735,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 524616078}
   m_CullTransparentMesh: 1
+--- !u!1 &525518069 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1011855235563843825, guid: b00c10a37d9feba4782aad5cb3128a96, type: 3}
+  m_PrefabInstance: {fileID: 703564824}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &537374087
 GameObject:
   m_ObjectHideFlags: 0
@@ -4649,6 +4654,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1477929702}
   m_CullTransparentMesh: 1
+--- !u!1 &1544450290 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1011855235563843825, guid: b00c10a37d9feba4782aad5cb3128a96, type: 3}
+  m_PrefabInstance: {fileID: 1151347962}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1568288871
 GameObject:
   m_ObjectHideFlags: 0
@@ -4687,6 +4697,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1680747892 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9015203865458146190, guid: b00c10a37d9feba4782aad5cb3128a96, type: 3}
+  m_PrefabInstance: {fileID: 1151347962}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1724188548
 GameObject:
   m_ObjectHideFlags: 0
@@ -5470,6 +5485,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2003696122}
   m_CullTransparentMesh: 1
+--- !u!1 &2033100288 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9015203865458146190, guid: b00c10a37d9feba4782aad5cb3128a96, type: 3}
+  m_PrefabInstance: {fileID: 703564824}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2067407711
 GameObject:
   m_ObjectHideFlags: 0
@@ -6024,7 +6044,9 @@ MonoBehaviour:
     gameplaySettings: {fileID: 11400000, guid: d338db95f60174b41bd6e219f61b651f, type: 2}
     planeGameObject: {fileID: 1151347967}
     bottleSpawnerGameObject: {fileID: 1151347966}
-    smokeSpawnerGameObject: {fileID: 1151347965}
+    smokeSpawnerInAirGameObject: {fileID: 1151347965}
+    smokeSpawnerOnTheGroundGameObject: {fileID: 1544450290}
+    fireSpawnerGameObject: {fileID: 1680747892}
     planeRendererGameObject: {fileID: 1151347964}
     projectilesParentGameObject: {fileID: 546739592}
     cameraGameObject: {fileID: 1337464495}
@@ -6033,13 +6055,16 @@ MonoBehaviour:
     - {fileID: 7997397083522814020, guid: 407fc9b604bafcb4cb859b5cd4f4b1be, type: 3}
     - {fileID: 7997397083522814020, guid: 759b7b6eed06fc147ac9a6a6c93c3f0a, type: 3}
     smokePrefab: {fileID: 3160574352092641783, guid: 070ad948d9e93f940adbc5350b5de6f1, type: 3}
+    firePrefab: {fileID: 7367513235340081065, guid: 3ab895ccfd3e4ea46918a58ea6694917, type: 3}
     explosionPrefab: {fileID: 3555890799097804707, guid: c87b6386b15942e4c8eb26d445727a4e, type: 3}
     godMode: 0
   playerTwoPlane:
     gameplaySettings: {fileID: 11400000, guid: d338db95f60174b41bd6e219f61b651f, type: 2}
     planeGameObject: {fileID: 703564829}
     bottleSpawnerGameObject: {fileID: 703564828}
-    smokeSpawnerGameObject: {fileID: 703564827}
+    smokeSpawnerInAirGameObject: {fileID: 703564827}
+    smokeSpawnerOnTheGroundGameObject: {fileID: 525518069}
+    fireSpawnerGameObject: {fileID: 2033100288}
     planeRendererGameObject: {fileID: 703564825}
     projectilesParentGameObject: {fileID: 546739592}
     cameraGameObject: {fileID: 392735077}
@@ -6048,6 +6073,7 @@ MonoBehaviour:
     - {fileID: 7997397083522814020, guid: 407fc9b604bafcb4cb859b5cd4f4b1be, type: 3}
     - {fileID: 7997397083522814020, guid: 759b7b6eed06fc147ac9a6a6c93c3f0a, type: 3}
     smokePrefab: {fileID: 3160574352092641783, guid: 070ad948d9e93f940adbc5350b5de6f1, type: 3}
+    firePrefab: {fileID: 7367513235340081065, guid: 3ab895ccfd3e4ea46918a58ea6694917, type: 3}
     explosionPrefab: {fileID: 3555890799097804707, guid: c87b6386b15942e4c8eb26d445727a4e, type: 3}
     godMode: 0
   currentGameMode: 3

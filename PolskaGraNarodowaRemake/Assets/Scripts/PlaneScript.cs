@@ -22,13 +22,16 @@ internal class Plane
     internal int playerNumber;
     public GameObject planeGameObject;
     public GameObject bottleSpawnerGameObject;
-    public GameObject smokeSpawnerGameObject;
+    public GameObject smokeSpawnerInAirGameObject;
+    public GameObject smokeSpawnerOnTheGroundGameObject;
+    public GameObject fireSpawnerGameObject;
     public GameObject planeRendererGameObject;
     public GameObject projectilesParentGameObject;
     public GameObject cameraGameObject;
     //Prefabs
     public GameObject[] bottlePrefab;
     public GameObject smokePrefab;
+    public GameObject firePrefab;
     public GameObject explosionPrefab;
     //Scripts
     internal PlaneRenderer planeRendererScript;
@@ -62,11 +65,10 @@ internal class Plane
     {
         planeRendererScript = planeRendererGameObject.GetComponent<PlaneRenderer>();
         audioManagerScript = GameObject.Find("MasterController").GetComponent<AudioManager>();
-        playerNumber = numberOfThePlayer;
         planeRendererScript.planeSkin = gameplaySettings.planeSkins[gameplaySettings.playersPlaneSkins[playerNumber]];
-        planeRendererScript.LoadPlaneSkin();
-        gameScore = 0;
         ResetPlaneData();
+        playerNumber = numberOfThePlayer;
+        gameScore = 0;
     }
     internal void ResetPlaneData()
     {
@@ -85,10 +87,12 @@ internal class Plane
         rewardForLandingAdded = false;
         timeToFullyChargeBottleThrowCounter = 0;
         currentPlaneState = PlaneState.standard;
-        planeRendererScript.ChangePlaneSprite(currentPlaneState);
-        planeRendererScript.ChangeTilt(currentPlaneState, 0);
-        if (smokeSpawnerGameObject.transform.childCount != 0)
-            foreach (Transform child in smokeSpawnerGameObject.transform)
+        planeRendererScript.ResetPlaneRenderer(currentPlaneState);
+        if (smokeSpawnerInAirGameObject.transform.childCount != 0)
+            foreach (Transform child in smokeSpawnerInAirGameObject.transform)
+                GameObject.Destroy(child.gameObject);
+        if (smokeSpawnerOnTheGroundGameObject.transform.childCount != 0)
+            foreach (Transform child in smokeSpawnerOnTheGroundGameObject.transform)
                 GameObject.Destroy(child.gameObject);
     }
     internal void SpawnBottleOfVodka(float bottleThrowForce, Vector2 bottleThrowAngle)
@@ -115,7 +119,7 @@ internal class Plane
         audioManagerScript.StopPlayingSoundsFromTheSpecificSoundBank(audioManagerScript.oneLinersSounds);
         audioManagerScript.PlaySound("Whistle", audioManagerScript.SFX);
         if (smokePrefab != null)
-            Object.Instantiate(smokePrefab, smokeSpawnerGameObject.transform.position, Quaternion.Euler(270, 0, 0), smokeSpawnerGameObject.transform);
+            Object.Instantiate(smokePrefab, smokeSpawnerInAirGameObject.transform.position, Quaternion.Euler(270, 0, 0), smokeSpawnerInAirGameObject.transform);
         if (explosionPrefab != null)
         {
             Object.Instantiate(explosionPrefab, planeGameObject.transform.position, Quaternion.identity, planeGameObject.transform);
@@ -131,8 +135,22 @@ internal class Plane
         planeRendererScript.ChangeTilt(currentPlaneState, -1);
         audioManagerScript.StopPlayingSound("Whistle", audioManagerScript.SFX);
         audioManagerScript.StopPlayingSound("EngineSound", audioManagerScript.SFX);
-        if (smokePrefab != null && smokeSpawnerGameObject.transform.childCount == 0)
-            Object.Instantiate(smokePrefab, smokeSpawnerGameObject.transform.position, Quaternion.Euler(270, 0, 0), smokeSpawnerGameObject.transform);
+        if (smokePrefab != null)
+        {
+            if (smokeSpawnerInAirGameObject.transform.childCount != 0)
+                foreach (Transform child in smokeSpawnerInAirGameObject.transform)
+                    GameObject.Destroy(child.gameObject);
+            if (smokeSpawnerOnTheGroundGameObject.transform.childCount == 0)
+                Object.Instantiate(smokePrefab, smokeSpawnerOnTheGroundGameObject.transform.position, Quaternion.Euler(-90, 0, 0), smokeSpawnerOnTheGroundGameObject.transform);
+            else
+                foreach (Transform child in smokeSpawnerOnTheGroundGameObject.transform)
+                    child.rotation = Quaternion.Euler(-90, 0, 0);
+        }
+        if (firePrefab != null && fireSpawnerGameObject.transform.childCount == 0)
+        {
+            GameObject fire = Object.Instantiate(firePrefab, fireSpawnerGameObject.transform.position, Quaternion.Euler(0, 0, 0), fireSpawnerGameObject.transform);
+            fire.transform.localScale = new Vector3((float)0.2, (float)0.2, 1);
+        }
         if (explosionPrefab != null)
         {
             Object.Instantiate(explosionPrefab, planeGameObject.transform.position, Quaternion.identity, planeGameObject.transform);

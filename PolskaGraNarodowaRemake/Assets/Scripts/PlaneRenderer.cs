@@ -5,22 +5,61 @@ using UnityEngine;
 public class PlaneRenderer : MonoBehaviour
 {
     internal PlaneSkin planeSkin;
-    internal void LoadPlaneSkin()
+    private bool wheelsSlideOut;
+    public float timeToFullySlideOutWheels;
+    private float wheelsSlidingOutCounter;
+    private float wheelsInitialPositionY;
+    private void OnEnable()
     {
-        this.GetComponent<SpriteRenderer>().sprite = planeSkin.planeWithoutWheels;
+        wheelsInitialPositionY = transform.parent.Find("WheelsRenderer").gameObject.transform.localPosition.y;
+        timeToFullySlideOutWheels = (float)System.Math.Round(timeToFullySlideOutWheels, 2);
+    }
+    private void Update()
+    {
+        if(wheelsSlideOut)
+        {
+            wheelsSlidingOutCounter += Time.deltaTime;
+            SlideOutWheels();
+            if (wheelsSlidingOutCounter >= timeToFullySlideOutWheels)
+            {
+                wheelsSlidingOutCounter = timeToFullySlideOutWheels;
+                wheelsSlideOut = false;
+            }
+        }
+    }
+    internal void ResetPlaneRenderer(PlaneState currentPlaneState)
+    {
+        ChangePlaneSprite(currentPlaneState);
+        ChangeTilt(currentPlaneState, 0);
+        transform.parent.Find("HolesRenderer").GetComponent<SpriteRenderer>().sprite = null;
+        transform.parent.Find("HolesRenderer").gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        transform.parent.Find("WheelsRenderer").GetComponent<SpriteRenderer>().sprite = null;
+        transform.parent.Find("WheelsRenderer").gameObject.transform.localPosition = new Vector3(0, wheelsInitialPositionY, 0);
+        wheelsSlidingOutCounter = 0;
+        wheelsSlideOut = false;
     }
     internal void ChangePlaneSprite(PlaneState currentPlaneState)
     {
-        if (this.GetComponent<SpriteRenderer>())
+        
+        if (GetComponent<SpriteRenderer>())
         {
             if (currentPlaneState == PlaneState.standard)
-                this.GetComponent<SpriteRenderer>().sprite = planeSkin.planeWithoutWheels;
+                GetComponent<SpriteRenderer>().sprite = planeSkin.planeStandard;
             else if (currentPlaneState == PlaneState.crashed)
-                this.GetComponent<SpriteRenderer>().sprite = planeSkin.planeCrashed;
+            {
+                GetComponent<SpriteRenderer>().sprite = planeSkin.planeCrashed;
+                transform.parent.Find("HolesRenderer").GetComponent<SpriteRenderer>().sprite = null;
+            }
             else if (currentPlaneState == PlaneState.wheelsOn)
-                this.GetComponent<SpriteRenderer>().sprite = planeSkin.planeWithWheels;
+            {
+                transform.parent.Find("WheelsRenderer").GetComponent<SpriteRenderer>().sprite = planeSkin.planeWheels;
+                wheelsSlideOut = true;
+            }
             else if (currentPlaneState == PlaneState.damaged)
-                this.GetComponent<SpriteRenderer>().sprite = planeSkin.planeWithHoles;
+            {
+                transform.parent.Find("HolesRenderer").GetComponent<SpriteRenderer>().sprite = planeSkin.planeHoles;
+                transform.parent.Find("HolesRenderer").gameObject.transform.localRotation = Quaternion.Euler(0, 0, -15f);
+            }
         }
     }
     internal void ChangeTilt(PlaneState currentPlaneState, float direction)
@@ -28,15 +67,21 @@ public class PlaneRenderer : MonoBehaviour
         if (currentPlaneState == PlaneState.standard)
         {
             if (direction > 0)
-                this.transform.rotation = Quaternion.Euler(0, 0, 15f);
+                transform.rotation = Quaternion.Euler(0, 0, 15f);
             else if (direction == 0)
-                this.transform.rotation = Quaternion.Euler(0, 0, 0);
+                transform.rotation = Quaternion.Euler(0, 0, 0);
             if (direction < 0)
-                this.transform.rotation = Quaternion.Euler(0, 0, -15f);
+                transform.rotation = Quaternion.Euler(0, 0, -15f);
         }
         else if (currentPlaneState == PlaneState.wheelsOn || currentPlaneState == PlaneState.crashed)
-            this.transform.rotation = Quaternion.Euler(0, 0, 0);
+            transform.rotation = Quaternion.Euler(0, 0, 0);
         else if (currentPlaneState == PlaneState.damaged)
-            this.transform.rotation = Quaternion.Euler(0, 0, -15f);
+            transform.rotation = Quaternion.Euler(0, 0, -15f);
+    }
+    private void SlideOutWheels()
+    {
+        float lerpValue = wheelsSlidingOutCounter / timeToFullySlideOutWheels;
+        if (transform.parent.Find("WheelsRenderer").gameObject.transform.localPosition.y > 0)
+            transform.parent.Find("WheelsRenderer").gameObject.transform.localPosition = new Vector3(0, Mathf.Lerp(wheelsInitialPositionY, 0, lerpValue), 0);
     }
 }
