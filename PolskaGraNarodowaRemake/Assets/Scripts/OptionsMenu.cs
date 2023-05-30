@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class OptionsMenu : MonoBehaviour
 {
@@ -38,12 +39,12 @@ public class OptionsMenu : MonoBehaviour
         List<string> names = new List<string>();
         foreach (string s in System.Enum.GetNames(typeof(Languages)))
             names.Add(s);
-        activeLanguageGameObject.GetComponent<Text>().text = names[gameplaySettings.langauageIndex];
-        volumeSFXSliderGameObject.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].sfxVolumeSlider;
-        volumeMusicSliderGameObject.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].musicVolumeSlider;
-        volumeQuotesSliderGameObject.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].quotesVolumeSlider;
-        languageSelectorGameObject.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].activeLanguage;
-        backToMainMenuButton.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].backToMainMenuButton;
+        activeLanguageGameObject.GetComponent<TMP_Text>().text = names[gameplaySettings.langauageIndex];
+        volumeSFXSliderGameObject.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].sfxVolumeSlider;
+        volumeMusicSliderGameObject.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].musicVolumeSlider;
+        volumeQuotesSliderGameObject.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].quotesVolumeSlider;
+        languageSelectorGameObject.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].activeLanguage;
+        backToMainMenuButton.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].backToMainMenuButton;
     }
     public void NextLanguage()
     {

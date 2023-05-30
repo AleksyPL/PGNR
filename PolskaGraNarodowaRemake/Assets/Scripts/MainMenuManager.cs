@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public enum GameMode
 {
@@ -28,7 +29,13 @@ public class MainMenuManager : MonoBehaviour
     //options
     public GameObject optionsMenuGameObject;
     //how to play menu
-    public GameObject howToPlayPanelMenuGameObject;
+    public GameObject howToPlayPanelGameObject;
+    public GameObject howToPlayPanelTitleGameObject;
+    public GameObject howToPlayPanelStoryGameObject;
+    public GameObject howToPlayPanelControlsPlayerOneGameObject;
+    public GameObject howToPlayPanelControlsPlayerTwoGameObject;
+    public GameObject howToPlayPanelPlayerOneIndicatorGameObject;
+    public GameObject howToPlayPanelPlayerTwoIndicatorGameObject;
     public GameObject howToPlayPanelBackToMainMenuButton;
     //skin selection menu
     public GameObject skinSelectorMenuGameObject;
@@ -54,21 +61,27 @@ public class MainMenuManager : MonoBehaviour
     {
         playGameButton.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuButton0;
         howToPlayPanelMenuButton.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuButton1;
-        howToPlayPanelBackToMainMenuButton.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].backToMainMenuButton;
         optionsMenuButton.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuButton2;
         exitGameMenuButton.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuButton3;
+        gameModeSelectionMenuBackToMainMenuButton.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].backToMainMenuButton;
         gameModeSelectionMenuTitleGameObject.GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].gameModeSelectionMenuTitle;
         startSinglePlayerClassicModeMenuButton.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].gameModeSelectionMenuButton0;
         startSinglePlayerEndlessModeMenuButton.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].gameModeSelectionMenuButton1;
         startMultiPlayerClassicModeMenuButton.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].gameModeSelectionMenuButton2;
         startMultiPlayerEndlessModeMenuButton.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].gameModeSelectionMenuButton3;
-        gameModeSelectionMenuBackToMainMenuButton.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].backToMainMenuButton;
+        howToPlayPanelTitleGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].howToPlayTitle;
+        howToPlayPanelStoryGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].howToPlayStory;
+        howToPlayPanelControlsPlayerOneGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].howtoPlayControlsPlayerOne;
+        howToPlayPanelControlsPlayerTwoGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].howtoPlayControlsPlayerTwo;
+        howToPlayPanelPlayerOneIndicatorGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].playerOneIndicator;
+        howToPlayPanelPlayerTwoIndicatorGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].playerTwoIndicator;
+        howToPlayPanelBackToMainMenuButton.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].backToMainMenuButton;
     }
     private void Update()
     {
         if (optionsMenuGameObject.activeSelf && Input.GetButtonDown("Cancel"))
             DisableOptionsMenu();
-        else if (howToPlayPanelMenuGameObject.activeSelf && Input.GetButtonDown("Cancel"))
+        else if (howToPlayPanelGameObject.activeSelf && Input.GetButtonDown("Cancel"))
             DisableHowToPlayPanel();
         else if (skinSelectorMenuGameObject.activeSelf && Input.GetButtonDown("Cancel"))
             DisableSkinSelectorMenu();
@@ -120,12 +133,12 @@ public class MainMenuManager : MonoBehaviour
     public void EnableHowToPlayPanel()
     {
         menuButtonsMainGameObject.SetActive(false);
-        howToPlayPanelMenuGameObject.SetActive(true);
+        howToPlayPanelGameObject.SetActive(true);
     }
     public void DisableHowToPlayPanel()
     {
         menuButtonsMainGameObject.SetActive(true);
-        howToPlayPanelMenuGameObject.SetActive(false);
+        howToPlayPanelGameObject.SetActive(false);
         UpdateUIButtonsWithLocalization();
     }
     public void EnableSkinSelectorMenu(int newGameMode)
