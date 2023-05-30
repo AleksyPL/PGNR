@@ -13,7 +13,14 @@ public class Localization : ScriptableObject
     internal string mainMenuButton1;
     internal string mainMenuButton2;
     internal string mainMenuButton3;
-    internal string mainMenuButton4;
+    //game mode selection menu
+    internal string gameModeSelectionMenuTitle;
+    internal string gameModeSelectionMenuButton0;
+    internal string gameModeSelectionMenuButton1;
+    internal string gameModeSelectionMenuButton2;
+    internal string gameModeSelectionMenuButton3;
+    //skin selection menu
+    internal string skinSelectionMenuTitle;
     //how to play
     internal string howToPlayTitle;
     internal string howToPlayStory;
@@ -22,7 +29,6 @@ public class Localization : ScriptableObject
     internal string playerOneIndicator;
     internal string playerTwoIndicator;
     internal string backToMainMenuButton;
-    internal string launchGameButton;
     //options
     internal string sfxVolumeSlider;
     internal string musicVolumeSlider;
@@ -37,14 +43,12 @@ public class Localization : ScriptableObject
     internal string regularHudProgression1;
     internal string regularHudLandingMessage;
     internal string regularHudPlaneHit;
-    internal string regularHudPlaneDestroyed;
     //pause screen
     internal string pauseScreenPauseMainTitle;
     internal string pauseScreenGameOverMainTitle;
     internal string pauseScreenYearTitle;
     internal string pauseScreenBottlesTitle;
     internal string pauseScreenButton0;
-    internal string pauseScreenButton1;
     internal string gameOverScreenButton0;
     internal string activeBottleWarning;
     internal string warningTitle;
@@ -77,42 +81,44 @@ public class Localization : ScriptableObject
             mainMenuButton1 = listOfAll[3];
             mainMenuButton2 = listOfAll[5];
             mainMenuButton3 = listOfAll[7];
-            mainMenuButton4 = listOfAll[9];
-            howToPlayTitle = listOfAll[11];
-            howToPlayStory = listOfAll[13];
-            howtoPlayControlsPlayerOne = listOfAll[15];
-            howtoPlayControlsPlayerTwo = listOfAll[17];
-            playerOneIndicator = listOfAll[19];
-            playerTwoIndicator = listOfAll[21];
-            backToMainMenuButton = listOfAll[23];
-            sfxVolumeSlider = listOfAll[25];
-            musicVolumeSlider = listOfAll[27];
-            quotesVolumeSlider = listOfAll[29];
-            activeLanguage = listOfAll[31];
-            regularHudYear = listOfAll[33];
-            regularHudProgression0 = listOfAll[35];
-            regularHudProgression1 = listOfAll[37];
-            regularHudLandingMessage = listOfAll[39];
-            regularHudPlaneHit = listOfAll[41];
-            regularHudPlaneDestroyed = listOfAll[43];
-            regularHudBottle = listOfAll[45];
-            regularHudEarned0 = listOfAll[47];
-            regularHudEarned1 = listOfAll[49];
-            pauseScreenYearTitle = listOfAll[51];
-            pauseScreenBottlesTitle = listOfAll[53];
-            pauseScreenPauseMainTitle = listOfAll[55];
-            pauseScreenGameOverMainTitle = listOfAll[57];
-            pauseScreenButton0 = listOfAll[59];
-            pauseScreenButton1 = listOfAll[61];
-            gameOverScreenButton0 = listOfAll[63];
-            warningTitle = listOfAll[65];
-            warningYes = listOfAll[67];
-            warningNo = listOfAll[69];
-            colorPanelPlayerWins = listOfAll[71];
-            colorPanelPlayerLoses = listOfAll[73];
-            colorPanelPlayerLosesSinglePlayer = listOfAll[75];
-            activeBottleWarning = listOfAll[77];
-            launchGameButton = listOfAll[79];
+            gameModeSelectionMenuTitle = listOfAll[9];
+            gameModeSelectionMenuButton0 = listOfAll[11];
+            gameModeSelectionMenuButton1 = listOfAll[13];
+            gameModeSelectionMenuButton2 = listOfAll[15];
+            gameModeSelectionMenuButton3 = listOfAll[17];
+            skinSelectionMenuTitle = listOfAll[19];
+            howToPlayTitle = listOfAll[21];
+            howToPlayStory = listOfAll[23];
+            howtoPlayControlsPlayerOne = listOfAll[25];
+            howtoPlayControlsPlayerTwo = listOfAll[27];
+            playerOneIndicator = listOfAll[29];
+            playerTwoIndicator = listOfAll[31];
+            backToMainMenuButton = listOfAll[33];
+            sfxVolumeSlider = listOfAll[35];
+            musicVolumeSlider = listOfAll[37];
+            quotesVolumeSlider = listOfAll[39];
+            activeLanguage = listOfAll[41];
+            regularHudYear = listOfAll[43];
+            regularHudProgression0 = listOfAll[45];
+            regularHudProgression1 = listOfAll[47];
+            regularHudLandingMessage = listOfAll[49];
+            regularHudPlaneHit = listOfAll[51];
+            regularHudBottle = listOfAll[53];
+            regularHudEarned0 = listOfAll[55];
+            regularHudEarned1 = listOfAll[57];
+            pauseScreenYearTitle = listOfAll[59];
+            pauseScreenBottlesTitle = listOfAll[61];
+            pauseScreenPauseMainTitle = listOfAll[63];
+            pauseScreenGameOverMainTitle = listOfAll[65];
+            pauseScreenButton0 = listOfAll[67];
+            gameOverScreenButton0 = listOfAll[69];
+            warningTitle = listOfAll[71];
+            warningYes = listOfAll[73];
+            warningNo = listOfAll[75];
+            colorPanelPlayerWins = listOfAll[77];
+            colorPanelPlayerLoses = listOfAll[79];
+            colorPanelPlayerLosesSinglePlayer = listOfAll[81];
+            activeBottleWarning = listOfAll[83];
         }
     }
 }

@@ -1,21 +1,31 @@
 //Main menu - Button0
-SINGLEPLAYER
+START GAME
 //Main menu - Button1
-VERSUS MODE
-//Main menu - Button2
 HOW TO PLAY
-//Main menu - Button3
+//Main menu - Button2
 OPTIONS
-//Main menu - Button4
+//Main menu - Button3
 EXIT GAME
+//Game Mode Selector - Title
+Choose game mode
+//Game Mode Selector - Button0
+SinglePlayer classic mode
+//Game Mode Selector - Button1
+SinglePlayer endless mode
+//Game Mode Selector - Button2
+Versus classic mode
+//Game Mode Selector - Button3
+Versus endless mode
+//Skin Selection Menu - Title
+Choose your plane
 //How to play - Title
 Motherland Calls, Pilot!
 //How to play - Story
 You have to fly the new Polish National Dreamliner far to the East with the President on board.\nBut don't think that THE EAST will let you land so easily! Avoid the fog, cut down the birches, destroy the TNT.\nVodka is your weapon. Unlimited quantities, because it is a Polish plane.\nBut remember: the more you drink, the harder it is to fly ...\nBefore throwing the vodka away, drink a bit. The lighter bottle goes much farther.\nShow the President that a Pole can!
 //How to play - Controls - Player 1
-W and S - flying/nSpace - drinking/nSpace(Hold) - bottle will fly farther"
+W and S - flying/nSpace - drinking/nSpace(Hold) - bottle will fly farther/nESC - pause menu
 //How to play - Controls - Player 2
-Arrows Up and Down - flying/n0 on numpad or R.Ctrl - drinking/n0 on numpad or R.Ctrl(Hold) - bottle will fly farther
+Arrows Up and Down - flying/n0 on numpad or R.Ctrl - drinking/n0 on numpad or R.Ctrl(Hold) - bottle will fly farther/nBackspace - pause menu
 //How to play - Controls - Player 1 indicator
 Player 1
 //How to play - Controls - Player 2 indicator
@@ -40,8 +50,6 @@ Mr. President, we have already covered
 Mr. President, we are landing!
 //Regular HUD - plane hit
 Mr. President, I'm afraid we're going to get fucked up
-//Regular HUD - plane destroyed
-Unfortunately, the next president will become a hero
 //Regular HUD - bottle drunk
 Drunk bottles: 
 //Regular HUD - earned0
@@ -57,8 +65,6 @@ GAME PAUSED
 //Pause Screen - Main Title - Game Over
 GAME OVER
 //Pause Screen - Button0
-OPTIONS
-//Pause Screen - Button1
 BACK TO THE GAME
 //Game Over Screen - Button0
 TRY AGAIN
@@ -76,5 +82,3 @@ loses
 You lose
 //Active Bottle Warning
 Bottle throw was active before pausing a game, hold the attack button to continue charging the attack, otherwise, the bottle will be thrown anyway
-//Launch game
-LAUNCH THE GAME

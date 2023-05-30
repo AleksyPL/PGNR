@@ -7,28 +7,39 @@ using UnityEngine.UI;
 public enum GameMode
 {
     SinglePlayerClassic,
-    VersusClassic
+    SinglePlayerEndless,
+    VersusClassic,
+    VersusEndless
 }
 
 public class MainMenuManager : MonoBehaviour
 {
     internal AudioManager audioScript;
+    public GameObject audioManagerGameObject;
     internal PlaneSkinSelector planeSkinSelectorScript;
     public GameMode currentGameMode;
     public GameplaySettings gameplaySettings;
-    public GameObject audioManagerGameObject;
-    public GameObject optionsMenuGameObject;
-    public GameObject howToPlayPanelMenuGameObject;
+    //menu main buttons
     public GameObject menuButtonsMainGameObject;
+    public GameObject playGameButton;
+    public GameObject howToPlayPanelMenuButton;
+    public GameObject exitGameMenuButton;
+    public GameObject optionsMenuButton;
+    //options
+    public GameObject optionsMenuGameObject;
+    //how to play menu
+    public GameObject howToPlayPanelMenuGameObject;
+    public GameObject howToPlayPanelBackToMainMenuButton;
+    //skin selection menu
     public GameObject skinSelectorMenuGameObject;
-    //buttons
+    //game mode selection menu
     public GameObject startSinglePlayerClassicModeMenuButton;
     public GameObject startMultiPlayerClassicModeMenuButton;
     public GameObject startSinglePlayerEndlessModeMenuButton;
     public GameObject startMultiPlayerEndlessModeMenuButton;
-    public GameObject optionsMenuButton;
-    public GameObject howToPlayPanelMenuButton;
-    public GameObject exitGameMenuButton;
+    public GameObject gameModeSelectorMenuGameObject;
+    public GameObject gameModeSelectionMenuTitleGameObject;
+    public GameObject gameModeSelectionMenuBackToMainMenuButton;
     void Start()
     {
         Application.targetFrameRate = 144;
@@ -41,26 +52,44 @@ public class MainMenuManager : MonoBehaviour
     }
     private void UpdateUIButtonsWithLocalization()
     {
-        startSinglePlayerClassicModeMenuButton.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuButton0;
-        startMultiPlayerClassicModeMenuButton.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuButton1;
-        howToPlayPanelMenuButton.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuButton2;
-        optionsMenuButton.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuButton3;
-        exitGameMenuButton.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuButton4;
+        playGameButton.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuButton0;
+        howToPlayPanelMenuButton.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuButton1;
+        howToPlayPanelBackToMainMenuButton.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].backToMainMenuButton;
+        optionsMenuButton.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuButton2;
+        exitGameMenuButton.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuButton3;
+        gameModeSelectionMenuTitleGameObject.GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].gameModeSelectionMenuTitle;
+        startSinglePlayerClassicModeMenuButton.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].gameModeSelectionMenuButton0;
+        startSinglePlayerEndlessModeMenuButton.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].gameModeSelectionMenuButton1;
+        startMultiPlayerClassicModeMenuButton.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].gameModeSelectionMenuButton2;
+        startMultiPlayerEndlessModeMenuButton.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].gameModeSelectionMenuButton3;
+        gameModeSelectionMenuBackToMainMenuButton.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].backToMainMenuButton;
     }
     private void Update()
     {
-        if(optionsMenuButton.activeSelf && Input.GetButtonDown("Cancel"))
+        if (optionsMenuGameObject.activeSelf && Input.GetButtonDown("Cancel"))
             DisableOptionsMenu();
-        else if (howToPlayPanelMenuButton.activeSelf && Input.GetButtonDown("Cancel"))
+        else if (howToPlayPanelMenuGameObject.activeSelf && Input.GetButtonDown("Cancel"))
             DisableHowToPlayPanel();
+        else if (skinSelectorMenuGameObject.activeSelf && Input.GetButtonDown("Cancel"))
+            DisableSkinSelectorMenu();
+        else if (gameModeSelectorMenuGameObject.activeSelf && Input.GetButtonDown("Cancel"))
+            DisableGameModeSelectorMenu();
     }
     public void StartGameSinglePlayer()
     {
         SceneManager.LoadScene("SinglePlayerClassicMode");
     }
+    public void StartGameSinglePlayerEndless()
+    {
+        SceneManager.LoadScene("SinglePlayerEndlessMode");
+    }
     public void StartGameMultiPlayer()
     {
         SceneManager.LoadScene("VersusClassicMode");
+    }
+    public void StartGameMultiPlayerEndless()
+    {
+        SceneManager.LoadScene("VersusEndlessMode");
     }
     public void QuitGame()
     {
@@ -75,6 +104,17 @@ public class MainMenuManager : MonoBehaviour
     {
         menuButtonsMainGameObject.SetActive(true);
         optionsMenuGameObject.SetActive(false);
+        UpdateUIButtonsWithLocalization();
+    }
+    public void EnableGameModeSelectorMenu()
+    {
+        menuButtonsMainGameObject.SetActive(false);
+        gameModeSelectorMenuGameObject.SetActive(true);
+    }
+    public void DisableGameModeSelectorMenu()
+    {
+        menuButtonsMainGameObject.SetActive(true);
+        gameModeSelectorMenuGameObject.SetActive(false);
         UpdateUIButtonsWithLocalization();
     }
     public void EnableHowToPlayPanel()
@@ -93,9 +133,14 @@ public class MainMenuManager : MonoBehaviour
         if (newGameMode == 0)
             currentGameMode = GameMode.SinglePlayerClassic;
         else if (newGameMode == 1)
+            currentGameMode = GameMode.SinglePlayerEndless;
+        else if (newGameMode == 2)
             currentGameMode = GameMode.VersusClassic;
-        menuButtonsMainGameObject.SetActive(false);
+        else if (newGameMode == 3)
+            currentGameMode = GameMode.VersusEndless;
         skinSelectorMenuGameObject.SetActive(true);
+        gameModeSelectorMenuGameObject.SetActive(false);
+        menuButtonsMainGameObject.SetActive(false);
         planeSkinSelectorScript.UpdateUIElements();
     }
     public void DisableSkinSelectorMenu()
@@ -111,5 +156,9 @@ public class MainMenuManager : MonoBehaviour
             StartGameSinglePlayer();
         else if (currentGameMode == GameMode.VersusClassic)
             StartGameMultiPlayer();
+        else if (currentGameMode == GameMode.SinglePlayerEndless)
+            StartGameSinglePlayerEndless();
+        else if (currentGameMode == GameMode.VersusEndless)
+            StartGameMultiPlayerEndless();
     }
 }

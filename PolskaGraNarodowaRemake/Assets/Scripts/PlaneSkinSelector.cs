@@ -7,6 +7,7 @@ public class PlaneSkinSelector : MonoBehaviour
 {
     internal MainMenuManager mainMenuManagerScript;
     public GameplaySettings gameplaySettings;
+    public GameObject mainTitleGameObject;
     [Header("Player One")]
     public GameObject playerOneMainGameObject;
     public GameObject playerOneIndicatorGameObject;
@@ -28,15 +29,16 @@ public class PlaneSkinSelector : MonoBehaviour
     internal void UpdateUIElements()
     {
         backToMainMenuButtonGameObject.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].backToMainMenuButton;
-        startGameButtonGameObject.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].launchGameButton;
+        startGameButtonGameObject.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuButton0;
+        mainTitleGameObject.GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].skinSelectionMenuTitle;
         playerOnePlaneImageGameObject.GetComponent<Image>().sprite = gameplaySettings.planeSkins[gameplaySettings.playersPlaneSkins[0]].planeStandard;
         playerOneSkinNameGameObject.GetComponent<Text>().text = gameplaySettings.planeSkins[gameplaySettings.playersPlaneSkins[0]].skinName[gameplaySettings.langauageIndex];
-        if (mainMenuManagerScript.currentGameMode == GameMode.SinglePlayerClassic)
+        if (mainMenuManagerScript.currentGameMode == GameMode.SinglePlayerClassic || mainMenuManagerScript.currentGameMode == GameMode.SinglePlayerEndless)
         {
             playerOneIndicatorGameObject.SetActive(false);
             playerTwoMainGameObject.SetActive(false);
         }
-        else if (mainMenuManagerScript.currentGameMode == GameMode.VersusClassic)
+        else if (mainMenuManagerScript.currentGameMode == GameMode.VersusClassic || mainMenuManagerScript.currentGameMode == GameMode.VersusEndless)
         {
             playerTwoMainGameObject.SetActive(true);
             playerOneIndicatorGameObject.SetActive(true);

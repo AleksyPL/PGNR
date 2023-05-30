@@ -1,21 +1,31 @@
 //Main menu - Button0
-GRA KLASYCZNA
+ROZPOCZNIJ GRĘ
 //Main menu - Button1
-GRA DWUOSOBOWA
-//Main menu - Button2
 JAK GRAĆ
-//Main menu - Button3
+//Main menu - Button2
 OPCJE
-//Main menu - Button4
+//Main menu - Button3
 ZAKOŃCZ GRĘ
+//Game Mode Selector - Title
+Wybierz tryb rozgrywki
+//Game Mode Selector - Button0
+Gra jednoosowa klasyczna
+//Game Mode Selector - Button1
+Gra jednoosobowa nieskończona
+//Game Mode Selector - Button2
+Gra przeciw drugiemu graczowi klasyczna
+//Game Mode Selector - Button3
+Gra przeciw drugiemu graczowi nieskończona
+//Skin Selection Menu - Title
+Wybierz swój samolot
 //How to play - Title
 Pilocie, Ojczyzna Wzywa!
 //How to play - Story
 Musisz polecieć nowym polskim Narodowym Drimlajnerem daleko na Wschód z Panem Prezydętem na pokładzie.\nNie licz jednak na to, że Wschód pozwoli ci tak łatwo wylądować! Omiń mgły, zetnij brzozy, zniszcz trotyl.\nTwoją bronią jest wódka. Nieograniczone ilości, bo to polski samolot.\nAle pamiętaj: im więcej pijesz, tym trudniej się leci...\nPrzed wyrzuceniem wódki, wypij trochę. Lżejsza butelka dalej leci.\nPokaż Panu Prezydętowi, że Polak potrafi!
 //How to play - Controls - Player 1
-W oraz S - sterowanie/nSpacja - pijesz/nSpacja(Przytrzymaj) - butelka poleci dalej
+W oraz S - sterowanie/nSpacja - pijesz/nSpacja(Przytrzymaj) - butelka poleci dalej/nESC - menu pauzy
 //How to play - Controls - Player 2
-Strzałki góra i dół - sterowanie/n0 klaw. num. lub P.Ctrl - pijesz/n0 klaw. num. lub P.Ctrl(Przytrzymaj) - butelka poleci dalej
+Strzałki góra i dół - sterowanie/n0 klaw. num. lub P.Ctrl - pijesz/n0 klaw. num. lub P.Ctrl(Przytrzymaj) - butelka poleci dalej/nBackspace - menu pauzy
 //How to play - Controls - Player 1 indicator
 Gracz 1
 //How to play - Controls - Player 2 indicator
@@ -40,8 +50,6 @@ Panie Prezydencie, przelecieliśmy już
 Panie Prezydencie, lądujemy!
 //Regular HUD - plane hit
 Panie Prezydencie, obawiam się, że się rozpierdolimy
-//Regular HUD - plane destroyed
-Niestety, kolejny prezydent zostanie bohaterem
 //Regular HUD - bottle drunk
 Wypite butelki: 
 //Regular HUD - earned0
@@ -57,8 +65,6 @@ PAUZA
 //Pause Screen - Main Title - Game Over
 KONIEC GRY
 //Pause Screen - Button0
-OPCJE
-//Pause Screen - Button1
 POWRÓT DO GRY
 //Game Over Screen - Button0
 SPRÓBUJ JESZCZE RAZ
@@ -76,5 +82,3 @@ przegrywa
 Przegrywasz
 //Active Bottle Warning
 Rzut butelką aktywny przed zapauzowaniem gry, przytrzymaj przycisk ataku kontynuować ładowanie ataku, w przeciwnym razie butelka zostanie wystrzelona
-//Launch game
-ROZPOCZNIJ GRĘ
