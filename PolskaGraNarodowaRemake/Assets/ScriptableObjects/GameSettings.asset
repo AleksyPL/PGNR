@@ -16,11 +16,10 @@ MonoBehaviour:
   localizationsStrings:
   - {fileID: 11400000, guid: 0f9bd656d084a05489812542daadc1dd, type: 2}
   - {fileID: 11400000, guid: 6f3d82aa6f6afb549b75a30004dfdc74, type: 2}
-  currentPlayerOnePlaneSkin: 1
-  currentPlayerTwoPlaneSkin: 0
   planeSkins:
   - {fileID: 11400000, guid: 696b5ea809eac4644ba7f7ee97ed913f, type: 2}
   - {fileID: 11400000, guid: cffa560e6db4a8540bd2aff7063367f2, type: 2}
+  - {fileID: 11400000, guid: 30435d364bbe0534b9d98a80dc22469d, type: 2}
   volumeSFX: 1
   volumeQuotes: 1
   volumeMusic: 1
@@ -37,7 +36,6 @@ MonoBehaviour:
   altitudeChangeForce: 5
   fallingForce: 5
   airportSlowingForce: 9
-  waitingTimeAfterLanding: 3
   timeToFullyChargeBottleThrow: 1
   bottleThrowForceMin: 300
   bottleThrowForceMax: 1000
@@ -48,3 +46,10 @@ MonoBehaviour:
   launchForce: 850
   altitudeChangeForceOverridedMultiplier: 2
   difficultyImpulseForce: 1
+  bottlePrefab:
+  - {fileID: 7997397083522814020, guid: 759b7b6eed06fc147ac9a6a6c93c3f0a, type: 3}
+  - {fileID: 7997397083522814020, guid: 407fc9b604bafcb4cb859b5cd4f4b1be, type: 3}
+  - {fileID: 7997397083522814020, guid: dc51cdc406a34804c9562f02baf278d7, type: 3}
+  smokePrefab: {fileID: 3160574352092641783, guid: 070ad948d9e93f940adbc5350b5de6f1, type: 3}
+  firePrefab: {fileID: 7367513235340081065, guid: 3ab895ccfd3e4ea46918a58ea6694917, type: 3}
+  explosionPrefab: {fileID: 5340300019348822664, guid: 3e072ae572fe3ad4f99af6cac4ea688a, type: 3}

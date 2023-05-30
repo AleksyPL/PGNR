@@ -1248,8 +1248,10 @@ MonoBehaviour:
   howToPlayPanelMenuGameObject: {fileID: 2127317489}
   menuButtonsMainGameObject: {fileID: 1930139619}
   skinSelectorMenuGameObject: {fileID: 1526053341}
-  startSinglePlayerModeMenuButton: {fileID: 1653566685}
-  startMultiPlayerModeMenuButton: {fileID: 1771388309}
+  startSinglePlayerClassicModeMenuButton: {fileID: 1653566685}
+  startMultiPlayerClassicModeMenuButton: {fileID: 1771388309}
+  startSinglePlayerEndlessModeMenuButton: {fileID: 0}
+  startMultiPlayerEndlessModeMenuButton: {fileID: 0}
   optionsMenuButton: {fileID: 712218396}
   howToPlayPanelMenuButton: {fileID: 1564071925}
   exitGameMenuButton: {fileID: 761427425}
@@ -2865,7 +2867,7 @@ GameObject:
   - component: {fileID: 1653566688}
   - component: {fileID: 1653566687}
   m_Layer: 5
-  m_Name: StartGameSingle
+  m_Name: StartGameSingleClassic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3079,7 +3081,7 @@ GameObject:
   - component: {fileID: 1771388312}
   - component: {fileID: 1771388311}
   m_Layer: 5
-  m_Name: StartGameVersus
+  m_Name: StartGameVersusClassic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

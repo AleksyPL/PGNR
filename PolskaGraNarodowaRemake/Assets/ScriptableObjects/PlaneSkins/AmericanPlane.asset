@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7aa23677339836344a1a78d0986b469a, type: 3}
   m_Name: AmericanPlane
   m_EditorClassIdentifier: 
-  planeWithoutWheels: {fileID: 21300000, guid: 4d2e038d3209fb844b0c3bb40a88831e, type: 3}
-  planeWithHoles: {fileID: 21300000, guid: da7e4123cbe21fb4eb6b3abe920729c0, type: 3}
-  planeWithWheels: {fileID: 21300000, guid: b6893fa2a49377940938cae5bcca7729, type: 3}
-  planeCrashed: {fileID: 21300000, guid: c3d875509baf7c9418348ddbf4379e15, type: 3}
+  planeStandard: {fileID: 21300000, guid: aa2ea36f0a1d32043b1c2732c44894d9, type: 3}
+  planeHoles: {fileID: 21300000, guid: 5ec13479d777d8f46939d35766d5d307, type: 3}
+  planeWheels: {fileID: 21300000, guid: 969d80388f7903040bddb94823545895, type: 3}
+  planeCrashed: {fileID: 21300000, guid: 82243fbe410ee674488f602ac06993bc, type: 3}
   skinName:
   - USA
   - USA

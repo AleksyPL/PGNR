@@ -22,8 +22,10 @@ public class MainMenuManager : MonoBehaviour
     public GameObject menuButtonsMainGameObject;
     public GameObject skinSelectorMenuGameObject;
     //buttons
-    public GameObject startSinglePlayerModeMenuButton;
-    public GameObject startMultiPlayerModeMenuButton;
+    public GameObject startSinglePlayerClassicModeMenuButton;
+    public GameObject startMultiPlayerClassicModeMenuButton;
+    public GameObject startSinglePlayerEndlessModeMenuButton;
+    public GameObject startMultiPlayerEndlessModeMenuButton;
     public GameObject optionsMenuButton;
     public GameObject howToPlayPanelMenuButton;
     public GameObject exitGameMenuButton;
@@ -39,8 +41,8 @@ public class MainMenuManager : MonoBehaviour
     }
     private void UpdateUIButtonsWithLocalization()
     {
-        startSinglePlayerModeMenuButton.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuButton0;
-        startMultiPlayerModeMenuButton.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuButton1;
+        startSinglePlayerClassicModeMenuButton.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuButton0;
+        startMultiPlayerClassicModeMenuButton.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuButton1;
         howToPlayPanelMenuButton.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuButton2;
         optionsMenuButton.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuButton3;
         exitGameMenuButton.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuButton4;
@@ -54,11 +56,11 @@ public class MainMenuManager : MonoBehaviour
     }
     public void StartGameSinglePlayer()
     {
-        SceneManager.LoadScene("SinglePlayerMode");
+        SceneManager.LoadScene("SinglePlayerClassicMode");
     }
     public void StartGameMultiPlayer()
     {
-        SceneManager.LoadScene("VersusMode");
+        SceneManager.LoadScene("VersusClassicMode");
     }
     public void QuitGame()
     {

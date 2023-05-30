@@ -35,7 +35,7 @@ Rok:
 //Regular HUD - LevelProgressStory0
 Panie Prezydencie, przelecieliśmy już 
 //Regular HUD - LevelProgressStory1
-% procent trasy. Jakoś to będzie!
+% trasy. Jakoś to będzie!
 //Regular HUD - landing message
 Panie Prezydencie, lądujemy!
 //Regular HUD - plane hit

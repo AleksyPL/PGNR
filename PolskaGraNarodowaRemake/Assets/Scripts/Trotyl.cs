@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Trotyl : MonoBehaviour
 {
-    public GameObject explosionPrefab;
     private GameModeManager gameModeManagerScript;
     private AudioManager audioScript;
     void Start()
@@ -16,9 +15,9 @@ public class Trotyl : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            if (explosionPrefab != null)
+            if (gameModeManagerScript.flightController.gameplaySettings.explosionPrefab != null)
             {
-                Instantiate(explosionPrefab, transform.position, Quaternion.identity, gameModeManagerScript.transform.Find("ObstaclesAndProjectiles").transform);
+                Instantiate(gameModeManagerScript.flightController.gameplaySettings.explosionPrefab, transform.position, Quaternion.identity, gameModeManagerScript.transform.Find("ObstaclesAndProjectiles").transform);
                 audioScript.PlaySound("Explosion", audioScript.SFX);
             }
             Destroy(gameObject);

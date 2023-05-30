@@ -53,6 +53,11 @@ public class GameplaySettings : ScriptableObject
     [Header("Difficulty Manager Settings")]
     public float altitudeChangeForceOverridedMultiplier;
     public float difficultyImpulseForce;
+    [Header("Prefabs")]
+    public GameObject[] bottlePrefab;
+    public GameObject smokePrefab;
+    public GameObject firePrefab;
+    public GameObject explosionPrefab;
     private void OnEnable()
     {
         if (currentLanguage == Languages.Polski)

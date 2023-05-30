@@ -5479,7 +5479,7 @@ MonoBehaviour:
     - {fileID: 7997397083522814020, guid: 759b7b6eed06fc147ac9a6a6c93c3f0a, type: 3}
     smokePrefab: {fileID: 3160574352092641783, guid: 070ad948d9e93f940adbc5350b5de6f1, type: 3}
     firePrefab: {fileID: 7367513235340081065, guid: 3ab895ccfd3e4ea46918a58ea6694917, type: 3}
-    explosionPrefab: {fileID: 3555890799097804707, guid: c87b6386b15942e4c8eb26d445727a4e, type: 3}
+    explosionPrefab: {fileID: 5340300019348822664, guid: 3e072ae572fe3ad4f99af6cac4ea688a, type: 3}
     godMode: 0
   playerTwoPlane:
     gameplaySettings: {fileID: 0}

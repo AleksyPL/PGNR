@@ -28,11 +28,6 @@ internal class Plane
     public GameObject planeRendererGameObject;
     public GameObject projectilesParentGameObject;
     public GameObject cameraGameObject;
-    //Prefabs
-    public GameObject[] bottlePrefab;
-    public GameObject smokePrefab;
-    public GameObject firePrefab;
-    public GameObject explosionPrefab;
     //Scripts
     internal PlaneRenderer planeRendererScript;
     //Difficulty
@@ -60,18 +55,20 @@ internal class Plane
     internal bool rewardForLandingAdded;
     //Others
     internal AudioManager audioManagerScript;
-    public bool godMode;
+    public bool godModeLevelStart;
+    internal bool godMode;
     internal void LoadPlaneData(int numberOfThePlayer)
     {
+        playerNumber = numberOfThePlayer;
+        gameScore = 0;
         planeRendererScript = planeRendererGameObject.GetComponent<PlaneRenderer>();
         audioManagerScript = GameObject.Find("MasterController").GetComponent<AudioManager>();
         planeRendererScript.planeSkin = gameplaySettings.planeSkins[gameplaySettings.playersPlaneSkins[playerNumber]];
         ResetPlaneData();
-        playerNumber = numberOfThePlayer;
-        gameScore = 0;
     }
     internal void ResetPlaneData()
     {
+        godMode = godModeLevelStart;
         attackKeyPressed = false;
         attackKeyReleased = false;
         verticalMovementKeys = 0;
@@ -94,13 +91,16 @@ internal class Plane
         if (smokeSpawnerOnTheGroundGameObject.transform.childCount != 0)
             foreach (Transform child in smokeSpawnerOnTheGroundGameObject.transform)
                 GameObject.Destroy(child.gameObject);
+        if (fireSpawnerGameObject.transform.childCount != 0)
+            foreach (Transform child in fireSpawnerGameObject.transform)
+                GameObject.Destroy(child.gameObject);
     }
     internal void SpawnBottleOfVodka(float bottleThrowForce, Vector2 bottleThrowAngle)
     {
         if (currentPlaneState == PlaneState.standard)
         {
-            int bottleVariant = Random.Range(0, bottlePrefab.Length);
-            GameObject bottle = Object.Instantiate(bottlePrefab[bottleVariant], bottleSpawnerGameObject.transform.position, Quaternion.identity, projectilesParentGameObject.transform);
+            int bottleVariant = Random.Range(0, gameplaySettings.bottlePrefab.Length);
+            GameObject bottle = Object.Instantiate(gameplaySettings.bottlePrefab[bottleVariant], bottleSpawnerGameObject.transform.position, Quaternion.identity, projectilesParentGameObject.transform);
             bottle.GetComponent<BottleOfVodka>().SetParentObject(this);
             bottle.GetComponent<Rigidbody2D>().AddForce(bottleThrowAngle * bottleThrowForce);
             int randomDirection = Random.Range(0, 2);
@@ -118,11 +118,11 @@ internal class Plane
         planeRendererScript.ChangeTilt(currentPlaneState, -1);
         audioManagerScript.StopPlayingSoundsFromTheSpecificSoundBank(audioManagerScript.oneLinersSounds);
         audioManagerScript.PlaySound("Whistle", audioManagerScript.SFX);
-        if (smokePrefab != null)
-            Object.Instantiate(smokePrefab, smokeSpawnerInAirGameObject.transform.position, Quaternion.Euler(270, 0, 0), smokeSpawnerInAirGameObject.transform);
-        if (explosionPrefab != null)
+        if (gameplaySettings.smokePrefab != null)
+            Object.Instantiate(gameplaySettings.smokePrefab, smokeSpawnerInAirGameObject.transform.position, Quaternion.Euler(270, 0, 0), smokeSpawnerInAirGameObject.transform);
+        if (gameplaySettings.explosionPrefab != null)
         {
-            Object.Instantiate(explosionPrefab, planeGameObject.transform.position, Quaternion.identity, planeGameObject.transform);
+            Object.Instantiate(gameplaySettings.explosionPrefab, planeGameObject.transform.position, Quaternion.identity, planeGameObject.transform);
             audioManagerScript.PlaySound("Explosion", audioManagerScript.SFX);
         }
         int randomSoundEffect = Random.Range(0, audioManagerScript.hitReactionSounds.Length);
@@ -135,25 +135,25 @@ internal class Plane
         planeRendererScript.ChangeTilt(currentPlaneState, -1);
         audioManagerScript.StopPlayingSound("Whistle", audioManagerScript.SFX);
         audioManagerScript.StopPlayingSound("EngineSound", audioManagerScript.SFX);
-        if (smokePrefab != null)
+        if (gameplaySettings.smokePrefab != null)
         {
             if (smokeSpawnerInAirGameObject.transform.childCount != 0)
                 foreach (Transform child in smokeSpawnerInAirGameObject.transform)
                     GameObject.Destroy(child.gameObject);
             if (smokeSpawnerOnTheGroundGameObject.transform.childCount == 0)
-                Object.Instantiate(smokePrefab, smokeSpawnerOnTheGroundGameObject.transform.position, Quaternion.Euler(-90, 0, 0), smokeSpawnerOnTheGroundGameObject.transform);
+                Object.Instantiate(gameplaySettings.smokePrefab, smokeSpawnerOnTheGroundGameObject.transform.position, Quaternion.Euler(-90, 0, 0), smokeSpawnerOnTheGroundGameObject.transform);
             else
                 foreach (Transform child in smokeSpawnerOnTheGroundGameObject.transform)
                     child.rotation = Quaternion.Euler(-90, 0, 0);
         }
-        if (firePrefab != null && fireSpawnerGameObject.transform.childCount == 0)
+        if (gameplaySettings.firePrefab != null && fireSpawnerGameObject.transform.childCount == 0)
         {
-            GameObject fire = Object.Instantiate(firePrefab, fireSpawnerGameObject.transform.position, Quaternion.Euler(0, 0, 0), fireSpawnerGameObject.transform);
+            GameObject fire = Object.Instantiate(gameplaySettings.firePrefab, fireSpawnerGameObject.transform.position, Quaternion.Euler(0, 0, 0), fireSpawnerGameObject.transform);
             fire.transform.localScale = new Vector3((float)0.2, (float)0.2, 1);
         }
-        if (explosionPrefab != null)
+        if (gameplaySettings.explosionPrefab != null)
         {
-            Object.Instantiate(explosionPrefab, planeGameObject.transform.position, Quaternion.identity, planeGameObject.transform);
+            Object.Instantiate(gameplaySettings.explosionPrefab, planeGameObject.transform.position, Quaternion.identity, planeGameObject.transform);
             audioManagerScript.PlaySound("Explosion", audioManagerScript.SFX);
         }
     }
