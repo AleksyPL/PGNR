@@ -53,3 +53,9 @@ MonoBehaviour:
   smokePrefab: {fileID: 3160574352092641783, guid: 070ad948d9e93f940adbc5350b5de6f1, type: 3}
   firePrefab: {fileID: 7367513235340081065, guid: 3ab895ccfd3e4ea46918a58ea6694917, type: 3}
   explosionPrefab: {fileID: 5340300019348822664, guid: 3e072ae572fe3ad4f99af6cac4ea688a, type: 3}
+  powerUps:
+  - {fileID: 11400000, guid: 49f2946fe317fc049ba4b616a739b062, type: 2}
+  - {fileID: 11400000, guid: 93a90385487e11040a20fa697715f2b3, type: 2}
+  - {fileID: 11400000, guid: f25ff53517f68ca4996fdde2c9f93278, type: 2}
+  - {fileID: 11400000, guid: 89e67a9d83dfa6040be81259ff32cafc, type: 2}
+  - {fileID: 11400000, guid: 21abeccd03d07754ab113d9eb81373b9, type: 2}

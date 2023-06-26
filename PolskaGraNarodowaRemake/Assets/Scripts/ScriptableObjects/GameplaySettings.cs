@@ -58,6 +58,8 @@ public class GameplaySettings : ScriptableObject
     public GameObject smokePrefab;
     public GameObject firePrefab;
     public GameObject explosionPrefab;
+    [Header("PowerUps")]
+    public PowerUp[] powerUps;
     private void OnEnable()
     {
         if (currentLanguage == Languages.Polski)

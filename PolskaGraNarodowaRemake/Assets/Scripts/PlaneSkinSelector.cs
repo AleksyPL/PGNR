@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlaneSkinSelector : MonoBehaviour
 {
@@ -28,11 +29,11 @@ public class PlaneSkinSelector : MonoBehaviour
     }
     internal void UpdateUIElements()
     {
-        backToMainMenuButtonGameObject.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].backToMainMenuButton;
-        startGameButtonGameObject.transform.Find("Text").GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuButton0;
-        mainTitleGameObject.GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].skinSelectionMenuTitle;
+        backToMainMenuButtonGameObject.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].backToMainMenuButton;
+        startGameButtonGameObject.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuButton0;
+        mainTitleGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].skinSelectionMenuTitle;
         playerOnePlaneImageGameObject.GetComponent<Image>().sprite = gameplaySettings.planeSkins[gameplaySettings.playersPlaneSkins[0]].planeStandard;
-        playerOneSkinNameGameObject.GetComponent<Text>().text = gameplaySettings.planeSkins[gameplaySettings.playersPlaneSkins[0]].skinName[gameplaySettings.langauageIndex];
+        playerOneSkinNameGameObject.GetComponent<TMP_Text>().text = gameplaySettings.planeSkins[gameplaySettings.playersPlaneSkins[0]].skinName[gameplaySettings.langauageIndex];
         if (mainMenuManagerScript.currentGameMode == GameMode.SinglePlayerClassic || mainMenuManagerScript.currentGameMode == GameMode.SinglePlayerEndless)
         {
             playerOneIndicatorGameObject.SetActive(false);
@@ -42,10 +43,10 @@ public class PlaneSkinSelector : MonoBehaviour
         {
             playerTwoMainGameObject.SetActive(true);
             playerOneIndicatorGameObject.SetActive(true);
-            playerOneIndicatorGameObject.GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].playerOneIndicator;
-            playerTwoIndicatorGameObject.GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].playerTwoIndicator;
+            playerOneIndicatorGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].playerOneIndicator;
+            playerTwoIndicatorGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].playerTwoIndicator;
             playerTwoPlaneImageGameObject.GetComponent<Image>().sprite = gameplaySettings.planeSkins[gameplaySettings.playersPlaneSkins[1]].planeStandard;
-            playerTwoSkinNameGameObject.GetComponent<Text>().text = gameplaySettings.planeSkins[gameplaySettings.playersPlaneSkins[1]].skinName[gameplaySettings.langauageIndex];
+            playerTwoSkinNameGameObject.GetComponent<TMP_Text>().text = gameplaySettings.planeSkins[gameplaySettings.playersPlaneSkins[1]].skinName[gameplaySettings.langauageIndex];
         }
     }
     public void NextPlaneSkin(int playerNumber)

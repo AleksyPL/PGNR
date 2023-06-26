@@ -70,8 +70,8 @@ public class RewardAndProgressionManager : MonoBehaviour
         }
         flightControllerScript.uiManagerScript.DisableOptionsMenu();
         flightControllerScript.uiManagerScript.DisableGameOverScreen();
-        flightControllerScript.uiManagerScript.DisablePauseScreen();
-        flightControllerScript.uiManagerScript.TurnOffTheTimer();
+        //flightControllerScript.uiManagerScript.DisablePauseScreen();
+        //flightControllerScript.uiManagerScript.TurnOffTheTimer();
         flightControllerScript.levelManagerScript.numberOfObstacles = 3;
         flightControllerScript.levelManagerScript.numberOfFogInstances = 0;
         flightControllerScript.levelManagerScript.LoadLevel();

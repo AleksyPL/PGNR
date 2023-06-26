@@ -50,9 +50,12 @@ internal class Plane
     internal float verticalMovementKeys;
     internal bool attackKeyPressed;
     internal bool attackKeyReleased;
+    internal bool activeBottleWarning;
     //Score
     internal int gameScore;
     internal bool rewardForLandingAdded;
+    //PowerUps
+    internal bool shieldEnabled;
     //Others
     internal AudioManager audioManagerScript;
     public bool godModeLevelStart;
