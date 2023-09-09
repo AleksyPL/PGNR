@@ -15,9 +15,9 @@ public class Trotyl : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            if (gameModeManagerScript.flightController.gameplaySettings.explosionPrefab != null)
+            if (gameModeManagerScript.flightControllerScript.gameplaySettings.explosionPrefab != null)
             {
-                Instantiate(gameModeManagerScript.flightController.gameplaySettings.explosionPrefab, transform.position, Quaternion.identity, gameModeManagerScript.transform.Find("ObstaclesAndProjectiles").transform);
+                Instantiate(gameModeManagerScript.flightControllerScript.gameplaySettings.explosionPrefab, transform.position, Quaternion.identity, gameModeManagerScript.transform.Find("ObstaclesAndProjectiles").transform);
                 audioScript.PlaySound("Explosion", audioScript.SFX);
             }
             Destroy(gameObject);

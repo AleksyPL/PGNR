@@ -6,7 +6,7 @@ public class RewardAndProgressionManager : MonoBehaviour
 {
     internal FlightController flightControllerScript;
     internal int levelCounter;
-    internal float currentlevelDistance;
+    internal float currentLevelDistance;
     internal float levelSafeSpace;
     internal float levelLandingSpace;
     internal float levelProgressPlayerOneCounter;
@@ -19,7 +19,7 @@ public class RewardAndProgressionManager : MonoBehaviour
     void Start()
     {
         flightControllerScript = GetComponent<FlightController>();
-        currentlevelDistance = 100;
+        currentLevelDistance = 100;
         levelSafeSpace = 10;
         levelLandingSpace = 30;
         toNewLevel = false;
@@ -41,11 +41,11 @@ public class RewardAndProgressionManager : MonoBehaviour
     {
         if (plane.currentPlaneSpeed > 0 && plane.currentPlaneState == PlaneState.standard)
         {
-            if (counter < currentlevelDistance + levelSafeSpace)
+            if (counter < currentLevelDistance + levelSafeSpace)
                 counter += plane.currentPlaneSpeed * Time.deltaTime;
-            if (counter >= currentlevelDistance + levelSafeSpace)
+            if (counter >= currentLevelDistance + levelSafeSpace)
             {
-                counter = currentlevelDistance + levelSafeSpace;
+                counter = currentLevelDistance + levelSafeSpace;
                 plane.currentPlaneState = PlaneState.wheelsOn;
                 plane.planeRendererScript.ChangePlaneSprite(PlaneState.wheelsOn);
             }

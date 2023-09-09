@@ -34,12 +34,12 @@ public class PlaneSkinSelector : MonoBehaviour
         mainTitleGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].skinSelectionMenuTitle;
         playerOnePlaneImageGameObject.GetComponent<Image>().sprite = gameplaySettings.planeSkins[gameplaySettings.playersPlaneSkins[0]].planeStandard;
         playerOneSkinNameGameObject.GetComponent<TMP_Text>().text = gameplaySettings.planeSkins[gameplaySettings.playersPlaneSkins[0]].skinName[gameplaySettings.langauageIndex];
-        if (mainMenuManagerScript.currentGameMode == GameMode.SinglePlayerClassic || mainMenuManagerScript.currentGameMode == GameMode.SinglePlayerEndless)
+        if (MainMenuManager.currentGameMode == GameMode.SinglePlayerClassic || MainMenuManager.currentGameMode == GameMode.SinglePlayerEndless)
         {
             playerOneIndicatorGameObject.SetActive(false);
             playerTwoMainGameObject.SetActive(false);
         }
-        else if (mainMenuManagerScript.currentGameMode == GameMode.VersusClassic || mainMenuManagerScript.currentGameMode == GameMode.VersusEndless)
+        else if (MainMenuManager.currentGameMode == GameMode.VersusClassic || MainMenuManager.currentGameMode == GameMode.VersusEndless)
         {
             playerTwoMainGameObject.SetActive(true);
             playerOneIndicatorGameObject.SetActive(true);

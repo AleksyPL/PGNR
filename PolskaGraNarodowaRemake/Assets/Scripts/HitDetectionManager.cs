@@ -22,12 +22,21 @@ public class HitDetectionManager : MonoBehaviour
             {
                 if(transform.name == "birchTree" || transform.name == "trotylLauncher")
                 {
-                    if(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).godMode == false)
+                    if(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).godMode == false && !gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).shieldEnabled)
                     {
                         if (transform.GetComponent<FadeOutTool>())
                             transform.gameObject.GetComponent<FadeOutTool>().enabled = true;
                         if (gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).currentPlaneState != PlaneState.damaged)
                             gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).DamageThePlane();
+                    }
+                    else if (gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).godMode == false && gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).shieldEnabled)
+                    {
+                        if (transform.GetComponent<FadeOutTool>())
+                            transform.gameObject.GetComponent<FadeOutTool>().enabled = true;
+                        else
+                            Destroy(transform.gameObject);
+                        gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).shieldEnabled = false;
+                        gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).planeRendererScript.HideShield();
                     }
                     else
                     {
@@ -55,22 +64,26 @@ public class HitDetectionManager : MonoBehaviour
             else if(transform.name == "SpawnNewObjects" && (gameModeManagerScript.currentGameMode == GameModeManager.GameMode.singleplayerEndless || gameModeManagerScript.currentGameMode == GameModeManager.GameMode.versusEndless))
             {
                 //ENDLESS MODE IMPORTANT
-                gameModeManagerScript.flightController.rewardAndProgressionManagerScript.levelSafeSpace = 0;
-                foreach (Transform child in gameModeManagerScript.flightController.levelManagerScript.obstaclesAndProjectilesGameObject.transform)
+                gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.levelSafeSpace = 0;
+                foreach (Transform child in gameModeManagerScript.flightControllerScript.levelManagerScript.obstaclesAndProjectilesParentGameObject.transform)
                 {
                     if (child != transform && child.transform.name == "SpawnNewObjects")
                         Destroy(child.gameObject);
                 }
-                gameModeManagerScript.flightController.levelManagerScript.obstacleSectorWidth = gameModeManagerScript.flightController.levelManagerScript.numberOfObstacles / gameModeManagerScript.flightController.rewardAndProgressionManagerScript.currentlevelDistance;
-                gameModeManagerScript.flightController.levelManagerScript.SpawnObstacles(gameModeManagerScript.playerOnePlane, ref gameModeManagerScript.flightController.levelManagerScript.obstaclesBufferGameObject,(float)(gameModeManagerScript.flightController.levelManagerScript.obstacleSectorWidth / 2 + gameModeManagerScript.flightController.rewardAndProgressionManagerScript.currentlevelDistance));
+                gameModeManagerScript.flightControllerScript.levelManagerScript.obstacleSectorWidth = gameModeManagerScript.flightControllerScript.levelManagerScript.numberOfObstacles / gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance;
+                gameModeManagerScript.flightControllerScript.levelManagerScript.SpawnObstacles(gameModeManagerScript.playerOnePlane, ref gameModeManagerScript.flightControllerScript.levelManagerScript.obstaclesBufferGameObject,(float)(gameModeManagerScript.flightControllerScript.levelManagerScript.obstacleSectorWidth / 2 + gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance));
+                gameModeManagerScript.flightControllerScript.levelManagerScript.SpawnPowerUps(gameModeManagerScript.playerOnePlane, ref gameModeManagerScript.flightControllerScript.levelManagerScript.powerUpsParentGameObject, gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.levelProgressPlayerOneCounter + (2 * Camera.main.orthographicSize * Camera.main.aspect), gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.levelProgressPlayerOneCounter + (2 * Camera.main.orthographicSize * Camera.main.aspect) + gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance);
                 if (gameModeManagerScript.currentGameMode == GameModeManager.GameMode.versusEndless)
-                    gameModeManagerScript.flightController.levelManagerScript.CopyObstaclesFromOnePlayerToAnother(ref gameModeManagerScript.flightController.levelManagerScript.obstaclesBufferGameObject, ref gameModeManagerScript.flightController.levelManagerScript.obstaclesAndProjectilesGameObject);
+                {
+                    gameModeManagerScript.flightControllerScript.levelManagerScript.CopyObstaclesFromOnePlayerToAnother(ref gameModeManagerScript.flightControllerScript.levelManagerScript.obstaclesBufferGameObject, ref gameModeManagerScript.flightControllerScript.levelManagerScript.obstaclesAndProjectilesParentGameObject);
+                    gameModeManagerScript.flightControllerScript.levelManagerScript.SpawnPowerUps(gameModeManagerScript.playerTwoPlane, ref gameModeManagerScript.flightControllerScript.levelManagerScript.powerUpsParentGameObject, gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.levelProgressPlayerTwoCounter + (2 * Camera.main.orthographicSize * Camera.main.aspect), gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.levelProgressPlayerTwoCounter + (2 * Camera.main.orthographicSize * Camera.main.aspect) + gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance);
+                }
                 else if (gameModeManagerScript.currentGameMode == GameModeManager.GameMode.singleplayerEndless)
-                    gameModeManagerScript.flightController.levelManagerScript.MoveObstaclesFromOneObjectToAnother(ref gameModeManagerScript.flightController.levelManagerScript.obstaclesBufferGameObject, ref gameModeManagerScript.flightController.levelManagerScript.obstaclesAndProjectilesGameObject);
+                    gameModeManagerScript.flightControllerScript.levelManagerScript.MoveObstaclesFromOneObjectToAnother(ref gameModeManagerScript.flightControllerScript.levelManagerScript.obstaclesBufferGameObject, ref gameModeManagerScript.flightControllerScript.levelManagerScript.obstaclesAndProjectilesParentGameObject);
                 Destroy(transform.gameObject);
             }
         }
-        else if(collision.gameObject.CompareTag("Obstacle") && transform.tag == "KillPlane")
+        else if((collision.gameObject.CompareTag("Obstacle") || collision.gameObject.CompareTag("PowerUp")) && transform.tag == "KillPlane")
         {
             Destroy(collision.transform.gameObject);
         }

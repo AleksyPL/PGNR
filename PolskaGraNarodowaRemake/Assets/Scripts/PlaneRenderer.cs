@@ -40,7 +40,6 @@ public class PlaneRenderer : MonoBehaviour
     }
     internal void ChangePlaneSprite(PlaneState currentPlaneState)
     {
-        
         if (GetComponent<SpriteRenderer>())
         {
             if (currentPlaneState == PlaneState.standard)
@@ -61,6 +60,14 @@ public class PlaneRenderer : MonoBehaviour
                 transform.parent.Find("HolesRenderer").gameObject.transform.localRotation = Quaternion.Euler(0, 0, -15f);
             }
         }
+    }
+    internal void ShowShield()
+    {
+        transform.parent.Find("ShieldRenderer").GetComponent<SpriteRenderer>().gameObject.SetActive(true);
+    }
+    internal void HideShield()
+    {
+        transform.parent.Find("ShieldRenderer").GetComponent<SpriteRenderer>().gameObject.SetActive(false);
     }
     internal void ChangeTilt(PlaneState currentPlaneState, float direction)
     {

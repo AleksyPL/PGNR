@@ -56,6 +56,7 @@ internal class Plane
     internal bool rewardForLandingAdded;
     //PowerUps
     internal bool shieldEnabled;
+    internal bool speedEnabled;
     //Others
     internal AudioManager audioManagerScript;
     public bool godModeLevelStart;
@@ -86,6 +87,8 @@ internal class Plane
         difficultyImpulsTimeCurrent = 0;
         rewardForLandingAdded = false;
         timeToFullyChargeBottleThrowCounter = 0;
+        shieldEnabled = false;
+        speedEnabled = false;
         currentPlaneState = PlaneState.standard;
         planeRendererScript.ResetPlaneRenderer(currentPlaneState);
         if (smokeSpawnerInAirGameObject.transform.childCount != 0)

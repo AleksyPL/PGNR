@@ -802,6 +802,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &632554195
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 632554196}
+  m_Layer: 0
+  m_Name: PowerUps
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &632554196
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632554195}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2130491220}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &703564824
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1789,6 +1820,34 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 732326852}
     m_Modifications:
+    - target: {fileID: 1633478549, guid: 634ad76ae54ee6c4482d977cf834e3ac, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1633478549, guid: 634ad76ae54ee6c4482d977cf834e3ac, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e7a50ef4fb76fab47b9afd015f7c2b57, type: 3}
+    - target: {fileID: 1633478549, guid: 634ad76ae54ee6c4482d977cf834e3ac, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1633478549, guid: 634ad76ae54ee6c4482d977cf834e3ac, type: 3}
+      propertyPath: m_UseSpriteMesh
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1633478549, guid: 634ad76ae54ee6c4482d977cf834e3ac, type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1633478549, guid: 634ad76ae54ee6c4482d977cf834e3ac, type: 3}
+      propertyPath: m_PixelsPerUnitMultiplier
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1633478550, guid: 634ad76ae54ee6c4482d977cf834e3ac, type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1082773052073075428, guid: 634ad76ae54ee6c4482d977cf834e3ac, type: 3}
       propertyPath: m_Name
       value: RegularHUD
@@ -2057,6 +2116,7 @@ GameObject:
   - component: {fileID: 2130491214}
   - component: {fileID: 2130491213}
   - component: {fileID: 2130491212}
+  - component: {fileID: 2130491221}
   m_Layer: 0
   m_Name: MasterController
   m_TagString: Untagged
@@ -2265,14 +2325,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   airportPrefab: {fileID: 5789956881310506299, guid: b6909e430ea5f1841b1ce737fe3a9c4d, type: 3}
-  treePrefab:
-  - {fileID: 7111739764834294617, guid: 5be49d678abb58e419ae70aa4e5825ea, type: 3}
-  - {fileID: 7111739764834294617, guid: 12867ad6d0860c34e905cf0fd5abae2f, type: 3}
-  - {fileID: 7111739764834294617, guid: 625d3f58cdbd8e940b99cf8bfd0192f0, type: 3}
+  treePrefabs: []
   trotylLauncherPrefab: {fileID: 2449576941250485145, guid: 69b0d68d52dc25f43aebf67166c6a6b2, type: 3}
   fogPrefab: {fileID: 4663679174155961175, guid: 9311617b76dd8d049b198314d66ddeb5, type: 3}
   endlessModeSpawnerPrefab: {fileID: 4815197519027456619, guid: 07b0e2427d2e4c84e89b3ca69d913acf, type: 3}
-  obstaclesAndProjectilesGameObject: {fileID: 546739592}
+  powerUpsPrefabs: []
+  obstaclesAndProjectilesParentGameObject: {fileID: 0}
+  powerUpsParentGameObject: {fileID: 0}
   sameObstaclesForBothPlayes: 1
 --- !u!114 &2130491216
 MonoBehaviour:
@@ -2386,6 +2445,7 @@ MonoBehaviour:
     cameraGameObject: {fileID: 392735077}
     godModeLevelStart: 0
   currentGameMode: 3
+  enablePowerUps: 1
 --- !u!4 &2130491220
 Transform:
   m_ObjectHideFlags: 0
@@ -2400,6 +2460,19 @@ Transform:
   m_Children:
   - {fileID: 732326852}
   - {fileID: 546739593}
+  - {fileID: 632554196}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2130491221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2130491211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40759ba208d2c264e82f7dfb85d711b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

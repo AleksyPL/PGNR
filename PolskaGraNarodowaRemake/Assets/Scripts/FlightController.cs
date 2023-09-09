@@ -12,7 +12,7 @@ public class FlightController : MonoBehaviour
     internal RewardAndProgressionManager rewardAndProgressionManagerScript;
     internal AudioManager audioManagerScript;
     internal UIManager uiManagerScript;
-
+    internal PowerUpManager powerUpManagerScript;
     void OnEnable()
     {
         uiManagerScript = GetComponent<UIManager>();
@@ -22,6 +22,7 @@ public class FlightController : MonoBehaviour
         levelManagerScript = GetComponent<LevelManager>();
         audioManagerScript = GetComponent<AudioManager>();
         rewardAndProgressionManagerScript = GetComponent<RewardAndProgressionManager>();
+        powerUpManagerScript = GetComponent<PowerUpManager>();
     }
     private void Start()
     {

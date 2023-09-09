@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using TMPro;
+using System.Linq;
 
 public class UIManager : MonoBehaviour
 {
@@ -48,6 +49,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject gameSummaryYearPlayerTwoGameObject;
     [SerializeField] private GameObject gameSummaryScorePlayerTwoGameObject;
     [SerializeField] private GameObject gameSummaryBottlesPlayerTwoGameObject;
+    [Header("PowerUpsBar")]
+    [SerializeField] internal GameObject powerUpBarPlayerOneParentGameObject;
+    [SerializeField] internal GameObject powerUpBarPlayerTwoParentGameObject;
     [Header("Options Menu")]
     [SerializeField] private GameObject optionsMenuGameObject;
     [Header("TimerCircle")]
@@ -132,9 +136,9 @@ public class UIManager : MonoBehaviour
         {
             if(plane == flightControllerScript.gameModeScript.playerOnePlane)
             {
-                if (flightControllerScript.rewardAndProgressionManagerScript.levelProgressPlayerOneCounter < flightControllerScript.rewardAndProgressionManagerScript.currentlevelDistance + flightControllerScript.rewardAndProgressionManagerScript.levelSafeSpace)
+                if (flightControllerScript.rewardAndProgressionManagerScript.levelProgressPlayerOneCounter < flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance + flightControllerScript.rewardAndProgressionManagerScript.levelSafeSpace)
                 {
-                    int levelProgress = (int)(flightControllerScript.rewardAndProgressionManagerScript.levelProgressPlayerOneCounter / (flightControllerScript.rewardAndProgressionManagerScript.currentlevelDistance + flightControllerScript.rewardAndProgressionManagerScript.levelSafeSpace) * 100);
+                    int levelProgress = (int)(flightControllerScript.rewardAndProgressionManagerScript.levelProgressPlayerOneCounter / (flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance + flightControllerScript.rewardAndProgressionManagerScript.levelSafeSpace) * 100);
                     regularHUDLevelProgressGameObject.GetComponent<TMP_Text>().text = (gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].regularHudProgression0 + levelProgress + gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].regularHudProgression1).ToString();
                 }
                 else
@@ -142,9 +146,9 @@ public class UIManager : MonoBehaviour
             }
             else
             {
-                if (flightControllerScript.rewardAndProgressionManagerScript.levelProgressPlayerTwoCounter < flightControllerScript.rewardAndProgressionManagerScript.currentlevelDistance + flightControllerScript.rewardAndProgressionManagerScript.levelSafeSpace)
+                if (flightControllerScript.rewardAndProgressionManagerScript.levelProgressPlayerTwoCounter < flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance + flightControllerScript.rewardAndProgressionManagerScript.levelSafeSpace)
                 {
-                    int levelProgress = (int)(flightControllerScript.rewardAndProgressionManagerScript.levelProgressPlayerTwoCounter / (flightControllerScript.rewardAndProgressionManagerScript.currentlevelDistance + flightControllerScript.rewardAndProgressionManagerScript.levelSafeSpace) * 100);
+                    int levelProgress = (int)(flightControllerScript.rewardAndProgressionManagerScript.levelProgressPlayerTwoCounter / (flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance + flightControllerScript.rewardAndProgressionManagerScript.levelSafeSpace) * 100);
                     regularHUDLevelProgressGameObject.GetComponent<TMP_Text>().text = (gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].regularHudProgression0 + levelProgress + gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].regularHudProgression1).ToString();
                 }
                 else
@@ -249,6 +253,39 @@ public class UIManager : MonoBehaviour
     internal void SetTheTextOnTheColorPanel(GameObject colorPanel, string text)
     {
         colorPanel.transform.Find("Text").gameObject.GetComponent<TMP_Text>().text = text;
+    }
+    internal void DisplayPowerUpDescriptionOnHUD(GameObject planeObject, string[] messageToDisplay)
+    {
+        if (flightControllerScript.gameModeScript.ReturnAPlaneObject(planeObject.gameObject).playerNumber == 0)
+        {
+            flightControllerScript.gameModeScript.flightControllerScript.uiManagerScript.regularHUDLevelProgressPlayerOneGameObject.GetComponent<TMP_Text>().text = messageToDisplay[gameplaySettings.langauageIndex];
+            ChangeTheOrderOnThePowerUpsBar(powerUpBarPlayerOneParentGameObject);
+        }
+        else
+        {
+            flightControllerScript.gameModeScript.flightControllerScript.uiManagerScript.regularHUDLevelProgressPlayerTwoGameObject.GetComponent<TMP_Text>().text = messageToDisplay[gameplaySettings.langauageIndex];
+            ChangeTheOrderOnThePowerUpsBar(powerUpBarPlayerTwoParentGameObject);
+        }
+    }
+    internal void ChangeTheOrderOnThePowerUpsBar(GameObject powerUpBarGameObject)
+    {
+        if (powerUpBarGameObject.transform.childCount != 0)
+        {
+            List<GameObject> myObjectsUnsorted = new List<GameObject>();
+            for (int i=0;i<powerUpBarGameObject.transform.childCount;i++)
+            {
+                if (powerUpBarGameObject.transform.GetChild(i).gameObject.GetComponent<UIPowerUp>().powerUpDurationCounter > 0)
+                    myObjectsUnsorted.Add(powerUpBarGameObject.transform.GetChild(i).gameObject);
+                else
+                    Destroy(powerUpBarGameObject.transform.GetChild(i).gameObject);
+            }
+            List<GameObject> myObjectsSorted = myObjectsUnsorted.OrderBy(o => o.GetComponent<UIPowerUp>().powerUpDurationCounter).ToList();
+            for (int i = 0; i < myObjectsSorted.Count; i++)
+            {
+                myObjectsSorted[i].GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+                myObjectsSorted[i].GetComponent<RectTransform>().localPosition = new Vector3(0-(i*100), 0, 0);
+            }
+        }
     }
     public void QuitGame()
     {

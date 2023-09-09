@@ -18,7 +18,8 @@ public class MainMenuManager : MonoBehaviour
     internal AudioManager audioScript;
     public GameObject audioManagerGameObject;
     internal PlaneSkinSelector planeSkinSelectorScript;
-    public GameMode currentGameMode;
+    public static GameMode currentGameMode;
+    internal static bool fromMainMenu = false;
     public GameplaySettings gameplaySettings;
     //menu main buttons
     public GameObject menuButtonsMainGameObject;
@@ -90,20 +91,20 @@ public class MainMenuManager : MonoBehaviour
     }
     public void StartGameSinglePlayer()
     {
-        SceneManager.LoadScene("SinglePlayerClassicMode");
+        SceneManager.LoadScene("SinglePlayer");
     }
-    public void StartGameSinglePlayerEndless()
-    {
-        SceneManager.LoadScene("SinglePlayerEndlessMode");
-    }
+    //public void StartGameSinglePlayerEndless()
+    //{
+    //    SceneManager.LoadScene("SinglePlayerEndlessMode");
+    //}
     public void StartGameMultiPlayer()
     {
-        SceneManager.LoadScene("VersusClassicMode");
+        SceneManager.LoadScene("MultiPlayer");
     }
-    public void StartGameMultiPlayerEndless()
-    {
-        SceneManager.LoadScene("VersusEndlessMode");
-    }
+    //public void StartGameMultiPlayerEndless()
+    //{
+    //    SceneManager.LoadScene("VersusEndlessMode");
+    //}
     public void QuitGame()
     {
         Application.Quit();
@@ -165,13 +166,14 @@ public class MainMenuManager : MonoBehaviour
     }
     public void LaunchTheGame()
     {
-        if (currentGameMode == GameMode.SinglePlayerClassic)
+        fromMainMenu = true;
+        if (currentGameMode == GameMode.SinglePlayerClassic || currentGameMode == GameMode.SinglePlayerEndless)
             StartGameSinglePlayer();
-        else if (currentGameMode == GameMode.VersusClassic)
+        else if (currentGameMode == GameMode.VersusClassic || currentGameMode == GameMode.VersusEndless)
             StartGameMultiPlayer();
-        else if (currentGameMode == GameMode.SinglePlayerEndless)
-            StartGameSinglePlayerEndless();
-        else if (currentGameMode == GameMode.VersusEndless)
-            StartGameMultiPlayerEndless();
+        //else if (currentGameMode == GameMode.SinglePlayerEndless)
+        //    StartGameSinglePlayerEndless();
+        //else if (currentGameMode == GameMode.VersusEndless)
+        //    StartGameMultiPlayerEndless();
     }
 }

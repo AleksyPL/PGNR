@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7555dfbe4f4f250448e4103e52c60097, type: 3}
   m_Name: Shield
   m_EditorClassIdentifier: 
-  powerUpName: 
-  powerUpDescriptionPL: 
-  powerUpDescriptionEN: 
-  powerUpDuration: 
+  powerUpName: ShieldPowerUp
+  powerUpDescription:
+  - Tarcza, chroni przed 1 uderzeniem
+  - Shield, protects from 1 hit
+  powerUpDuration: 10
+  currentPowerUpImageBox: {fileID: 21300000, guid: f2f7695ef9a2b8d49b93a40300a81f80, type: 3}
+  currentPowerUpImageUI: {fileID: 21300000, guid: cf4249bf8b12ec142bd11687732426a6, type: 3}

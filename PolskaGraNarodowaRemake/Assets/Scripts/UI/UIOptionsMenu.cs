@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class OptionsMenu : MonoBehaviour
+public class UIOptionsMenu : MonoBehaviour
 {
     public GameplaySettings gameplaySettings;
     public GameObject volumeSFXSliderGameObject;

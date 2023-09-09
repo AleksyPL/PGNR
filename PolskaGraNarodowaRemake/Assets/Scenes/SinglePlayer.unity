@@ -671,6 +671,37 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8535687716828918783, guid: af37a67e2c14f374eb7d00afa5eed0e1, type: 3}
   m_PrefabInstance: {fileID: 8535687716318313267}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &683886162
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 683886163}
+  m_Layer: 0
+  m_Name: PowerUps
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &683886163
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 683886162}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2084290474}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &728077561 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8535687717037862858, guid: af37a67e2c14f374eb7d00afa5eed0e1, type: 3}
@@ -1559,13 +1590,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   airportPrefab: {fileID: 5789956881310506299, guid: b6909e430ea5f1841b1ce737fe3a9c4d, type: 3}
-  treePrefabs: []
+  treePrefabs:
+  - {fileID: 7111739764834294617, guid: 5be49d678abb58e419ae70aa4e5825ea, type: 3}
+  - {fileID: 7111739764834294617, guid: 12867ad6d0860c34e905cf0fd5abae2f, type: 3}
+  - {fileID: 7111739764834294617, guid: 625d3f58cdbd8e940b99cf8bfd0192f0, type: 3}
   trotylLauncherPrefab: {fileID: 2449576941250485145, guid: 69b0d68d52dc25f43aebf67166c6a6b2, type: 3}
   fogPrefab: {fileID: 4663679174155961175, guid: 9311617b76dd8d049b198314d66ddeb5, type: 3}
-  endlessModeSpawnerPrefab: {fileID: 0}
-  powerUpsPrefabs: []
-  obstaclesAndProjectilesParentGameObject: {fileID: 0}
-  powerUpsParentGameObject: {fileID: 0}
+  endlessModeSpawnerPrefab: {fileID: 4815197519027456619, guid: 07b0e2427d2e4c84e89b3ca69d913acf, type: 3}
+  powerUpsPrefabs:
+  - {fileID: 8758847133875726905, guid: 8abb5dbb56e3cb7499264e4616252e67, type: 3}
+  obstaclesAndProjectilesParentGameObject: {fileID: 815594488}
+  powerUpsParentGameObject: {fileID: 683886162}
   sameObstaclesForBothPlayes: 1
 --- !u!114 &2084290470
 MonoBehaviour:
@@ -1678,8 +1713,9 @@ MonoBehaviour:
     projectilesParentGameObject: {fileID: 0}
     cameraGameObject: {fileID: 0}
     godModeLevelStart: 0
-  currentGameMode: 0
-  enablePowerUps: 0
+  gameModeSettingsOverride: 1
+  currentGameMode: 1
+  enablePowerUps: 1
 --- !u!4 &2084290474
 Transform:
   m_ObjectHideFlags: 0
@@ -1694,6 +1730,7 @@ Transform:
   m_Children:
   - {fileID: 321047455}
   - {fileID: 815594489}
+  - {fileID: 683886163}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
