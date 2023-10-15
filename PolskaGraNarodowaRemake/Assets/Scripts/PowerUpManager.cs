@@ -15,27 +15,28 @@ public class PowerUpManager : MonoBehaviour
     void Start()
     {
         flightControllerScript = GetComponent<FlightController>();
-        ResetDurationForThePowerUp("ShieldPowerUp", ref shieldPlayerOneCounter);
-        ResetDurationForThePowerUp("SpeedPowerUp", ref speedPlayerOneCounter);
+        ResetDurationForThePowerUp(flightControllerScript.gameModeScript.playerOnePlane, "ShieldPowerUp");
+        ResetDurationForThePowerUp(flightControllerScript.gameModeScript.playerTwoPlane, "SpeedPowerUp");
         if (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusEndless)
         {
-            ResetDurationForThePowerUp("ShieldPowerUp", ref shieldPlayerTwoCounter);
-            ResetDurationForThePowerUp("SpeedPowerUp", ref speedPlayerTwoCounter);
+            ResetDurationForThePowerUp(flightControllerScript.gameModeScript.playerOnePlane, "ShieldPowerUp");
+            ResetDurationForThePowerUp(flightControllerScript.gameModeScript.playerTwoPlane, "SpeedPowerUp");
         }
     }
 
     void Update()
     {
-        CheckPlayersShield(ref flightControllerScript.gameModeScript.playerOnePlane, ref shieldPlayerOneCounter);
-        CheckPlayersSpeed(ref flightControllerScript.gameModeScript.playerOnePlane, ref speedPlayerOneCounter);
+        CheckPlayerShield(flightControllerScript.gameModeScript.playerOnePlane);
+        CheckPlayerSpeed(flightControllerScript.gameModeScript.playerOnePlane);
         if (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusEndless)
         {
-            CheckPlayersShield(ref flightControllerScript.gameModeScript.playerTwoPlane, ref shieldPlayerTwoCounter);
-            CheckPlayersSpeed(ref flightControllerScript.gameModeScript.playerTwoPlane, ref speedPlayerTwoCounter);
+            CheckPlayerShield(flightControllerScript.gameModeScript.playerTwoPlane);
+            CheckPlayerSpeed(flightControllerScript.gameModeScript.playerTwoPlane);
         }
     }
-    internal void ResetDurationForThePowerUp(string powerUpName, ref float powerUpCounter)
+    internal void ResetDurationForThePowerUp(Plane plane, string powerUpName)
     {
+        float powerUpCounter = 0;
         for (int i = 0; i < flightControllerScript.levelManagerScript.powerUpsPrefabs.Length; i++)
         {
             if(flightControllerScript.levelManagerScript.powerUpsPrefabs[i].name == powerUpName)
@@ -44,30 +45,70 @@ public class PowerUpManager : MonoBehaviour
                 break;
             }
         }
+        if (plane == flightControllerScript.gameModeScript.playerOnePlane)
+        {
+            if (powerUpName == "ShieldPowerUp")
+                shieldPlayerOneCounter = powerUpCounter;
+            else if (powerUpName == "SpeedPowerUp")
+                speedPlayerOneCounter = powerUpCounter;
+        }
+        else if (plane == flightControllerScript.gameModeScript.playerTwoPlane)
+        {
+            if (powerUpName == "ShieldPowerUp")
+                shieldPlayerTwoCounter = powerUpCounter;
+            else if (powerUpName == "SpeedPowerUp")
+                speedPlayerTwoCounter = powerUpCounter;
+        }
     }
-    private void CheckPlayersShield(ref Plane plane, ref float shieldDurationCounter)
+    private void CheckPlayerShield(Plane plane)
     {
         if (plane.shieldEnabled)
         {
-            shieldDurationCounter -= Time.deltaTime;
-            if (shieldPlayerOneCounter <= 0)
+            if(plane == flightControllerScript.gameModeScript.playerOnePlane)
             {
-                plane.planeRendererScript.HideShield();
-                plane.shieldEnabled = false;
-                ResetDurationForThePowerUp("ShieldPowerUp", ref shieldDurationCounter);
+                shieldPlayerOneCounter -= Time.deltaTime;
+                if (shieldPlayerOneCounter <= 0)
+                {
+                    plane.planeRendererScript.HideShield();
+                    plane.shieldEnabled = false;
+                    ResetDurationForThePowerUp(flightControllerScript.gameModeScript.playerOnePlane, "ShieldPowerUp");
+                }
+            }
+            else if (plane == flightControllerScript.gameModeScript.playerTwoPlane)
+            {
+                shieldPlayerTwoCounter -= Time.deltaTime;
+                if (shieldPlayerTwoCounter <= 0)
+                {
+                    plane.planeRendererScript.HideShield();
+                    plane.shieldEnabled = false;
+                    ResetDurationForThePowerUp(flightControllerScript.gameModeScript.playerTwoPlane, "ShieldPowerUp");
+                }
             }
         }
     }
-    private void CheckPlayersSpeed(ref Plane plane, ref float speedDurationCounter)
+    private void CheckPlayerSpeed(Plane plane)
     {
         if (plane.speedEnabled)
         {
-            speedDurationCounter -= Time.deltaTime;
-            if (speedPlayerOneCounter <= 0)
+            if (plane == flightControllerScript.gameModeScript.playerOnePlane)
             {
-                plane.speedEnabled = false;
-                plane.currentPlaneSpeed = flightControllerScript.gameplaySettings.defaultPlaneSpeed;
-                ResetDurationForThePowerUp("SpeedPowerUp", ref speedDurationCounter);
+                speedPlayerOneCounter -= Time.deltaTime;
+                if (speedPlayerOneCounter <= 0)
+                {
+                    plane.speedEnabled = false;
+                    plane.currentPlaneSpeed = flightControllerScript.gameplaySettings.defaultPlaneSpeed;
+                    ResetDurationForThePowerUp(flightControllerScript.gameModeScript.playerOnePlane, "SpeedPowerUp");
+                }
+            }
+            else if (plane == flightControllerScript.gameModeScript.playerTwoPlane)
+            {
+                speedPlayerTwoCounter -= Time.deltaTime;
+                if (speedPlayerTwoCounter <= 0)
+                {
+                    plane.speedEnabled = false;
+                    plane.currentPlaneSpeed = flightControllerScript.gameplaySettings.defaultPlaneSpeed;
+                    ResetDurationForThePowerUp(flightControllerScript.gameModeScript.playerTwoPlane, "SpeedPowerUp");
+                }
             }
         }
     }

@@ -32,6 +32,7 @@ MonoBehaviour:
   cameraPositionXOffsetMulti: 25
   cameraDespawnDisatance: 20
   fadeOutLifeTime: 1
+  fadeInLifeTime: 1
   defaultPlaneSpeed: 6.5
   altitudeChangeForce: 5
   fallingForce: 5
@@ -59,3 +60,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f25ff53517f68ca4996fdde2c9f93278, type: 2}
   - {fileID: 11400000, guid: 89e67a9d83dfa6040be81259ff32cafc, type: 2}
   - {fileID: 11400000, guid: 21abeccd03d07754ab113d9eb81373b9, type: 2}
+  durationTimeForPowerUpMessageOnTheScreen: 3

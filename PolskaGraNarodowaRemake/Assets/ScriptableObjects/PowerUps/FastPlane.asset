@@ -18,3 +18,4 @@ MonoBehaviour:
   - You are speeding
   powerUpDuration: 3
   currentPowerUpImageBox: {fileID: 21300000, guid: f2f7695ef9a2b8d49b93a40300a81f80, type: 3}
+  currentPowerUpUIClockImage: {fileID: 21300000, guid: e7a50ef4fb76fab47b9afd015f7c2b57, type: 3}

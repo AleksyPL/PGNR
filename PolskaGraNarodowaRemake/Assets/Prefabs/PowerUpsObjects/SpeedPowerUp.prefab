@@ -13,7 +13,9 @@ GameObject:
   - component: {fileID: 6600728554898421845}
   - component: {fileID: 3592396426143559122}
   - component: {fileID: 93986127246805496}
-  m_Layer: 12
+  - component: {fileID: 2849039912543002793}
+  - component: {fileID: 147990740011176672}
+  m_Layer: 0
   m_Name: SpeedPowerUp
   m_TagString: PowerUp
   m_Icon: {fileID: 0}
@@ -49,7 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameplaySettings: {fileID: 11400000, guid: d338db95f60174b41bd6e219f61b651f, type: 2}
   currentPowerUpScriptableObject: {fileID: 11400000, guid: 49f2946fe317fc049ba4b616a739b062, type: 2}
-  UiPowerUpPrefab: {fileID: 4995597508849887570, guid: cc2c1c9a7ba6e68489f73a808aa1d9ce, type: 3}
+  PowerUpUIClockPrefab: {fileID: 4995597508849887570, guid: c9fb0b10d8ab1064ba15eb77532b7da7, type: 3}
   currentPowerUp: 4
 --- !u!114 &6600728554898421845
 MonoBehaviour:
@@ -105,7 +107,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 8
   m_Sprite: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -141,3 +143,37 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.2, y: 4.2}
   m_EdgeRadius: 0
+--- !u!114 &2849039912543002793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8758847133875726905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1f1433c94cf5ad4383e9e47d2e2776f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameplaySettings: {fileID: 11400000, guid: d338db95f60174b41bd6e219f61b651f, type: 2}
+--- !u!50 &147990740011176672
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8758847133875726905}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7

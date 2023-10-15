@@ -10,6 +10,7 @@ TagManager:
   - Plane
   - KillPlane
   - Vodka
+  - PowerUp
   layers:
   - Default
   - TransparentFX
@@ -23,8 +24,8 @@ TagManager:
   - Airport
   - Projectile
   - EndlessController
-  - 
-  - 
+  - Fog
+  - KillPlane
   - 
   - 
   - 

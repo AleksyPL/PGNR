@@ -49,9 +49,14 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject gameSummaryYearPlayerTwoGameObject;
     [SerializeField] private GameObject gameSummaryScorePlayerTwoGameObject;
     [SerializeField] private GameObject gameSummaryBottlesPlayerTwoGameObject;
-    [Header("PowerUpsBar")]
+    [Header("PowerUps")]
     [SerializeField] internal GameObject powerUpBarPlayerOneParentGameObject;
     [SerializeField] internal GameObject powerUpBarPlayerTwoParentGameObject;
+    [SerializeField] private GameObject powerUpUIClockPrefab;
+    private float powerUpMessageOnScreenPlayerOneCounter;
+    private float powerUpMessageOnScreenPlayerTwoCounter;
+    private bool powerUpMessageOnScreenEnabledPlayerOne;
+    private bool powerUpMessageOnScreenEnabledPlayerTwo;
     [Header("Options Menu")]
     [SerializeField] private GameObject optionsMenuGameObject;
     [Header("TimerCircle")]
@@ -132,7 +137,7 @@ public class UIManager : MonoBehaviour
         //current year
         regularHUDYearGameObject.GetComponent<TMP_Text>().text = (gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].regularHudYear + (2009 + flightControllerScript.rewardAndProgressionManagerScript.levelCounter)).ToString();
         //level progress
-        if (plane.currentPlaneState == PlaneState.standard || plane.currentPlaneState == PlaneState.wheelsOn)
+        if ((flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerClassic || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusClassic) && plane.currentPlaneState == PlaneState.standard || plane.currentPlaneState == PlaneState.wheelsOn)
         {
             if(plane == flightControllerScript.gameModeScript.playerOnePlane)
             {
@@ -155,6 +160,8 @@ public class UIManager : MonoBehaviour
                     regularHUDLevelProgressGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].regularHudLandingMessage;
             }
         }
+        else
+            DisablePowerUpMessage();
         if (plane.currentPlaneState == PlaneState.damaged)
             regularHUDLevelProgressGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].regularHudPlaneHit;
         //bottles
@@ -259,12 +266,54 @@ public class UIManager : MonoBehaviour
         if (flightControllerScript.gameModeScript.ReturnAPlaneObject(planeObject.gameObject).playerNumber == 0)
         {
             flightControllerScript.gameModeScript.flightControllerScript.uiManagerScript.regularHUDLevelProgressPlayerOneGameObject.GetComponent<TMP_Text>().text = messageToDisplay[gameplaySettings.langauageIndex];
+            if(powerUpMessageOnScreenEnabledPlayerOne)
+                powerUpMessageOnScreenPlayerOneCounter = 0;
+            else
+                powerUpMessageOnScreenEnabledPlayerOne = true;
             ChangeTheOrderOnThePowerUpsBar(powerUpBarPlayerOneParentGameObject);
         }
         else
         {
             flightControllerScript.gameModeScript.flightControllerScript.uiManagerScript.regularHUDLevelProgressPlayerTwoGameObject.GetComponent<TMP_Text>().text = messageToDisplay[gameplaySettings.langauageIndex];
+            if (powerUpMessageOnScreenEnabledPlayerTwo)
+                powerUpMessageOnScreenPlayerTwoCounter = 0;
+            else
+                powerUpMessageOnScreenEnabledPlayerTwo = true;
             ChangeTheOrderOnThePowerUpsBar(powerUpBarPlayerTwoParentGameObject);
+        }
+    }
+    private void DisablePowerUpMessage()
+    {
+        if(powerUpMessageOnScreenEnabledPlayerOne)
+        {
+            powerUpMessageOnScreenPlayerOneCounter += Time.deltaTime;
+            if (powerUpMessageOnScreenPlayerOneCounter > gameplaySettings.durationTimeForPowerUpMessageOnTheScreen)
+            {
+                regularHUDLevelProgressPlayerOneGameObject.GetComponent<TMP_Text>().text = "";
+                powerUpMessageOnScreenPlayerOneCounter = 0;
+                powerUpMessageOnScreenEnabledPlayerOne = false;
+            } 
+        }
+        if (powerUpMessageOnScreenEnabledPlayerTwo)
+        {
+            powerUpMessageOnScreenPlayerTwoCounter += Time.deltaTime;
+            if (powerUpMessageOnScreenPlayerTwoCounter > gameplaySettings.durationTimeForPowerUpMessageOnTheScreen)
+            {
+                regularHUDLevelProgressPlayerTwoGameObject.GetComponent<TMP_Text>().text = "";
+                powerUpMessageOnScreenPlayerTwoCounter = 0;
+                powerUpMessageOnScreenEnabledPlayerTwo = false;
+            }
+        }
+    }
+    internal void SpawnPowerUpUIClock(Plane plane, PowerUp currentPowerUp)
+    {
+        if(plane == flightControllerScript.gameModeScript.playerOnePlane && ReturnPowerUpUIClockIfExists(plane, currentPowerUp.powerUpName) == null)
+        {
+            GameObject powerUpUIGameObject = Instantiate(powerUpUIClockPrefab);
+            powerUpUIGameObject.gameObject.transform.name = currentPowerUp.powerUpName;
+            powerUpUIGameObject.GetComponent<Image>().sprite = currentPowerUp.currentPowerUpUIClockImage;
+            powerUpUIGameObject.gameObject.transform.SetParent(powerUpBarPlayerOneParentGameObject.transform);
+            powerUpUIGameObject.GetComponent<UIPowerUp>().EnableUIPowerUp(currentPowerUp.powerUpDuration, currentPowerUp.powerUpName);
         }
     }
     internal void ChangeTheOrderOnThePowerUpsBar(GameObject powerUpBarGameObject)
@@ -286,6 +335,37 @@ public class UIManager : MonoBehaviour
                 myObjectsSorted[i].GetComponent<RectTransform>().localPosition = new Vector3(0-(i*100), 0, 0);
             }
         }
+    }
+    internal GameObject ReturnPowerUpUIClockIfExists(Plane plane, string powerUpUIClockName)
+    {
+        if (plane == flightControllerScript.gameModeScript.playerOnePlane)
+        {
+            if (powerUpBarPlayerOneParentGameObject.transform.childCount != 0)
+            {
+                for (int i = 0; i < powerUpBarPlayerOneParentGameObject.transform.childCount; i++)
+                {
+                    if (powerUpBarPlayerOneParentGameObject.transform.GetChild(i).gameObject.name == powerUpUIClockName)
+                        return powerUpBarPlayerOneParentGameObject.transform.GetChild(i).gameObject;
+                }
+            }
+        }
+        else if (plane == flightControllerScript.gameModeScript.playerTwoPlane)
+        {
+            if (powerUpBarPlayerTwoParentGameObject.transform.childCount != 0)
+            {
+                for (int i = 0; i < powerUpBarPlayerTwoParentGameObject.transform.childCount; i++)
+                {
+                    if (powerUpBarPlayerTwoParentGameObject.transform.GetChild(i).gameObject.name == powerUpUIClockName)
+                        return powerUpBarPlayerTwoParentGameObject.transform.GetChild(i).gameObject;
+                }
+            }
+        }
+        return null;
+    }
+    internal void ResetDurationForTheUIPowerUpClock(Plane plane, string powerUpUIClockName)
+    {
+        if (ReturnPowerUpUIClockIfExists(plane, powerUpUIClockName) != null)
+            ReturnPowerUpUIClockIfExists(plane, powerUpUIClockName).GetComponent<UIPowerUp>().powerUpDurationCounter = ReturnPowerUpUIClockIfExists(plane, powerUpUIClockName).GetComponent<UIPowerUp>().powerUpDuration;
     }
     public void QuitGame()
     {

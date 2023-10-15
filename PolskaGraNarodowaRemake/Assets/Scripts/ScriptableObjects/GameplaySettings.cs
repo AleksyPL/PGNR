@@ -34,8 +34,9 @@ public class GameplaySettings : ScriptableObject
     public float cameraPositionXOffsetMulti;
     public float cameraDespawnDisatance;
     internal float cameraPositionXOffset;
-    [Header("Fade Out Tool Settings")]
+    [Header("Fade Tool Settings")]
     public float fadeOutLifeTime;
+    public float fadeInLifeTime;
     [Header("Flight Controller Settings")]
     public float defaultPlaneSpeed;
     public float altitudeChangeForce;
@@ -60,6 +61,7 @@ public class GameplaySettings : ScriptableObject
     public GameObject explosionPrefab;
     [Header("PowerUps")]
     public PowerUp[] powerUps;
+    public float durationTimeForPowerUpMessageOnTheScreen;
     private void OnEnable()
     {
         if (currentLanguage == Languages.Polski)
