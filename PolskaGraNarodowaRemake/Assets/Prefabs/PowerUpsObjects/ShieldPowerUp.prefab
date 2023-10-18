@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 93986127246805496}
   - component: {fileID: -5066397118196233507}
   - component: {fileID: -1878499805168822444}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: ShieldPowerUp
   m_TagString: PowerUp
   m_Icon: {fileID: 0}
@@ -51,7 +51,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameplaySettings: {fileID: 11400000, guid: d338db95f60174b41bd6e219f61b651f, type: 2}
   currentPowerUpScriptableObject: {fileID: 11400000, guid: 89e67a9d83dfa6040be81259ff32cafc, type: 2}
-  PowerUpUIClockPrefab: {fileID: 4995597508849887570, guid: c9fb0b10d8ab1064ba15eb77532b7da7, type: 3}
   currentPowerUp: 0
 --- !u!114 &6600728554898421845
 MonoBehaviour:

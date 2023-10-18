@@ -28,6 +28,7 @@ public class PowerUpObject : MonoBehaviour
         {
             if(currentPowerUp == PowerUp1.Shield)
             {
+                gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).cameraGameObject.GetComponent<CameraManager>().PlayCameraFocusAnimation();
                 if (!gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).shieldEnabled)
                 {
                     gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).shieldEnabled = true;
@@ -43,6 +44,7 @@ public class PowerUpObject : MonoBehaviour
             }
             else if (currentPowerUp == PowerUp1.FastPlane)
             {
+                gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).cameraGameObject.GetComponent<CameraManager>().PlayCameraFocusAnimation();
                 if (!gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).speedEnabled)
                 {
                     gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).speedEnabled = true;

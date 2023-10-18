@@ -8,12 +8,13 @@ public class PowerUpManager : MonoBehaviour
     //shield
     internal float shieldPlayerOneCounter;
     internal float shieldPlayerTwoCounter;
+    //speed
     internal float speedPlayerOneCounter;
     internal float speedPlayerTwoCounter;
 
-
     void Start()
     {
+        
         flightControllerScript = GetComponent<FlightController>();
         ResetDurationForThePowerUp(flightControllerScript.gameModeScript.playerOnePlane, "ShieldPowerUp");
         ResetDurationForThePowerUp(flightControllerScript.gameModeScript.playerTwoPlane, "SpeedPowerUp");
@@ -28,10 +29,12 @@ public class PowerUpManager : MonoBehaviour
     {
         CheckPlayerShield(flightControllerScript.gameModeScript.playerOnePlane);
         CheckPlayerSpeed(flightControllerScript.gameModeScript.playerOnePlane);
+        //CheckIfTheCameraIsCurrentlyShaking(flightControllerScript.gameModeScript.playerOnePlane);
         if (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusEndless)
         {
             CheckPlayerShield(flightControllerScript.gameModeScript.playerTwoPlane);
             CheckPlayerSpeed(flightControllerScript.gameModeScript.playerTwoPlane);
+            //CheckIfTheCameraIsCurrentlyShaking(flightControllerScript.gameModeScript.playerTwoPlane);
         }
     }
     internal void ResetDurationForThePowerUp(Plane plane, string powerUpName)
@@ -112,4 +115,5 @@ public class PowerUpManager : MonoBehaviour
             }
         }
     }
+    
 }
