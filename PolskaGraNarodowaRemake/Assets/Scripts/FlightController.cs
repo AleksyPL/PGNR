@@ -42,9 +42,24 @@ public class FlightController : MonoBehaviour
                 float bottleThrowForceCurrent = Mathf.Lerp(gameplaySettings.bottleThrowForceMin, gameplaySettings.bottleThrowForceMax, plane.timeToFullyChargeBottleThrowCounter / gameplaySettings.timeToFullyChargeBottleThrow);
                 Vector2 bottleThrowAngleCurrent = Vector2.Lerp(gameplaySettings.bottleThrowAngleMin, gameplaySettings.bottleThrowAngleMax, plane.timeToFullyChargeBottleThrowCounter / gameplaySettings.timeToFullyChargeBottleThrow);
                 plane.SpawnBottleOfVodka(bottleThrowForceCurrent, bottleThrowAngleCurrent);
+                if(plane.multiShotEnabled)
+                {
+                    plane.SpawnBottleOfVodka(bottleThrowForceCurrent, bottleThrowAngleCurrent * (1 + gameplaySettings.multishotSpread));
+                    plane.SpawnBottleOfVodka(bottleThrowForceCurrent, bottleThrowAngleCurrent * (1 - gameplaySettings.multishotSpread));
+                }
                 plane.timeToFullyChargeBottleThrowCounter = 0;
                 if (plane.difficultyImpulseEnabled == false)
                     plane.difficultyImpulseEnabled = true;
+                if (plane.gettingWastedXTimesMoreEnabled)
+                {
+                    plane.bottlesDrunk += gameplaySettings.gettingWastedXTimesMoreNumber;
+                    plane.bottlesDrunkTotal += gameplaySettings.gettingWastedXTimesMoreNumber;
+                }
+                else
+                {
+                    plane.bottlesDrunk++;
+                    plane.bottlesDrunkTotal++;
+                }
             }
         }
     }
@@ -94,13 +109,13 @@ public class FlightController : MonoBehaviour
     }
     private void Update()
     {
-        if(gameModeScript.playerOnePlane.currentPlaneState == PlaneState.standard || gameModeScript.playerOnePlane.currentPlaneState == PlaneState.wheelsOn)
+        if(!uiManagerScript.timerBeforeTheFlightEnabled && gameModeScript.playerOnePlane.currentPlaneState == PlaneState.standard || gameModeScript.playerOnePlane.currentPlaneState == PlaneState.wheelsOn)
         {
             MovePlaneStandardAndWheels(gameModeScript.playerOnePlane);
             if(gameModeScript.playerOnePlane.currentPlaneState != PlaneState.wheelsOn)
                 ThrowBottleOfVodka(gameModeScript.playerOnePlane);
         }
-        if((gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerClassic && gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerEndless) && (gameModeScript.playerTwoPlane.currentPlaneState == PlaneState.standard || gameModeScript.playerTwoPlane.currentPlaneState == PlaneState.wheelsOn))
+        if(!uiManagerScript.timerBeforeTheFlightEnabled && gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerClassic && gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerEndless && (gameModeScript.playerTwoPlane.currentPlaneState == PlaneState.standard || gameModeScript.playerTwoPlane.currentPlaneState == PlaneState.wheelsOn))
         {
             MovePlaneStandardAndWheels(gameModeScript.playerTwoPlane);
             if(gameModeScript.playerTwoPlane.currentPlaneState != PlaneState.wheelsOn)

@@ -35,7 +35,7 @@ public class DifficultyManager : MonoBehaviour
         if (plane.difficultyImpulseEnabled)
         {
             plane.difficultuImpulseCounter -= Time.deltaTime;
-            plane.planeGameObject.transform.position += new Vector3(0, plane.difficultyImpulseDirection * gameplaySettings.difficultyImpulseForce * plane.bottleDrunkCounter * Time.deltaTime, 0);
+            plane.planeGameObject.transform.position += new Vector3(0, plane.difficultyImpulseDirection * gameplaySettings.difficultyImpulseForce * plane.bottlesDrunk * Time.deltaTime, 0);
             if (plane.planeGameObject.transform.position.y > plane.topScreenHeight)
                 plane.planeGameObject.transform.position = new Vector3(plane.planeGameObject.transform.position.x, plane.topScreenHeight, 0);
             if (plane.difficultuImpulseCounter <= 0)

@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7555dfbe4f4f250448e4103e52c60097, type: 3}
   m_Name: SoberUp
   m_EditorClassIdentifier: 
-  powerUpName: 
-  powerUpDescriptionPL: 
-  powerUpDescriptionEN: 
-  powerUpDuration: 
+  powerUpName: SoberUpPowerUp
+  powerUpDescription:
+  - "Trze\u017Awiejesz"
+  - You are sobering up
+  powerUpDuration: 0
+  currentPowerUpImageBox: {fileID: 21300000, guid: f2f7695ef9a2b8d49b93a40300a81f80, type: 3}
+  currentPowerUpUIClockImage: {fileID: 0}

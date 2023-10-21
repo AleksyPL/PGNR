@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7555dfbe4f4f250448e4103e52c60097, type: 3}
   m_Name: MultiShot
   m_EditorClassIdentifier: 
-  powerUpDescriptionPL: 
-  powerUpDescriptionEN: 
-  powerUpDuration: 
+  powerUpName: MultiShotPowerUp
+  powerUpDescription:
+  - "Wypijasz trzy ma\u0142e butelki zamiast jednej du\u017Cej"
+  - You drink three small bottles instead of one large
+  powerUpDuration: 5
+  currentPowerUpImageBox: {fileID: 21300000, guid: f2f7695ef9a2b8d49b93a40300a81f80, type: 3}
+  currentPowerUpUIClockImage: {fileID: 21300000, guid: b7f3d1bafc15e2e4f80fdfb28a0bd11f, type: 3}

@@ -25,7 +25,8 @@ public class UIPowerUp : MonoBehaviour
             if (powerUpDurationCounter <= 0)
             {
                 uiManagerScript.ChangeTheOrderOnThePowerUpsBar(uiManagerScript.powerUpBarPlayerOneParentGameObject);
-                uiManagerScript.ChangeTheOrderOnThePowerUpsBar(uiManagerScript.powerUpBarPlayerTwoParentGameObject);
+                if(uiManagerScript.flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusEndless)
+                    uiManagerScript.ChangeTheOrderOnThePowerUpsBar(uiManagerScript.powerUpBarPlayerTwoParentGameObject);
             }
         }
     }

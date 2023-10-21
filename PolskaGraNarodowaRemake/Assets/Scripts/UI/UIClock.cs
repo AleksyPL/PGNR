@@ -38,7 +38,7 @@ public class UIClock : MonoBehaviour
         {
             flightControllerScript.levelManagerScript.LoadLevel();
         }
-        else
+        else if (flightControllerScript.uiManagerScript.pauseScreenEnabled)
         {
             Time.timeScale = 1;
             if (GameObject.Find("ActiveBottleWarning") != null)
@@ -63,6 +63,16 @@ public class UIClock : MonoBehaviour
             flightControllerScript.uiManagerScript.regularHUDMainGameObject.SetActive(true);
             flightControllerScript.audioManagerScript.ResumeAllPausedSounds();
             flightControllerScript.uiManagerScript.pauseScreenEnabled = false;
+        }
+        else
+        {
+            Time.timeScale = 1;
+            flightControllerScript.uiManagerScript.timerBeforeTheFlightEnabled = false;
+            flightControllerScript.uiManagerScript.regularHUDLevelProgressPlayerOneGameObject.GetComponent<TMP_Text>().text = "";
+            if(flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusClassic || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusEndless)
+                flightControllerScript.uiManagerScript.regularHUDLevelProgressPlayerTwoGameObject.GetComponent<TMP_Text>().text = "";
+            flightControllerScript.uiManagerScript.regularHUDMainGameObject.SetActive(true);
+            flightControllerScript.audioManagerScript.ResumeAllPausedSounds();
         }
         Destroy(transform.gameObject);
     }

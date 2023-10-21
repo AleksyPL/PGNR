@@ -82,3 +82,13 @@ loses
 You lose
 //Active Bottle Warning
 Bottle throw was active before pausing a game, hold the attack button to continue charging the attack, otherwise, the bottle will be thrown anyway
+//Classic Mode
+, Land safely at the airport!
+//Endless Mode - Single
+Fly as far as you can
+//Endless Mode - Versus
+Fly as far as you can, defeat your enemy
+//Power Up - Sober Up - You are sober
+You are sober
+//Power Up - Inverted Steering - control wheel repaired
+Your control wheel has repaired itself

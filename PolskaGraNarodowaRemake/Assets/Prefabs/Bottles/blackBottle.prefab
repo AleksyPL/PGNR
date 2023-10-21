@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crackedVersionPrefab: {fileID: 5855151004956493632, guid: a887636af86919e4ba9dceb29cbc5de5, type: 3}
-  explosionPrefab: {fileID: 3555890799097804707, guid: c87b6386b15942e4c8eb26d445727a4e, type: 3}
+  explosionPrefab: {fileID: 5340300019348822664, guid: 3e072ae572fe3ad4f99af6cac4ea688a, type: 3}
   gameplaySettings: {fileID: 11400000, guid: d338db95f60174b41bd6e219f61b651f, type: 2}
 --- !u!50 &-8991957748745707059
 Rigidbody2D:

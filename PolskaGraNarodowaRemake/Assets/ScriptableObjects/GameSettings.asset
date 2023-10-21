@@ -60,4 +60,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f25ff53517f68ca4996fdde2c9f93278, type: 2}
   - {fileID: 11400000, guid: 89e67a9d83dfa6040be81259ff32cafc, type: 2}
   - {fileID: 11400000, guid: 21abeccd03d07754ab113d9eb81373b9, type: 2}
+  - {fileID: 11400000, guid: 3932759e40ed4194bb38788406b3956a, type: 2}
   durationTimeForPowerUpMessageOnTheScreen: 3
+  gettingWastedXTimesMoreNumber: 3
+  multishotSpread: 0.2

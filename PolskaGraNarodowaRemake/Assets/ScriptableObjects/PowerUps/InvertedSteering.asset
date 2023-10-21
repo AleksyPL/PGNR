@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7555dfbe4f4f250448e4103e52c60097, type: 3}
   m_Name: InvertedSteering
   m_EditorClassIdentifier: 
-  powerUpDescriptionPL: 
-  powerUpDescriptionEN: 
-  powerUpDuration: 
+  powerUpName: InvertedSteeringPowerUp
+  powerUpDescription:
+  - "Tw\xF3j ster si\u0119 popsu\u0142"
+  - Your control wheel is broken
+  powerUpDuration: 3
+  currentPowerUpImageBox: {fileID: 21300000, guid: f2f7695ef9a2b8d49b93a40300a81f80, type: 3}
+  currentPowerUpUIClockImage: {fileID: 21300000, guid: 2173bcd05e5a8e745bfc2142fd68ba22, type: 3}

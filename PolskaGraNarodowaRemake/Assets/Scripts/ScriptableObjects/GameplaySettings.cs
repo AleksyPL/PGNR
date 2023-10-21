@@ -62,6 +62,8 @@ public class GameplaySettings : ScriptableObject
     [Header("PowerUps")]
     public PowerUp[] powerUps;
     public float durationTimeForPowerUpMessageOnTheScreen;
+    public int gettingWastedXTimesMoreNumber;
+    public float multishotSpread;
     private void OnEnable()
     {
         if (currentLanguage == Languages.Polski)

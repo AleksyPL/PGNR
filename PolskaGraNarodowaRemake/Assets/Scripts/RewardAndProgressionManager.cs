@@ -13,8 +13,6 @@ public class RewardAndProgressionManager : MonoBehaviour
     internal float levelProgressPlayerTwoCounter;
     private float scorePointsCounterPlayerOneCounter;
     private float scorePointsCounterPlayerTwoCounter;
-    internal int totalBottlesDrunkPlayerOne;
-    internal int totalBottlesDrunkPlayerTwo;
     internal bool toNewLevel;
     void Start()
     {

@@ -82,3 +82,13 @@ przegrywa
 Przegrywasz
 //Active Bottle Warning
 Rzut butelką aktywny przed zapauzowaniem gry, przytrzymaj przycisk ataku kontynuować ładowanie ataku, w przeciwnym razie butelka zostanie wystrzelona
+//Classic Mode
+, Wyląduj bezpiecznie na lotnisku!
+//Endless Mode - Single
+Leć jak najdalej
+//Endless Mode - Versus
+Leć jak najdalej, pokonaj przeciwnika
+//Power Up - Sober Up - You are sober
+Jesteś trzeźwy
+//Power Up - Inverted Steering - control wheel repaired
+Twój ster się naprawił

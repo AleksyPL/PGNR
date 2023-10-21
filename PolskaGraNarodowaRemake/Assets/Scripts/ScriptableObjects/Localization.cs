@@ -58,6 +58,14 @@ public class Localization : ScriptableObject
     internal string colorPanelPlayerWins;
     internal string colorPanelPlayerLoses;
     internal string colorPanelPlayerLosesSinglePlayer;
+    //game modes
+    internal string classicModeMessage;
+    internal string endlessSingleMessage;
+    internal string endlessVersusMessage;
+    //power Ups
+    internal string soberUpYouAreSoberMessage;
+    internal string invertedSteeringRepairedMessage;
+
     private void OnEnable()
     {
         LoadData();
@@ -119,6 +127,11 @@ public class Localization : ScriptableObject
             colorPanelPlayerLoses = listOfAll[79];
             colorPanelPlayerLosesSinglePlayer = listOfAll[81];
             activeBottleWarning = listOfAll[83];
+            classicModeMessage = listOfAll[85];
+            endlessSingleMessage = listOfAll[87];
+            endlessVersusMessage = listOfAll[89];
+            soberUpYouAreSoberMessage = listOfAll[91];
+            invertedSteeringRepairedMessage = listOfAll[93];
         }
     }
 }

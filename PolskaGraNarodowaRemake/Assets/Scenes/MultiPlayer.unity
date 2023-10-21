@@ -227,14 +227,9 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1082773052073075429, guid: 634ad76ae54ee6c4482d977cf834e3ac, type: 3}
   m_PrefabInstance: {fileID: 52441333}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &52441337 stripped
+--- !u!1 &52441335 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 1082773053093928744, guid: 634ad76ae54ee6c4482d977cf834e3ac, type: 3}
-  m_PrefabInstance: {fileID: 52441333}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &52441341 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1082773053313270302, guid: 634ad76ae54ee6c4482d977cf834e3ac, type: 3}
+  m_CorrespondingSourceObject: {fileID: 709499515900942839, guid: 634ad76ae54ee6c4482d977cf834e3ac, type: 3}
   m_PrefabInstance: {fileID: 52441333}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &52441343 stripped
@@ -2028,6 +2023,31 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5473055148817784095, guid: 66f13fd3eb8053e4a94762bcaef331d6, type: 3}
   m_PrefabInstance: {fileID: 5473055150505131774}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2097291906 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8535687717261512240, guid: af37a67e2c14f374eb7d00afa5eed0e1, type: 3}
+  m_PrefabInstance: {fileID: 1849406767}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2097291907 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8535687717897856753, guid: af37a67e2c14f374eb7d00afa5eed0e1, type: 3}
+  m_PrefabInstance: {fileID: 1849406767}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2097291908 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8535687717104712764, guid: af37a67e2c14f374eb7d00afa5eed0e1, type: 3}
+  m_PrefabInstance: {fileID: 1849406767}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2097291909 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8535687716876871785, guid: af37a67e2c14f374eb7d00afa5eed0e1, type: 3}
+  m_PrefabInstance: {fileID: 1849406767}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2097291910 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8535687717116870706, guid: af37a67e2c14f374eb7d00afa5eed0e1, type: 3}
+  m_PrefabInstance: {fileID: 1849406767}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2134856608
 GameObject:
   m_ObjectHideFlags: 0
@@ -2106,7 +2126,7 @@ MonoBehaviour:
     planeRendererGameObject: {fileID: 1562720028}
     projectilesParentGameObject: {fileID: 1172776397}
     cameraGameObject: {fileID: 1810758763}
-    godModeLevelStart: 1
+    godModeLevelStart: 0
   playerTwoPlane:
     gameplaySettings: {fileID: 11400000, guid: d338db95f60174b41bd6e219f61b651f, type: 2}
     planeGameObject: {fileID: 372025643}
@@ -2117,7 +2137,7 @@ MonoBehaviour:
     planeRendererGameObject: {fileID: 1878046767}
     projectilesParentGameObject: {fileID: 1172776397}
     cameraGameObject: {fileID: 199547950}
-    godModeLevelStart: 1
+    godModeLevelStart: 0
   gameModeSettingsOverride: 1
   currentGameMode: 3
 --- !u!114 &2134856612
@@ -2155,10 +2175,14 @@ MonoBehaviour:
   powerUpsPrefabs:
   - {fileID: 8758847133875726905, guid: 8abb5dbb56e3cb7499264e4616252e67, type: 3}
   - {fileID: 8758847133875726905, guid: 9845d665f07659943b1e1961170bf55a, type: 3}
+  - {fileID: 8758847133875726905, guid: 62a2e9259a9ca9c4f9e7cd598a004f69, type: 3}
+  - {fileID: 8758847133875726905, guid: 59c1587379ddf074c825491849384371, type: 3}
+  - {fileID: 8758847133875726905, guid: 786999b230ab4ca42ba4f62ef354ece0, type: 3}
+  - {fileID: 8758847133875726905, guid: efe9f2e538fe54b4ab1988b7c9676c0a, type: 3}
   obstaclesAndProjectilesParentGameObject: {fileID: 1172776397}
   powerUpsParentGameObject: {fileID: 66538046}
-  enableObstacles: 0
-  sameObstaclesForBothPlayes: 0
+  enableObstacles: 1
+  sameObstaclesForBothPlayes: 1
   enablePowerUps: 1
 --- !u!114 &2134856614
 MonoBehaviour:
@@ -2363,11 +2387,10 @@ MonoBehaviour:
   gameplaySettings: {fileID: 11400000, guid: d338db95f60174b41bd6e219f61b651f, type: 2}
   UIElements: {fileID: 1292206221}
   regularHUDMainGameObject: {fileID: 52441343}
-  regularHUDYearPlayerOneGameObject: {fileID: 52441341}
+  regularHUDPlayerTwoMainGameObject: {fileID: 52441335}
   regularHUDLevelProgressPlayerOneGameObject: {fileID: 493928483}
   regularHUDScorePlayerOneGameObject: {fileID: 493928485}
   regularHUDBottlesPlayerOneGameObject: {fileID: 493928484}
-  regularHUDYearPlayerTwoGameObject: {fileID: 52441337}
   regularHUDLevelProgressPlayerTwoGameObject: {fileID: 1126101634}
   regularHUDScorePlayerTwoGameObject: {fileID: 446547126}
   regularHUDBottlesPlayerTwoGameObject: {fileID: 735743962}
@@ -2403,6 +2426,11 @@ MonoBehaviour:
   pauseScreenTimerDuration: 3
   activeBottleWarningPrefab: {fileID: 6788948104780032561, guid: 8cfb5050171ec1f409c3ce53625a15c9, type: 3}
   gameOverScreenButtonsGameObject: {fileID: 1849406787}
+  gameOverScreenTryAgainButtonGameObject: {fileID: 2097291910}
+  gameOverScreenExitButtonGameObject: {fileID: 2097291909}
+  exitWarningTitleGameObject: {fileID: 2097291908}
+  exitWarningYesButtonGameObject: {fileID: 2097291906}
+  exitWarningNoButtonGameObject: {fileID: 2097291907}
 --- !u!114 &2134856619
 MonoBehaviour:
   m_ObjectHideFlags: 0

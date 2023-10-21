@@ -35,7 +35,8 @@ internal class Plane
     internal int difficultyImpulseDirection;
     internal float difficultyImpulsTimeCurrent;
     internal float difficultuImpulseCounter;
-    internal int bottleDrunkCounter;
+    internal int bottlesDrunk;
+    internal int bottlesDrunkTotal;
     //Camera borders
     internal float groundLevelHeight;
     internal float topScreenHeight;
@@ -57,6 +58,9 @@ internal class Plane
     //PowerUps
     internal bool shieldEnabled;
     internal bool speedEnabled;
+    internal bool invertedSteeringEnabled;
+    internal bool gettingWastedXTimesMoreEnabled;
+    internal bool multiShotEnabled;
     //Others
     internal AudioManager audioManagerScript;
     public bool godModeLevelStart;
@@ -81,14 +85,13 @@ internal class Plane
         tiresSFXPlayed = false;
         currentPlaneSpeed = gameplaySettings.defaultPlaneSpeed;
         altitudeChangeForce = gameplaySettings.altitudeChangeForce;
-        bottleDrunkCounter = 0;
-        difficultyImpulseEnabled = false;
-        difficultyImpulseDirection = 1;
-        difficultyImpulsTimeCurrent = 0;
         rewardForLandingAdded = false;
         timeToFullyChargeBottleThrowCounter = 0;
         shieldEnabled = false;
         speedEnabled = false;
+        invertedSteeringEnabled = false;
+        gettingWastedXTimesMoreEnabled = false;
+        multiShotEnabled = false;
         currentPlaneState = PlaneState.standard;
         planeRendererScript.ResetPlaneRenderer(currentPlaneState);
         if (smokeSpawnerInAirGameObject.transform.childCount != 0)
@@ -114,8 +117,14 @@ internal class Plane
                 bottle.GetComponent<Rigidbody2D>().AddTorque(180);
             else
                 bottle.GetComponent<Rigidbody2D>().AddTorque(-180);
-            bottleDrunkCounter++;
         }
+    }
+    internal void SoberUp()
+    {
+        bottlesDrunk = 0;
+        difficultyImpulseEnabled = false;
+        difficultyImpulseDirection = 1;
+        difficultyImpulsTimeCurrent = 0;
     }
     internal void DamageThePlane()
     {

@@ -11,7 +11,7 @@ public class PlaneRenderer : MonoBehaviour
     private float wheelsInitialPositionY;
     private void OnEnable()
     {
-        wheelsInitialPositionY = transform.parent.Find("WheelsRenderer").gameObject.transform.localPosition.y;
+        wheelsInitialPositionY = transform.Find("WheelsRenderer").gameObject.transform.localPosition.y;
         timeToFullySlideOutWheels = (float)System.Math.Round(timeToFullySlideOutWheels, 2);
     }
     private void Update()
@@ -33,8 +33,8 @@ public class PlaneRenderer : MonoBehaviour
         ChangeTilt(currentPlaneState, 0);
         transform.parent.Find("HolesRenderer").GetComponent<SpriteRenderer>().sprite = null;
         transform.parent.Find("HolesRenderer").gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
-        transform.parent.Find("WheelsRenderer").GetComponent<SpriteRenderer>().sprite = null;
-        transform.parent.Find("WheelsRenderer").gameObject.transform.localPosition = new Vector3(0, wheelsInitialPositionY, 0);
+        transform.Find("WheelsRenderer").GetComponent<SpriteRenderer>().sprite = null;
+        transform.Find("WheelsRenderer").gameObject.transform.localPosition = new Vector3(0, wheelsInitialPositionY, 0);
         wheelsSlidingOutCounter = 0;
         wheelsSlideOut = false;
     }
@@ -51,7 +51,7 @@ public class PlaneRenderer : MonoBehaviour
             }
             else if (currentPlaneState == PlaneState.wheelsOn)
             {
-                transform.parent.Find("WheelsRenderer").GetComponent<SpriteRenderer>().sprite = planeSkin.planeWheels;
+                transform.Find("WheelsRenderer").GetComponent<SpriteRenderer>().sprite = planeSkin.planeWheels;
                 wheelsSlideOut = true;
             }
             else if (currentPlaneState == PlaneState.damaged)
@@ -63,11 +63,11 @@ public class PlaneRenderer : MonoBehaviour
     }
     internal void ShowShield()
     {
-        transform.parent.Find("ShieldRenderer").GetComponent<SpriteRenderer>().gameObject.SetActive(true);
+        transform.Find("ShieldRenderer").GetComponent<SpriteRenderer>().gameObject.SetActive(true);
     }
     internal void HideShield()
     {
-        transform.parent.Find("ShieldRenderer").GetComponent<SpriteRenderer>().gameObject.SetActive(false);
+        transform.Find("ShieldRenderer").GetComponent<SpriteRenderer>().gameObject.SetActive(false);
     }
     internal void ChangeTilt(PlaneState currentPlaneState, float direction)
     {
@@ -88,7 +88,7 @@ public class PlaneRenderer : MonoBehaviour
     private void SlideOutWheels()
     {
         float lerpValue = wheelsSlidingOutCounter / timeToFullySlideOutWheels;
-        if (transform.parent.Find("WheelsRenderer").gameObject.transform.localPosition.y > 0)
-            transform.parent.Find("WheelsRenderer").gameObject.transform.localPosition = new Vector3(0, Mathf.Lerp(wheelsInitialPositionY, 0, lerpValue), 0);
+        if (transform.Find("WheelsRenderer").gameObject.transform.localPosition.y > 0)
+            transform.Find("WheelsRenderer").gameObject.transform.localPosition = new Vector3(0, Mathf.Lerp(wheelsInitialPositionY, 0, lerpValue), 0);
     }
 }

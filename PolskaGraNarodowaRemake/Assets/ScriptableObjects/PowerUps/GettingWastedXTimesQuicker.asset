@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7555dfbe4f4f250448e4103e52c60097, type: 3}
   m_Name: GettingWastedXTimesQuicker
   m_EditorClassIdentifier: 
-  powerUpName: 
-  powerUpDescriptionPL: 
-  powerUpDescriptionEN: 
-  powerUpDuration: 
+  powerUpName: GettingWastedXTimesMore
+  powerUpDescription:
+  - "Pusty \u017Co\u0142\u0105dek! Upijasz si\u0119 trzy razy szybciej"
+  - Empty stomach! You get drunk three times faster
+  powerUpDuration: 3
+  currentPowerUpImageBox: {fileID: 21300000, guid: f2f7695ef9a2b8d49b93a40300a81f80, type: 3}
+  currentPowerUpUIClockImage: {fileID: 21300000, guid: 40a64e8fcfb114043aad043eaff18e3c, type: 3}
