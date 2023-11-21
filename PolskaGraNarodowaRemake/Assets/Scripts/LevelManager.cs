@@ -16,6 +16,7 @@ public class LevelManager : MonoBehaviour
     public bool enableObstacles;
     public bool sameObstaclesForBothPlayes;
     public bool enablePowerUps;
+    public int numberOfPowerUpsPerSector;
     internal GameObject obstaclesBufferGameObject;
     internal FlightController flightControllerScript;
     private float distanceBetweenPlayers;
@@ -177,11 +178,11 @@ public class LevelManager : MonoBehaviour
             }
         }
     }
-    internal void SpawnPowerUps(Plane plane, GameObject powerUpParent, float placementPointXstart, float placementPointXFinish, float powerUpsPerChunk = 1)
+    internal void SpawnPowerUps(Plane plane, GameObject powerUpParent, float placementPointXstart, float placementPointXFinish)
     {
-        if(powerUpsPrefabs.Length !=0 && enablePowerUps && (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerEndless || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusEndless))
+        if(powerUpsPrefabs.Length !=0 && enablePowerUps && numberOfPowerUpsPerSector >= 1 && (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerEndless || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusEndless))
         {
-            for (int i = 0; i < powerUpsPerChunk; i++)
+            for (int i = 0; i < numberOfPowerUpsPerSector; i++)
             {
                 int powerUpNumber = Random.Range(0, powerUpsPrefabs.Length);
                 GameObject powerUpObject = Instantiate(powerUpsPrefabs[powerUpNumber], new Vector3(Random.Range(placementPointXstart, placementPointXFinish), Random.Range(plane.topScreenHeight, plane.groundLevelHeight + 2), 0), Quaternion.identity, powerUpParent.transform);

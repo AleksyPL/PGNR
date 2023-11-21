@@ -19,7 +19,7 @@ public class InputManager : MonoBehaviour
             {
                 float verticalMovementKeys = Input.GetAxisRaw("Vertical");
                 if (flightControllerScript.gameModeScript.playerOnePlane.invertedSteeringEnabled)
-                    verticalMovementKeys *= (-1);
+                    verticalMovementKeys = -verticalMovementKeys;
                 flightControllerScript.gameModeScript.playerOnePlane.verticalMovementKeys = verticalMovementKeys;
                 flightControllerScript.gameModeScript.playerOnePlane.attackKeyPressed = Input.GetButton("Jump");
                 flightControllerScript.gameModeScript.playerOnePlane.attackKeyReleased = Input.GetButtonUp("Jump");
@@ -29,7 +29,7 @@ public class InputManager : MonoBehaviour
         {
             float verticalMovementKeys = Input.GetAxisRaw("Vertical1");
             if (flightControllerScript.gameModeScript.playerTwoPlane.invertedSteeringEnabled)
-                verticalMovementKeys *= (-1);
+                verticalMovementKeys = -verticalMovementKeys;
             flightControllerScript.gameModeScript.playerTwoPlane.verticalMovementKeys = verticalMovementKeys;
             flightControllerScript.gameModeScript.playerTwoPlane.attackKeyPressed = Input.GetButton("Jump1");
             flightControllerScript.gameModeScript.playerTwoPlane.attackKeyReleased = Input.GetButtonUp("Jump1");

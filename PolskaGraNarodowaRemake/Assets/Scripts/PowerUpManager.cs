@@ -41,7 +41,7 @@ public class PowerUpManager : MonoBehaviour
 
     void Update()
     {
-        if (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerEndless)
+        if (flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerClassic && flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.versusClassic)
         {
             CheckPlayerShield(flightControllerScript.gameModeScript.playerOnePlane);
             CheckPlayerSpeed(flightControllerScript.gameModeScript.playerOnePlane);
@@ -104,16 +104,22 @@ public class PowerUpManager : MonoBehaviour
             {
                 shieldPlayerOneCounter -= Time.deltaTime;
                 if (shieldPlayerOneCounter <= 0)
+                {
+                    plane.planeRendererScript.HideShield();
+                    plane.shieldEnabled = false;
                     ResetDurationForThePowerUp(flightControllerScript.gameModeScript.playerOnePlane, "ShieldPowerUp");
+                }
             }
             else if (plane == flightControllerScript.gameModeScript.playerTwoPlane)
             {
                 shieldPlayerTwoCounter -= Time.deltaTime;
                 if (shieldPlayerTwoCounter <= 0)
+                {
+                    plane.planeRendererScript.HideShield();
+                    plane.shieldEnabled = false;
                     ResetDurationForThePowerUp(flightControllerScript.gameModeScript.playerTwoPlane, "ShieldPowerUp");
+                }
             }
-            plane.planeRendererScript.HideShield();
-            plane.shieldEnabled = false;
         }
     }
     private void CheckPlayerSpeed(Plane plane)
@@ -124,16 +130,22 @@ public class PowerUpManager : MonoBehaviour
             {
                 speedPlayerOneCounter -= Time.deltaTime;
                 if (speedPlayerOneCounter <= 0)
+                {
+                    plane.speedEnabled = false;
+                    plane.currentPlaneSpeed = flightControllerScript.gameplaySettings.defaultPlaneSpeed;
                     ResetDurationForThePowerUp(flightControllerScript.gameModeScript.playerOnePlane, "SpeedPowerUp");
+                }
             }
             else if (plane == flightControllerScript.gameModeScript.playerTwoPlane)
             {
                 speedPlayerTwoCounter -= Time.deltaTime;
                 if (speedPlayerTwoCounter <= 0)
+                {
+                    plane.speedEnabled = false;
+                    plane.currentPlaneSpeed = flightControllerScript.gameplaySettings.defaultPlaneSpeed;
                     ResetDurationForThePowerUp(flightControllerScript.gameModeScript.playerTwoPlane, "SpeedPowerUp");
+                }
             }
-            plane.speedEnabled = false;
-            plane.currentPlaneSpeed = flightControllerScript.gameplaySettings.defaultPlaneSpeed;
         }
     }
     private void CheckInvertedSteering(Plane plane)
@@ -144,15 +156,20 @@ public class PowerUpManager : MonoBehaviour
             {
                 steeringPlayerOneCounter -= Time.deltaTime;
                 if (steeringPlayerOneCounter <= 0)
+                {
+                    plane.invertedSteeringEnabled = false;
                     ResetDurationForThePowerUp(flightControllerScript.gameModeScript.playerOnePlane, "InvertedSteeringPowerUp");
+                }
             }
             else if (plane == flightControllerScript.gameModeScript.playerTwoPlane)
             {
                 steeringPlayerTwoCounter -= Time.deltaTime;
                 if (steeringPlayerTwoCounter <= 0)
+                {
+                    plane.invertedSteeringEnabled = false;
                     ResetDurationForThePowerUp(flightControllerScript.gameModeScript.playerTwoPlane, "InvertedSteeringPowerUp");
+                }
             }
-            plane.invertedSteeringEnabled = false;
         }
     }
     private void CheckGettingWastedXTimesMore(Plane plane)
@@ -163,15 +180,20 @@ public class PowerUpManager : MonoBehaviour
             {
                 gettingWastedXTimesMorePlayerOneCounter -= Time.deltaTime;
                 if (gettingWastedXTimesMorePlayerOneCounter <= 0)
+                {
+                    plane.gettingWastedXTimesMoreEnabled = false;
                     ResetDurationForThePowerUp(flightControllerScript.gameModeScript.playerOnePlane, "GettingWastedXTimesMorePowerUp");
+                }
             }
             else if (plane == flightControllerScript.gameModeScript.playerTwoPlane)
             {
                 gettingWastedXTimesMorePlayerTwoCounter -= Time.deltaTime;
                 if (gettingWastedXTimesMorePlayerTwoCounter <= 0)
+                {
+                    plane.gettingWastedXTimesMoreEnabled = false;
                     ResetDurationForThePowerUp(flightControllerScript.gameModeScript.playerTwoPlane, "GettingWastedXTimesMorePowerUp");
+                }
             }
-            plane.gettingWastedXTimesMoreEnabled = false;
         }
     }
     private void CheckMultiShot(Plane plane)
@@ -182,15 +204,20 @@ public class PowerUpManager : MonoBehaviour
             {
                 multiShotPlayerOneCounter -= Time.deltaTime;
                 if (multiShotPlayerOneCounter <= 0)
+                {
+                    plane.multiShotEnabled = false;
                     ResetDurationForThePowerUp(flightControllerScript.gameModeScript.playerOnePlane, "MultiShotPowerUp");
+                }
             }
             else if (plane == flightControllerScript.gameModeScript.playerTwoPlane)
             {
                 multiShotPlayerTwoCounter -= Time.deltaTime;
                 if (multiShotPlayerTwoCounter <= 0)
+                {
+                    plane.multiShotEnabled = false;
                     ResetDurationForThePowerUp(flightControllerScript.gameModeScript.playerTwoPlane, "MultiShotPowerUp");
+                }
             }
-            plane.multiShotEnabled = false;
         }
     }
 }

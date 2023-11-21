@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class FlightController : MonoBehaviour
@@ -75,6 +76,8 @@ public class FlightController : MonoBehaviour
             plane.planeGameObject.transform.position += new Vector3(plane.currentPlaneSpeed * Time.deltaTime, plane.verticalMovementKeys * plane.altitudeChangeForce * Time.deltaTime, 0);
         if (plane.planeGameObject.transform.position.y > plane.topScreenHeight)
             plane.planeGameObject.transform.position = new Vector3(plane.planeGameObject.transform.position.x, plane.topScreenHeight, 0);
+        if (plane.planeGameObject.transform.position.y < plane.groundLevelHeight)
+            plane.planeGameObject.transform.position = new Vector3(plane.planeGameObject.transform.position.x, plane.groundLevelHeight, 0);
         if (plane.isTouchingAirport)
         {
             audioManagerScript.StopPlayingSoundsFromTheSpecificSoundBank(audioManagerScript.oneLinersSounds);

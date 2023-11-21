@@ -94,6 +94,7 @@ internal class Plane
         multiShotEnabled = false;
         currentPlaneState = PlaneState.standard;
         planeRendererScript.ResetPlaneRenderer(currentPlaneState);
+        SoberUp();
         if (smokeSpawnerInAirGameObject.transform.childCount != 0)
             foreach (Transform child in smokeSpawnerInAirGameObject.transform)
                 GameObject.Destroy(child.gameObject);

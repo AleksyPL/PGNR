@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public enum GameMode
 {
@@ -24,6 +25,7 @@ public class MainMenuManager : MonoBehaviour
     //menu main buttons
     public GameObject menuButtonsMainGameObject;
     public GameObject playGameButton;
+    public GameObject plotButton;
     public GameObject howToPlayPanelMenuButton;
     public GameObject exitGameMenuButton;
     public GameObject optionsMenuButton;
@@ -32,12 +34,16 @@ public class MainMenuManager : MonoBehaviour
     //how to play menu
     public GameObject howToPlayPanelGameObject;
     public GameObject howToPlayPanelTitleGameObject;
-    public GameObject howToPlayPanelStoryGameObject;
     public GameObject howToPlayPanelControlsPlayerOneGameObject;
     public GameObject howToPlayPanelControlsPlayerTwoGameObject;
     public GameObject howToPlayPanelPlayerOneIndicatorGameObject;
     public GameObject howToPlayPanelPlayerTwoIndicatorGameObject;
     public GameObject howToPlayPanelBackToMainMenuButton;
+    //plot
+    public GameObject plotPanelGameObject;
+    public GameObject plotPanelTitleGameObject;
+    public GameObject plotPanelStoryGameObject;
+    public GameObject plotPanelBackToMainMenuButton;
     //skin selection menu
     public GameObject skinSelectorMenuGameObject;
     //game mode selection menu
@@ -51,6 +57,11 @@ public class MainMenuManager : MonoBehaviour
     void Start()
     {
         Application.targetFrameRate = 144;
+#if UNITY_EDITOR
+        gameplaySettings.safeMode = false;
+#else
+        GetArguments();
+#endif
         currentGameMode = GameMode.SinglePlayerClassic;
         planeSkinSelectorScript = GetComponent<PlaneSkinSelector>();
         audioScript = audioManagerGameObject.GetComponent<AudioManager>();
@@ -60,23 +71,29 @@ public class MainMenuManager : MonoBehaviour
     }
     private void UpdateUIButtonsWithLocalization()
     {
-        playGameButton.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuButton0;
+        playGameButton.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuStartGame;
         howToPlayPanelMenuButton.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuButton1;
         optionsMenuButton.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuButton2;
         exitGameMenuButton.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuButton3;
+        plotButton.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuButtonPlot;
         gameModeSelectionMenuBackToMainMenuButton.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].backToMainMenuButton;
         gameModeSelectionMenuTitleGameObject.GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].gameModeSelectionMenuTitle;
         startSinglePlayerClassicModeMenuButton.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].gameModeSelectionMenuButton0;
         startSinglePlayerEndlessModeMenuButton.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].gameModeSelectionMenuButton1;
         startMultiPlayerClassicModeMenuButton.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].gameModeSelectionMenuButton2;
         startMultiPlayerEndlessModeMenuButton.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].gameModeSelectionMenuButton3;
-        howToPlayPanelTitleGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].howToPlayTitle;
-        howToPlayPanelStoryGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].howToPlayStory;
+        howToPlayPanelTitleGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuButton1;
+        plotPanelTitleGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuButtonPlot;
+        if(gameplaySettings.safeMode)
+            plotPanelStoryGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].plotPlotAlt;
+        else
+            plotPanelStoryGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].plotPlot;
         howToPlayPanelControlsPlayerOneGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].howtoPlayControlsPlayerOne;
         howToPlayPanelControlsPlayerTwoGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].howtoPlayControlsPlayerTwo;
         howToPlayPanelPlayerOneIndicatorGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].playerOneIndicator;
         howToPlayPanelPlayerTwoIndicatorGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].playerTwoIndicator;
         howToPlayPanelBackToMainMenuButton.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].backToMainMenuButton;
+        plotPanelBackToMainMenuButton.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].backToMainMenuButton;
     }
     private void Update()
     {
@@ -93,18 +110,10 @@ public class MainMenuManager : MonoBehaviour
     {
         SceneManager.LoadScene("SinglePlayer");
     }
-    //public void StartGameSinglePlayerEndless()
-    //{
-    //    SceneManager.LoadScene("SinglePlayerEndlessMode");
-    //}
     public void StartGameMultiPlayer()
     {
         SceneManager.LoadScene("MultiPlayer");
     }
-    //public void StartGameMultiPlayerEndless()
-    //{
-    //    SceneManager.LoadScene("VersusEndlessMode");
-    //}
     public void QuitGame()
     {
         Application.Quit();
@@ -142,6 +151,17 @@ public class MainMenuManager : MonoBehaviour
         howToPlayPanelGameObject.SetActive(false);
         UpdateUIButtonsWithLocalization();
     }
+    public void EnablePlotPanel()
+    {
+        menuButtonsMainGameObject.SetActive(false);
+        plotPanelGameObject.SetActive(true);
+    }
+    public void DisablePlotPanel()
+    {
+        menuButtonsMainGameObject.SetActive(true);
+        plotPanelGameObject.SetActive(false);
+        UpdateUIButtonsWithLocalization();
+    }
     public void EnableSkinSelectorMenu(int newGameMode)
     {
         if (newGameMode == 0)
@@ -171,9 +191,21 @@ public class MainMenuManager : MonoBehaviour
             StartGameSinglePlayer();
         else if (currentGameMode == GameMode.VersusClassic || currentGameMode == GameMode.VersusEndless)
             StartGameMultiPlayer();
-        //else if (currentGameMode == GameMode.SinglePlayerEndless)
-        //    StartGameSinglePlayerEndless();
-        //else if (currentGameMode == GameMode.VersusEndless)
-        //    StartGameMultiPlayerEndless();
+    }
+    private void GetArguments()
+    {
+        string[] arguments = Environment.GetCommandLineArgs();
+        if(arguments.Length > 0)
+        {
+            for(int i=0;i<arguments.Length;i++)
+            {
+                if (arguments[i] == "-TrueGame")
+                {
+                    gameplaySettings.safeMode = false;
+                    break;
+                }
+            }
+            gameplaySettings.safeMode = true;
+        }
     }
 }

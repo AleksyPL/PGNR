@@ -1,4 +1,4 @@
-//Main menu - Button0
+//Main menu - StartGame
 START GAME
 //Main menu - Button1
 HOW TO PLAY
@@ -20,12 +20,12 @@ Versus endless mode
 Choose your plane
 //How to play - Title
 Motherland Calls, Pilot!
-//How to play - Story
-You have to fly the new Polish National Dreamliner far to the East with the President on board. But don't think that THE EAST will let you land so easily! Avoid the fog, cut down the birches, destroy the TNT. Vodka is your weapon. Unlimited quantities, because it is a Polish plane. But remember: the more you drink, the harder it is to fly ... Before throwing the vodka away, drink a bit. The lighter bottle goes much farther. Show the President that a Pole can!
+//Plot - Plot
+You have to fly the new Polish National Dreamliner far to the East with the President on board. <br><br>But don't think that THE EAST will let you land so easily! Avoid the fog, cut down the birches, destroy the TNT. Vodka is your weapon. Unlimited quantities, because it is a Polish plane. <br><br>But remember: the more you drink, the harder it is to fly ... Before throwing the vodka away, drink a bit. The lighter bottle goes much farther. <br><br>Show the President that a Pole can!
 //How to play - Controls - Player 1
-W and S - flying<br>Space - drinking<br>Space(Hold) - bottle will fly farther<br>ESC - pause menu
+W/S - flying<br>Space - drinking<br>Space(Hold) - bottle will fly farther<br>ESC - pause menu
 //How to play - Controls - Player 2
-Arrows Up and Down - flying<br>0 on numpad - drinking<br>0 on numpad(Hold) - bottle will fly farther<br>Backspace - pause menu
+Arrows Up/Down - flying<br>R.CTRL - drinking<br>R.CTRL(Hold) - bottle will fly farther<br>Backspace - pause menu
 //How to play - Controls - Player 1 indicator
 Player 1
 //How to play - Controls - Player 2 indicator
@@ -92,3 +92,9 @@ Fly as far as you can, defeat your enemy
 You are sober
 //Power Up - Inverted Steering - control wheel repaired
 Your control wheel has repaired itself
+//Congratulations after Landing
+Congratulations, you landed safely
+//Main Menu - Plot
+PLOT
+//Plot - Alt Plot
+They are fine

@@ -9,10 +9,11 @@ public class Localization : ScriptableObject
     public string localizationTextFile;
     //public TextAsset localizationTextFile;
     //main menu
-    internal string mainMenuButton0;
+    internal string mainMenuStartGame;
     internal string mainMenuButton1;
     internal string mainMenuButton2;
     internal string mainMenuButton3;
+    internal string mainMenuButtonPlot;
     //game mode selection menu
     internal string gameModeSelectionMenuTitle;
     internal string gameModeSelectionMenuButton0;
@@ -23,7 +24,8 @@ public class Localization : ScriptableObject
     internal string skinSelectionMenuTitle;
     //how to play
     internal string howToPlayTitle;
-    internal string howToPlayStory;
+    internal string plotPlot;
+    internal string plotPlotAlt;
     internal string howtoPlayControlsPlayerOne;
     internal string howtoPlayControlsPlayerTwo;
     internal string playerOneIndicator;
@@ -43,6 +45,7 @@ public class Localization : ScriptableObject
     internal string regularHudProgression1;
     internal string regularHudLandingMessage;
     internal string regularHudPlaneHit;
+    internal string regularHudCongratulationsAfterLanding;
     //pause screen
     internal string pauseScreenPauseMainTitle;
     internal string pauseScreenGameOverMainTitle;
@@ -85,7 +88,7 @@ public class Localization : ScriptableObject
         }
         if (listOfAll.Count != 0)
         {
-            mainMenuButton0 = listOfAll[1];
+            mainMenuStartGame = listOfAll[1];
             mainMenuButton1 = listOfAll[3];
             mainMenuButton2 = listOfAll[5];
             mainMenuButton3 = listOfAll[7];
@@ -96,7 +99,8 @@ public class Localization : ScriptableObject
             gameModeSelectionMenuButton3 = listOfAll[17];
             skinSelectionMenuTitle = listOfAll[19];
             howToPlayTitle = listOfAll[21];
-            howToPlayStory = listOfAll[23];
+            plotPlot = listOfAll[23];
+            plotPlotAlt = listOfAll[99];
             howtoPlayControlsPlayerOne = listOfAll[25];
             howtoPlayControlsPlayerTwo = listOfAll[27];
             playerOneIndicator = listOfAll[29];
@@ -132,6 +136,8 @@ public class Localization : ScriptableObject
             endlessVersusMessage = listOfAll[89];
             soberUpYouAreSoberMessage = listOfAll[91];
             invertedSteeringRepairedMessage = listOfAll[93];
+            regularHudCongratulationsAfterLanding = listOfAll[95];
+            mainMenuButtonPlot = listOfAll[97];
         }
     }
 }

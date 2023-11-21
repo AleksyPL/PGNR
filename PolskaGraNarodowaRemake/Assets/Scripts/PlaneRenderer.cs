@@ -63,11 +63,11 @@ public class PlaneRenderer : MonoBehaviour
     }
     internal void ShowShield()
     {
-        transform.Find("ShieldRenderer").GetComponent<SpriteRenderer>().gameObject.SetActive(true);
+        transform.Find("ShieldRenderer").GetComponent<SpriteRenderer>().enabled = true;
     }
     internal void HideShield()
     {
-        transform.Find("ShieldRenderer").GetComponent<SpriteRenderer>().gameObject.SetActive(false);
+        transform.Find("ShieldRenderer").GetComponent<SpriteRenderer>().enabled = false;
     }
     internal void ChangeTilt(PlaneState currentPlaneState, float direction)
     {

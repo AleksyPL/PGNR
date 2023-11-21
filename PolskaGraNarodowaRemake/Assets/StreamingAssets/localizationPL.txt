@@ -1,4 +1,4 @@
-//Main menu - Button0
+//Main menu - StartGame
 ROZPOCZNIJ GRĘ
 //Main menu - Button1
 JAK GRAĆ
@@ -20,12 +20,12 @@ Gra przeciw drugiemu graczowi nieskończona
 Wybierz swój samolot
 //How to play - Title
 Pilocie, Ojczyzna Wzywa!
-//How to play - Story
-Musisz polecieć nowym polskim Narodowym Drimlajnerem daleko na Wschód z Panem Prezydentem na pokładzie. Nie licz jednak na to, że Wschód pozwoli ci tak łatwo wylądować! Omiń mgły, zetnij brzozy, zniszcz trotyl. Twoją bronią jest wódka. Nieograniczone ilości, bo to polski samolot. Ale pamiętaj: im więcej pijesz, tym trudniej się leci... Przed wyrzuceniem wódki, wypij trochę. Lżejsza butelka dalej leci. Pokaż Panu Prezydentowi, że Polak potrafi!
+//Plot - Plot
+Musisz polecieć nowym polskim Narodowym Drimlajnerem daleko na Wschód z Panem Prezydentem na pokładzie. <br><br>Nie licz jednak na to, że Wschód pozwoli ci tak łatwo wylądować! Omiń mgły, zetnij brzozy, zniszcz trotyl. Twoją bronią jest wódka. Nieograniczone ilości, bo to polski samolot. <br><br>Ale pamiętaj: im więcej pijesz, tym trudniej się leci... Przed wyrzuceniem wódki, wypij trochę. Lżejsza butelka dalej leci. <br><br>Pokaż Panu Prezydentowi, że Polak potrafi!
 //How to play - Controls - Player 1
-W oraz S - sterowanie<br>Spacja - pijesz<br>Spacja(Przytrzymaj) - butelka poleci dalej<br>ESC - menu pauzy
+W/S - sterowanie<br>Spacja - pijesz<br>Spacja(Przytrzymaj) - butelka poleci dalej<br>ESC - menu pauzy
 //How to play - Controls - Player 2
-Strzałki góra i dół - sterowanie<br>0 klaw. num. - pijesz<br>0 klaw. num.(Przytrzymaj) - butelka poleci dalej<br>Backspace - menu pauzy
+Strzałki góra/dół - sterowanie<br>P.CTRL - pijesz<br>P.CTRL(Przytrzymaj) - butelka poleci dalej<br>Backspace - menu pauzy
 //How to play - Controls - Player 1 indicator
 Gracz 1
 //How to play - Controls - Player 2 indicator
@@ -92,3 +92,9 @@ Leć jak najdalej, pokonaj przeciwnika
 Jesteś trzeźwy
 //Power Up - Inverted Steering - control wheel repaired
 Twój ster się naprawił
+//Congratulations after Landing
+Gratulacje, bezpiecznie wylądowałeś na miejscu
+//Main Menu - Plot
+FABUŁA
+//Plot - Alt Plot
+Wszystko dobrze robio
