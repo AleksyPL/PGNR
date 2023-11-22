@@ -1435,155 +1435,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2237e657e9e034b458395414a067e260, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oneLinersSounds:
-  - clip: {fileID: 8300000, guid: dec7a67cbcb770d458a583bdcc334623, type: 3}
-    name: OneLiner0
-    volumeSetInEditor: 1
-    pitch: 1
-    looping: 0
-    source: {fileID: 0}
-  - clip: {fileID: 8300000, guid: f9045fdf5d86d104f9c047a714c6f6db, type: 3}
-    name: OneLiner1
-    volumeSetInEditor: 1
-    pitch: 1
-    looping: 0
-    source: {fileID: 0}
-  - clip: {fileID: 8300000, guid: 5da7e78a8b7ff724f9622601e7d4ee42, type: 3}
-    name: OneLiner2
-    volumeSetInEditor: 1
-    pitch: 1
-    looping: 0
-    source: {fileID: 0}
-  - clip: {fileID: 8300000, guid: 00edd58e09a74ec439a85105dcb30913, type: 3}
-    name: OneLiner3
-    volumeSetInEditor: 1
-    pitch: 1
-    looping: 0
-    source: {fileID: 0}
-  - clip: {fileID: 8300000, guid: 0aad579aadeff994581f93e5479fa7a1, type: 3}
-    name: OneLiner4
-    volumeSetInEditor: 1
-    pitch: 1
-    looping: 0
-    source: {fileID: 0}
-  - clip: {fileID: 8300000, guid: faa9224c55a183e40a2e5cb4161f1cbf, type: 3}
-    name: OneLiner5
-    volumeSetInEditor: 1
-    pitch: 1
-    looping: 0
-    source: {fileID: 0}
-  - clip: {fileID: 8300000, guid: 39f7cf8474691b648a0d6ab744e5fca4, type: 3}
-    name: OneLiner6
-    volumeSetInEditor: 1
-    pitch: 1
-    looping: 0
-    source: {fileID: 0}
-  - clip: {fileID: 8300000, guid: 72b555cff04b8274baeb0227f395d716, type: 3}
-    name: OneLiner7
-    volumeSetInEditor: 1
-    pitch: 1
-    looping: 0
-    source: {fileID: 0}
-  - clip: {fileID: 8300000, guid: a8c9760b283f17049ba1c26403a3ffed, type: 3}
-    name: OneLiner8
-    volumeSetInEditor: 1
-    pitch: 1
-    looping: 0
-    source: {fileID: 0}
-  - clip: {fileID: 8300000, guid: 6161b84a17741f545ba702108be19bce, type: 3}
-    name: OneLiner9
-    volumeSetInEditor: 1
-    pitch: 1
-    looping: 0
-    source: {fileID: 0}
-  hitReactionSounds:
-  - clip: {fileID: 8300000, guid: 07459aaca5ead2f4283b81ed81a8589f, type: 3}
-    name: HitReaction0
-    volumeSetInEditor: 1
-    pitch: 1
-    looping: 0
-    source: {fileID: 0}
-  - clip: {fileID: 8300000, guid: 4be9e1f5f796ab749bc9d53281a49054, type: 3}
-    name: HitReaction1
-    volumeSetInEditor: 1
-    pitch: 1
-    looping: 0
-    source: {fileID: 0}
+  oneLiners:
+  - {fileID: 11400000, guid: b8b624ae7c3a11f48acc1fd3b6502f61, type: 2}
+  - {fileID: 11400000, guid: c6ae4f7c7dace9e4e8b13f55bc2d87bd, type: 2}
+  oneLinersSafe:
+  - {fileID: 11400000, guid: 8ae483f99733ee54b9ce13573ef833dd, type: 2}
+  - {fileID: 11400000, guid: 418da3b715313dd47a2bd5ad4ac32f25, type: 2}
+  hitReactions:
+  - {fileID: 11400000, guid: bbde4254a27e37d419bfec772282690c, type: 2}
+  - {fileID: 11400000, guid: 7576c2d8e4f9abe439765978b135fabd, type: 2}
+  hitReactionsSafe:
+  - {fileID: 11400000, guid: 5949093bca7309845b3cfedf25a40295, type: 2}
+  - {fileID: 11400000, guid: f2ae75636ea472444b8962019d4bfdb6, type: 2}
   landingSounds:
-  - clip: {fileID: 8300000, guid: b82832a18a87cf841bc07140bb6b42a7, type: 3}
-    name: Landing0
-    volumeSetInEditor: 1
-    pitch: 1
-    looping: 0
-    source: {fileID: 0}
-  - clip: {fileID: 8300000, guid: 9a318c4ae0617b748b80e72e9e26af52, type: 3}
-    name: Landing1
-    volumeSetInEditor: 1
-    pitch: 1
-    looping: 0
-    source: {fileID: 0}
-  - clip: {fileID: 8300000, guid: 4811ddcbfdccb434298d218f459e5ebc, type: 3}
-    name: Landing2
-    volumeSetInEditor: 1
-    pitch: 1
-    looping: 0
-    source: {fileID: 0}
-  - clip: {fileID: 8300000, guid: 4a43de6433f7583499e8eb8f718e6ed6, type: 3}
-    name: Landing3
-    volumeSetInEditor: 1
-    pitch: 1
-    looping: 0
-    source: {fileID: 0}
-  SFX:
-  - clip: {fileID: 8300000, guid: 36dfecd7cee10d14a81a39d871f534bf, type: 3}
-    name: EngineSound
-    volumeSetInEditor: 0.8
-    pitch: 0.9
-    looping: 1
-    source: {fileID: 0}
-  - clip: {fileID: 8300000, guid: a4272c560b2baeb43b5f9929f152ddda, type: 3}
-    name: BreakingGlass
-    volumeSetInEditor: 1
-    pitch: 1
-    looping: 0
-    source: {fileID: 0}
-  - clip: {fileID: 8300000, guid: 1978bd7b5386652438aa330bf6811b36, type: 3}
-    name: Cannon
-    volumeSetInEditor: 1
-    pitch: 1
-    looping: 0
-    source: {fileID: 0}
-  - clip: {fileID: 8300000, guid: a337f753d2316b443bdd834f837da741, type: 3}
-    name: Explosion
-    volumeSetInEditor: 1
-    pitch: 1
-    looping: 0
-    source: {fileID: 0}
-  - clip: {fileID: 8300000, guid: bbeb5e9f17048054080a508ccdbb31ab, type: 3}
-    name: Tires
-    volumeSetInEditor: 1
-    pitch: 1
-    looping: 0
-    source: {fileID: 0}
-  - clip: {fileID: 8300000, guid: 5e6bb69571dc6764da467ddd67b8b47d, type: 3}
-    name: Whistle
-    volumeSetInEditor: 1
-    pitch: 1
-    looping: 0
-    source: {fileID: 0}
-  otherSounds:
-  - clip: {fileID: 8300000, guid: 4109530998a2cea4483fab1060eae099, type: 3}
-    name: MainMenuTheme
-    volumeSetInEditor: 1
-    pitch: 1
-    looping: 1
-    source: {fileID: 0}
-  - clip: {fileID: 8300000, guid: a9e6bd91da09fbd45b09a7af2be4b9fa, type: 3}
-    name: TopGunTheme
-    volumeSetInEditor: 0.7
-    pitch: 1
-    looping: 1
-    source: {fileID: 0}
+  - {fileID: 11400000, guid: 0b08c5cae74f038479a6cad6bd9f2924, type: 2}
+  - {fileID: 11400000, guid: b83690898c83ccc458298c9991b2026e, type: 2}
+  landingSoundsSafe:
+  - {fileID: 11400000, guid: 7010498fcc7f552458fc0f74ee78fb12, type: 2}
+  - {fileID: 11400000, guid: 6e7fdb99aef85ff4d9a36576fd0213f7, type: 2}
+  otherSounds: {fileID: 11400000, guid: 4dc2b70a9f3f78b4c8b913aca4cd5530, type: 2}
+  otherSoundsSafe: {fileID: 11400000, guid: 42e01dfb2c618ff4a9ede9a854dd5b63, type: 2}
+  SFX: {fileID: 11400000, guid: 475e60e399f56f343b40a313cee488b8, type: 2}
   gameplaySettings: {fileID: 11400000, guid: d338db95f60174b41bd6e219f61b651f, type: 2}
   UIManagerGameObject: {fileID: 321047451}
 --- !u!114 &2084290468
@@ -1630,6 +1502,7 @@ MonoBehaviour:
   enableObstacles: 1
   sameObstaclesForBothPlayes: 0
   enablePowerUps: 1
+  numberOfPowerUpsPerSector: 0
 --- !u!114 &2084290470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1793,6 +1666,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 321047455}
     m_Modifications:
+    - target: {fileID: 709499515900942839, guid: 634ad76ae54ee6c4482d977cf834e3ac, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1082773052073075428, guid: 634ad76ae54ee6c4482d977cf834e3ac, type: 3}
       propertyPath: m_Name
       value: RegularHUD

@@ -28,9 +28,8 @@ MonoBehaviour:
   rewardForLanding: 100
   rewardForHittingATarget: 50
   rewardPerSecond: 1
-  cameraPositionXOffsetSingle: 12
-  cameraPositionXOffsetMulti: 25
-  cameraDespawnDisatance: 20
+  camerePositionXOffsetPersentageSingle: 0.4
+  camerePositionXOffsetPersentageMulti: 0.45
   fadeOutLifeTime: 1
   fadeInLifeTime: 1
   defaultPlaneSpeed: 6.5

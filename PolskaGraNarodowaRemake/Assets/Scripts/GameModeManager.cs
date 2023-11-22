@@ -36,12 +36,8 @@ public class GameModeManager : MonoBehaviour
         playerOnePlane.LoadPlaneData(0);
         SetUpGameMode();
         if (currentGameMode != GameMode.singleplayerClassic && currentGameMode != GameMode.singleplayerEndless)
-        {
             playerTwoPlane.LoadPlaneData(1);
-            flightControllerScript.gameplaySettings.cameraPositionXOffset = flightControllerScript.gameplaySettings.cameraPositionXOffsetMulti;
-        }
-        else
-            flightControllerScript.gameplaySettings.cameraPositionXOffset = flightControllerScript.gameplaySettings.cameraPositionXOffsetSingle;
+        CalculateCameraOffset();
         waitingTimeForOneLinerCurrent = 0;
         someoneWon = false;
     }
@@ -176,5 +172,13 @@ public class GameModeManager : MonoBehaviour
             return ref playerOnePlane;
         else
             return ref playerTwoPlane;
+    }
+    private void CalculateCameraOffset()
+    {
+        float offsetX = playerOnePlane.cameraGameObject.GetComponent<Camera>().aspect * 2 * playerOnePlane.cameraGameObject.GetComponent<Camera>().orthographicSize;
+        if (currentGameMode == GameMode.singleplayerClassic || currentGameMode == GameMode.singleplayerEndless)
+            flightControllerScript.gameplaySettings.cameraPositionXOffset = offsetX * flightControllerScript.gameplaySettings.camerePositionXOffsetPersentageSingle;
+        else if (currentGameMode == GameMode.versusClassic || currentGameMode == GameMode.versusEndless)
+            flightControllerScript.gameplaySettings.cameraPositionXOffset = offsetX * flightControllerScript.gameplaySettings.camerePositionXOffsetPersentageMulti;
     }
 }
