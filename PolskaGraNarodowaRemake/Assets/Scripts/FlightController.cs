@@ -27,7 +27,7 @@ public class FlightController : MonoBehaviour
     }
     private void Start()
     {
-        audioManagerScript.PlaySound("TopGunTheme", audioManagerScript.otherSounds);
+        audioManagerScript.PlaySound("TopGunTheme", audioManagerScript.localOtherSounds);
     }
     internal void ThrowBottleOfVodka(Plane plane, bool pressedBeforePauseScreen = false)
     {
@@ -80,11 +80,11 @@ public class FlightController : MonoBehaviour
             plane.planeGameObject.transform.position = new Vector3(plane.planeGameObject.transform.position.x, plane.groundLevelHeight, 0);
         if (plane.isTouchingAirport)
         {
-            audioManagerScript.StopPlayingSoundsFromTheSpecificSoundBank(audioManagerScript.oneLinersSounds);
-            audioManagerScript.StopPlayingSound("EngineSound", audioManagerScript.SFX);
+            audioManagerScript.StopPlayingSoundsFromTheSpecificSoundBank(audioManagerScript.localOneLinersSounds);
+            audioManagerScript.StopPlayingSound("EngineSound", audioManagerScript.localSFX);
             if(!plane.tiresSFXPlayed)
             {
-                audioManagerScript.PlaySound("Tires", audioManagerScript.SFX);
+                audioManagerScript.PlaySound("Tires", audioManagerScript.localSFX);
                 plane.tiresSFXPlayed = true;
             }
             plane.verticalMovementKeys = 0;

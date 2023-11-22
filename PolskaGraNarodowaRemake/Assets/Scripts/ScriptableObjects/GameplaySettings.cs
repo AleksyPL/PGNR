@@ -65,7 +65,7 @@ public class GameplaySettings : ScriptableObject
     public int gettingWastedXTimesMoreNumber;
     public float multishotSpread;
     [Header("Other")]
-    public bool safeMode;
+    internal bool safeMode;
     private void OnEnable()
     {
         if (currentLanguage == Languages.Polski)

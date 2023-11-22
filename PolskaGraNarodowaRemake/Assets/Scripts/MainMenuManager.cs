@@ -58,14 +58,14 @@ public class MainMenuManager : MonoBehaviour
     {
         Application.targetFrameRate = 144;
 #if UNITY_EDITOR
-        gameplaySettings.safeMode = false;
+        gameplaySettings.safeMode = true;
 #else
         GetArguments();
 #endif
         currentGameMode = GameMode.SinglePlayerClassic;
         planeSkinSelectorScript = GetComponent<PlaneSkinSelector>();
         audioScript = audioManagerGameObject.GetComponent<AudioManager>();
-        audioScript.PlaySound("MainMenuTheme", audioScript.otherSounds);
+        audioScript.PlaySound("MainMenuTheme", audioScript.localOtherSounds);
         menuButtonsMainGameObject.SetActive(true);
         UpdateUIButtonsWithLocalization();
     }

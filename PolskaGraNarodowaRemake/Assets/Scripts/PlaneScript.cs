@@ -132,25 +132,25 @@ internal class Plane
         currentPlaneState = PlaneState.damaged;
         planeRendererScript.ChangePlaneSprite(currentPlaneState);
         planeRendererScript.ChangeTilt(currentPlaneState, -1);
-        audioManagerScript.StopPlayingSoundsFromTheSpecificSoundBank(audioManagerScript.oneLinersSounds);
-        audioManagerScript.PlaySound("Whistle", audioManagerScript.SFX);
+        audioManagerScript.StopPlayingSoundsFromTheSpecificSoundBank(audioManagerScript.localOneLinersSounds);
+        audioManagerScript.PlaySound("Whistle", audioManagerScript.localSFX);
         if (gameplaySettings.smokePrefab != null)
             Object.Instantiate(gameplaySettings.smokePrefab, smokeSpawnerInAirGameObject.transform.position, Quaternion.Euler(270, 0, 0), smokeSpawnerInAirGameObject.transform);
         if (gameplaySettings.explosionPrefab != null)
         {
             Object.Instantiate(gameplaySettings.explosionPrefab, planeGameObject.transform.position, Quaternion.identity, planeGameObject.transform);
-            audioManagerScript.PlaySound("Explosion", audioManagerScript.SFX);
+            audioManagerScript.PlaySound("Explosion", audioManagerScript.localSFX);
         }
-        int randomSoundEffect = Random.Range(0, audioManagerScript.hitReactionSounds.Length);
-        audioManagerScript.PlaySound("HitReaction" + randomSoundEffect, audioManagerScript.hitReactionSounds);
+        int randomSoundEffect = Random.Range(0, audioManagerScript.localHitReactionSounds.Length);
+        audioManagerScript.PlaySound("HitReaction" + randomSoundEffect, audioManagerScript.localHitReactionSounds);
     }
     internal void DestroyThePlane()
     {
         currentPlaneState = PlaneState.crashed;
         planeRendererScript.ChangePlaneSprite(currentPlaneState);
         planeRendererScript.ChangeTilt(currentPlaneState, -1);
-        audioManagerScript.StopPlayingSound("Whistle", audioManagerScript.SFX);
-        audioManagerScript.StopPlayingSound("EngineSound", audioManagerScript.SFX);
+        audioManagerScript.StopPlayingSound("Whistle", audioManagerScript.localSFX);
+        audioManagerScript.StopPlayingSound("EngineSound", audioManagerScript.localSFX);
         if (gameplaySettings.smokePrefab != null)
         {
             if (smokeSpawnerInAirGameObject.transform.childCount != 0)
@@ -170,7 +170,7 @@ internal class Plane
         if (gameplaySettings.explosionPrefab != null)
         {
             Object.Instantiate(gameplaySettings.explosionPrefab, planeGameObject.transform.position, Quaternion.identity, planeGameObject.transform);
-            audioManagerScript.PlaySound("Explosion", audioManagerScript.SFX);
+            audioManagerScript.PlaySound("Explosion", audioManagerScript.localSFX);
         }
     }
 }

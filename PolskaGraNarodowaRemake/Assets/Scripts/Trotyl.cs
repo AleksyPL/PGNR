@@ -18,7 +18,7 @@ public class Trotyl : MonoBehaviour
             if (gameModeManagerScript.flightControllerScript.gameplaySettings.explosionPrefab != null)
             {
                 Instantiate(gameModeManagerScript.flightControllerScript.gameplaySettings.explosionPrefab, transform.position, Quaternion.identity, gameModeManagerScript.transform.Find("ObstaclesAndProjectiles").transform);
-                audioScript.PlaySound("Explosion", audioScript.SFX);
+                audioScript.PlaySound("Explosion", audioScript.localSFX);
             }
             Destroy(gameObject);
         }
