@@ -21,7 +21,7 @@ Choose your plane
 //How to play - Title
 Motherland Calls, Pilot!
 //Plot - Plot
-You have to fly the new Polish National Dreamliner far to the East with the President on board. <br><br>But don't think that THE EAST will let you land so easily! Avoid the fog, cut down the birches, destroy the TNT. Vodka is your weapon. Unlimited quantities, because it is a Polish plane. <br><br>But remember: the more you drink, the harder it is to fly ... Before throwing the vodka away, drink a bit. The lighter bottle goes much farther. <br><br>Show the President that a Pole can!
+Great success
 //How to play - Controls - Player 1
 W/S - flying<br>Space - drinking<br>Space(Hold) - bottle will fly farther<br>ESC - pause menu
 //How to play - Controls - Player 2

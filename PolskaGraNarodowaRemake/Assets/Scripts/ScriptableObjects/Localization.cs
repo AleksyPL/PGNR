@@ -25,7 +25,6 @@ public class Localization : ScriptableObject
     //how to play
     internal string howToPlayTitle;
     internal string plotPlot;
-    internal string plotPlotAlt;
     internal string howtoPlayControlsPlayerOne;
     internal string howtoPlayControlsPlayerTwo;
     internal string playerOneIndicator;
@@ -69,11 +68,7 @@ public class Localization : ScriptableObject
     internal string soberUpYouAreSoberMessage;
     internal string invertedSteeringRepairedMessage;
 
-    private void OnEnable()
-    {
-        LoadData();
-    }
-    private void LoadData()
+    internal void LoadData()
     {
         List<string> listOfAll = new List<string>();
         if(localizationTextFile != null)
@@ -100,7 +95,6 @@ public class Localization : ScriptableObject
             skinSelectionMenuTitle = listOfAll[19];
             howToPlayTitle = listOfAll[21];
             plotPlot = listOfAll[23];
-            plotPlotAlt = listOfAll[99];
             howtoPlayControlsPlayerOne = listOfAll[25];
             howtoPlayControlsPlayerTwo = listOfAll[27];
             playerOneIndicator = listOfAll[29];

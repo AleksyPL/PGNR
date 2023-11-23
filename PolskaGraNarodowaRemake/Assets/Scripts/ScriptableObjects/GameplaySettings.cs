@@ -14,7 +14,9 @@ public class GameplaySettings : ScriptableObject
     [Header("Language Settings")]
     public Languages currentLanguage;
     internal int langauageIndex;
-    public Localization[] localizationsStrings;
+    public Localization[] localizationStringsSafe;
+    public Localization[] localizationStringsNotSafe;
+    internal Localization[] localizationsStrings;
     [Header("Skins Settings")]
     public PlaneSkin[] planeSkins;
     internal int [] playersPlaneSkins = new int[2];
@@ -72,6 +74,23 @@ public class GameplaySettings : ScriptableObject
         else if (currentLanguage == Languages.English)
             langauageIndex = 1;
         ResetPlayerSkins();
+        LoadLocalizationData();
+    }
+    private void LoadLocalizationData()
+    {
+        if(localizationStringsSafe.Length == localizationStringsNotSafe.Length)
+        {
+            if (safeMode)
+                localizationsStrings = localizationStringsSafe;
+            else
+                localizationsStrings = localizationStringsNotSafe;
+            for(int i=0;i<localizationsStrings.Length;i++)
+            {
+                localizationsStrings[i].LoadData();
+            }
+        }
+        else
+            Application.Quit();
     }
     internal void ResetPlayerSkins()
     {

@@ -5,11 +5,13 @@ using UnityEngine.UI;
 using System;
 using TMPro;
 using System.Linq;
+using UnityEngine.EventSystems;
 
 public class UIManager : MonoBehaviour
 {
     public GameplaySettings gameplaySettings;
     public GameObject UIElements;
+    public GameObject EventSystemGameObject;
     internal FlightController flightControllerScript;
     internal bool pauseScreenEnabled;
     internal bool timerBeforeTheFlightEnabled;
@@ -37,9 +39,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject pauseScreenRegularButtonsGameObject;
     [SerializeField] private GameObject pauseScreenWarningGameObject;
     [SerializeField] private GameObject pauseScreenTitleGameObject;
-    [SerializeField] private GameObject pasueScreenOptionsButtonGameObject;
-    [SerializeField] private GameObject pasueScreenBackToMainMenuButtonGameObject;
-    [SerializeField] private GameObject pasueScreenResumeGameButtonGameObject;
+    [SerializeField] private GameObject pauseScreenOptionsButtonGameObject;
+    [SerializeField] private GameObject pauseScreenBackToMainMenuButtonGameObject;
+    [SerializeField] private GameObject pauseScreenResumeGameButtonGameObject;
     [Header("Game Statistics")]
     [SerializeField] private GameObject gameStatsGameObject;
     [SerializeField] private GameObject gameSummaryYearTitle;
@@ -76,6 +78,7 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         flightControllerScript = GetComponent<FlightController>();
+        EventSystemGameObject.GetComponent<EventSystem>().SetSelectedGameObject(null);
         pauseScreenEnabled = false;
         if (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerClassic || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerEndless)
             MoveUiElementsSinglePlayer();
@@ -96,7 +99,7 @@ public class UIManager : MonoBehaviour
             DisableOptionsMenu();
         else if (((flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerClassic || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerEndless) && flightControllerScript.gameModeScript.playerOneState != GameModeManager.PlayerState.crashed) || ((flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerClassic && flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerEndless) && flightControllerScript.gameModeScript.playerOneState != GameModeManager.PlayerState.crashed && flightControllerScript.gameModeScript.playerTwoState != GameModeManager.PlayerState.crashed))
         {
-            if (!pauseScreenEnabled && !pauseScreenGameObject.activeSelf && flightControllerScript.inputManagerScript.ESCpressed)
+            if (!pauseScreenEnabled && !pauseScreenGameObject.activeSelf && flightControllerScript.inputManagerScript.ESCpressed && !timerBeforeTheFlightEnabled)
             {
                 EnablePauseScreen();
                 flightControllerScript.gameModeScript.playerOnePlane.activeBottleWarning = flightControllerScript.gameModeScript.playerOnePlane.attackKeyPressed;
@@ -129,9 +132,9 @@ public class UIManager : MonoBehaviour
         gameSummaryBottlesPlayerOneGameObject.GetComponent<TMP_Text>().text = flightControllerScript.gameModeScript.playerOnePlane.bottlesDrunkTotal.ToString();
         gameSummaryScorePlayerOneGameObject.GetComponent<TMP_Text>().text = (flightControllerScript.gameModeScript.playerOnePlane.gameScore + gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].regularHudEarned1).ToString();
         gameSummaryYearPlayerOneGameObject.GetComponent<TMP_Text>().text = (2009 + flightControllerScript.rewardAndProgressionManagerScript.levelCounter).ToString();
-        pasueScreenOptionsButtonGameObject.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuButton2;
-        pasueScreenResumeGameButtonGameObject.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].pauseScreenButton0;
-        pasueScreenBackToMainMenuButtonGameObject.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].backToMainMenuButton;
+        pauseScreenOptionsButtonGameObject.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuButton2;
+        pauseScreenResumeGameButtonGameObject.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].pauseScreenButton0;
+        pauseScreenBackToMainMenuButtonGameObject.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].backToMainMenuButton;
         if (flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerClassic && flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerEndless)
         {
             gameSummaryPlayerOneIndicator.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].playerOneIndicator;
@@ -186,6 +189,7 @@ public class UIManager : MonoBehaviour
     private void EnablePauseScreen()
     {
         Time.timeScale = 0;
+        EventSystemGameObject.GetComponent<EventSystem>().SetSelectedGameObject(pauseScreenOptionsButtonGameObject);
         pauseScreenTitleGameObject.GetComponentInChildren<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].pauseScreenPauseMainTitle;
         fadePanelGameObject.SetActive(true);
         pauseScreenGameObject.SetActive(true);
@@ -200,6 +204,7 @@ public class UIManager : MonoBehaviour
     internal void EnableGameOverScreen()
     {
         UpdatePauseScreenHUD();
+        EventSystemGameObject.GetComponent<EventSystem>().SetSelectedGameObject(gameOverScreenTryAgainButtonGameObject);
         TurnOffColorPanel(colorPanelPlayerOneGameObject);
         TurnOffColorPanel(colorPanelPlayerTwoGameObject);
         pauseScreenTitleGameObject.GetComponentInChildren<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].pauseScreenGameOverMainTitle;
@@ -219,6 +224,7 @@ public class UIManager : MonoBehaviour
     }
     public void DisablePauseScreen()
     {
+        
         fadePanelGameObject.SetActive(false);
         pauseScreenGameObject.SetActive(false);
         if (flightControllerScript.gameModeScript.playerOnePlane.activeBottleWarning || flightControllerScript.gameModeScript.playerTwoPlane.activeBottleWarning)
@@ -261,6 +267,7 @@ public class UIManager : MonoBehaviour
     public void EnableExitWarning()
     {
         gameStatsGameObject.SetActive(false);
+        EventSystemGameObject.GetComponent<EventSystem>().SetSelectedGameObject(exitWarningNoButtonGameObject);
         exitWarningTitleGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].warningTitle;
         exitWarningYesButtonGameObject.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].warningYes;
         exitWarningNoButtonGameObject.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].warningNo;
@@ -270,11 +277,13 @@ public class UIManager : MonoBehaviour
     public void DisableExitWarning()
     {
         gameStatsGameObject.SetActive(true);
+        EventSystemGameObject.GetComponent<EventSystem>().SetSelectedGameObject(pauseScreenOptionsButtonGameObject);
         pauseScreenRegularButtonsGameObject.SetActive(true);
         pauseScreenWarningGameObject.SetActive(false);
     }
     public void EnableOptionsMenu()
     {
+        EventSystemGameObject.GetComponent<EventSystem>().SetSelectedGameObject(optionsMenuGameObject.GetComponent<UIOptionsMenu>().backToMainMenuButton);
         pauseScreenTitleGameObject.GetComponentInChildren<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].pauseScreenButton0;
         optionsMenuGameObject.SetActive(true);
         pauseScreenRegularButtonsGameObject.SetActive(false);

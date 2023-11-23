@@ -66,10 +66,15 @@ public class FlightController : MonoBehaviour
     }
     private void MovePlaneStandardAndWheels(Plane plane)
     {
-        if (plane.verticalMovementKeys != 0)
+        //inverted steering power up
+        if (plane.invertedSteeringEnabled)
+            plane.verticalMovementKeys = -plane.verticalMovementKeys;
+        //visually rotating a plane
+        if (plane.verticalMovementKeys != 0 && !uiManagerScript.pauseScreenEnabled)
             plane.planeRendererScript.ChangeTilt(plane.currentPlaneState, plane.verticalMovementKeys);
-        else
+        else if (plane.verticalMovementKeys == 0 && !uiManagerScript.pauseScreenEnabled)
             plane.planeRendererScript.ChangeTilt(plane.currentPlaneState, 0);
+        //moving a plane
         if(plane.verticalMovementKeys != plane.difficultyImpulseDirection && plane.verticalMovementKeys != 0)
             plane.planeGameObject.transform.position += new Vector3(plane.currentPlaneSpeed * Time.deltaTime, plane.verticalMovementKeys * plane.altitudeChangeForce * gameplaySettings.altitudeChangeForceOverridedMultiplier * Time.deltaTime, 0);
         else
