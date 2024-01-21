@@ -130,10 +130,11 @@ public class MainMenuManager : MonoBehaviour
     public void EnableGameModeSelectorMenu()
     {
         menuButtonsMainGameObject.SetActive(false);
-#if (UNITY_MOBILE)
-        startMultiPlayerClassicModeMenuButton.SetActive(false);
-        startMultiPlayerEndlessModeMenuButton.SetActive(false);
-#endif
+        if(Application.isMobilePlatform)
+        {
+            startMultiPlayerClassicModeMenuButton.SetActive(false);
+            startMultiPlayerEndlessModeMenuButton.SetActive(false);
+        }
         gameModeSelectorMenuGameObject.SetActive(true);
     }
     public void DisableGameModeSelectorMenu()

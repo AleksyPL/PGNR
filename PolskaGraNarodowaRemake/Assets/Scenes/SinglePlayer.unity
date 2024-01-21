@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &5753483 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4083172027464559756, guid: e1f2790d888363340aee63cf0a3337ef, type: 3}
+  m_PrefabInstance: {fileID: 919508294}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8890784 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8535687716310274707, guid: af37a67e2c14f374eb7d00afa5eed0e1, type: 3}
@@ -814,11 +819,6 @@ Transform:
   m_Father: {fileID: 2084290474}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &887848031 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8535687717046585196, guid: af37a67e2c14f374eb7d00afa5eed0e1, type: 3}
-  m_PrefabInstance: {fileID: 8535687716318313267}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &919508294
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -943,11 +943,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1088756308, guid: e1f2790d888363340aee63cf0a3337ef, type: 3}
   m_PrefabInstance: {fileID: 919508294}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &919508300 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1082773052073075428, guid: e1f2790d888363340aee63cf0a3337ef, type: 3}
-  m_PrefabInstance: {fileID: 919508294}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1019006229 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8535687717184189990, guid: af37a67e2c14f374eb7d00afa5eed0e1, type: 3}
@@ -961,11 +956,6 @@ GameObject:
 --- !u!1 &1052587935 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8535687717217651884, guid: af37a67e2c14f374eb7d00afa5eed0e1, type: 3}
-  m_PrefabInstance: {fileID: 8535687716318313267}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1127758300 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8535687717443945199, guid: af37a67e2c14f374eb7d00afa5eed0e1, type: 3}
   m_PrefabInstance: {fileID: 8535687716318313267}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1141303070 stripped
@@ -1080,16 +1070,6 @@ Transform:
 --- !u!1 &1243231354 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8535687717559422793, guid: af37a67e2c14f374eb7d00afa5eed0e1, type: 3}
-  m_PrefabInstance: {fileID: 8535687716318313267}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1254344788 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8535687717547324263, guid: af37a67e2c14f374eb7d00afa5eed0e1, type: 3}
-  m_PrefabInstance: {fileID: 8535687716318313267}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1300647849 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8535687717467927706, guid: af37a67e2c14f374eb7d00afa5eed0e1, type: 3}
   m_PrefabInstance: {fileID: 8535687716318313267}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1461092543 stripped
@@ -1269,6 +1249,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1760416418}
     m_Modifications:
+    - target: {fileID: 1970404982561522291, guid: e3f9bbec2259e164babd95c86d901eb8, type: 3}
+      propertyPath: cameraObject
+      value: 
+      objectReference: {fileID: 1748445943}
     - target: {fileID: 8657606410379598683, guid: e3f9bbec2259e164babd95c86d901eb8, type: 3}
       propertyPath: cameraObject
       value: 
@@ -1474,11 +1458,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5473055150138345581, guid: 66f13fd3eb8053e4a94762bcaef331d6, type: 3}
   m_PrefabInstance: {fileID: 1913100914}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1913100916 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5473055150381135021, guid: 66f13fd3eb8053e4a94762bcaef331d6, type: 3}
-  m_PrefabInstance: {fileID: 1913100914}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1913100917 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5473055148817784095, guid: 66f13fd3eb8053e4a94762bcaef331d6, type: 3}
@@ -1544,27 +1523,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2237e657e9e034b458395414a067e260, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oneLiners:
-  - {fileID: 11400000, guid: b8b624ae7c3a11f48acc1fd3b6502f61, type: 2}
-  - {fileID: 11400000, guid: c6ae4f7c7dace9e4e8b13f55bc2d87bd, type: 2}
-  oneLinersSafe:
-  - {fileID: 11400000, guid: 8ae483f99733ee54b9ce13573ef833dd, type: 2}
-  - {fileID: 11400000, guid: 418da3b715313dd47a2bd5ad4ac32f25, type: 2}
-  hitReactions:
-  - {fileID: 11400000, guid: bbde4254a27e37d419bfec772282690c, type: 2}
-  - {fileID: 11400000, guid: 7576c2d8e4f9abe439765978b135fabd, type: 2}
-  hitReactionsSafe:
-  - {fileID: 11400000, guid: 5949093bca7309845b3cfedf25a40295, type: 2}
-  - {fileID: 11400000, guid: f2ae75636ea472444b8962019d4bfdb6, type: 2}
-  landingSounds:
-  - {fileID: 11400000, guid: 0b08c5cae74f038479a6cad6bd9f2924, type: 2}
-  - {fileID: 11400000, guid: b83690898c83ccc458298c9991b2026e, type: 2}
-  landingSoundsSafe:
-  - {fileID: 11400000, guid: 7010498fcc7f552458fc0f74ee78fb12, type: 2}
-  - {fileID: 11400000, guid: 6e7fdb99aef85ff4d9a36576fd0213f7, type: 2}
-  otherSounds: {fileID: 11400000, guid: 4dc2b70a9f3f78b4c8b913aca4cd5530, type: 2}
-  otherSoundsSafe: {fileID: 11400000, guid: 42e01dfb2c618ff4a9ede9a854dd5b63, type: 2}
-  SFX: {fileID: 11400000, guid: 475e60e399f56f343b40a313cee488b8, type: 2}
+  masterSoundBank: {fileID: 11400000, guid: c1b79b4a205816f47b4a3067b2b9f14d, type: 2}
   gameplaySettings: {fileID: 11400000, guid: d338db95f60174b41bd6e219f61b651f, type: 2}
   UIManagerGameObject: {fileID: 321047451}
 --- !u!114 &2084290468
@@ -1639,18 +1598,30 @@ MonoBehaviour:
   gameplaySettings: {fileID: 11400000, guid: d338db95f60174b41bd6e219f61b651f, type: 2}
   UIElements: {fileID: 321047451}
   EventSystemGameObject: {fileID: 1201612828}
-  regularHUDMainGameObject: {fileID: 919508300}
-  regularHUDPlayerTwoMainGameObject: {fileID: 0}
-  regularHUDLevelProgressPlayerOneGameObject: {fileID: 919508296}
-  regularHUDScorePlayerOneGameObject: {fileID: 919508298}
-  regularHUDBottlesPlayerOneGameObject: {fileID: 919508297}
-  regularHUDLevelProgressPlayerTwoGameObject: {fileID: 0}
-  regularHUDScorePlayerTwoGameObject: {fileID: 0}
-  regularHUDBottlesPlayerTwoGameObject: {fileID: 0}
+  playerOneUI:
+    colorPanelGameObject: {fileID: 1913100917}
+    regularHUDMainGameObject: {fileID: 5753483}
+    regularHUDLevelProgressGameObject: {fileID: 919508296}
+    regularHUDScoreGameObject: {fileID: 919508298}
+    regularHUDBottlesGameObject: {fileID: 919508297}
+    gameSummaryPlayerIndicator: {fileID: 487916966}
+    gameSummaryYearGameObject: {fileID: 1019006229}
+    gameSummaryScoreGameObject: {fileID: 585157570}
+    gameSummaryBottlesGameObject: {fileID: 393069069}
+    powerUpBarParentGameObject: {fileID: 919508299}
+  playerTwoUI:
+    colorPanelGameObject: {fileID: 0}
+    regularHUDMainGameObject: {fileID: 0}
+    regularHUDLevelProgressGameObject: {fileID: 0}
+    regularHUDScoreGameObject: {fileID: 0}
+    regularHUDBottlesGameObject: {fileID: 0}
+    gameSummaryPlayerIndicator: {fileID: 0}
+    gameSummaryYearGameObject: {fileID: 0}
+    gameSummaryScoreGameObject: {fileID: 0}
+    gameSummaryBottlesGameObject: {fileID: 0}
+    powerUpBarParentGameObject: {fileID: 0}
   winColor: {r: 1, g: 1, b: 0, a: 0.078431375}
   loseColor: {r: 1, g: 0, b: 0, a: 0.078431375}
-  colorPanelPlayerOneGameObject: {fileID: 1913100917}
-  colorPanelPlayerTwoGameObject: {fileID: 1913100916}
   fadePanelGameObject: {fileID: 1638038328}
   pauseScreenGameObject: {fileID: 253150717}
   pauseScreenRegularButtonsGameObject: {fileID: 1461092543}
@@ -1663,16 +1634,6 @@ MonoBehaviour:
   gameSummaryYearTitle: {fileID: 728077561}
   gameSummaryBottlesTitle: {fileID: 1052587935}
   gameSummaryScoreTitle: {fileID: 663865548}
-  gameSummaryPlayerOneIndicator: {fileID: 487916966}
-  gameSummaryPlayerTwoIndicator: {fileID: 887848031}
-  gameSummaryYearPlayerOneGameObject: {fileID: 1019006229}
-  gameSummaryScorePlayerOneGameObject: {fileID: 585157570}
-  gameSummaryBottlesPlayerOneGameObject: {fileID: 393069069}
-  gameSummaryYearPlayerTwoGameObject: {fileID: 1127758300}
-  gameSummaryScorePlayerTwoGameObject: {fileID: 1254344788}
-  gameSummaryBottlesPlayerTwoGameObject: {fileID: 1300647849}
-  powerUpBarPlayerOneParentGameObject: {fileID: 919508299}
-  powerUpBarPlayerTwoParentGameObject: {fileID: 0}
   powerUpUIClockPrefab: {fileID: 4995597508849887570, guid: c9fb0b10d8ab1064ba15eb77532b7da7, type: 3}
   optionsMenuGameObject: {fileID: 396299570}
   timerPrefab: {fileID: 8491916331133349894, guid: 252ca51c1f642934e9278a963e842837, type: 3}

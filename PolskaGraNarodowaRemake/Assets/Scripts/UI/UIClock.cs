@@ -29,9 +29,9 @@ public class UIClock : MonoBehaviour
     {
         if (flightControllerScript.gameModeScript.someoneWon)
         {
-            flightControllerScript.uiManagerScript.SetTheTextOnTheColorPanel(flightControllerScript.uiManagerScript.colorPanelPlayerOneGameObject, "");
+            flightControllerScript.uiManagerScript.SetTheTextOnTheColorPanel(flightControllerScript.uiManagerScript.playerOneUI.colorPanelGameObject, "");
             if (flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerClassic && flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerEndless)
-                flightControllerScript.uiManagerScript.SetTheTextOnTheColorPanel(flightControllerScript.uiManagerScript.colorPanelPlayerTwoGameObject, "");
+                flightControllerScript.uiManagerScript.SetTheTextOnTheColorPanel(flightControllerScript.uiManagerScript.playerTwoUI.colorPanelGameObject, "");
             flightControllerScript.uiManagerScript.EnableGameOverScreen();
         }
         else if (flightControllerScript.rewardAndProgressionManagerScript.toNewLevel)
@@ -60,7 +60,9 @@ public class UIClock : MonoBehaviour
                     flightControllerScript.gameModeScript.playerTwoPlane.activeBottleWarning = false;
                 }
             }
-            flightControllerScript.uiManagerScript.regularHUDMainGameObject.SetActive(true);
+            flightControllerScript.uiManagerScript.playerOneUI.regularHUDMainGameObject.SetActive(true);
+            if (flightControllerScript.uiManagerScript.playerTwoUI.regularHUDMainGameObject != null)
+                flightControllerScript.uiManagerScript.playerTwoUI.regularHUDMainGameObject.SetActive(true);
             flightControllerScript.audioManagerScript.ResumeAllPausedSounds();
             flightControllerScript.uiManagerScript.pauseScreenEnabled = false;
         }
@@ -68,10 +70,13 @@ public class UIClock : MonoBehaviour
         {
             Time.timeScale = 1;
             flightControllerScript.uiManagerScript.timerBeforeTheFlightEnabled = false;
-            flightControllerScript.uiManagerScript.regularHUDLevelProgressPlayerOneGameObject.GetComponent<TMP_Text>().text = "";
-            if(flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusClassic || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusEndless)
-                flightControllerScript.uiManagerScript.regularHUDLevelProgressPlayerTwoGameObject.GetComponent<TMP_Text>().text = "";
-            flightControllerScript.uiManagerScript.regularHUDMainGameObject.SetActive(true);
+            flightControllerScript.uiManagerScript.playerOneUI.regularHUDLevelProgressGameObject.GetComponent<TMP_Text>().text = "";
+            flightControllerScript.uiManagerScript.playerOneUI.regularHUDMainGameObject.SetActive(true);
+            if (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusClassic || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusEndless)
+            {
+                flightControllerScript.uiManagerScript.playerTwoUI.regularHUDLevelProgressGameObject.GetComponent<TMP_Text>().text = "";
+                flightControllerScript.uiManagerScript.playerTwoUI.regularHUDMainGameObject.SetActive(true);
+            }     
             flightControllerScript.audioManagerScript.ResumeAllPausedSounds();
         }
         Destroy(transform.gameObject);

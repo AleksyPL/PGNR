@@ -62,14 +62,14 @@ public class RewardAndProgressionManager : MonoBehaviour
         flightControllerScript.gameModeScript.someoneWon = false;
         flightControllerScript.gameModeScript.playerOnePlane.gameScore = 0;
         flightControllerScript.gameModeScript.playerOnePlane.ResetPlaneData();
-        flightControllerScript.uiManagerScript.TurnOffColorPanel(flightControllerScript.uiManagerScript.colorPanelPlayerOneGameObject);
+        flightControllerScript.uiManagerScript.TurnOffColorPanel(flightControllerScript.uiManagerScript.playerOneUI.colorPanelGameObject);
         if(flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerClassic && flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerEndless)
         {
             flightControllerScript.gameModeScript.playerTwoPlane.gameScore = 0;
             flightControllerScript.gameModeScript.playerTwoPlane.ResetPlaneData();
             levelProgressPlayerTwoCounter = 0;
             scorePointsCounterPlayerTwoCounter = 0;
-            flightControllerScript.uiManagerScript.TurnOffColorPanel(flightControllerScript.uiManagerScript.colorPanelPlayerTwoGameObject);
+            flightControllerScript.uiManagerScript.TurnOffColorPanel(flightControllerScript.uiManagerScript.playerTwoUI.colorPanelGameObject);
         }
         flightControllerScript.uiManagerScript.DisableOptionsMenu();
         flightControllerScript.uiManagerScript.DisableGameOverScreen();

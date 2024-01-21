@@ -221,7 +221,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1088756309}
   m_Layer: 5
-  m_Name: PowerUpBarPlayerOne
+  m_Name: PowerUpBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1532,7 +1532,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3182712339018867238}
   m_Layer: 5
-  m_Name: PowerUpBarPlayerTwo
+  m_Name: PowerUpBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

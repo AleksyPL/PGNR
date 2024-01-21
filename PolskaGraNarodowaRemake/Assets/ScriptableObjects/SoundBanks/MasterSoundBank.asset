@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fd56166d2abc1645a6c3f6503228776, type: 3}
+  m_Name: MasterSoundBank
+  m_EditorClassIdentifier: 
+  oneLiners:
+  - {fileID: 11400000, guid: b8b624ae7c3a11f48acc1fd3b6502f61, type: 2}
+  - {fileID: 11400000, guid: c6ae4f7c7dace9e4e8b13f55bc2d87bd, type: 2}
+  oneLinersSafe:
+  - {fileID: 11400000, guid: 8ae483f99733ee54b9ce13573ef833dd, type: 2}
+  - {fileID: 11400000, guid: 418da3b715313dd47a2bd5ad4ac32f25, type: 2}
+  hitReactions:
+  - {fileID: 11400000, guid: bbde4254a27e37d419bfec772282690c, type: 2}
+  - {fileID: 11400000, guid: 7576c2d8e4f9abe439765978b135fabd, type: 2}
+  hitReactionsSafe:
+  - {fileID: 11400000, guid: 5949093bca7309845b3cfedf25a40295, type: 2}
+  - {fileID: 11400000, guid: f2ae75636ea472444b8962019d4bfdb6, type: 2}
+  landingSounds:
+  - {fileID: 11400000, guid: 0b08c5cae74f038479a6cad6bd9f2924, type: 2}
+  - {fileID: 11400000, guid: b83690898c83ccc458298c9991b2026e, type: 2}
+  landingSoundsSafe:
+  - {fileID: 11400000, guid: 7010498fcc7f552458fc0f74ee78fb12, type: 2}
+  - {fileID: 11400000, guid: 6e7fdb99aef85ff4d9a36576fd0213f7, type: 2}
+  otherSounds: {fileID: 11400000, guid: 4dc2b70a9f3f78b4c8b913aca4cd5530, type: 2}
+  otherSoundsSafe: {fileID: 11400000, guid: 42e01dfb2c618ff4a9ede9a854dd5b63, type: 2}
+  SFX: {fileID: 11400000, guid: 475e60e399f56f343b40a313cee488b8, type: 2}

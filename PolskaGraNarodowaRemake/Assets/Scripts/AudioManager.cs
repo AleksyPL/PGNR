@@ -10,16 +10,8 @@ public class AudioManager : MonoBehaviour
     internal Sound[] localHitReactionSounds;
     internal Sound[] localLandingSounds;
     internal Sound[] localSFX;
-    internal Sound[] localOtherSounds; 
-    public SoundBank[] oneLiners;
-    public SoundBank[] oneLinersSafe;
-    public SoundBank[] hitReactions;
-    public SoundBank[] hitReactionsSafe;
-    public SoundBank[] landingSounds;
-    public SoundBank[] landingSoundsSafe;
-    public SoundBank otherSounds;
-    public SoundBank otherSoundsSafe;
-    public SoundBank SFX;
+    internal Sound[] localOtherSounds;
+    public MasterSoundBank masterSoundBank;
     public GameplaySettings gameplaySettings;
     public GameObject UIManagerGameObject;
     internal List<Sound> pausedSounds;
@@ -29,7 +21,9 @@ public class AudioManager : MonoBehaviour
 
     void OnEnable()
     {
-        IdentifyWhichTracksAreOKToLoad();
+        masterSoundBank.audioManagerScript = GetComponent<AudioManager>();
+        masterSoundBank.gameplaySettings = gameplaySettings;
+        masterSoundBank.IdentifyWhichTracksAreOKToLoad();
         LoadSounds(localSFX);
         LoadSounds(localOtherSounds);
         if (SceneManager.GetActiveScene().name != "MainMenu")
@@ -216,27 +210,5 @@ public class AudioManager : MonoBehaviour
             pausedSounds.Clear();
         }
     }
-    private void IdentifyWhichTracksAreOKToLoad()
-    {
-        localSFX = SFX.sounds;
-        if (gameplaySettings.safeMode)
-            localOtherSounds = otherSoundsSafe.sounds;
-        else
-            localOtherSounds = otherSounds.sounds;
-        if (SceneManager.GetActiveScene().name != "MainMenu")
-        {
-            if (gameplaySettings.safeMode)
-            {
-                localOneLinersSounds = oneLinersSafe[gameplaySettings.langauageIndex].sounds;
-                localLandingSounds = landingSoundsSafe[gameplaySettings.langauageIndex].sounds;
-                localHitReactionSounds = hitReactionsSafe[gameplaySettings.langauageIndex].sounds;
-            }
-            else
-            {
-                localOneLinersSounds = oneLiners[gameplaySettings.langauageIndex].sounds;
-                localLandingSounds = landingSounds[gameplaySettings.langauageIndex].sounds;
-                localHitReactionSounds = hitReactions[gameplaySettings.langauageIndex].sounds;
-            }
-        }
-    }
+    
 }

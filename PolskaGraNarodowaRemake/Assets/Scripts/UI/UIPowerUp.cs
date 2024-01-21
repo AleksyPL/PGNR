@@ -24,9 +24,9 @@ public class UIPowerUp : MonoBehaviour
             clockImageGameObject.fillAmount = Mathf.InverseLerp(0, 1, powerUpDurationCounter / powerUpDuration);
             if (powerUpDurationCounter <= 0)
             {
-                uiManagerScript.ChangeTheOrderOnThePowerUpsBar(uiManagerScript.powerUpBarPlayerOneParentGameObject);
+                uiManagerScript.ChangeTheOrderOnThePowerUpsBar(uiManagerScript.playerOneUI.powerUpBarParentGameObject);
                 if(uiManagerScript.flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusEndless)
-                    uiManagerScript.ChangeTheOrderOnThePowerUpsBar(uiManagerScript.powerUpBarPlayerTwoParentGameObject);
+                    uiManagerScript.ChangeTheOrderOnThePowerUpsBar(uiManagerScript.playerTwoUI.powerUpBarParentGameObject);
             }
         }
     }

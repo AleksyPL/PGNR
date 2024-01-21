@@ -244,11 +244,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 709499515900942839, guid: 634ad76ae54ee6c4482d977cf834e3ac, type: 3}
   m_PrefabInstance: {fileID: 52441333}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &52441343 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1082773052073075428, guid: 634ad76ae54ee6c4482d977cf834e3ac, type: 3}
-  m_PrefabInstance: {fileID: 52441333}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &66538046
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,6 +279,11 @@ Transform:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7876854575269858844, guid: b00c10a37d9feba4782aad5cb3128a96, type: 3}
   m_PrefabInstance: {fileID: 1411442962}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &81232227 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4083172027464559756, guid: 634ad76ae54ee6c4482d977cf834e3ac, type: 3}
+  m_PrefabInstance: {fileID: 52441333}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &105093552
 GameObject:
@@ -714,7 +714,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8657606411223057766, guid: e3f9bbec2259e164babd95c86d901eb8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -16.2
+      value: -16.3
       objectReference: {fileID: 0}
     - target: {fileID: 8657606411223057766, guid: e3f9bbec2259e164babd95c86d901eb8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2610,27 +2610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2237e657e9e034b458395414a067e260, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oneLiners:
-  - {fileID: 11400000, guid: b8b624ae7c3a11f48acc1fd3b6502f61, type: 2}
-  - {fileID: 11400000, guid: c6ae4f7c7dace9e4e8b13f55bc2d87bd, type: 2}
-  oneLinersSafe:
-  - {fileID: 11400000, guid: 8ae483f99733ee54b9ce13573ef833dd, type: 2}
-  - {fileID: 11400000, guid: 418da3b715313dd47a2bd5ad4ac32f25, type: 2}
-  hitReactions:
-  - {fileID: 11400000, guid: bbde4254a27e37d419bfec772282690c, type: 2}
-  - {fileID: 11400000, guid: 7576c2d8e4f9abe439765978b135fabd, type: 2}
-  hitReactionsSafe:
-  - {fileID: 11400000, guid: 5949093bca7309845b3cfedf25a40295, type: 2}
-  - {fileID: 11400000, guid: f2ae75636ea472444b8962019d4bfdb6, type: 2}
-  landingSounds:
-  - {fileID: 11400000, guid: 0b08c5cae74f038479a6cad6bd9f2924, type: 2}
-  - {fileID: 11400000, guid: b83690898c83ccc458298c9991b2026e, type: 2}
-  landingSoundsSafe:
-  - {fileID: 11400000, guid: 7010498fcc7f552458fc0f74ee78fb12, type: 2}
-  - {fileID: 11400000, guid: 6e7fdb99aef85ff4d9a36576fd0213f7, type: 2}
-  otherSounds: {fileID: 11400000, guid: 4dc2b70a9f3f78b4c8b913aca4cd5530, type: 2}
-  otherSoundsSafe: {fileID: 11400000, guid: 42e01dfb2c618ff4a9ede9a854dd5b63, type: 2}
-  SFX: {fileID: 11400000, guid: 475e60e399f56f343b40a313cee488b8, type: 2}
+  masterSoundBank: {fileID: 11400000, guid: c1b79b4a205816f47b4a3067b2b9f14d, type: 2}
   gameplaySettings: {fileID: 11400000, guid: d338db95f60174b41bd6e219f61b651f, type: 2}
   UIManagerGameObject: {fileID: 1292206221}
 --- !u!114 &2134856617
@@ -2661,18 +2641,30 @@ MonoBehaviour:
   gameplaySettings: {fileID: 11400000, guid: d338db95f60174b41bd6e219f61b651f, type: 2}
   UIElements: {fileID: 1292206221}
   EventSystemGameObject: {fileID: 1772966990}
-  regularHUDMainGameObject: {fileID: 52441343}
-  regularHUDPlayerTwoMainGameObject: {fileID: 52441335}
-  regularHUDLevelProgressPlayerOneGameObject: {fileID: 493928483}
-  regularHUDScorePlayerOneGameObject: {fileID: 493928485}
-  regularHUDBottlesPlayerOneGameObject: {fileID: 493928484}
-  regularHUDLevelProgressPlayerTwoGameObject: {fileID: 1126101634}
-  regularHUDScorePlayerTwoGameObject: {fileID: 446547126}
-  regularHUDBottlesPlayerTwoGameObject: {fileID: 735743962}
+  playerOneUI:
+    colorPanelGameObject: {fileID: 2090001377}
+    regularHUDMainGameObject: {fileID: 81232227}
+    regularHUDLevelProgressGameObject: {fileID: 493928483}
+    regularHUDScoreGameObject: {fileID: 493928485}
+    regularHUDBottlesGameObject: {fileID: 493928484}
+    gameSummaryPlayerIndicator: {fileID: 1849406776}
+    gameSummaryYearGameObject: {fileID: 1849406779}
+    gameSummaryScoreGameObject: {fileID: 1849406777}
+    gameSummaryBottlesGameObject: {fileID: 1849406778}
+    powerUpBarParentGameObject: {fileID: 172152494}
+  playerTwoUI:
+    colorPanelGameObject: {fileID: 460065363}
+    regularHUDMainGameObject: {fileID: 52441335}
+    regularHUDLevelProgressGameObject: {fileID: 1126101634}
+    regularHUDScoreGameObject: {fileID: 446547126}
+    regularHUDBottlesGameObject: {fileID: 735743962}
+    gameSummaryPlayerIndicator: {fileID: 1849406772}
+    gameSummaryYearGameObject: {fileID: 1849406775}
+    gameSummaryScoreGameObject: {fileID: 1849406773}
+    gameSummaryBottlesGameObject: {fileID: 1849406774}
+    powerUpBarParentGameObject: {fileID: 1826782130}
   winColor: {r: 1, g: 1, b: 0, a: 0.078431375}
   loseColor: {r: 1, g: 0, b: 0, a: 0.078431375}
-  colorPanelPlayerOneGameObject: {fileID: 2090001377}
-  colorPanelPlayerTwoGameObject: {fileID: 460065363}
   fadePanelGameObject: {fileID: 1849406781}
   pauseScreenGameObject: {fileID: 1849406789}
   pauseScreenRegularButtonsGameObject: {fileID: 1849406786}
@@ -2685,16 +2677,6 @@ MonoBehaviour:
   gameSummaryYearTitle: {fileID: 1849406771}
   gameSummaryBottlesTitle: {fileID: 1849406770}
   gameSummaryScoreTitle: {fileID: 1849406769}
-  gameSummaryPlayerOneIndicator: {fileID: 1849406776}
-  gameSummaryPlayerTwoIndicator: {fileID: 1849406772}
-  gameSummaryYearPlayerOneGameObject: {fileID: 1849406779}
-  gameSummaryScorePlayerOneGameObject: {fileID: 1849406777}
-  gameSummaryBottlesPlayerOneGameObject: {fileID: 1849406778}
-  gameSummaryYearPlayerTwoGameObject: {fileID: 1849406775}
-  gameSummaryScorePlayerTwoGameObject: {fileID: 1849406773}
-  gameSummaryBottlesPlayerTwoGameObject: {fileID: 1849406774}
-  powerUpBarPlayerOneParentGameObject: {fileID: 172152494}
-  powerUpBarPlayerTwoParentGameObject: {fileID: 1826782130}
   powerUpUIClockPrefab: {fileID: 4995597508849887570, guid: c9fb0b10d8ab1064ba15eb77532b7da7, type: 3}
   optionsMenuGameObject: {fileID: 1210908537}
   timerPrefab: {fileID: 8491916331133349894, guid: 252ca51c1f642934e9278a963e842837, type: 3}
