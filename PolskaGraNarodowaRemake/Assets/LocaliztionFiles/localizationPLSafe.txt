@@ -1,0 +1,98 @@
+//Main menu - StartGame
+ROZPOCZNIJ GRĘ
+//Main menu - Button1
+JAK GRAĆ
+//Main menu - Button2
+OPCJE
+//Main menu - Button3
+ZAKOŃCZ GRĘ
+//Game Mode Selector - Title
+Wybierz tryb rozgrywki
+//Game Mode Selector - Button0
+Gra jednoosowa klasyczna
+//Game Mode Selector - Button1
+Gra jednoosobowa nieskończona
+//Game Mode Selector - Button2
+Gra przeciw drugiemu graczowi klasyczna
+//Game Mode Selector - Button3
+Gra przeciw drugiemu graczowi nieskończona
+//Skin Selection Menu - Title
+Wybierz swój samolot
+//How to play - Title
+Pilocie, Ojczyzna Wzywa!
+//Plot - Plot
+Dobrze robio
+//How to play - Controls - Player 1
+W/S - sterowanie<br>Spacja - pijesz<br>Spacja(Przytrzymaj) - butelka poleci dalej<br>ESC - menu pauzy
+//How to play - Controls - Player 2
+Strzałki góra/dół - sterowanie<br>P.CTRL - pijesz<br>P.CTRL(Przytrzymaj) - butelka poleci dalej<br>Backspace - menu pauzy
+//How to play - Controls - Player 1 indicator
+Gracz 1
+//How to play - Controls - Player 2 indicator
+Gracz 2
+//How to play - Back To Menu Button
+WRÓĆ DO MENU GŁÓWNEGO
+//Options - SFX slider
+GŁOŚNOŚĆ EFEKTÓW
+//Options - Music slider
+GŁOŚNOŚĆ MUZYKI
+//Options - quotes slider
+GŁOŚNOŚĆ WYPOWIEDZI
+//Options - Language
+AKTYWNY JĘZYK
+//Regular HUD - Year
+Rok: 
+//Regular HUD - LevelProgressStory0
+Panie Prezydencie, przelecieliśmy już 
+//Regular HUD - LevelProgressStory1
+% trasy. Jakoś to będzie!
+//Regular HUD - landing message
+Panie Prezydencie, lądujemy!
+//Regular HUD - plane hit
+Panie Prezydencie, obawiam się, że się rozpierdolimy
+//Regular HUD - bottle drunk
+Wypite butelki: 
+//Regular HUD - earned0
+Zarobiłeś: 
+//Regular HUD - earned1
+zł
+//Pause Screen - Year title
+Doleciałeś do roku:
+//Pause Screen - Bottles title
+Wszystkie wypite butelki:
+//Pause Screen - Main Title - Pause
+PAUZA
+//Pause Screen - Main Title - Game Over
+KONIEC GRY
+//Pause Screen - Button0
+POWRÓT DO GRY
+//Game Over Screen - Button0
+SPRÓBUJ JESZCZE RAZ
+//Warning0
+POSTĘP NIE ZOSTANIE ZACHOWANY, CZY CHCESZ KONTYNUOWAĆ?
+//Warning1
+TAK
+//Warning2
+NIE
+//Color Panel - Winning
+wygrywa
+//Color Panel - Loosing
+przegrywa
+//Color Panel - Loosing - SinglePlayer
+Przegrywasz
+//Active Bottle Warning
+Rzut butelką aktywny przed zapauzowaniem gry, przytrzymaj przycisk ataku kontynuować ładowanie ataku, w przeciwnym razie butelka zostanie wystrzelona
+//Classic Mode
+, Wyląduj bezpiecznie na lotnisku!
+//Endless Mode - Single
+Leć jak najdalej
+//Endless Mode - Versus
+Leć jak najdalej, pokonaj przeciwnika
+//Power Up - Sober Up - You are sober
+Jesteś trzeźwy
+//Power Up - Inverted Steering - control wheel repaired
+Twój ster się naprawił
+//Congratulations after Landing
+Gratulacje, bezpiecznie wylądowałeś na miejscu
+//Main Menu - Plot
+FABUŁA

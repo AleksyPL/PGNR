@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using System.Text.RegularExpressions;
 
 public enum GameMode
 {
@@ -16,22 +17,22 @@ public enum GameMode
 
 public class MainMenuManager : MonoBehaviour
 {
-    internal AudioManager audioScript;
+    internal AudioManager audioManagerScript;
     public GameObject audioManagerGameObject;
     internal PlaneSkinSelector planeSkinSelectorScript;
     public static GameMode currentGameMode;
     internal static bool fromMainMenu = false;
     public GameplaySettings gameplaySettings;
-    //menu main buttons
+    [Header("Main menu buttons")]
     public GameObject menuButtonsMainGameObject;
     public GameObject playGameButton;
     public GameObject plotButton;
     public GameObject howToPlayPanelMenuButton;
     public GameObject exitGameMenuButton;
     public GameObject optionsMenuButton;
-    //options
+    [Header("Options panel")]
     public GameObject optionsMenuGameObject;
-    //how to play menu
+    [Header("How to play panel")]
     public GameObject howToPlayPanelGameObject;
     public GameObject howToPlayPanelTitleGameObject;
     public GameObject howToPlayPanelControlsPlayerOneGameObject;
@@ -39,14 +40,14 @@ public class MainMenuManager : MonoBehaviour
     public GameObject howToPlayPanelPlayerOneIndicatorGameObject;
     public GameObject howToPlayPanelPlayerTwoIndicatorGameObject;
     public GameObject howToPlayPanelBackToMainMenuButton;
-    //plot
+    [Header("Plot panel")]
     public GameObject plotPanelGameObject;
     public GameObject plotPanelTitleGameObject;
     public GameObject plotPanelStoryGameObject;
     public GameObject plotPanelBackToMainMenuButton;
-    //skin selection menu
+    [Header("Skin selection panel")]
     public GameObject skinSelectorMenuGameObject;
-    //game mode selection menu
+    [Header("Game mode selection panel")]
     public GameObject startSinglePlayerClassicModeMenuButton;
     public GameObject startMultiPlayerClassicModeMenuButton;
     public GameObject startSinglePlayerEndlessModeMenuButton;
@@ -57,15 +58,13 @@ public class MainMenuManager : MonoBehaviour
     void Start()
     {
         Application.targetFrameRate = 144;
-#if UNITY_EDITOR
-        gameplaySettings.safeMode = true;
-#else
-        GetArguments();
+#if (UNITY_WEBGL || UNITY_MOBILE)
+        DisableQuitGameButton();
 #endif
         currentGameMode = GameMode.SinglePlayerClassic;
         planeSkinSelectorScript = GetComponent<PlaneSkinSelector>();
-        audioScript = audioManagerGameObject.GetComponent<AudioManager>();
-        audioScript.PlaySound("MainMenuTheme", audioScript.localOtherSounds);
+        audioManagerScript = audioManagerGameObject.GetComponent<AudioManager>();
+        audioManagerScript.PlaySound("MainMenuTheme", audioManagerScript.localOtherSounds);
         menuButtonsMainGameObject.SetActive(true);
         UpdateUIButtonsWithLocalization();
     }
@@ -94,6 +93,8 @@ public class MainMenuManager : MonoBehaviour
     }
     private void Update()
     {
+        if (optionsMenuGameObject.activeSelf)
+            audioManagerScript.UpdateAllSoundsVolume();
         if (optionsMenuGameObject.activeSelf && Input.GetButtonDown("Cancel"))
             DisableOptionsMenu();
         else if (howToPlayPanelGameObject.activeSelf && Input.GetButtonDown("Cancel"))
@@ -129,6 +130,10 @@ public class MainMenuManager : MonoBehaviour
     public void EnableGameModeSelectorMenu()
     {
         menuButtonsMainGameObject.SetActive(false);
+#if (UNITY_MOBILE)
+        startMultiPlayerClassicModeMenuButton.SetActive(false);
+        startMultiPlayerEndlessModeMenuButton.SetActive(false);
+#endif
         gameModeSelectorMenuGameObject.SetActive(true);
     }
     public void DisableGameModeSelectorMenu()
@@ -189,20 +194,8 @@ public class MainMenuManager : MonoBehaviour
         else if (currentGameMode == GameMode.VersusClassic || currentGameMode == GameMode.VersusEndless)
             StartGameMultiPlayer();
     }
-    private void GetArguments()
+    private void DisableQuitGameButton()
     {
-        string[] arguments = Environment.GetCommandLineArgs();
-        if(arguments.Length > 0)
-        {
-            for(int i=0;i<arguments.Length;i++)
-            {
-                if (arguments[i] == "-TrueGame")
-                {
-                    gameplaySettings.safeMode = false;
-                    break;
-                }
-            }
-            gameplaySettings.safeMode = true;
-        }
+        exitGameMenuButton.gameObject.SetActive(false);
     }
 }

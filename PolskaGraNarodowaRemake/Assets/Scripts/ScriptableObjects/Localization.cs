@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.Networking;
+using System;
 
 [CreateAssetMenu(menuName = "ScriptableObjects/Localization")]
 public class Localization : ScriptableObject
 {
-    public string localizationTextFile;
-    //public TextAsset localizationTextFile;
+    public TextAsset localizationTextFile;
     //main menu
     internal string mainMenuStartGame;
     internal string mainMenuButton1;
@@ -72,15 +73,7 @@ public class Localization : ScriptableObject
     {
         List<string> listOfAll = new List<string>();
         if(localizationTextFile != null)
-        {
-            StreamReader inp_stm = new StreamReader(Application.streamingAssetsPath + "/" + localizationTextFile + ".txt");
-            while (!inp_stm.EndOfStream)
-            {
-                string inp_ln = inp_stm.ReadLine();
-                listOfAll.Add(inp_ln);
-            }
-            inp_stm.Close();
-        }
+            listOfAll.AddRange(localizationTextFile.text.Split(Environment.NewLine));
         if (listOfAll.Count != 0)
         {
             mainMenuStartGame = listOfAll[1];

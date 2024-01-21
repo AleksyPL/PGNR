@@ -58,16 +58,21 @@ public class AudioManager : MonoBehaviour
     }
     public void UpdateAllSoundsVolume()
     {
-        foreach (Sound s in localOneLinersSounds)
-            s.source.volume = gameplaySettings.volumeQuotes * s.volumeSetInEditor;
-        foreach (Sound s in localHitReactionSounds)
-            s.source.volume = gameplaySettings.volumeQuotes * s.volumeSetInEditor;
-        foreach (Sound s in localLandingSounds)
-            s.source.volume = gameplaySettings.volumeQuotes * s.volumeSetInEditor;
-        foreach (Sound s in localSFX)
-            s.source.volume = gameplaySettings.volumeSFX * s.volumeSetInEditor;
-        foreach (Sound s in localOtherSounds)
-            s.source.volume = gameplaySettings.volumeMusic * s.volumeSetInEditor;
+        if(localOneLinersSounds != null)
+            foreach (Sound s in localOneLinersSounds)
+                s.source.volume = gameplaySettings.volumeQuotes * s.volumeSetInEditor;
+        if(localHitReactionSounds != null)
+            foreach (Sound s in localHitReactionSounds)
+                s.source.volume = gameplaySettings.volumeQuotes * s.volumeSetInEditor;
+        if(localLandingSounds != null)
+            foreach (Sound s in localLandingSounds)
+                s.source.volume = gameplaySettings.volumeQuotes * s.volumeSetInEditor;
+        if(localSFX != null)
+            foreach (Sound s in localSFX)
+                s.source.volume = gameplaySettings.volumeSFX * s.volumeSetInEditor;
+        if(localOtherSounds != null)
+            foreach (Sound s in localOtherSounds)
+                s.source.volume = gameplaySettings.volumeMusic * s.volumeSetInEditor;
     }
     public void PlaySound(string soundName, Sound[] localSoundsBank)
     {

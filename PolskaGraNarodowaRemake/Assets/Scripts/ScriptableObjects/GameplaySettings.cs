@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 public enum Languages
@@ -66,16 +68,31 @@ public class GameplaySettings : ScriptableObject
     public int gettingWastedXTimesMoreNumber;
     public float multishotSpread;
     [Header("Other")]
-    internal bool safeMode;
+    internal bool safeMode = true;
+
     private void OnEnable()
     {
+#if UNITY_EDITOR
+        safeMode = false;
+#else
+        GetArguments();
+#endif
         if (currentLanguage == Languages.Polski)
             langauageIndex = 0;
         else if (currentLanguage == Languages.English)
             langauageIndex = 1;
+        ResetGameVolume();
         ResetPlayerSkins();
         LoadLocalizationData();
     }
+
+    private void ResetGameVolume()
+    {
+        volumeSFX = 1;
+        volumeQuotes = 1;
+        volumeMusic = 1;
+    }
+
     private void LoadLocalizationData()
     {
         if(localizationStringsSafe.Length == localizationStringsNotSafe.Length)
@@ -85,9 +102,7 @@ public class GameplaySettings : ScriptableObject
             else
                 localizationsStrings = localizationStringsNotSafe;
             for(int i=0;i<localizationsStrings.Length;i++)
-            {
                 localizationsStrings[i].LoadData();
-            }
         }
         else
             Application.Quit();
@@ -96,5 +111,29 @@ public class GameplaySettings : ScriptableObject
     {
         playersPlaneSkins[0] = 0;
         playersPlaneSkins[1] = 1;
+    }
+    private string RemoveSpecialCharacters(string str)
+    {
+        return Regex.Replace(str, "[^a-zA-Z0-9_.]+", "", RegexOptions.Compiled);
+    }
+    private void GetArguments()
+    {
+#if UNITY_WEBGL
+        string parametersInTheWholeLink = Application.absoluteURL.Substring(Application.absoluteURL.IndexOf("?") + 1);
+        string[] arguments = parametersInTheWholeLink.Split(new char[] { '?' });
+#else
+        string[] arguments = Environment.GetCommandLineArgs();
+#endif
+        if (arguments.Length > 0)
+        {
+            for (int i = 0; i < arguments.Length; i++)
+            {
+                arguments[i] = RemoveSpecialCharacters(arguments[i]);
+                if (arguments[i] == "TrueGame")
+                    safeMode = false;
+                if (arguments[i] == "EN")
+                    langauageIndex = 1;
+            }
+        }
     }
 }

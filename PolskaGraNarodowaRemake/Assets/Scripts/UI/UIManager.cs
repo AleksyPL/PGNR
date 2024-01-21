@@ -80,8 +80,9 @@ public class UIManager : MonoBehaviour
         flightControllerScript = GetComponent<FlightController>();
         EventSystemGameObject.GetComponent<EventSystem>().SetSelectedGameObject(null);
         pauseScreenEnabled = false;
-        if (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerClassic || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerEndless)
-            MoveUiElementsSinglePlayer();
+        optionsMenuGameObject.GetComponent<UIOptionsMenu>().DisableLanguageButtons();
+        //if (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerClassic || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerEndless)
+        //    MoveUiElementsSinglePlayer();
     }
     void Update()
     {
@@ -188,18 +189,21 @@ public class UIManager : MonoBehaviour
     }
     private void EnablePauseScreen()
     {
-        Time.timeScale = 0;
-        EventSystemGameObject.GetComponent<EventSystem>().SetSelectedGameObject(pauseScreenOptionsButtonGameObject);
-        pauseScreenTitleGameObject.GetComponentInChildren<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].pauseScreenPauseMainTitle;
-        fadePanelGameObject.SetActive(true);
-        pauseScreenGameObject.SetActive(true);
-        regularHUDMainGameObject.SetActive(false);
-        flightControllerScript.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightControllerScript.audioManagerScript.localSFX);
-        flightControllerScript.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightControllerScript.audioManagerScript.localOneLinersSounds);
-        flightControllerScript.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightControllerScript.audioManagerScript.localHitReactionSounds);
-        flightControllerScript.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightControllerScript.audioManagerScript.localLandingSounds);
-        pauseScreenEnabled = true;
-        UpdatePauseScreenHUD();
+        if (((flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerClassic || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerEndless) && flightControllerScript.gameModeScript.playerOnePlane.currentPlaneState != PlaneState.crashed) || ((flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerClassic && flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerEndless) && (flightControllerScript.gameModeScript.playerOnePlane.currentPlaneState != PlaneState.crashed || flightControllerScript.gameModeScript.playerTwoPlane.currentPlaneState != PlaneState.crashed)))
+        {
+            Time.timeScale = 0;
+            EventSystemGameObject.GetComponent<EventSystem>().SetSelectedGameObject(pauseScreenOptionsButtonGameObject);
+            pauseScreenTitleGameObject.GetComponentInChildren<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].pauseScreenPauseMainTitle;
+            fadePanelGameObject.SetActive(true);
+            pauseScreenGameObject.SetActive(true);
+            regularHUDMainGameObject.SetActive(false);
+            flightControllerScript.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightControllerScript.audioManagerScript.localSFX);
+            flightControllerScript.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightControllerScript.audioManagerScript.localOneLinersSounds);
+            flightControllerScript.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightControllerScript.audioManagerScript.localHitReactionSounds);
+            flightControllerScript.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightControllerScript.audioManagerScript.localLandingSounds);
+            pauseScreenEnabled = true;
+            UpdatePauseScreenHUD();
+        }
     }
     internal void EnableGameOverScreen()
     {

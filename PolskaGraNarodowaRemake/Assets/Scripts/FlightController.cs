@@ -27,6 +27,7 @@ public class FlightController : MonoBehaviour
     }
     private void Start()
     {
+        audioManagerScript.UpdateAllSoundsVolume();
         audioManagerScript.PlaySound("TopGunTheme", audioManagerScript.localOtherSounds);
     }
     internal void ThrowBottleOfVodka(Plane plane, bool pressedBeforePauseScreen = false)
@@ -70,9 +71,9 @@ public class FlightController : MonoBehaviour
         if (plane.invertedSteeringEnabled)
             plane.verticalMovementKeys = -plane.verticalMovementKeys;
         //visually rotating a plane
-        if (plane.verticalMovementKeys != 0 && !uiManagerScript.pauseScreenEnabled)
+        if (plane.verticalMovementKeys != 0)
             plane.planeRendererScript.ChangeTilt(plane.currentPlaneState, plane.verticalMovementKeys);
-        else if (plane.verticalMovementKeys == 0 && !uiManagerScript.pauseScreenEnabled)
+        else if (plane.verticalMovementKeys == 0)
             plane.planeRendererScript.ChangeTilt(plane.currentPlaneState, 0);
         //moving a plane
         if(plane.verticalMovementKeys != plane.difficultyImpulseDirection && plane.verticalMovementKeys != 0)
@@ -117,21 +118,24 @@ public class FlightController : MonoBehaviour
     }
     private void Update()
     {
-        if(!uiManagerScript.timerBeforeTheFlightEnabled && gameModeScript.playerOnePlane.currentPlaneState == PlaneState.standard || gameModeScript.playerOnePlane.currentPlaneState == PlaneState.wheelsOn)
+        if(!uiManagerScript.pauseScreenEnabled)
         {
-            MovePlaneStandardAndWheels(gameModeScript.playerOnePlane);
-            if(gameModeScript.playerOnePlane.currentPlaneState != PlaneState.wheelsOn)
-                ThrowBottleOfVodka(gameModeScript.playerOnePlane);
+            if (!uiManagerScript.timerBeforeTheFlightEnabled && gameModeScript.playerOnePlane.currentPlaneState == PlaneState.standard || gameModeScript.playerOnePlane.currentPlaneState == PlaneState.wheelsOn)
+            {
+                MovePlaneStandardAndWheels(gameModeScript.playerOnePlane);
+                if (gameModeScript.playerOnePlane.currentPlaneState != PlaneState.wheelsOn)
+                    ThrowBottleOfVodka(gameModeScript.playerOnePlane);
+            }
+            if (!uiManagerScript.timerBeforeTheFlightEnabled && gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerClassic && gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerEndless && (gameModeScript.playerTwoPlane.currentPlaneState == PlaneState.standard || gameModeScript.playerTwoPlane.currentPlaneState == PlaneState.wheelsOn))
+            {
+                MovePlaneStandardAndWheels(gameModeScript.playerTwoPlane);
+                if (gameModeScript.playerTwoPlane.currentPlaneState != PlaneState.wheelsOn)
+                    ThrowBottleOfVodka(gameModeScript.playerTwoPlane);
+            }
+            if (gameModeScript.playerOnePlane.currentPlaneState == PlaneState.damaged)
+                MovePlaneDamaged(gameModeScript.playerOnePlane);
+            if ((gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerClassic && gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerEndless) && gameModeScript.playerTwoPlane.currentPlaneState == PlaneState.damaged)
+                MovePlaneDamaged(gameModeScript.playerTwoPlane);
         }
-        if(!uiManagerScript.timerBeforeTheFlightEnabled && gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerClassic && gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerEndless && (gameModeScript.playerTwoPlane.currentPlaneState == PlaneState.standard || gameModeScript.playerTwoPlane.currentPlaneState == PlaneState.wheelsOn))
-        {
-            MovePlaneStandardAndWheels(gameModeScript.playerTwoPlane);
-            if(gameModeScript.playerTwoPlane.currentPlaneState != PlaneState.wheelsOn)
-                ThrowBottleOfVodka(gameModeScript.playerTwoPlane);
-        }
-        if(gameModeScript.playerOnePlane.currentPlaneState == PlaneState.damaged)
-            MovePlaneDamaged(gameModeScript.playerOnePlane);
-        if((gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerClassic && gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerEndless) && gameModeScript.playerTwoPlane.currentPlaneState == PlaneState.damaged)
-            MovePlaneDamaged(gameModeScript.playerTwoPlane);
     }
 }

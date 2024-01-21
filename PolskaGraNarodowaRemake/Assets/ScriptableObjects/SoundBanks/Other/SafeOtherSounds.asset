@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SafeOtherSounds
   m_EditorClassIdentifier: 
   sounds:
-  - clip: {fileID: 8300000, guid: 4109530998a2cea4483fab1060eae099, type: 3}
+  - clip: {fileID: 8300000, guid: f09d2f9ba4485d54182044d1765e2b84, type: 3}
     name: MainMenuTheme
     volumeSetInEditor: 1
     pitch: 1

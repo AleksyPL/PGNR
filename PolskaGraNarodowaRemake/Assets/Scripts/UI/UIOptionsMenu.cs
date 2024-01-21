@@ -13,6 +13,7 @@ public class UIOptionsMenu : MonoBehaviour
     public GameObject languageSelectorGameObject;
     public GameObject activeLanguageGameObject;
     public GameObject backToMainMenuButton;
+    public Color notAvailableButton;
     private void OnEnable()
     {
         LoadValuesFromSettings();
@@ -57,5 +58,12 @@ public class UIOptionsMenu : MonoBehaviour
         gameplaySettings.langauageIndex--;
         if (gameplaySettings.langauageIndex < 0)
             gameplaySettings.langauageIndex = System.Enum.GetValues(typeof(Languages)).Length - 1;
+    }
+    internal void DisableLanguageButtons()
+    {
+        languageSelectorGameObject.transform.Find("LeftArrow").GetComponent<Button>().enabled = false;
+        languageSelectorGameObject.transform.Find("LeftArrow").GetComponent<Image>().color = notAvailableButton;
+        languageSelectorGameObject.transform.Find("RightArrow").GetComponent<Button>().enabled = false;
+        languageSelectorGameObject.transform.Find("RightArrow").GetComponent<Image>().color = notAvailableButton;
     }
 }

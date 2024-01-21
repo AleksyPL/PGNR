@@ -6,24 +6,39 @@ public class ParallaxManager : MonoBehaviour
 {
     private Transform cameraTransform;
     private Vector3 lastCameraPosition;
-    private float textureUnitSizeX;
+    
     public GameObject cameraObject;
-    public float parallaxEffectMultipler;
+    public List<OneLayer> parallaxLayers;
+    [System.Serializable]
+    public class OneLayer
+    {
+        public GameObject parallaxLayerImage;
+        public float parallaxEffectMultipler;
+        internal float textureUnitSizeX;
+        internal void LoadTextureUnitSizeX()
+        {
+            textureUnitSizeX = parallaxLayerImage.GetComponent<SpriteRenderer>().sprite.texture.width / parallaxLayerImage.GetComponent<SpriteRenderer>().sprite.pixelsPerUnit;
+        }
+    }
     void Start()
     {
         cameraTransform = cameraObject.transform;
         lastCameraPosition = cameraTransform.position;
-        textureUnitSizeX = GetComponent<SpriteRenderer>().sprite.texture.width / GetComponent<SpriteRenderer>().sprite.pixelsPerUnit;
+        for (int i = 0; i < parallaxLayers.Count; i++)
+            parallaxLayers[i].LoadTextureUnitSizeX();
     }
     void LateUpdate()
     {
         Vector3 deltaMovement = cameraTransform.position - lastCameraPosition;
-        transform.position += deltaMovement * parallaxEffectMultipler;
         lastCameraPosition = cameraTransform.position;
-        if (Mathf.Abs(cameraTransform.position.x - transform.position.x) >= textureUnitSizeX)
+        for (int i = 0; i < parallaxLayers.Count; i++)
         {
-            float offsetPositionX = (cameraTransform.position.x - transform.position.x) % textureUnitSizeX;
-            transform.position = new Vector3(cameraTransform.position.x + offsetPositionX, transform.position.y);
+            parallaxLayers[i].parallaxLayerImage.transform.position += deltaMovement * parallaxLayers[i].parallaxEffectMultipler;
+            if (Mathf.Abs(cameraTransform.position.x - parallaxLayers[i].parallaxLayerImage.transform.position.x) >= parallaxLayers[i].textureUnitSizeX)
+            {
+                float offsetPositionX = (cameraTransform.position.x - parallaxLayers[i].parallaxLayerImage.transform.position.x) % parallaxLayers[i].textureUnitSizeX;
+                parallaxLayers[i].parallaxLayerImage.transform.position = new Vector3(cameraTransform.position.x + offsetPositionX, parallaxLayers[i].parallaxLayerImage.transform.position.y, 0);
+            }
         }
     }
 }

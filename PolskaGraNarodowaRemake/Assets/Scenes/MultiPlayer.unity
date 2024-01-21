@@ -219,9 +219,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3182712339018867238, guid: 634ad76ae54ee6c4482d977cf834e3ac, type: 3}
+    - target: {fileID: 4502320695618372020, guid: 634ad76ae54ee6c4482d977cf834e3ac, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -204
+      value: -55
+      objectReference: {fileID: 0}
+    - target: {fileID: 7008977727011540148, guid: 634ad76ae54ee6c4482d977cf834e3ac, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -211
+      objectReference: {fileID: 0}
+    - target: {fileID: 8422522448854808290, guid: 634ad76ae54ee6c4482d977cf834e3ac, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -104
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -518,21 +526,13 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1037625254}
     m_Modifications:
-    - target: {fileID: 8657606410379598683, guid: e3f9bbec2259e164babd95c86d901eb8, type: 3}
+    - target: {fileID: 1970404982561522291, guid: e3f9bbec2259e164babd95c86d901eb8, type: 3}
       propertyPath: cameraObject
       value: 
       objectReference: {fileID: 1810758763}
     - target: {fileID: 8657606411223057766, guid: e3f9bbec2259e164babd95c86d901eb8, type: 3}
       propertyPath: m_RootOrder
       value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8657606411223057766, guid: e3f9bbec2259e164babd95c86d901eb8, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8657606411223057766, guid: e3f9bbec2259e164babd95c86d901eb8, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8657606411223057766, guid: e3f9bbec2259e164babd95c86d901eb8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -578,30 +578,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BackgroundUp
       objectReference: {fileID: 0}
-    - target: {fileID: 8657606411472102641, guid: e3f9bbec2259e164babd95c86d901eb8, type: 3}
-      propertyPath: cameraObject
-      value: 
-      objectReference: {fileID: 1810758763}
-    - target: {fileID: 8657606411529941433, guid: e3f9bbec2259e164babd95c86d901eb8, type: 3}
-      propertyPath: cameraObject
-      value: 
-      objectReference: {fileID: 1810758763}
-    - target: {fileID: 8657606411625689427, guid: e3f9bbec2259e164babd95c86d901eb8, type: 3}
-      propertyPath: cameraObject
-      value: 
-      objectReference: {fileID: 1810758763}
-    - target: {fileID: 8657606411672503222, guid: e3f9bbec2259e164babd95c86d901eb8, type: 3}
-      propertyPath: cameraObject
-      value: 
-      objectReference: {fileID: 1810758763}
-    - target: {fileID: 8657606411852324920, guid: e3f9bbec2259e164babd95c86d901eb8, type: 3}
-      propertyPath: cameraObject
-      value: 
-      objectReference: {fileID: 1810758763}
-    - target: {fileID: 8657606412044337510, guid: e3f9bbec2259e164babd95c86d901eb8, type: 3}
-      propertyPath: cameraObject
-      value: 
-      objectReference: {fileID: 1810758763}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: e3f9bbec2259e164babd95c86d901eb8, type: 3}
@@ -724,25 +700,13 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1037625254}
     m_Modifications:
-    - target: {fileID: 8657606410379598683, guid: e3f9bbec2259e164babd95c86d901eb8, type: 3}
+    - target: {fileID: 1970404982561522291, guid: e3f9bbec2259e164babd95c86d901eb8, type: 3}
       propertyPath: cameraObject
       value: 
       objectReference: {fileID: 199547950}
     - target: {fileID: 8657606411223057766, guid: e3f9bbec2259e164babd95c86d901eb8, type: 3}
       propertyPath: m_RootOrder
       value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8657606411223057766, guid: e3f9bbec2259e164babd95c86d901eb8, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8657606411223057766, guid: e3f9bbec2259e164babd95c86d901eb8, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8657606411223057766, guid: e3f9bbec2259e164babd95c86d901eb8, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8657606411223057766, guid: e3f9bbec2259e164babd95c86d901eb8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -788,30 +752,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BackgroundDown
       objectReference: {fileID: 0}
-    - target: {fileID: 8657606411472102641, guid: e3f9bbec2259e164babd95c86d901eb8, type: 3}
-      propertyPath: cameraObject
-      value: 
-      objectReference: {fileID: 199547950}
-    - target: {fileID: 8657606411529941433, guid: e3f9bbec2259e164babd95c86d901eb8, type: 3}
-      propertyPath: cameraObject
-      value: 
-      objectReference: {fileID: 199547950}
-    - target: {fileID: 8657606411625689427, guid: e3f9bbec2259e164babd95c86d901eb8, type: 3}
-      propertyPath: cameraObject
-      value: 
-      objectReference: {fileID: 199547950}
-    - target: {fileID: 8657606411672503222, guid: e3f9bbec2259e164babd95c86d901eb8, type: 3}
-      propertyPath: cameraObject
-      value: 
-      objectReference: {fileID: 199547950}
-    - target: {fileID: 8657606411852324920, guid: e3f9bbec2259e164babd95c86d901eb8, type: 3}
-      propertyPath: cameraObject
-      value: 
-      objectReference: {fileID: 199547950}
-    - target: {fileID: 8657606412044337510, guid: e3f9bbec2259e164babd95c86d901eb8, type: 3}
-      propertyPath: cameraObject
-      value: 
-      objectReference: {fileID: 199547950}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: e3f9bbec2259e164babd95c86d901eb8, type: 3}
@@ -1022,8 +962,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 559070839}
   - {fileID: 367166381}
+  - {fileID: 559070839}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

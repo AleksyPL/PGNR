@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4427393703c9374c9d55b46477c8fe4, type: 3}
   m_Name: LocalizationENSafe
   m_EditorClassIdentifier: 
-  localizationTextFile: localizationENSafe
+  localizationTextFile: {fileID: 4900000, guid: d82bf8463a7f9d24a94ddb069c7fa900, type: 3}

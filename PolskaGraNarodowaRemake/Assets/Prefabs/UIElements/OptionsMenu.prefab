@@ -543,6 +543,7 @@ MonoBehaviour:
   languageSelectorGameObject: {fileID: 4771030179569190363}
   activeLanguageGameObject: {fileID: 6826692717953291546}
   backToMainMenuButton: {fileID: 133455585484151057}
+  notAvailableButton: {r: 0.1792453, g: 0.16656284, b: 0.16656284, a: 0.21960784}
 --- !u!1 &133455584637428148
 GameObject:
   m_ObjectHideFlags: 0
