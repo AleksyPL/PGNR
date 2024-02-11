@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 8657606411223057766}
   - component: {fileID: 1970404982561522291}
   m_Layer: 0
-  m_Name: Regular Background
+  m_Name: Summer Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -135,7 +135,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc687521c1f66724db284dc6cdac42de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraObject: {fileID: 0}
+  upperScreenY: 17.2
+  lowerScreenY: -16.3
   parallaxLayers:
   - parallaxLayerImage: {fileID: 8657606411472102652}
     parallaxEffectMultipler: 0.7

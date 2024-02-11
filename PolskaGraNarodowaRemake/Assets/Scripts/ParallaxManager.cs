@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class ParallaxManager : MonoBehaviour
 {
+    public float upperScreenY;
+    public float lowerScreenY;
     private Transform cameraTransform;
     private Vector3 lastCameraPosition;
-    
-    public GameObject cameraObject;
+    private GameObject cameraObject;
     public List<OneLayer> parallaxLayers;
     [System.Serializable]
     public class OneLayer
@@ -20,8 +21,10 @@ public class ParallaxManager : MonoBehaviour
             textureUnitSizeX = parallaxLayerImage.GetComponent<SpriteRenderer>().sprite.texture.width / parallaxLayerImage.GetComponent<SpriteRenderer>().sprite.pixelsPerUnit;
         }
     }
-    void Start()
+    internal void BackgroundSetup(float backgroundY, GameObject cameraObjectToSet)
     {
+        transform.position = new Vector3(transform.position.x, backgroundY, transform.position.z);
+        cameraObject = cameraObjectToSet;
         cameraTransform = cameraObject.transform;
         lastCameraPosition = cameraTransform.position;
         for (int i = 0; i < parallaxLayers.Count; i++)

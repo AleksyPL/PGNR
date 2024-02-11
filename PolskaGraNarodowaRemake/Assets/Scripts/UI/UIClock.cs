@@ -40,10 +40,11 @@ public class UIClock : MonoBehaviour
         }
         else if (flightControllerScript.uiManagerScript.pauseScreenEnabled)
         {
-            Time.timeScale = 1;
-            if (GameObject.Find("ActiveBottleWarning") != null)
+             Time.timeScale = 1;
+            if (transform.parent.Find("ActiveBottleWarning") != null)
             {
-                Destroy(GameObject.Find("ActiveBottleWaring"));
+                transform.parent.Find("ActiveBottleWarning").GetComponent<UIActiveBottleWarning>().DestroyBottleWarning();
+                //Destroy(transform.parent.Find("ActiveBottleWarning"));
                 //hack
                 flightControllerScript.gameModeScript.playerOnePlane.attackKeyPressed = Input.GetButton("Jump");
                 if (flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerClassic && flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerEndless)
@@ -60,6 +61,8 @@ public class UIClock : MonoBehaviour
                     flightControllerScript.gameModeScript.playerTwoPlane.activeBottleWarning = false;
                 }
             }
+            if (Application.isMobilePlatform || flightControllerScript.gameModeScript.simulateMobileApp)
+                flightControllerScript.uiManagerScript.TurnOnTouchScreenButtons();
             flightControllerScript.uiManagerScript.playerOneUI.regularHUDMainGameObject.SetActive(true);
             if (flightControllerScript.uiManagerScript.playerTwoUI.regularHUDMainGameObject != null)
                 flightControllerScript.uiManagerScript.playerTwoUI.regularHUDMainGameObject.SetActive(true);

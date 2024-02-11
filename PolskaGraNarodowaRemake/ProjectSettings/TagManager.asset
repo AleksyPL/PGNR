@@ -57,3 +57,6 @@ TagManager:
   - name: Smoke
     uniqueID: 4119643997
     locked: 0
+  - name: EnvironmentEffects
+    uniqueID: 1810119269
+    locked: 0

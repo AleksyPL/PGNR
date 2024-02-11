@@ -21,11 +21,11 @@ Wybierz swój samolot
 //How to play - Title
 Pilocie, Ojczyzna Wzywa!
 //Plot - Plot
-Dobrze robio
+Musisz polecieć nowym Polskim samolotem daleko na Wschód. <br><br>Nie licz jednak na to, że to będzie łatwe zadanie. Omijaj przeszkody na swojej drodze, oraz niszcz je śmieciami znalezionymi na pokładzie. <br><br>Ale pamiętaj: aparatura samolotu ustawiona jest na większy ciężar samolotu, im wiecej wyrzucisz śmieci, tym trudniej będzie się leciało. <br><br>Pokaż wszystkim jakim dobrym jesteś pilotem.
 //How to play - Controls - Player 1
 W/S - sterowanie<br>Spacja - pijesz<br>Spacja(Przytrzymaj) - butelka poleci dalej<br>ESC - menu pauzy
 //How to play - Controls - Player 2
-Strzałki góra/dół - sterowanie<br>P.CTRL - pijesz<br>P.CTRL(Przytrzymaj) - butelka poleci dalej<br>Backspace - menu pauzy
+Strzałki góra/dół - sterowanie<br>P.SHIFT - pijesz<br>P.SHIFT(Przytrzymaj) - butelka poleci dalej<br>Backspace - menu pauzy
 //How to play - Controls - Player 1 indicator
 Gracz 1
 //How to play - Controls - Player 2 indicator

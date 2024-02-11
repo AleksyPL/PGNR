@@ -13,21 +13,18 @@ public class UIOptionsMenu : MonoBehaviour
     public GameObject languageSelectorGameObject;
     public GameObject activeLanguageGameObject;
     public GameObject backToMainMenuButton;
+    public GameObject audioManagerGameObject;
     public Color notAvailableButton;
     private void OnEnable()
     {
         LoadValuesFromSettings();
-    }
-    private void Update()
-    {
-        UpdateSettingsUsingSliderValues();
-        UpdateUIWithNewLanguage();
     }
     public void LoadValuesFromSettings()
     {
         volumeMusicSliderGameObject.GetComponent<Slider>().value = gameplaySettings.volumeMusic;
         volumeQuotesSliderGameObject.GetComponent<Slider>().value = gameplaySettings.volumeQuotes;
         volumeSFXSliderGameObject.GetComponent<Slider>().value = gameplaySettings.volumeSFX;
+        audioManagerGameObject.GetComponent<AudioManager>().UpdateAllSoundsVolume();
     }
     public void UpdateSettingsUsingSliderValues()
     {
@@ -52,12 +49,14 @@ public class UIOptionsMenu : MonoBehaviour
         gameplaySettings.langauageIndex++;
         if (gameplaySettings.langauageIndex > System.Enum.GetValues(typeof(Languages)).Length - 1)
             gameplaySettings.langauageIndex = 0;
+        UpdateUIWithNewLanguage();
     }
     public void PreviousLanguage()
     {
         gameplaySettings.langauageIndex--;
         if (gameplaySettings.langauageIndex < 0)
             gameplaySettings.langauageIndex = System.Enum.GetValues(typeof(Languages)).Length - 1;
+        UpdateUIWithNewLanguage();
     }
     internal void DisableLanguageButtons()
     {

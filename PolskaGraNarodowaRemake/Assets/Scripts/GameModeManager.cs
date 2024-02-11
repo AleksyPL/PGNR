@@ -28,8 +28,8 @@ public class GameModeManager : MonoBehaviour
     internal PlayerState playerTwoState;
     internal bool someoneWon;
     private float waitingTimeForOneLinerCurrent;
-    
-    private void OnEnable()
+    [SerializeField] internal bool simulateMobileApp;
+    void OnEnable()
     {
         Application.targetFrameRate = 144;
         flightControllerScript = GetComponent<FlightController>();
@@ -69,7 +69,7 @@ public class GameModeManager : MonoBehaviour
                 flightControllerScript.audioManagerScript.StopPlayingSoundsFromTheSpecificSoundBank(flightControllerScript.audioManagerScript.localHitReactionSounds);
                 flightControllerScript.audioManagerScript.StopPlayingSoundsFromTheSpecificSoundBank(flightControllerScript.audioManagerScript.localLandingSounds);
                 flightControllerScript.uiManagerScript.playerOneUI.regularHUDMainGameObject.SetActive(false);
-                if (flightControllerScript.uiManagerScript.playerTwoUI != null)
+                if (flightControllerScript.uiManagerScript.playerTwoUI.regularHUDMainGameObject != null)
                     flightControllerScript.uiManagerScript.playerTwoUI.regularHUDMainGameObject.SetActive(false);
                 flightControllerScript.uiManagerScript.SpawnTimerOnTheScreen(gameOverTimer);
             } 
@@ -91,7 +91,7 @@ public class GameModeManager : MonoBehaviour
                 flightControllerScript.audioManagerScript.StopPlayingSoundsFromTheSpecificSoundBank(flightControllerScript.audioManagerScript.localHitReactionSounds);
                 flightControllerScript.audioManagerScript.StopPlayingSoundsFromTheSpecificSoundBank(flightControllerScript.audioManagerScript.localLandingSounds);
                 flightControllerScript.uiManagerScript.playerOneUI.regularHUDMainGameObject.SetActive(false);
-                if (flightControllerScript.uiManagerScript.playerTwoUI != null)
+                if (flightControllerScript.uiManagerScript.playerTwoUI.regularHUDMainGameObject != null)
                     flightControllerScript.uiManagerScript.playerTwoUI.regularHUDMainGameObject.SetActive(false);
                 flightControllerScript.uiManagerScript.SpawnTimerOnTheScreen(gameOverTimer);
             }
@@ -110,7 +110,7 @@ public class GameModeManager : MonoBehaviour
                 flightControllerScript.audioManagerScript.StopPlayingSoundsFromTheSpecificSoundBank(flightControllerScript.audioManagerScript.localHitReactionSounds);
                 flightControllerScript.audioManagerScript.StopPlayingSoundsFromTheSpecificSoundBank(flightControllerScript.audioManagerScript.localLandingSounds);
                 flightControllerScript.uiManagerScript.playerOneUI.regularHUDMainGameObject.SetActive(false);
-                if (flightControllerScript.uiManagerScript.playerTwoUI != null)
+                if (flightControllerScript.uiManagerScript.playerTwoUI.regularHUDMainGameObject != null)
                     flightControllerScript.uiManagerScript.playerTwoUI.regularHUDMainGameObject.SetActive(false);
                 flightControllerScript.uiManagerScript.SpawnTimerOnTheScreen(gameOverTimer);
             }
@@ -128,7 +128,7 @@ public class GameModeManager : MonoBehaviour
             }
         }
     }
-    private void Update()
+    void Update()
     {
         SetProgressionFlags(playerOnePlane);
         if (currentGameMode != GameMode.singleplayerClassic && currentGameMode != GameMode.singleplayerEndless)

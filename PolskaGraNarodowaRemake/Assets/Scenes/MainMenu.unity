@@ -4425,6 +4425,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 4dc2b70a9f3f78b4c8b913aca4cd5530, type: 2}
     - target: {fileID: 5961415093726692383, guid: 03ef519fc35c46a4eaadc7545d8d0dca, type: 3}
+      propertyPath: masterSoundBank
+      value: 
+      objectReference: {fileID: 11400000, guid: c1b79b4a205816f47b4a3067b2b9f14d, type: 2}
+    - target: {fileID: 5961415093726692383, guid: 03ef519fc35c46a4eaadc7545d8d0dca, type: 3}
       propertyPath: otherSoundsSafe
       value: 
       objectReference: {fileID: 11400000, guid: 42e01dfb2c618ff4a9ede9a854dd5b63, type: 2}
@@ -7871,6 +7875,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 649934971}
     m_Modifications:
+    - target: {fileID: 578825359, guid: d106925ab1a24b74d9f8dcd8bb083c05, type: 3}
+      propertyPath: audioManagerGameObject
+      value: 
+      objectReference: {fileID: 535110958}
     - target: {fileID: 133455584487155260, guid: d106925ab1a24b74d9f8dcd8bb083c05, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

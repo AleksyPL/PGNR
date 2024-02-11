@@ -10,6 +10,7 @@ public class FlightController : MonoBehaviour
     public GameplaySettings gameplaySettings;
     internal InputManager inputManagerScript;
     internal LevelManager levelManagerScript;
+    internal EnvironmentManager environmentManagerScript;
     internal RewardAndProgressionManager rewardAndProgressionManagerScript;
     internal AudioManager audioManagerScript;
     internal UIManager uiManagerScript;
@@ -21,6 +22,7 @@ public class FlightController : MonoBehaviour
         difficultyScript = GetComponent<DifficultyManager>();
         inputManagerScript = GetComponent<InputManager>();
         levelManagerScript = GetComponent<LevelManager>();
+        environmentManagerScript = GetComponent<EnvironmentManager>();
         audioManagerScript = GetComponent<AudioManager>();
         rewardAndProgressionManagerScript = GetComponent<RewardAndProgressionManager>();
         powerUpManagerScript = GetComponent<PowerUpManager>();
@@ -41,6 +43,9 @@ public class FlightController : MonoBehaviour
             }
             if (plane.attackKeyReleased || pressedBeforePauseScreen)
             {
+                //touch screen hack
+                plane.attackKeyReleased = false;
+                //end of hack
                 float bottleThrowForceCurrent = Mathf.Lerp(gameplaySettings.bottleThrowForceMin, gameplaySettings.bottleThrowForceMax, plane.timeToFullyChargeBottleThrowCounter / gameplaySettings.timeToFullyChargeBottleThrow);
                 Vector2 bottleThrowAngleCurrent = Vector2.Lerp(gameplaySettings.bottleThrowAngleMin, gameplaySettings.bottleThrowAngleMax, plane.timeToFullyChargeBottleThrowCounter / gameplaySettings.timeToFullyChargeBottleThrow);
                 plane.SpawnBottleOfVodka(bottleThrowForceCurrent, bottleThrowAngleCurrent);
@@ -62,6 +67,7 @@ public class FlightController : MonoBehaviour
                     plane.bottlesDrunk++;
                     plane.bottlesDrunkTotal++;
                 }
+                uiManagerScript.UpdateBottlesCounter(plane);
             }
         }
     }
@@ -118,15 +124,15 @@ public class FlightController : MonoBehaviour
     }
     private void Update()
     {
-        if(!uiManagerScript.pauseScreenEnabled)
+        if(!uiManagerScript.pauseScreenEnabled && !uiManagerScript.timerBeforeTheFlightEnabled)
         {
-            if (!uiManagerScript.timerBeforeTheFlightEnabled && gameModeScript.playerOnePlane.currentPlaneState == PlaneState.standard || gameModeScript.playerOnePlane.currentPlaneState == PlaneState.wheelsOn)
+            if (gameModeScript.playerOnePlane.currentPlaneState == PlaneState.standard || gameModeScript.playerOnePlane.currentPlaneState == PlaneState.wheelsOn)
             {
                 MovePlaneStandardAndWheels(gameModeScript.playerOnePlane);
                 if (gameModeScript.playerOnePlane.currentPlaneState != PlaneState.wheelsOn)
                     ThrowBottleOfVodka(gameModeScript.playerOnePlane);
             }
-            if (!uiManagerScript.timerBeforeTheFlightEnabled && gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerClassic && gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerEndless && (gameModeScript.playerTwoPlane.currentPlaneState == PlaneState.standard || gameModeScript.playerTwoPlane.currentPlaneState == PlaneState.wheelsOn))
+            if (gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerClassic && gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerEndless && (gameModeScript.playerTwoPlane.currentPlaneState == PlaneState.standard || gameModeScript.playerTwoPlane.currentPlaneState == PlaneState.wheelsOn))
             {
                 MovePlaneStandardAndWheels(gameModeScript.playerTwoPlane);
                 if (gameModeScript.playerTwoPlane.currentPlaneState != PlaneState.wheelsOn)

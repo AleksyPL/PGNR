@@ -60,6 +60,8 @@ public class MainMenuManager : MonoBehaviour
         Application.targetFrameRate = 144;
 #if (UNITY_WEBGL || UNITY_MOBILE)
         DisableQuitGameButton();
+        if (Application.isMobilePlatform)
+            Screen.orientation = ScreenOrientation.LandscapeLeft;
 #endif
         currentGameMode = GameMode.SinglePlayerClassic;
         planeSkinSelectorScript = GetComponent<PlaneSkinSelector>();
@@ -93,8 +95,8 @@ public class MainMenuManager : MonoBehaviour
     }
     private void Update()
     {
-        if (optionsMenuGameObject.activeSelf)
-            audioManagerScript.UpdateAllSoundsVolume();
+        //if (optionsMenuGameObject.activeSelf)
+        //    audioManagerScript.UpdateAllSoundsVolume();
         if (optionsMenuGameObject.activeSelf && Input.GetButtonDown("Cancel"))
             DisableOptionsMenu();
         else if (howToPlayPanelGameObject.activeSelf && Input.GetButtonDown("Cancel"))

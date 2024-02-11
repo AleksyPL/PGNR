@@ -25,9 +25,9 @@ public class DifficultyManager : MonoBehaviour
 
     void Update()
     {
-        if(flightControllerScript.gameModeScript.playerOnePlane.currentPlaneState == PlaneState.standard || (flightControllerScript.gameModeScript.playerOnePlane.currentPlaneState == PlaneState.wheelsOn && !flightControllerScript.gameModeScript.playerOnePlane.isTouchingAirport))
+        if((flightControllerScript.gameModeScript.playerOnePlane.currentPlaneState == PlaneState.standard && flightControllerScript.gameModeScript.playerOnePlane.difficultyImpulseEnabled) || (flightControllerScript.gameModeScript.playerOnePlane.currentPlaneState == PlaneState.wheelsOn && !flightControllerScript.gameModeScript.playerOnePlane.isTouchingAirport))
             ApplyDifficultyImpulse(flightControllerScript.gameModeScript.playerOnePlane);
-        if((flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerClassic && flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerEndless) && (flightControllerScript.gameModeScript.playerTwoPlane.currentPlaneState == PlaneState.standard || (flightControllerScript.gameModeScript.playerTwoPlane.currentPlaneState == PlaneState.wheelsOn && !flightControllerScript.gameModeScript.playerTwoPlane.isTouchingAirport)))
+        if(flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerClassic && flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerEndless && ((flightControllerScript.gameModeScript.playerTwoPlane.currentPlaneState == PlaneState.standard && flightControllerScript.gameModeScript.playerTwoPlane.difficultyImpulseEnabled) || (flightControllerScript.gameModeScript.playerTwoPlane.currentPlaneState == PlaneState.wheelsOn && !flightControllerScript.gameModeScript.playerTwoPlane.isTouchingAirport)))
             ApplyDifficultyImpulse(flightControllerScript.gameModeScript.playerTwoPlane);
     }
     internal void ApplyDifficultyImpulse(Plane plane)

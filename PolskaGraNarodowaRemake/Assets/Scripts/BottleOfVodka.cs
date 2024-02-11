@@ -25,7 +25,7 @@ public class BottleOfVodka : MonoBehaviour
         if (collision.gameObject.CompareTag("Obstacle") || collision.gameObject.CompareTag("Ground"))
         {
             flightControllerScript.audioManagerScript.PlaySound("BreakingGlass", flightControllerScript.audioManagerScript.localSFX);
-            if (collision.gameObject.transform.name == "birchTree")
+            if (collision.gameObject.transform.name == "verticalObstacle")
             {
                 parentObject.gameScore += gameplaySettings.rewardForHittingATarget;
                 collision.gameObject.GetComponent<FadeOutTool>().enabled = true;

@@ -68,13 +68,14 @@ public class GameplaySettings : ScriptableObject
     public int gettingWastedXTimesMoreNumber;
     public float multishotSpread;
     [Header("Other")]
-    internal bool safeMode = true;
+    public bool scriptableObjectSafeMod;
+    internal bool safeMode;
 
     private void OnEnable()
     {
-#if UNITY_EDITOR
-        safeMode = false;
-#else
+        safeMode = scriptableObjectSafeMod;
+#if !UNITY_EDITOR
+        safeMode = true;
         GetArguments();
 #endif
         if (currentLanguage == Languages.Polski)

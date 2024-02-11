@@ -13,43 +13,47 @@ public class InputManager : MonoBehaviour
     }
     void Update()
     {
-        if (!Application.isMobilePlatform)
+        if(!flightControllerScript.gameModeScript.simulateMobileApp)
         {
-            flightControllerScript.gameModeScript.playerOnePlane.verticalMovementKeys = Input.GetAxisRaw("Vertical");
-            flightControllerScript.gameModeScript.playerOnePlane.attackKeyPressed = Input.GetButton("Jump");
-            flightControllerScript.gameModeScript.playerOnePlane.attackKeyReleased = Input.GetButtonUp("Jump");
-            ESCpressed = Input.GetButtonDown("Cancel");
-            if (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusClassic || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusEndless)
+            if (!Application.isMobilePlatform)
             {
-                flightControllerScript.gameModeScript.playerTwoPlane.verticalMovementKeys = Input.GetAxisRaw("Vertical1");
-                flightControllerScript.gameModeScript.playerTwoPlane.attackKeyPressed = Input.GetButton("Jump1");
-                flightControllerScript.gameModeScript.playerTwoPlane.attackKeyReleased = Input.GetButtonUp("Jump1");
+                flightControllerScript.gameModeScript.playerOnePlane.verticalMovementKeys = Input.GetAxisRaw("Vertical");
+                flightControllerScript.gameModeScript.playerOnePlane.attackKeyPressed = Input.GetButton("Jump");
+                flightControllerScript.gameModeScript.playerOnePlane.attackKeyReleased = Input.GetButtonUp("Jump");
+                ESCpressed = Input.GetButtonDown("Cancel");
+                if (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusClassic || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusEndless)
+                {
+                    flightControllerScript.gameModeScript.playerTwoPlane.verticalMovementKeys = Input.GetAxisRaw("Vertical1");
+                    flightControllerScript.gameModeScript.playerTwoPlane.attackKeyPressed = Input.GetButton("Jump1");
+                    flightControllerScript.gameModeScript.playerTwoPlane.attackKeyReleased = Input.GetButtonUp("Jump1");
+                }
             }
         }
-        else
-        {
-            //sterowanie dotykowe
-        }
-            
-        //if(!flightControllerScript.uiManagerScript.pauseScreenEnabled && !flightControllerScript.gameModeScript.playerOnePlane.isTouchingAirport && flightControllerScript.gameModeScript.playerOnePlane.currentPlaneState != PlaneState.damaged && flightControllerScript.gameModeScript.playerOnePlane.currentPlaneState != PlaneState.crashed)
-        //{
-        //    if ((flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerClassic && flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerEndless && flightControllerScript.gameModeScript.playerTwoPlane.currentPlaneState != PlaneState.crashed) || (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerClassic || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerEndless))
-        //    {
-        //        flightControllerScript.gameModeScript.playerOnePlane.verticalMovementKeys = Input.GetAxisRaw("Vertical");
-        //        flightControllerScript.gameModeScript.playerOnePlane.attackKeyPressed = Input.GetButton("Jump");
-        //        flightControllerScript.gameModeScript.playerOnePlane.attackKeyReleased = Input.GetButtonUp("Jump");
-        //    }
-        //}
-        //if ((flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerClassic && flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerEndless) && !flightControllerScript.gameModeScript.playerTwoPlane.isTouchingAirport && flightControllerScript.gameModeScript.playerTwoPlane.currentPlaneState != PlaneState.damaged && flightControllerScript.gameModeScript.playerTwoPlane.currentPlaneState != PlaneState.crashed && flightControllerScript.gameModeScript.playerOnePlane.currentPlaneState != PlaneState.crashed)
-        ////if (!flightControllerScript.uiManagerScript.pauseScreenEnabled && (flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerClassic && flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerEndless) && !flightControllerScript.gameModeScript.playerTwoPlane.isTouchingAirport && flightControllerScript.gameModeScript.playerTwoPlane.currentPlaneState != PlaneState.damaged && flightControllerScript.gameModeScript.playerTwoPlane.currentPlaneState != PlaneState.crashed && flightControllerScript.gameModeScript.playerOnePlane.currentPlaneState != PlaneState.crashed)
-        //{
-        //    flightControllerScript.gameModeScript.playerTwoPlane.verticalMovementKeys = Input.GetAxisRaw("Vertical1");
-        //    flightControllerScript.gameModeScript.playerTwoPlane.attackKeyPressed = Input.GetButton("Jump1");
-        //    flightControllerScript.gameModeScript.playerTwoPlane.attackKeyReleased = Input.GetButtonUp("Jump1");
-        //}
-        //if(((flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerClassic || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerEndless) && flightControllerScript.gameModeScript.playerOnePlane.currentPlaneState != PlaneState.crashed) || ((flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerClassic && flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerEndless) && (flightControllerScript.gameModeScript.playerOnePlane.currentPlaneState != PlaneState.crashed || flightControllerScript.gameModeScript.playerTwoPlane.currentPlaneState != PlaneState.crashed)))
-        //{
-        //    ESCpressed = Input.GetButtonDown("Cancel");
-        //}
+    }
+    public void TouchScreenButtonUpPressed()
+    {
+        flightControllerScript.gameModeScript.playerOnePlane.verticalMovementKeys = 1;
+    }
+    public void TouchScreenButtonDownPressed()
+    {
+        flightControllerScript.gameModeScript.playerOnePlane.verticalMovementKeys = -1;
+    }
+    public void TouchScreenMovementButtonReleased()
+    {
+        flightControllerScript.gameModeScript.playerOnePlane.verticalMovementKeys = 0;
+    }
+    public void TouchScreenFireButtonPressed()
+    {
+        flightControllerScript.gameModeScript.playerOnePlane.attackKeyPressed = true;
+        flightControllerScript.gameModeScript.playerOnePlane.attackKeyReleased = false;
+    }
+    public void TouchScreenFireButtonReleased()
+    {
+        flightControllerScript.gameModeScript.playerOnePlane.attackKeyPressed = false;
+        flightControllerScript.gameModeScript.playerOnePlane.attackKeyReleased = true;
+    }
+    public void TouchScreenPauseScreenButtonPressed()
+    {
+        ESCpressed = true;
     }
 }
