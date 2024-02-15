@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -6855730133704589449}
   - component: {fileID: -5150114734278328657}
   - component: {fileID: -7941228401600312361}
+  - component: {fileID: 1945100073157819705}
   m_Layer: 7
   m_Name: rocksTall
   m_TagString: Obstacle
@@ -133,7 +134,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 7
 --- !u!61 &-7941228401600312361
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -147,7 +148,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.54813814}
+  m_Offset: {x: 0, y: -6.67}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -158,5 +159,62 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10.34, y: 14.343723}
+  m_Size: {x: 10.34, y: 0.85792446}
   m_EdgeRadius: 0
+--- !u!60 &1945100073157819705
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7111739764834294617}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 10.34, y: 15.44}
+    newSize: {x: 1.25, y: 6.53}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 5.0810347, y: -6.215517}
+      - {x: 4.354969, y: -5.9905972}
+      - {x: 3.427864, y: -5.216432}
+      - {x: 3.1286523, y: -2.8494346}
+      - {x: 3.3834693, y: -0.47615814}
+      - {x: 2.9717765, y: -0.015737534}
+      - {x: 2.4256923, y: 3.1065803}
+      - {x: 2.2830284, y: 5.1096773}
+      - {x: 1.9484184, y: 6.535351}
+      - {x: 1.5276402, y: 6.528863}
+      - {x: 1.3412039, y: 7.5811853}
+      - {x: -1.5901731, y: 7.452145}
+      - {x: -1.6236187, y: 5.2645545}
+      - {x: -1.4328973, y: 5.0527725}
+      - {x: -1.8735024, y: 2.924956}
+      - {x: -1.5682533, y: 2.4625077}
+      - {x: -2.2185616, y: 1.5513812}
+      - {x: -2.403027, y: 1.0907261}
+      - {x: -2.421163, y: 0.46874517}
+      - {x: -2.598597, y: 0.23000643}
+      - {x: -2.4400246, y: -1.4679067}
+      - {x: -2.449305, y: -3.2617872}
+      - {x: -2.1642532, y: -4.2325044}
+      - {x: -2.9071717, y: -5.128979}
+      - {x: -4.705935, y: -6.2701564}
+      - {x: -5.0743437, y: -7.005324}
+      - {x: -4.347478, y: -7.2486258}
+      - {x: -2.9715824, y: -7.5626955}
+      - {x: -0.3707068, y: -7.6320353}
+      - {x: 1.4699999, y: -7.6}
+      - {x: 5.2208385, y: -7.157016}
+  m_UseDelaunayMesh: 0

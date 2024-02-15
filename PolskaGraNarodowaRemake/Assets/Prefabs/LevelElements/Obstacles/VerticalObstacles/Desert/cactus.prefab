@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -6855730133704589449}
   - component: {fileID: -5150114734278328657}
   - component: {fileID: -1250263054420248788}
+  - component: {fileID: 7529379394882350150}
   m_Layer: 7
   m_Name: cactus
   m_TagString: Obstacle
@@ -133,9 +134,35 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 7
 --- !u!61 &-1250263054420248788
 BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7111739764834294617}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -1.68}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.276, y: 3.656}
+    newSize: {x: 1.25, y: 6.53}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.276, y: 0.18416429}
+  m_EdgeRadius: 0
+--- !u!60 &7529379394882350150
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -157,6 +184,27 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.276, y: 3.656}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.18447208, y: -1.4075572}
+      - {x: -0.14435482, y: -1.808}
+      - {x: 0.22467667, y: -1.8133235}
+      - {x: 0.27400002, y: -1.7120001}
+      - {x: 0.28338444, y: -0.7678043}
+      - {x: 0.50130486, y: -0.545998}
+      - {x: 0.6260361, y: -0.16762161}
+      - {x: 0.6237593, y: 0.5489139}
+      - {x: 0.5966254, y: 0.7130279}
+      - {x: 0.50981283, y: 0.7610434}
+      - {x: 0.3059028, y: 0.72368306}
+      - {x: 0.29355663, y: 1.6574692}
+      - {x: 0.21474218, y: 1.7710778}
+      - {x: 0.0043586567, y: 1.7810627}
+      - {x: -0.082581736, y: 1.6946359}
+      - {x: -0.15546343, y: 0.28132796}
+      - {x: -0.2767877, y: 0.2711616}
+      - {x: -0.48807818, y: 0.2816528}
+      - {x: -0.6101005, y: 0.21391478}
+      - {x: -0.6116009, y: -0.80566657}
+      - {x: -0.425559, y: -1.1720357}
+  m_UseDelaunayMesh: 0

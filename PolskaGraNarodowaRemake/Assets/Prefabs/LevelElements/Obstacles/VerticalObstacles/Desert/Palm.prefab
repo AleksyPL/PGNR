@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -6855730133704589449}
   - component: {fileID: -5150114734278328657}
   - component: {fileID: 4989899244219963034}
+  - component: {fileID: 2306649089893678547}
   m_Layer: 7
   m_Name: Palm
   m_TagString: Obstacle
@@ -133,9 +134,35 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 7
 --- !u!61 &4989899244219963034
 BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7111739764834294617}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -5.731224}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 8.02, y: 11.9}
+    newSize: {x: 1.25, y: 6.53}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 8.02, y: 0.43755198}
+  m_EdgeRadius: 0
+--- !u!60 &2306649089893678547
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -157,6 +184,49 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 8.02, y: 11.9}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 2.9031963, y: 4.1821103}
+      - {x: 4.05542, y: 3.5162718}
+      - {x: 3.9742162, y: 2.739067}
+      - {x: 3.7485652, y: 1.6069984}
+      - {x: 2.6278076, y: 2.0641685}
+      - {x: 3.3916337, y: 0.002005577}
+      - {x: 3.1720803, y: -0.46043494}
+      - {x: 2.1168716, y: 0.8484243}
+      - {x: 2.1065674, y: 0.48200524}
+      - {x: 1.8034797, y: 0.26890153}
+      - {x: 1.2512999, y: 1.2376496}
+      - {x: 1.333989, y: 0.20273712}
+      - {x: 1.2747252, y: -1.1550525}
+      - {x: 0.92469156, y: -1.753036}
+      - {x: 0.09951705, y: 0.020385027}
+      - {x: 0.15166111, y: -1.9378453}
+      - {x: 0.26225773, y: -3.6899295}
+      - {x: 0.48468527, y: -4.9010696}
+      - {x: 0.83480287, y: -5.9539127}
+      - {x: -0.28632224, y: -5.932247}
+      - {x: -0.57779574, y: -1.0684519}
+      - {x: -0.93977654, y: 0.7865734}
+      - {x: -2.3906999, y: -0.68187636}
+      - {x: -2.8086307, y: -0.33336216}
+      - {x: -2.2608025, y: 1.9399047}
+      - {x: -3.657414, y: 0.8909701}
+      - {x: -3.8796363, y: 1.5234089}
+      - {x: -2.987242, y: 2.9468064}
+      - {x: -4.1523347, y: 3.8599937}
+      - {x: -3.345985, y: 4.6773167}
+      - {x: -1.9626135, y: 4.7114105}
+      - {x: -2.7322652, y: 5.6126814}
+      - {x: -2.273192, y: 5.9780245}
+      - {x: -1.723661, y: 6.0306916}
+      - {x: -0.33218032, y: 5.3575826}
+      - {x: -0.14982177, y: 5.567634}
+      - {x: 0.49469662, y: 5.5986247}
+      - {x: 0.7990319, y: 5.096586}
+      - {x: 1.5201677, y: 5.6366324}
+      - {x: 2.9363499, y: 5.3880544}
+      - {x: 3.1626978, y: 4.973931}
+      - {x: 2.5159402, y: 4.679461}
+      - {x: 3.00309, y: 4.368352}
+  m_UseDelaunayMesh: 0

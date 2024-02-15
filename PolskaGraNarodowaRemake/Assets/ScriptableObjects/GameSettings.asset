@@ -66,4 +66,4 @@ MonoBehaviour:
   durationTimeForPowerUpMessageOnTheScreen: 3
   gettingWastedXTimesMoreNumber: 3
   multishotSpread: 0.2
-  scriptableObjectSafeMod: 1
+  scriptableObjectSafeMod: 0

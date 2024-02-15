@@ -149,9 +149,9 @@ public class UIManager : MonoBehaviour
                 int levelProgress = (int)(flightControllerScript.rewardAndProgressionManagerScript.ReturnPlayerProgressObject(plane).levelProgressCounter / (flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance + flightControllerScript.rewardAndProgressionManagerScript.levelSafeSpace) * 100);
                 ReturnPlayersUIObject(plane).regularHUDLevelProgressGameObject.GetComponent<TMP_Text>().text = (gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].regularHudProgression0 + levelProgress + gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].regularHudProgression1).ToString();
             }
-            else if (flightControllerScript.rewardAndProgressionManagerScript.ReturnPlayerProgressObject(plane).levelProgressCounter > (flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance + flightControllerScript.rewardAndProgressionManagerScript.levelSafeSpace) && plane.currentPlaneSpeed > 0)
+            else if (flightControllerScript.rewardAndProgressionManagerScript.ReturnPlayerProgressObject(plane).levelProgressCounter >= (flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance + flightControllerScript.rewardAndProgressionManagerScript.levelSafeSpace) && plane.currentPlaneSpeed > 0)
                 ReturnPlayersUIObject(plane).regularHUDLevelProgressGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].regularHudLandingMessage;
-            else if (flightControllerScript.rewardAndProgressionManagerScript.ReturnPlayerProgressObject(plane).levelProgressCounter > (flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance + flightControllerScript.rewardAndProgressionManagerScript.levelSafeSpace) && plane.currentPlaneSpeed == 0 && flightControllerScript.gameModeScript.playerOneState == GameModeManager.PlayerState.landed)
+            else if (flightControllerScript.rewardAndProgressionManagerScript.ReturnPlayerProgressObject(plane).levelProgressCounter >= (flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance + flightControllerScript.rewardAndProgressionManagerScript.levelSafeSpace) && plane.currentPlaneSpeed == 0 && flightControllerScript.gameModeScript.playerOneState == GameModeManager.PlayerState.landed)
                 ReturnPlayersUIObject(plane).regularHUDLevelProgressGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].regularHudCongratulationsAfterLanding;
         }
         if (plane.currentPlaneState == PlaneState.damaged)
@@ -297,6 +297,8 @@ public class UIManager : MonoBehaviour
         gameStatsGameObject.SetActive(true);
         pauseScreenRegularButtonsGameObject.SetActive(true);
         pauseScreenTitleGameObject.GetComponentInChildren<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].pauseScreenPauseMainTitle;
+        flightControllerScript = GetComponent<FlightController>();
+        flightControllerScript.audioManagerScript.UpdateAllSoundsVolume();
         if (pauseScreenEnabled)
             EnablePauseScreen();
     }

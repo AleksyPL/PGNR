@@ -18,6 +18,10 @@ public class UIOptionsMenu : MonoBehaviour
     private void OnEnable()
     {
         LoadValuesFromSettings();
+        UpdateUIWithNewLanguage();
+        volumeMusicSliderGameObject.GetComponent<Slider>().onValueChanged.AddListener(delegate { audioManagerGameObject.GetComponent<AudioManager>().UpdateAllSoundsVolume(); });
+        volumeSFXSliderGameObject.GetComponent<Slider>().onValueChanged.AddListener(delegate { audioManagerGameObject.GetComponent<AudioManager>().UpdateAllSoundsVolume(); });
+        volumeQuotesSliderGameObject.GetComponent<Slider>().onValueChanged.AddListener(delegate { audioManagerGameObject.GetComponent<AudioManager>().UpdateAllSoundsVolume(); });
     }
     public void LoadValuesFromSettings()
     {

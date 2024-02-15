@@ -81,8 +81,12 @@ public class FlightController : MonoBehaviour
             plane.planeRendererScript.ChangeTilt(plane.currentPlaneState, plane.verticalMovementKeys);
         else if (plane.verticalMovementKeys == 0)
             plane.planeRendererScript.ChangeTilt(plane.currentPlaneState, 0);
+        //airport touch hack
+        if (plane.isTouchingAirport)
+            plane.verticalMovementKeys = 0;
+        //end of hack
         //moving a plane
-        if(plane.verticalMovementKeys != plane.difficultyImpulseDirection && plane.verticalMovementKeys != 0)
+        if (plane.verticalMovementKeys != plane.difficultyImpulseDirection && plane.verticalMovementKeys != 0)
             plane.planeGameObject.transform.position += new Vector3(plane.currentPlaneSpeed * Time.deltaTime, plane.verticalMovementKeys * plane.altitudeChangeForce * gameplaySettings.altitudeChangeForceOverridedMultiplier * Time.deltaTime, 0);
         else
             plane.planeGameObject.transform.position += new Vector3(plane.currentPlaneSpeed * Time.deltaTime, plane.verticalMovementKeys * plane.altitudeChangeForce * Time.deltaTime, 0);
@@ -92,6 +96,7 @@ public class FlightController : MonoBehaviour
             plane.planeGameObject.transform.position = new Vector3(plane.planeGameObject.transform.position.x, plane.groundLevelHeight, 0);
         if (plane.isTouchingAirport)
         {
+            uiManagerScript.UpdateLevelProgressBar(plane);
             audioManagerScript.StopPlayingSoundsFromTheSpecificSoundBank(audioManagerScript.localOneLinersSounds);
             audioManagerScript.StopPlayingSound("EngineSound", audioManagerScript.localSFX);
             if(!plane.tiresSFXPlayed)
@@ -99,7 +104,6 @@ public class FlightController : MonoBehaviour
                 audioManagerScript.PlaySound("Tires", audioManagerScript.localSFX);
                 plane.tiresSFXPlayed = true;
             }
-            plane.verticalMovementKeys = 0;
             plane.planeRendererScript.ChangeTilt(plane.currentPlaneState, 0);
             plane.currentPlaneSpeed -= gameplaySettings.airportSlowingForce * Time.deltaTime;
             plane.difficultyImpulseEnabled = false;

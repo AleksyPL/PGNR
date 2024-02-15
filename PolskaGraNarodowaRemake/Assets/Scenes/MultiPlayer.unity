@@ -1764,6 +1764,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 8535687716876871791, guid: af37a67e2c14f374eb7d00afa5eed0e1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2134856608}
+    - target: {fileID: 8535687716876871791, guid: af37a67e2c14f374eb7d00afa5eed0e1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8535687717116870704, guid: af37a67e2c14f374eb7d00afa5eed0e1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2134856614}
+    - target: {fileID: 8535687717116870704, guid: af37a67e2c14f374eb7d00afa5eed0e1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RestartGame
+      objectReference: {fileID: 0}
     - target: {fileID: 8535687717261512244, guid: af37a67e2c14f374eb7d00afa5eed0e1, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2040,7 +2056,7 @@ MonoBehaviour:
     planeRendererGameObject: {fileID: 1562720028}
     projectilesParentGameObject: {fileID: 1172776397}
     cameraGameObject: {fileID: 1810758763}
-    godModeLevelStart: 1
+    godModeLevelStart: 0
   playerTwoPlane:
     gameplaySettings: {fileID: 11400000, guid: d338db95f60174b41bd6e219f61b651f, type: 2}
     planeGameObject: {fileID: 372025643}
@@ -2051,7 +2067,7 @@ MonoBehaviour:
     planeRendererGameObject: {fileID: 1878046767}
     projectilesParentGameObject: {fileID: 1172776397}
     cameraGameObject: {fileID: 199547950}
-    godModeLevelStart: 1
+    godModeLevelStart: 0
   gameModeSettingsOverride: 1
   currentGameMode: 3
   simulateMobileApp: 0
@@ -2094,7 +2110,7 @@ MonoBehaviour:
   powerUpsParentGameObject: {fileID: 66538046}
   enableObstacles: 1
   sameObstaclesForBothPlayes: 1
-  enablePowerUps: 0
+  enablePowerUps: 1
   numberOfPowerUpsPerSector: 5
   endlessModeSpawnerPlayerTwoOffset: 0.15
 --- !u!114 &2134856614

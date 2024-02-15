@@ -19,7 +19,7 @@ internal class Plane
     //Settings
     public GameplaySettings gameplaySettings;
     //Game Objects - Spawners etc
-    internal int playerNumber;
+    private int playerSkinNumber;
     public GameObject planeGameObject;
     public GameObject bottleSpawnerGameObject;
     public GameObject smokeSpawnerInAirGameObject;
@@ -67,11 +67,11 @@ internal class Plane
     internal bool godMode;
     internal void LoadPlaneData(int numberOfThePlayer)
     {
-        playerNumber = numberOfThePlayer;
+        playerSkinNumber = numberOfThePlayer;
         gameScore = 0;
         planeRendererScript = planeRendererGameObject.GetComponent<PlaneRenderer>();
         audioManagerScript = GameObject.Find("MasterController").GetComponent<AudioManager>();
-        planeRendererScript.planeSkin = gameplaySettings.planeSkins[gameplaySettings.playersPlaneSkins[playerNumber]];
+        planeRendererScript.planeSkin = gameplaySettings.planeSkins[gameplaySettings.playersPlaneSkins[playerSkinNumber]];
         ResetPlaneData();
     }
     internal void ResetPlaneData()

@@ -2172,7 +2172,7 @@ MonoBehaviour:
   obstaclesAndProjectilesParentGameObject: {fileID: 815594488}
   powerUpsParentGameObject: {fileID: 683886162}
   enableObstacles: 1
-  sameObstaclesForBothPlayes: 0
+  sameObstaclesForBothPlayes: 1
   enablePowerUps: 1
   numberOfPowerUpsPerSector: 0
   endlessModeSpawnerPlayerTwoOffset: 0
@@ -2286,7 +2286,7 @@ MonoBehaviour:
     planeRendererGameObject: {fileID: 452971146}
     projectilesParentGameObject: {fileID: 815594488}
     cameraGameObject: {fileID: 1748445943}
-    godModeLevelStart: 1
+    godModeLevelStart: 0
   playerTwoPlane:
     gameplaySettings: {fileID: 0}
     planeGameObject: {fileID: 0}
