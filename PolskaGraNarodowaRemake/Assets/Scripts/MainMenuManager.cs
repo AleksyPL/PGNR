@@ -95,8 +95,6 @@ public class MainMenuManager : MonoBehaviour
     }
     private void Update()
     {
-        //if (optionsMenuGameObject.activeSelf)
-        //    audioManagerScript.UpdateAllSoundsVolume();
         if (optionsMenuGameObject.activeSelf && Input.GetButtonDown("Cancel"))
             DisableOptionsMenu();
         else if (howToPlayPanelGameObject.activeSelf && Input.GetButtonDown("Cancel"))

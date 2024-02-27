@@ -106,10 +106,8 @@ public class LevelManager : MonoBehaviour
         }
         if (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerClassic || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusClassic)
             flightControllerScript.uiManagerScript.EnableBeforeTheFlightProcedure(flightControllerScript.gameplaySettings.localizationsStrings[flightControllerScript.gameplaySettings.langauageIndex].regularHudYear + (2009 + flightControllerScript.rewardAndProgressionManagerScript.levelCounter).ToString() + flightControllerScript.gameplaySettings.localizationsStrings[flightControllerScript.gameplaySettings.langauageIndex].classicModeMessage, 3f);
-        else if (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerEndless)
+        else if (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerEndless || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusEndless)
             flightControllerScript.uiManagerScript.EnableBeforeTheFlightProcedure(flightControllerScript.gameplaySettings.localizationsStrings[flightControllerScript.gameplaySettings.langauageIndex].endlessSingleMessage, 3f);
-        else if (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusEndless)
-            flightControllerScript.uiManagerScript.EnableBeforeTheFlightProcedure(flightControllerScript.gameplaySettings.localizationsStrings[flightControllerScript.gameplaySettings.langauageIndex].endlessVersusMessage, 3f);
     }
     internal void CalculatePlayerBoundries(Plane plane)
     {

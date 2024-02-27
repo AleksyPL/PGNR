@@ -96,7 +96,7 @@ public class PowerUpObject : MonoBehaviour
                 else if (gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).invertedSteeringEnabled)
                 {
                     gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).invertedSteeringEnabled = false;
-                    gameModeManagerScript.flightControllerScript.uiManagerScript.DeletePowerUpUIClock(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject), currentPowerUpScriptableObject);
+                    gameModeManagerScript.flightControllerScript.uiManagerScript.DeletePowerUpUIClock(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject), currentPowerUpScriptableObject.powerUpName);
                     gameModeManagerScript.flightControllerScript.uiManagerScript.DisplayPowerUpDescriptionOnHUD(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject), gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].invertedSteeringRepairedMessage);
                 }
             }

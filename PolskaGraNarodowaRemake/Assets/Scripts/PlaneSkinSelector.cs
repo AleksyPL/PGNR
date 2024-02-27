@@ -44,6 +44,7 @@ public class PlaneSkinSelector : MonoBehaviour
         {
             playerTwoMainGameObject.SetActive(true);
             playerOneIndicatorGameObject.SetActive(true);
+            playerOneMainGameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(-playerTwoMainGameObject.GetComponent<RectTransform>().anchoredPosition.x, playerOneMainGameObject.GetComponent<RectTransform>().anchoredPosition.y);
             playerOneIndicatorGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].playerOneIndicator;
             playerTwoIndicatorGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].playerTwoIndicator;
             playerTwoPlaneImageGameObject.GetComponent<Image>().sprite = gameplaySettings.planeSkins[gameplaySettings.playersPlaneSkins[1]].planeStandard;

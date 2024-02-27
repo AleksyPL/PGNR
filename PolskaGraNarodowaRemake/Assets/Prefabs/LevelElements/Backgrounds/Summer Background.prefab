@@ -121,7 +121,7 @@ Transform:
   - {fileID: 8657606411672503216}
   - {fileID: 8657606411625689437}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1970404982561522291
 MonoBehaviour:
@@ -151,7 +151,7 @@ MonoBehaviour:
   - parallaxLayerImage: {fileID: 8657606411672503217}
     parallaxEffectMultipler: 0.2
   - parallaxLayerImage: {fileID: 8657606411625689438}
-    parallaxEffectMultipler: 0.2
+    parallaxEffectMultipler: 0.05
 --- !u!1 &8657606411472102652
 GameObject:
   m_ObjectHideFlags: 0

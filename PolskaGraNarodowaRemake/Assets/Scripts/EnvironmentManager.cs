@@ -17,10 +17,6 @@ public class EnvironmentManager : MonoBehaviour
         off,
         random
     };
-    private void Start()
-    {
-        
-    }
     internal FlightController flightControllerScript;
     public GameObject backgroundsMainGameObject;
     public Environment[] environmentsScenarios;

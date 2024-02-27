@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7aa23677339836344a1a78d0986b469a, type: 3}
   m_Name: Orzel1Plane
   m_EditorClassIdentifier: 
-  planeStandard: {fileID: 21300000, guid: 83f19b065747cab42a2c7965a9e9e0cd, type: 3}
+  planeStandard: {fileID: 21300000, guid: f96e4f6c54e7e5e40917713aac413ebd, type: 3}
   planeHoles: {fileID: 21300000, guid: 5ec13479d777d8f46939d35766d5d307, type: 3}
   planeWheels: {fileID: 21300000, guid: 969d80388f7903040bddb94823545895, type: 3}
-  planeCrashed: {fileID: 21300000, guid: 1aef8e9368015784eb3d6352c3e9f307, type: 3}
+  planeCrashed: {fileID: 21300000, guid: 8501aef77cbba3e47a78328ccdab1f13, type: 3}
   skinName:
-  - "Orze\u0142 1"
-  - Eagle 1
+  - Jaszczomb 1
+  - Hawk 1

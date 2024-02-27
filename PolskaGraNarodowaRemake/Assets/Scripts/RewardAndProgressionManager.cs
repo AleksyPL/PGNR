@@ -82,18 +82,26 @@ public class RewardAndProgressionManager : MonoBehaviour
         flightControllerScript.gameModeScript.playerOnePlane.gameScore = 0;
         flightControllerScript.gameModeScript.playerOnePlane.ResetPlaneData();
         flightControllerScript.uiManagerScript.TurnOffColorPanel(flightControllerScript.uiManagerScript.playerOneUI.colorPanelGameObject);
-        if(flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerClassic && flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerEndless)
+        flightControllerScript.uiManagerScript.UpdateScoreCounter(flightControllerScript.gameModeScript.playerOnePlane);
+        flightControllerScript.uiManagerScript.UpdateBottlesCounter(flightControllerScript.gameModeScript.playerOnePlane);
+        if (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusClassic || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusEndless)
         {
             flightControllerScript.gameModeScript.playerTwoPlane.gameScore = 0;
             flightControllerScript.gameModeScript.playerTwoPlane.ResetPlaneData();
             playerTwoProgress.levelProgressCounter = 0;
             playerTwoProgress.scorePointsCounter = 0;
             flightControllerScript.uiManagerScript.TurnOffColorPanel(flightControllerScript.uiManagerScript.playerTwoUI.colorPanelGameObject);
+            flightControllerScript.uiManagerScript.UpdateScoreCounter(flightControllerScript.gameModeScript.playerTwoPlane);
+            flightControllerScript.uiManagerScript.UpdateBottlesCounter(flightControllerScript.gameModeScript.playerTwoPlane);
         }
+        flightControllerScript.powerUpManagerScript.ResetPowerUpManager();
         flightControllerScript.uiManagerScript.DisableOptionsMenu();
         flightControllerScript.uiManagerScript.DisableGameOverScreen();
         flightControllerScript.levelManagerScript.numberOfObstacles = 3;
         flightControllerScript.levelManagerScript.numberOfFogInstances = 0;
+        flightControllerScript.gameModeScript.waitingTimeForOneLinerCurrent = 0;
+        flightControllerScript.audioManagerScript.StopPlayingAllPausedSounds();
+        flightControllerScript.powerUpManagerScript.ResetPowerUpManager();
         flightControllerScript.levelManagerScript.LoadLevel();
     }
     void Update()

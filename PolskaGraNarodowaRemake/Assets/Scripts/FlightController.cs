@@ -128,7 +128,7 @@ public class FlightController : MonoBehaviour
     }
     private void Update()
     {
-        if(!uiManagerScript.pauseScreenEnabled && !uiManagerScript.timerBeforeTheFlightEnabled)
+        if(!uiManagerScript.pauseScreenEnabled && !uiManagerScript.timerBeforeTheFlightEnabled && !gameModeScript.someoneWon)
         {
             if (gameModeScript.playerOnePlane.currentPlaneState == PlaneState.standard || gameModeScript.playerOnePlane.currentPlaneState == PlaneState.wheelsOn)
             {

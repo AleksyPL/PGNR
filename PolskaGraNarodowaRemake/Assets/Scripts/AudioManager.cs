@@ -210,5 +210,9 @@ public class AudioManager : MonoBehaviour
             pausedSounds.Clear();
         }
     }
-    
+    internal void StopPlayingAllPausedSounds()
+    {
+        if (pausedSounds.Count != 0)
+            pausedSounds.Clear();
+    }
 }

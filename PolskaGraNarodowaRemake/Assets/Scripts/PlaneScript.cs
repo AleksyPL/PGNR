@@ -87,7 +87,7 @@ internal class Plane
         altitudeChangeForce = gameplaySettings.altitudeChangeForce;
         rewardForLandingAdded = false;
         timeToFullyChargeBottleThrowCounter = 0;
-        shieldEnabled = false;
+        TurnOffTheShield();
         speedEnabled = false;
         invertedSteeringEnabled = false;
         gettingWastedXTimesMoreEnabled = false;
@@ -127,8 +127,18 @@ internal class Plane
         difficultyImpulseDirection = 1;
         difficultyImpulsTimeCurrent = 0;
     }
+    internal void TurnOffTheShield()
+    {
+        if(shieldEnabled)
+        {
+            planeRendererScript.HideShield();
+            shieldEnabled = false;
+            GameObject.Find("MasterController").GetComponent<UIManager>().DeletePowerUpUIClock(this, "ShieldPowerUp");
+        }
+    }
     internal void DamageThePlane()
     {
+        cameraGameObject.GetComponent<CameraManager>().PlayCameraShakeAnimation();
         currentPlaneState = PlaneState.damaged;
         planeRendererScript.ChangePlaneSprite(currentPlaneState);
         planeRendererScript.ChangeTilt(currentPlaneState, -1);
@@ -146,6 +156,7 @@ internal class Plane
     }
     internal void DestroyThePlane()
     {
+        cameraGameObject.GetComponent<CameraManager>().PlayCameraShakeAnimation();
         currentPlaneState = PlaneState.crashed;
         planeRendererScript.ChangePlaneSprite(currentPlaneState);
         planeRendererScript.ChangeTilt(currentPlaneState, -1);

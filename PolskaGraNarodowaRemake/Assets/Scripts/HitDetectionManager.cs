@@ -37,8 +37,7 @@ public class HitDetectionManager : MonoBehaviour
                             transform.gameObject.GetComponent<FadeOutTool>().enabled = true;
                         else
                             Destroy(transform.gameObject);
-                        gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).shieldEnabled = false;
-                        gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).planeRendererScript.HideShield();
+                        gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).TurnOffTheShield();
                         if (gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).speedEnabled)
                             gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).speedEnabled = false;
                     }
@@ -59,6 +58,7 @@ public class HitDetectionManager : MonoBehaviour
                         gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).DestroyThePlane();
                     if (gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).speedEnabled)
                         gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).speedEnabled = false;
+                    gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).TurnOffTheShield();
                 }
             }
             else if(transform.tag == "KillPlane")
@@ -68,6 +68,7 @@ public class HitDetectionManager : MonoBehaviour
                 gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).DamageThePlane();
                 if (gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).speedEnabled)
                     gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).speedEnabled = false;
+                gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).TurnOffTheShield();
             }
             else if(transform.name == "SpawnNewObjects" && (gameModeManagerScript.currentGameMode == GameModeManager.GameMode.singleplayerEndless || gameModeManagerScript.currentGameMode == GameModeManager.GameMode.versusEndless))
             {
