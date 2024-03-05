@@ -118,20 +118,26 @@ public class UIManager : MonoBehaviour
     {
         gameSummaryBottlesTitle.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].pauseScreenBottlesTitle;
         gameSummaryScoreTitle.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].regularHudEarned0;
-        gameSummaryYearTitle.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].pauseScreenYearTitle;
+        gameSummaryYearTitle.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].pauseScreenLevelTitle;
         playerOneUI.gameSummaryBottlesGameObject.GetComponent<TMP_Text>().text = flightControllerScript.gameModeScript.playerOnePlane.bottlesDrunkTotal.ToString();
         playerOneUI.gameSummaryScoreGameObject.GetComponent<TMP_Text>().text = (flightControllerScript.gameModeScript.playerOnePlane.gameScore + gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].regularHudEarned1).ToString();
-        playerOneUI.gameSummaryYearGameObject.GetComponent<TMP_Text>().text = (2009 + flightControllerScript.rewardAndProgressionManagerScript.levelCounter).ToString();
-        pauseScreenOptionsButtonGameObject.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuButton2;
-        pauseScreenResumeGameButtonGameObject.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].pauseScreenButton0;
-        pauseScreenBackToMainMenuButtonGameObject.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].backToMainMenuButton;
+        if (flightControllerScript.gameplaySettings.safeMode)
+            playerOneUI.gameSummaryYearGameObject.GetComponent<TMP_Text>().text = flightControllerScript.rewardAndProgressionManagerScript.levelCounter.ToString();
+        else
+            playerOneUI.gameSummaryYearGameObject.GetComponent<TMP_Text>().text = (2009 + flightControllerScript.rewardAndProgressionManagerScript.levelCounter).ToString();
+        pauseScreenOptionsButtonGameObject.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuOptions;
+        pauseScreenResumeGameButtonGameObject.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].pauseScreenResumeGame;
+        pauseScreenBackToMainMenuButtonGameObject.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].backToMainMenu;
         if (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusClassic || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusEndless)
         {
             playerOneUI.gameSummaryPlayerIndicator.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].playerOneIndicator;
             playerTwoUI.gameSummaryPlayerIndicator.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].playerTwoIndicator;
             playerTwoUI.gameSummaryBottlesGameObject.GetComponent<TMP_Text>().text = flightControllerScript.gameModeScript.playerTwoPlane.bottlesDrunkTotal.ToString();
             playerTwoUI.gameSummaryScoreGameObject.GetComponent<TMP_Text>().text = (flightControllerScript.gameModeScript.playerTwoPlane.gameScore + gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].regularHudEarned1).ToString();
-            playerTwoUI.gameSummaryYearGameObject.GetComponent<TMP_Text>().text = (2009 + flightControllerScript.rewardAndProgressionManagerScript.levelCounter).ToString();
+            if (flightControllerScript.gameplaySettings.safeMode)
+                playerTwoUI.gameSummaryYearGameObject.GetComponent<TMP_Text>().text = flightControllerScript.rewardAndProgressionManagerScript.levelCounter.ToString();
+            else
+                playerTwoUI.gameSummaryYearGameObject.GetComponent<TMP_Text>().text = (2009 + flightControllerScript.rewardAndProgressionManagerScript.levelCounter).ToString();
         }
         if (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerEndless || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusEndless)
         {
@@ -204,8 +210,8 @@ public class UIManager : MonoBehaviour
         TurnOffColorPanel(playerOneUI.colorPanelGameObject);
         TurnOffColorPanel(playerTwoUI.colorPanelGameObject);
         pauseScreenTitleGameObject.GetComponentInChildren<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].pauseScreenGameOverMainTitle;
-        gameOverScreenTryAgainButtonGameObject.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].gameOverScreenButton0;
-        gameOverScreenExitButtonGameObject.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].backToMainMenuButton;
+        gameOverScreenTryAgainButtonGameObject.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].gameOverScreenTryAgain;
+        gameOverScreenExitButtonGameObject.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].backToMainMenu;
         pauseScreenRegularButtonsGameObject.SetActive(false);
         gameOverScreenButtonsGameObject.SetActive(true);
         playerOneUI.regularHUDMainGameObject.SetActive(false);
@@ -283,8 +289,8 @@ public class UIManager : MonoBehaviour
     }
     public void EnableOptionsMenu()
     {
-        EventSystemGameObject.GetComponent<EventSystem>().SetSelectedGameObject(optionsMenuGameObject.GetComponent<UIOptionsMenu>().backToMainMenuButton);
-        pauseScreenTitleGameObject.GetComponentInChildren<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].pauseScreenButton0;
+        EventSystemGameObject.GetComponent<EventSystem>().SetSelectedGameObject(optionsMenuGameObject.GetComponent<UIOptionsMenu>().backToPauseScreenButton);
+        pauseScreenTitleGameObject.GetComponentInChildren<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].pauseScreenResumeGame;
         optionsMenuGameObject.SetActive(true);
         pauseScreenRegularButtonsGameObject.SetActive(false);
         pauseScreenGameObject.SetActive(false);
@@ -344,9 +350,9 @@ public class UIManager : MonoBehaviour
         if ((plane == flightControllerScript.gameModeScript.playerOnePlane && ReturnPowerUpUIClockIfExists(plane, currentPowerUp.powerUpName) == null) || (plane == flightControllerScript.gameModeScript.playerTwoPlane && ReturnPowerUpUIClockIfExists(plane, currentPowerUp.powerUpName) == null))
         {
             GameObject powerUpUIGameObject = Instantiate(powerUpUIClockPrefab);
-            powerUpUIGameObject.gameObject.transform.name = currentPowerUp.powerUpName;
+            powerUpUIGameObject.transform.name = currentPowerUp.powerUpName;
             powerUpUIGameObject.GetComponent<Image>().sprite = currentPowerUp.currentPowerUpUIClockImage;
-            powerUpUIGameObject.gameObject.transform.SetParent(ReturnPlayersUIObject(plane).powerUpBarParentGameObject.transform);
+            powerUpUIGameObject.transform.SetParent(ReturnPlayersUIObject(plane).powerUpBarParentGameObject.transform);
             powerUpUIGameObject.GetComponent<UIPowerUp>().EnableUIPowerUp(currentPowerUp.powerUpDuration, currentPowerUp.powerUpName);
         }
     }
@@ -370,7 +376,7 @@ public class UIManager : MonoBehaviour
     {
         if (powerUpBarGameObject.transform.childCount != 0)
         {
-            List<GameObject> myObjectsUnsorted = new List<GameObject>();
+            List<GameObject> myObjectsUnsorted = new();
             for (int i=0;i<powerUpBarGameObject.transform.childCount;i++)
             {
                 if (powerUpBarGameObject.transform.GetChild(i).gameObject.GetComponent<UIPowerUp>().powerUpDurationCounter > 0)

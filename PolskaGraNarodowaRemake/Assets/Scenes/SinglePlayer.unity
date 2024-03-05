@@ -2159,7 +2159,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   airportPrefab: {fileID: 5789956881310506299, guid: b6909e430ea5f1841b1ce737fe3a9c4d, type: 3}
   trotylLauncherPrefab: {fileID: 2449576941250485145, guid: 69b0d68d52dc25f43aebf67166c6a6b2, type: 3}
-  fogPrefab: {fileID: 4663679174155961175, guid: 9311617b76dd8d049b198314d66ddeb5, type: 3}
   endlessModeSpawnerPrefab: {fileID: 4815197519027456619, guid: 07b0e2427d2e4c84e89b3ca69d913acf, type: 3}
   powerUpsPrefabs:
   - {fileID: 8758847133875726905, guid: 8abb5dbb56e3cb7499264e4616252e67, type: 3}
@@ -2349,12 +2348,14 @@ MonoBehaviour:
     - {fileID: 7111739764834294617, guid: 5be49d678abb58e419ae70aa4e5825ea, type: 3}
     - {fileID: 7111739764834294617, guid: 12867ad6d0860c34e905cf0fd5abae2f, type: 3}
     - {fileID: 7111739764834294617, guid: 625d3f58cdbd8e940b99cf8bfd0192f0, type: 3}
+    fogPrefab: {fileID: 4663679174155961175, guid: 9311617b76dd8d049b198314d66ddeb5, type: 3}
     rainEnabled: 1
   - backgroundPrefab: {fileID: 8657606411223057767, guid: ab11ba55180818a4ea0e92dc6f943133, type: 3}
     verticalObstaclesPrefabs:
     - {fileID: 7111739764834294617, guid: cd04a40501364fc439525313332df7d2, type: 3}
     - {fileID: 7111739764834294617, guid: 95b083c264c82c846bfcdf669a4a95ff, type: 3}
     - {fileID: 7111739764834294617, guid: 2480844f105fdd441a7b79d17815c470, type: 3}
+    fogPrefab: {fileID: 4663679174155961175, guid: 9311617b76dd8d049b198314d66ddeb5, type: 3}
     rainEnabled: 2
   - backgroundPrefab: {fileID: 8657606411223057767, guid: ae867611281b3f74a8f67e86a5af0688, type: 3}
     verticalObstaclesPrefabs:
@@ -2362,6 +2363,7 @@ MonoBehaviour:
     - {fileID: 7111739764834294617, guid: 786120e7e427ee1438ed2d3615ff76a0, type: 3}
     - {fileID: 7111739764834294617, guid: 7f12a64ecf1a01c44baffe51576d0a68, type: 3}
     - {fileID: 7111739764834294617, guid: 7cea2f27af3403849b7295716ff46147, type: 3}
+    fogPrefab: {fileID: 4663679174155961175, guid: 9311617b76dd8d049b198314d66ddeb5, type: 3}
     rainEnabled: 1
   cameraGameObjectPlayerOne: {fileID: 1748445943}
   cameraGameObjectPlayerTwo: {fileID: 0}

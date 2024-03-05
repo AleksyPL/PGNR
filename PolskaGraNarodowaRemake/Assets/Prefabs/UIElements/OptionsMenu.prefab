@@ -542,7 +542,8 @@ MonoBehaviour:
   volumeQuotesSliderGameObject: {fileID: 133455585652434663}
   languageSelectorGameObject: {fileID: 4771030179569190363}
   activeLanguageGameObject: {fileID: 6826692717953291546}
-  backToMainMenuButton: {fileID: 133455585484151057}
+  backToPauseScreenButton: {fileID: 133455585484151057}
+  audioManagerGameObject: {fileID: 0}
   notAvailableButton: {r: 0.1792453, g: 0.16656284, b: 0.16656284, a: 0.21960784}
 --- !u!1 &133455584637428148
 GameObject:
@@ -1152,7 +1153,7 @@ GameObject:
   - component: {fileID: 133455585484151060}
   - component: {fileID: 133455585484151063}
   m_Layer: 5
-  m_Name: BackToMainMenu
+  m_Name: BackToPauseScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

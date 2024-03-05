@@ -9,6 +9,7 @@ public class EnvironmentManager : MonoBehaviour
     {
         public GameObject backgroundPrefab;
         public GameObject[] verticalObstaclesPrefabs;
+        public GameObject fogPrefab;
         public Rain rainEnabled;
     };
     public enum Rain

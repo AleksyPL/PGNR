@@ -22,7 +22,7 @@ public class GameModeManager : MonoBehaviour
     [SerializeField] internal Plane playerOnePlane;
     [SerializeField] internal Plane playerTwoPlane;
     internal FlightController flightControllerScript;
-    public bool gameModeSettingsOverride;
+    internal bool gameModeSettingsOverride;
     [SerializeField] internal GameMode currentGameMode;
     internal PlayerState playerOneState;
     internal PlayerState playerTwoState;
@@ -32,6 +32,7 @@ public class GameModeManager : MonoBehaviour
     void OnEnable()
     {
         Application.targetFrameRate = 144;
+        gameModeSettingsOverride = true;
         flightControllerScript = GetComponent<FlightController>();
         playerOnePlane.LoadPlaneData(0);
         SetUpGameMode();

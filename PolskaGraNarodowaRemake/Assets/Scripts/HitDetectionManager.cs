@@ -13,12 +13,12 @@ public class HitDetectionManager : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Plane"))
         {
-            if(transform.tag == "Airport")
+            if(transform.CompareTag("Airport"))
             {
                 if(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).currentPlaneState == PlaneState.wheelsOn)
                     gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).isTouchingAirport = true;
             }
-            else if(transform.tag == "Obstacle")
+            else if(transform.CompareTag("Obstacle"))
             {
                 if(transform.name == "verticalObstacle" || transform.name == "trotylLauncher")
                 {
@@ -50,7 +50,7 @@ public class HitDetectionManager : MonoBehaviour
                     }
                 }
             }
-            else if(transform.tag == "Ground")
+            else if(transform.CompareTag("Ground"))
             {
                 if (gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).godMode == false || gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).currentPlaneState == PlaneState.damaged)
                 {
@@ -61,7 +61,7 @@ public class HitDetectionManager : MonoBehaviour
                     gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).TurnOffTheShield();
                 }
             }
-            else if(transform.tag == "KillPlane")
+            else if(transform.CompareTag("KillPlane"))
             {
                 if (transform.GetComponent<FadeOutTool>())
                     transform.gameObject.GetComponent<FadeOutTool>().enabled = true;

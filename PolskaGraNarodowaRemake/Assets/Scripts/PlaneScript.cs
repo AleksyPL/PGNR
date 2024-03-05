@@ -124,7 +124,7 @@ internal class Plane
     {
         bottlesDrunk = 0;
         difficultyImpulseEnabled = false;
-        difficultyImpulseDirection = 1;
+        difficultyImpulseDirection = 0;
         difficultyImpulsTimeCurrent = 0;
     }
     internal void TurnOffTheShield()

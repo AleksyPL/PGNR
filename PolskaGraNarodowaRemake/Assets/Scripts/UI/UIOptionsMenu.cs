@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class UIOptionsMenu : MonoBehaviour
@@ -12,7 +13,7 @@ public class UIOptionsMenu : MonoBehaviour
     public GameObject volumeQuotesSliderGameObject;
     public GameObject languageSelectorGameObject;
     public GameObject activeLanguageGameObject;
-    public GameObject backToMainMenuButton;
+    public GameObject backToPauseScreenButton;
     public GameObject audioManagerGameObject;
     public Color notAvailableButton;
     private void OnEnable()
@@ -46,7 +47,10 @@ public class UIOptionsMenu : MonoBehaviour
         volumeMusicSliderGameObject.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].musicVolumeSlider;
         volumeQuotesSliderGameObject.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].quotesVolumeSlider;
         languageSelectorGameObject.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].activeLanguage;
-        backToMainMenuButton.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].backToMainMenuButton;
+        if(SceneManager.GetActiveScene().name == "MainMenu")
+            backToPauseScreenButton.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].backToMainMenu;
+        else
+            backToPauseScreenButton.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].backToPauseScreen;
     }
     public void NextLanguage()
     {

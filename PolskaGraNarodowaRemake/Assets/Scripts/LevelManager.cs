@@ -7,7 +7,7 @@ public class LevelManager : MonoBehaviour
 {
     public GameObject airportPrefab;
     public GameObject trotylLauncherPrefab;
-    public GameObject fogPrefab;
+    //public GameObject fogPrefab;
     public GameObject endlessModeSpawnerPrefab;
     public GameObject[] powerUpsPrefabs;
     public GameObject obstaclesAndProjectilesParentGameObject;
@@ -105,7 +105,10 @@ public class LevelManager : MonoBehaviour
             }
         }
         if (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerClassic || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusClassic)
-            flightControllerScript.uiManagerScript.EnableBeforeTheFlightProcedure(flightControllerScript.gameplaySettings.localizationsStrings[flightControllerScript.gameplaySettings.langauageIndex].regularHudYear + (2009 + flightControllerScript.rewardAndProgressionManagerScript.levelCounter).ToString() + flightControllerScript.gameplaySettings.localizationsStrings[flightControllerScript.gameplaySettings.langauageIndex].classicModeMessage, 3f);
+            if(flightControllerScript.gameplaySettings.safeMode)
+                flightControllerScript.uiManagerScript.EnableBeforeTheFlightProcedure(flightControllerScript.gameplaySettings.localizationsStrings[flightControllerScript.gameplaySettings.langauageIndex].regularHudLevel + flightControllerScript.rewardAndProgressionManagerScript.levelCounter.ToString() + flightControllerScript.gameplaySettings.localizationsStrings[flightControllerScript.gameplaySettings.langauageIndex].classicModeMessage, 3f);
+            else
+                flightControllerScript.uiManagerScript.EnableBeforeTheFlightProcedure(flightControllerScript.gameplaySettings.localizationsStrings[flightControllerScript.gameplaySettings.langauageIndex].regularHudLevel + (2009 + flightControllerScript.rewardAndProgressionManagerScript.levelCounter).ToString() + flightControllerScript.gameplaySettings.localizationsStrings[flightControllerScript.gameplaySettings.langauageIndex].classicModeMessage, 3f);
         else if (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerEndless || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusEndless)
             flightControllerScript.uiManagerScript.EnableBeforeTheFlightProcedure(flightControllerScript.gameplaySettings.localizationsStrings[flightControllerScript.gameplaySettings.langauageIndex].endlessSingleMessage, 3f);
     }
@@ -119,7 +122,7 @@ public class LevelManager : MonoBehaviour
     {
         if(enableObstacles)
         {
-            List<GameObject> clonedObjects = new List<GameObject>();
+            List<GameObject> clonedObjects = new();
             foreach (Transform child in sourceGameObject.transform)
             {
                 clonedObjects.Add(Instantiate(child.gameObject, new Vector3(child.position.x, child.position.y - distanceBetweenPlayers, 0), Quaternion.identity));
@@ -131,9 +134,7 @@ public class LevelManager : MonoBehaviour
                     clonedObjects[clonedObjects.Count - 1].transform.position = new Vector3(clonedObjects[clonedObjects.Count - 1].transform.position.x + 0.2f, clonedObjects[clonedObjects.Count - 1].transform.position.y, 0);
             }
             foreach (GameObject child in clonedObjects)
-            {
                 child.transform.parent = finalGameObject.transform;
-            }
             MoveObstaclesFromOneObjectToAnother(ref sourceGameObject, ref finalGameObject);
             Destroy(sourceGameObject);
         }
@@ -176,14 +177,12 @@ public class LevelManager : MonoBehaviour
                     SpawnSingleObstacle(plane, ref obstaclesParent, (float)(placementPointXstart + placementPointXOffset + (i * obstacleSectorWidth) + (obstacleSectorWidth / 2)), flightControllerScript.environmentManagerScript.environmentsScenarios[flightControllerScript.environmentManagerScript.scenarioIndex].verticalObstaclesPrefabs[objectIndex], "verticalObstacle");
                 }
                 else if (obstacle == 1) //TROTYLLAUNCHER
-                {
                     SpawnSingleObstacle(plane, ref obstaclesParent, (float)(placementPointXstart + placementPointXOffset + (i * obstacleSectorWidth) + (obstacleSectorWidth / 2)), trotylLauncherPrefab, "trotylLauncher");
-                }
             }
             for (int i = 0; i < numberOfFogInstances; i++)
             {
                 //FOG
-                GameObject fog = Instantiate(fogPrefab, new Vector3(Random.Range(placementPointXstart, placementPointXFinish) + placementPointXOffset, (plane.topScreenHeight + plane.groundLevelHeight) / 2, 0), Quaternion.identity, obstaclesParent.transform);
+                GameObject fog = Instantiate(flightControllerScript.environmentManagerScript.environmentsScenarios[flightControllerScript.environmentManagerScript.scenarioIndex].fogPrefab, new Vector3(Random.Range(placementPointXstart, placementPointXFinish) + placementPointXOffset, (plane.topScreenHeight + plane.groundLevelHeight) / 2, 0), Quaternion.identity, obstaclesParent.transform);
                 fog.name = "fog";
             }
         }

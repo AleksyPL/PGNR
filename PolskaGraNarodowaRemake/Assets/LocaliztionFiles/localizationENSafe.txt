@@ -1,20 +1,20 @@
 //Main menu - StartGame
 START GAME
-//Main menu - Button1
+//Main menu - HowToPlay
 HOW TO PLAY
-//Main menu - Button2
+//Main menu - Options
 OPTIONS
-//Main menu - Button3
+//Main menu - QuitGame
 EXIT GAME
 //Game Mode Selector - Title
 Choose game mode
-//Game Mode Selector - Button0
+//Game Mode Selector - SinglePlayerClassic
 SinglePlayer classic mode
-//Game Mode Selector - Button1
+//Game Mode Selector - SinglePlayerEndless
 SinglePlayer endless mode
-//Game Mode Selector - Button2
+//Game Mode Selector - MultiPlayerClassic
 Versus classic mode
-//Game Mode Selector - Button3
+//Game Mode Selector - MultiPlayerEndless
 Versus endless mode
 //Skin Selection Menu - Title
 Choose your plane
@@ -40,8 +40,8 @@ MUSIC VOLUME
 QUOTES VOLUME
 //Options - Language
 ACTIVE LANGUAGE
-//Regular HUD - Year
-Year: 
+//Regular HUD - Level
+Level: 
 //Regular HUD - LevelProgressStory0
 Mr. President, we have already covered 
 //Regular HUD - LevelProgressStory1
@@ -49,24 +49,24 @@ Mr. President, we have already covered
 //Regular HUD - landing message
 Mr. President, we are landing!
 //Regular HUD - plane hit
-Mr. President, I'm afraid we're going to get fucked up
+The plane has been damaged
 //Regular HUD - bottle drunk
 Drunk bottles: 
 //Regular HUD - earned0
 Earned: 
 //Regular HUD - earned1
 PLN
-//Pause Screen - Year title
-You've reached the year:
+//Pause Screen - Level title
+Current level:
 //Pause Screen - Bottles title
 All drunk bottles:
 //Pause Screen - Main Title - Pause
 GAME PAUSED
 //Pause Screen - Main Title - Game Over
 GAME OVER
-//Pause Screen - Button0
-BACK TO THE GAME
-//Game Over Screen - Button0
+//Pause Screen - ResumeGame
+RESUME GAME
+//Game Over Screen - TryAgain
 TRY AGAIN
 //Warning0
 PROGRESS WILL NOT BE SAVED, DO YOU WANT TO CONTINUE?
@@ -96,3 +96,5 @@ Your control wheel has repaired itself
 Congratulations, you landed safely
 //Main Menu - Plot
 PLOT
+//BackToPauseScreen
+BACK TO PAUSE SCREEN

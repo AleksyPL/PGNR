@@ -1,20 +1,20 @@
 //Main menu - StartGame
 ROZPOCZNIJ GRĘ
-//Main menu - Button1
+//Main menu - HowToPlay
 JAK GRAĆ
-//Main menu - Button2
+//Main menu - Options
 OPCJE
-//Main menu - Button3
+//Main menu - QuitGame
 ZAKOŃCZ GRĘ
 //Game Mode Selector - Title
 Wybierz tryb rozgrywki
-//Game Mode Selector - Button0
+//Game Mode Selector - SinglePlayerClassic
 Gra jednoosowa klasyczna
-//Game Mode Selector - Button1
+//Game Mode Selector - SinglePlayerEndless
 Gra jednoosobowa nieskończona
-//Game Mode Selector - Button2
+//Game Mode Selector - MultiPlayerClassic
 Gra przeciw drugiemu graczowi klasyczna
-//Game Mode Selector - Button3
+//Game Mode Selector - MultiPlayerEndless
 Gra przeciw drugiemu graczowi nieskończona
 //Skin Selection Menu - Title
 Wybierz swój samolot
@@ -40,7 +40,7 @@ GŁOŚNOŚĆ MUZYKI
 GŁOŚNOŚĆ WYPOWIEDZI
 //Options - Language
 AKTYWNY JĘZYK
-//Regular HUD - Year
+//Regular HUD - Level
 Rok: 
 //Regular HUD - LevelProgressStory0
 Panie Prezydencie, przelecieliśmy już 
@@ -56,7 +56,7 @@ Wypite butelki:
 Zarobiłeś: 
 //Regular HUD - earned1
 zł
-//Pause Screen - Year title
+//Pause Screen - Level title
 Doleciałeś do roku:
 //Pause Screen - Bottles title
 Wszystkie wypite butelki:
@@ -64,9 +64,9 @@ Wszystkie wypite butelki:
 PAUZA
 //Pause Screen - Main Title - Game Over
 KONIEC GRY
-//Pause Screen - Button0
+//Pause Screen - ResumeGame
 POWRÓT DO GRY
-//Game Over Screen - Button0
+//Game Over Screen - TryAgain
 SPRÓBUJ JESZCZE RAZ
 //Warning0
 POSTĘP NIE ZOSTANIE ZACHOWANY, CZY CHCESZ KONTYNUOWAĆ?
@@ -96,3 +96,5 @@ Twój ster się naprawił
 Gratulacje, bezpiecznie wylądowałeś na miejscu
 //Main Menu - Plot
 FABUŁA
+//BackToPauseScreen
+POWRÓT DO EKRANU PAUZY
