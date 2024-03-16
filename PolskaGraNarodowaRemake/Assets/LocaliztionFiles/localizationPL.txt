@@ -98,3 +98,7 @@ Gratulacje, bezpiecznie wylądowałeś na miejscu
 FABUŁA
 //BackToPauseScreen
 POWRÓT DO EKRANU PAUZY
+//Acceptance
+OK
+//Disclaimer
+UWAGA!<br><br>Właśnie uruchomiłeś nieocenzurowaną wersję gry. Autor nie ponosi odpowiedzialności za szkody moralne wywołane treścią gry.<br>Gra jest dziełem fikcyjnym, nie ma na celu obrazić niczyich uczuć. Grasz na własną odpowiedzialność.<br>Jeżeli uruchomiłeś tą wersję gry przez przypadek, usuń argument "TrueGame" z adresu strony bądź pliku exe.

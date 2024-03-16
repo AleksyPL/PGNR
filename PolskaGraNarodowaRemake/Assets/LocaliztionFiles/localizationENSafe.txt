@@ -98,3 +98,7 @@ Congratulations, you landed safely
 PLOT
 //BackToPauseScreen
 BACK TO PAUSE SCREEN
+//Acceptance
+OK
+//Disclaimer
+Ignore this message.

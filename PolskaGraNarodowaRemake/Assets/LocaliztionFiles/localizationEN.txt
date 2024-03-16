@@ -98,3 +98,7 @@ Congratulations, you landed safely
 PLOT
 //BackToPauseScreen
 BACK TO PAUSE SCREEN
+//Acceptance
+OK
+//Disclaimer
+ATTENTION!<br><br>You have just launched the uncensored version of the game. The author is not liable for any moral damage caused by the content of the game.<br>The game is a work of fiction and is not intended to offend anyone's feelings. You play at your own risk.<br>If you started this version of the game by accident, remove the "TrueGame" argument from the website address or exe file.

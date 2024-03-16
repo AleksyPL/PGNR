@@ -98,3 +98,7 @@ Gratulacje, bezpiecznie wylądowałeś na miejscu
 FABUŁA
 //BackToPauseScreen
 POWRÓT DO EKRANU PAUZY
+//Acceptance
+OK
+//Disclaimer
+Zignoruj tą wiadomość.

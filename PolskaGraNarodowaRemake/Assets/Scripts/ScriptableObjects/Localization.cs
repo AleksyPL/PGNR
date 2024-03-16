@@ -22,6 +22,7 @@ public class Localization : ScriptableObject
     internal string warningNo;
     internal string playerOneIndicator;
     internal string playerTwoIndicator;
+    internal string acceptanceMessage;
     //game mode selection menu
     internal string gameModeSelectionMenuTitle;
     internal string gameModeSelectionMenuSinglePlayerClassic;
@@ -71,6 +72,8 @@ public class Localization : ScriptableObject
     //power Ups
     internal string soberUpYouAreSoberMessage;
     internal string invertedSteeringRepairedMessage;
+    //disclaimer
+    internal string disclaimerMessage;
 
     internal void LoadData()
     {
@@ -129,6 +132,8 @@ public class Localization : ScriptableObject
             regularHudCongratulationsAfterLanding = listOfAll[95];
             mainMenuButtonPlot = listOfAll[97];
             backToPauseScreen = listOfAll[99];
+            acceptanceMessage = listOfAll[101];
+            disclaimerMessage = listOfAll[103];
         }
     }
 }
