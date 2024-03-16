@@ -237,8 +237,16 @@ public class UIManager : MonoBehaviour
         {
             GameObject waring = Instantiate(activeBottleWarningPrefab, UIElements.transform);
             waring.transform.name = "ActiveBottleWarning";
-        }  
-        SpawnTimerOnTheScreen(pauseScreenTimerDuration);
+        }
+        GameObject timer = SpawnTimerOnTheScreen(pauseScreenTimerDuration);
+        if (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusClassic || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusEndless)
+        {
+            timer.GetComponent<RectTransform>().position = new Vector3(timer.GetComponent<RectTransform>().position.x, timer.GetComponent<RectTransform>().position.y + 100f, 0);
+            timer.GetComponent<RectTransform>().localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            timer = SpawnTimerOnTheScreen(pauseScreenTimerDuration);
+            timer.GetComponent<RectTransform>().position = new Vector3(timer.GetComponent<RectTransform>().position.x, timer.GetComponent<RectTransform>().position.y - 150f, 0);
+            timer.GetComponent<RectTransform>().localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        }
     }
     internal void EnableBeforeTheFlightProcedure(string message, float timeToCount)
     {
@@ -351,7 +359,10 @@ public class UIManager : MonoBehaviour
         {
             GameObject powerUpUIGameObject = Instantiate(powerUpUIClockPrefab);
             powerUpUIGameObject.transform.name = currentPowerUp.powerUpName;
-            powerUpUIGameObject.GetComponent<Image>().sprite = currentPowerUp.currentPowerUpUIClockImage;
+            if(gameplaySettings.safeMode)
+                powerUpUIGameObject.GetComponent<Image>().sprite = currentPowerUp.currentPowerUpSafeUIClockImage;
+            else
+                powerUpUIGameObject.GetComponent<Image>().sprite = currentPowerUp.currentPowerUpUIClockImage;
             powerUpUIGameObject.transform.SetParent(ReturnPlayersUIObject(plane).powerUpBarParentGameObject.transform);
             powerUpUIGameObject.GetComponent<UIPowerUp>().EnableUIPowerUp(currentPowerUp.powerUpDuration, currentPowerUp.powerUpName);
         }

@@ -89,7 +89,7 @@ Fly as far as you can
 //Endless Mode - Versus
 Fly as far as you can, defeat your enemy
 //Power Up - Sober Up - You are sober
-You are sober
+The sensors are well calibrated
 //Power Up - Inverted Steering - control wheel repaired
 Your control wheel has repaired itself
 //Congratulations after Landing

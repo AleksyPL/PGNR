@@ -86,7 +86,7 @@ public class FlightController : MonoBehaviour
             plane.verticalMovementKeys = 0;
         //end of hack
         //moving a plane
-        if (plane.verticalMovementKeys != plane.difficultyImpulseDirection && plane.verticalMovementKeys != 0)
+        if (plane.verticalMovementKeys != plane.difficultyImpulseDirection && plane.verticalMovementKeys != 0 && plane.difficultyImpulseEnabled)
             plane.planeGameObject.transform.position += new Vector3(plane.currentPlaneSpeed * Time.deltaTime, plane.verticalMovementKeys * plane.altitudeChangeForce * gameplaySettings.altitudeChangeForceOverridedMultiplier * Time.deltaTime, 0);
         else
             plane.planeGameObject.transform.position += new Vector3(plane.currentPlaneSpeed * Time.deltaTime, plane.verticalMovementKeys * plane.altitudeChangeForce * Time.deltaTime, 0);

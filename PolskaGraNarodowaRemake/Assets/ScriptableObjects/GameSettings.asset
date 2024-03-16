@@ -47,7 +47,7 @@ MonoBehaviour:
   rateOfFire: 5
   maxLaunchDelay: 5
   launchForce: 850
-  altitudeChangeForceOverridedMultiplier: 3
+  altitudeChangeForceOverridedMultiplier: 1.3
   difficultyImpulseForce: 1
   bottlePrefab:
   - {fileID: 7997397083522814020, guid: 759b7b6eed06fc147ac9a6a6c93c3f0a, type: 3}

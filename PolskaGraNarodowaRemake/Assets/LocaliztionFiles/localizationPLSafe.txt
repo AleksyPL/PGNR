@@ -89,7 +89,7 @@ Leć jak najdalej
 //Endless Mode - Versus
 Leć jak najdalej, pokonaj przeciwnika
 //Power Up - Sober Up - You are sober
-Jesteś trzeźwy
+Czujniki są dobrze skalibrowane
 //Power Up - Inverted Steering - control wheel repaired
 Twój ster się naprawił
 //Congratulations after Landing

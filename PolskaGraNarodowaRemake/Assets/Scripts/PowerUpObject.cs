@@ -24,7 +24,7 @@ public class PowerUpObject : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Plane"))
+        if(collision.gameObject.CompareTag("Plane") && gameModeManagerScript.ReturnPlayerStateObject(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject)) == GameModeManager.PlayerState.flying)
         {
             if(currentPowerUp == PowerUp1.Shield)
             {
@@ -34,7 +34,10 @@ public class PowerUpObject : MonoBehaviour
                     gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).shieldEnabled = true;
                     gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).planeRendererScript.ShowShield();
                     gameModeManagerScript.flightControllerScript.uiManagerScript.SpawnPowerUpUIClock(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject), currentPowerUpScriptableObject);
-                    gameModeManagerScript.flightControllerScript.uiManagerScript.DisplayPowerUpDescriptionOnHUD(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject), currentPowerUpScriptableObject.powerUpDescription[gameplaySettings.langauageIndex]);
+                    if(gameplaySettings.safeMode)
+                        gameModeManagerScript.flightControllerScript.uiManagerScript.DisplayPowerUpDescriptionOnHUD(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject), currentPowerUpScriptableObject.powerUpSafeDescription[gameplaySettings.langauageIndex]);
+                    else
+                        gameModeManagerScript.flightControllerScript.uiManagerScript.DisplayPowerUpDescriptionOnHUD(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject), currentPowerUpScriptableObject.powerUpDescription[gameplaySettings.langauageIndex]);
                 }
                 else
                 {
@@ -50,7 +53,10 @@ public class PowerUpObject : MonoBehaviour
                     gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).speedEnabled = true;
                     gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).currentPlaneSpeed += (float)(1.0* gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).currentPlaneSpeed);
                     gameModeManagerScript.flightControllerScript.uiManagerScript.SpawnPowerUpUIClock(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject), currentPowerUpScriptableObject);
-                    gameModeManagerScript.flightControllerScript.uiManagerScript.DisplayPowerUpDescriptionOnHUD(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject), currentPowerUpScriptableObject.powerUpDescription[gameplaySettings.langauageIndex]);
+                    if (gameplaySettings.safeMode)
+                        gameModeManagerScript.flightControllerScript.uiManagerScript.DisplayPowerUpDescriptionOnHUD(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject), currentPowerUpScriptableObject.powerUpSafeDescription[gameplaySettings.langauageIndex]);
+                    else
+                        gameModeManagerScript.flightControllerScript.uiManagerScript.DisplayPowerUpDescriptionOnHUD(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject), currentPowerUpScriptableObject.powerUpDescription[gameplaySettings.langauageIndex]);
                 }
                 else
                 {
@@ -64,10 +70,16 @@ public class PowerUpObject : MonoBehaviour
                 if(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).bottlesDrunk != 0)
                 {
                     gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).SoberUp();
-                    gameModeManagerScript.flightControllerScript.uiManagerScript.DisplayPowerUpDescriptionOnHUD(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject), currentPowerUpScriptableObject.powerUpDescription[gameplaySettings.langauageIndex]);
+                    if (gameplaySettings.safeMode)
+                        gameModeManagerScript.flightControllerScript.uiManagerScript.DisplayPowerUpDescriptionOnHUD(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject), currentPowerUpScriptableObject.powerUpSafeDescription[gameplaySettings.langauageIndex]);
+                    else
+                        gameModeManagerScript.flightControllerScript.uiManagerScript.DisplayPowerUpDescriptionOnHUD(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject), currentPowerUpScriptableObject.powerUpDescription[gameplaySettings.langauageIndex]);
                 }
                 else
-                    gameModeManagerScript.flightControllerScript.uiManagerScript.DisplayPowerUpDescriptionOnHUD(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject), gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].soberUpYouAreSoberMessage);
+                    if (gameplaySettings.safeMode)
+                    gameModeManagerScript.flightControllerScript.uiManagerScript.DisplayPowerUpDescriptionOnHUD(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject), currentPowerUpScriptableObject.powerUpAlternativeSafeDescription[gameplaySettings.langauageIndex]);
+                else
+                    gameModeManagerScript.flightControllerScript.uiManagerScript.DisplayPowerUpDescriptionOnHUD(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject), currentPowerUpScriptableObject.powerUpAlternativeDescription[gameplaySettings.langauageIndex]);
             }
             else if (currentPowerUp == PowerUp1.MultiShot)
             {
@@ -76,7 +88,10 @@ public class PowerUpObject : MonoBehaviour
                 {
                     gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).multiShotEnabled = true;
                     gameModeManagerScript.flightControllerScript.uiManagerScript.SpawnPowerUpUIClock(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject), currentPowerUpScriptableObject);
-                    gameModeManagerScript.flightControllerScript.uiManagerScript.DisplayPowerUpDescriptionOnHUD(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject), currentPowerUpScriptableObject.powerUpDescription[gameplaySettings.langauageIndex]);
+                    if (gameplaySettings.safeMode)
+                        gameModeManagerScript.flightControllerScript.uiManagerScript.DisplayPowerUpDescriptionOnHUD(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject), currentPowerUpScriptableObject.powerUpSafeDescription[gameplaySettings.langauageIndex]);
+                    else
+                        gameModeManagerScript.flightControllerScript.uiManagerScript.DisplayPowerUpDescriptionOnHUD(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject), currentPowerUpScriptableObject.powerUpDescription[gameplaySettings.langauageIndex]);
                 }
                 else
                 {
@@ -91,13 +106,20 @@ public class PowerUpObject : MonoBehaviour
                 {
                     gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).invertedSteeringEnabled = true;
                     gameModeManagerScript.flightControllerScript.uiManagerScript.SpawnPowerUpUIClock(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject), currentPowerUpScriptableObject);
-                    gameModeManagerScript.flightControllerScript.uiManagerScript.DisplayPowerUpDescriptionOnHUD(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject), currentPowerUpScriptableObject.powerUpDescription[gameplaySettings.langauageIndex]);
+                    if (gameplaySettings.safeMode)
+                        gameModeManagerScript.flightControllerScript.uiManagerScript.DisplayPowerUpDescriptionOnHUD(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject), currentPowerUpScriptableObject.powerUpSafeDescription[gameplaySettings.langauageIndex]);
+                    else
+                        gameModeManagerScript.flightControllerScript.uiManagerScript.DisplayPowerUpDescriptionOnHUD(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject), currentPowerUpScriptableObject.powerUpDescription[gameplaySettings.langauageIndex]);
                 }
                 else if (gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).invertedSteeringEnabled)
                 {
                     gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).invertedSteeringEnabled = false;
                     gameModeManagerScript.flightControllerScript.uiManagerScript.DeletePowerUpUIClock(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject), currentPowerUpScriptableObject.powerUpName);
-                    gameModeManagerScript.flightControllerScript.uiManagerScript.DisplayPowerUpDescriptionOnHUD(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject), gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].invertedSteeringRepairedMessage);
+                    if (gameplaySettings.safeMode)
+                        gameModeManagerScript.flightControllerScript.uiManagerScript.DisplayPowerUpDescriptionOnHUD(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject), currentPowerUpScriptableObject.powerUpAlternativeSafeDescription[gameplaySettings.langauageIndex]);
+                    else
+                        gameModeManagerScript.flightControllerScript.uiManagerScript.DisplayPowerUpDescriptionOnHUD(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject), currentPowerUpScriptableObject.powerUpAlternativeDescription[gameplaySettings.langauageIndex]);
+
                 }
             }
             else if (currentPowerUp == PowerUp1.GettingWastedXTimesQuicker)
@@ -107,7 +129,10 @@ public class PowerUpObject : MonoBehaviour
                 {
                     gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).gettingWastedXTimesMoreEnabled = true;
                     gameModeManagerScript.flightControllerScript.uiManagerScript.SpawnPowerUpUIClock(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject), currentPowerUpScriptableObject);
-                    gameModeManagerScript.flightControllerScript.uiManagerScript.DisplayPowerUpDescriptionOnHUD(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject), currentPowerUpScriptableObject.powerUpDescription[gameplaySettings.langauageIndex]);
+                    if (gameplaySettings.safeMode)
+                        gameModeManagerScript.flightControllerScript.uiManagerScript.DisplayPowerUpDescriptionOnHUD(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject), currentPowerUpScriptableObject.powerUpSafeDescription[gameplaySettings.langauageIndex]);
+                    else
+                        gameModeManagerScript.flightControllerScript.uiManagerScript.DisplayPowerUpDescriptionOnHUD(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject), currentPowerUpScriptableObject.powerUpDescription[gameplaySettings.langauageIndex]);
                 }
                 else
                 {
@@ -116,6 +141,10 @@ public class PowerUpObject : MonoBehaviour
                 }
             }
             Destroy(transform.gameObject);
-        }    
+        }
+        else if (collision.gameObject.CompareTag("Plane") && gameModeManagerScript.ReturnPlayerStateObject(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject)) != GameModeManager.PlayerState.flying)
+        {
+            Destroy(transform.gameObject);
+        }
     }
 }

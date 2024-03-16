@@ -16,6 +16,16 @@ MonoBehaviour:
   powerUpDescription:
   - "Pusty \u017Co\u0142\u0105dek! Upijasz si\u0119 trzy razy szybciej"
   - Empty stomach! You get drunk three times faster
+  powerUpAlternativeDescription:
+  - 
+  - 
+  powerUpSafeDescription:
+  - "Aparatura kokpitu szaleje! Wy\u015Bwietla 3 krotnie wi\u0119kszy ci\u0119\u017Car"
+  - The cockpit equipment is going crazy! Displays 3 times more weight
+  powerUpAlternativeSafeDescription:
+  - 
+  - 
   powerUpDuration: 3
   currentPowerUpImageBox: {fileID: 21300000, guid: f2f7695ef9a2b8d49b93a40300a81f80, type: 3}
   currentPowerUpUIClockImage: {fileID: 21300000, guid: 40a64e8fcfb114043aad043eaff18e3c, type: 3}
+  currentPowerUpSafeUIClockImage: {fileID: 21300000, guid: 40a64e8fcfb114043aad043eaff18e3c, type: 3}

@@ -16,6 +16,16 @@ MonoBehaviour:
   powerUpDescription:
   - "Tw\xF3j ster si\u0119 popsu\u0142"
   - Your control wheel is broken
+  powerUpAlternativeDescription:
+  - "Tw\xF3j ster sam si\u0119 naprawi\u0142"
+  - Your control wheel has repaired itself
+  powerUpSafeDescription:
+  - "Tw\xF3j ster si\u0119 popsu\u0142"
+  - Your control wheel is broken
+  powerUpAlternativeSafeDescription:
+  - "Tw\xF3j ster sam si\u0119 naprawi\u0142"
+  - Your control wheel has repaired itself
   powerUpDuration: 3
   currentPowerUpImageBox: {fileID: 21300000, guid: f2f7695ef9a2b8d49b93a40300a81f80, type: 3}
   currentPowerUpUIClockImage: {fileID: 21300000, guid: 2173bcd05e5a8e745bfc2142fd68ba22, type: 3}
+  currentPowerUpSafeUIClockImage: {fileID: 21300000, guid: 2173bcd05e5a8e745bfc2142fd68ba22, type: 3}

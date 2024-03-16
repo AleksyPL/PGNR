@@ -16,6 +16,16 @@ MonoBehaviour:
   powerUpDescription:
   - "Trze\u017Awiejesz"
   - You are sobering up
+  powerUpAlternativeDescription:
+  - "Jeste\u015B trze\u017Awy"
+  - You are sober
+  powerUpSafeDescription:
+  - "Uda\u0142o ci si\u0119 skalibrowa\u0107 czujniki"
+  - You have successfully calibrated the sensors
+  powerUpAlternativeSafeDescription:
+  - "Czujniki s\u0105 dobrze skalibrowane"
+  - The sensors are well calibrated
   powerUpDuration: 0
   currentPowerUpImageBox: {fileID: 21300000, guid: f2f7695ef9a2b8d49b93a40300a81f80, type: 3}
   currentPowerUpUIClockImage: {fileID: 0}
+  currentPowerUpSafeUIClockImage: {fileID: 0}

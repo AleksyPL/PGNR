@@ -127,8 +127,8 @@ public class Localization : ScriptableObject
             classicModeMessage = listOfAll[85];
             endlessSingleMessage = listOfAll[87];
             endlessVersusMessage = listOfAll[89];
-            soberUpYouAreSoberMessage = listOfAll[91];
-            invertedSteeringRepairedMessage = listOfAll[93];
+            //soberUpYouAreSoberMessage = listOfAll[91];
+            //invertedSteeringRepairedMessage = listOfAll[93];
             regularHudCongratulationsAfterLanding = listOfAll[95];
             mainMenuButtonPlot = listOfAll[97];
             backToPauseScreen = listOfAll[99];
