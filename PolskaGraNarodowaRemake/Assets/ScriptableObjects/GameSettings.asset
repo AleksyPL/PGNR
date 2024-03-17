@@ -36,7 +36,7 @@ MonoBehaviour:
   fadeOutLifeTime: 1
   fadeInLifeTime: 1
   defaultPlaneSpeed: 6.5
-  altitudeChangeForce: 5
+  altitudeChangeForce: 8
   fallingForce: 5
   airportSlowingForce: 9
   timeToFullyChargeBottleThrow: 1
@@ -47,7 +47,7 @@ MonoBehaviour:
   rateOfFire: 5
   maxLaunchDelay: 5
   launchForce: 850
-  altitudeChangeForceOverridedMultiplier: 1.3
+  altitudeChangeForceOverridedMultiplier: 1.5
   difficultyImpulseForce: 1
   bottlePrefab:
   - {fileID: 7997397083522814020, guid: 759b7b6eed06fc147ac9a6a6c93c3f0a, type: 3}
@@ -66,4 +66,4 @@ MonoBehaviour:
   durationTimeForPowerUpMessageOnTheScreen: 3
   gettingWastedXTimesMoreNumber: 3
   multishotSpread: 0.2
-  scriptableObjectSafeModOverride: 1
+  scriptableObjectSafeModOverride: 0

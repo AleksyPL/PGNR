@@ -4,9 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class UIOptionsMenu : MonoBehaviour
 {
+    public GameObject eventSystemGameObject;
+    private EventSystem eventSystem;
     public GameplaySettings gameplaySettings;
     public GameObject volumeSFXSliderGameObject;
     public GameObject volumeMusicSliderGameObject;
@@ -20,6 +23,9 @@ public class UIOptionsMenu : MonoBehaviour
     {
         LoadValuesFromSettings();
         UpdateUIWithNewLanguage();
+        eventSystem = eventSystemGameObject.GetComponent<EventSystem>();
+        if (!Application.isMobilePlatform)
+            eventSystem.SetSelectedGameObject(backToPauseScreenButton);
         volumeMusicSliderGameObject.GetComponent<Slider>().onValueChanged.AddListener(delegate { audioManagerGameObject.GetComponent<AudioManager>().UpdateAllSoundsVolume(); });
         volumeSFXSliderGameObject.GetComponent<Slider>().onValueChanged.AddListener(delegate { audioManagerGameObject.GetComponent<AudioManager>().UpdateAllSoundsVolume(); });
         volumeQuotesSliderGameObject.GetComponent<Slider>().onValueChanged.AddListener(delegate { audioManagerGameObject.GetComponent<AudioManager>().UpdateAllSoundsVolume(); });

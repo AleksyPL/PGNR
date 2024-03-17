@@ -11,7 +11,8 @@ public class UIManager : MonoBehaviour
 {
     public GameplaySettings gameplaySettings;
     public GameObject UIElements;
-    public GameObject EventSystemGameObject;
+    public GameObject eventSystemGameObject;
+    private EventSystem eventSystem;
     internal FlightController flightControllerScript;
     internal bool pauseScreenEnabled;
     internal bool timerBeforeTheFlightEnabled;
@@ -82,7 +83,7 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         flightControllerScript = GetComponent<FlightController>();
-        EventSystemGameObject.GetComponent<EventSystem>().SetSelectedGameObject(null);
+        eventSystem = eventSystemGameObject.GetComponent<EventSystem>();
         pauseScreenEnabled = false;
         optionsMenuGameObject.GetComponent<UIOptionsMenu>().DisableLanguageButtons();
         if (Application.isMobilePlatform || flightControllerScript.gameModeScript.simulateMobileApp)
@@ -186,7 +187,8 @@ public class UIManager : MonoBehaviour
                 TurnOffTouchScreenButtons();
                 flightControllerScript.inputManagerScript.ESCpressed = false;
             }
-            EventSystemGameObject.GetComponent<EventSystem>().SetSelectedGameObject(pauseScreenOptionsButtonGameObject);
+            else
+                eventSystem.SetSelectedGameObject(pauseScreenResumeGameButtonGameObject);
             pauseScreenTitleGameObject.GetComponentInChildren<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].pauseScreenPauseMainTitle;
             fadePanelGameObject.SetActive(true);
             pauseScreenGameObject.SetActive(true);
@@ -205,8 +207,9 @@ public class UIManager : MonoBehaviour
     {
         if (Application.isMobilePlatform)
             TurnOffTouchScreenButtons();
-        UpdatePauseScreenHUD();
-        EventSystemGameObject.GetComponent<EventSystem>().SetSelectedGameObject(gameOverScreenTryAgainButtonGameObject);
+        else
+            eventSystem.SetSelectedGameObject(gameOverScreenTryAgainButtonGameObject);
+        UpdatePauseScreenHUD();   
         TurnOffColorPanel(playerOneUI.colorPanelGameObject);
         TurnOffColorPanel(playerTwoUI.colorPanelGameObject);
         pauseScreenTitleGameObject.GetComponentInChildren<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].pauseScreenGameOverMainTitle;
@@ -281,7 +284,8 @@ public class UIManager : MonoBehaviour
     public void EnableExitWarning()
     {
         gameStatsGameObject.SetActive(false);
-        EventSystemGameObject.GetComponent<EventSystem>().SetSelectedGameObject(exitWarningNoButtonGameObject);
+        if(!Application.isMobilePlatform)
+            eventSystem.SetSelectedGameObject(exitWarningNoButtonGameObject);
         exitWarningTitleGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].warningTitle;
         exitWarningYesButtonGameObject.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].warningYes;
         exitWarningNoButtonGameObject.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].warningNo;
@@ -291,13 +295,15 @@ public class UIManager : MonoBehaviour
     public void DisableExitWarning()
     {
         gameStatsGameObject.SetActive(true);
-        EventSystemGameObject.GetComponent<EventSystem>().SetSelectedGameObject(pauseScreenOptionsButtonGameObject);
+        if (!Application.isMobilePlatform)
+            eventSystem.SetSelectedGameObject(pauseScreenOptionsButtonGameObject);
         pauseScreenRegularButtonsGameObject.SetActive(true);
         pauseScreenWarningGameObject.SetActive(false);
     }
     public void EnableOptionsMenu()
     {
-        EventSystemGameObject.GetComponent<EventSystem>().SetSelectedGameObject(optionsMenuGameObject.GetComponent<UIOptionsMenu>().backToPauseScreenButton);
+        if (!Application.isMobilePlatform)
+            eventSystem.SetSelectedGameObject(optionsMenuGameObject.GetComponent<UIOptionsMenu>().backToPauseScreenButton);
         pauseScreenTitleGameObject.GetComponentInChildren<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].pauseScreenResumeGame;
         optionsMenuGameObject.SetActive(true);
         pauseScreenRegularButtonsGameObject.SetActive(false);

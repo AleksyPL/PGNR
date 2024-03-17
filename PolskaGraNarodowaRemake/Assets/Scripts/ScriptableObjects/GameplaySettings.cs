@@ -70,6 +70,7 @@ public class GameplaySettings : ScriptableObject
     [Header("Other")]
     public bool scriptableObjectSafeModOverride;
     internal bool safeMode;
+    internal bool introductionScreens;
 
     private void OnEnable()
     {
@@ -83,6 +84,7 @@ public class GameplaySettings : ScriptableObject
             langauageIndex = 0;
         else if (currentLanguage == Languages.English)
             langauageIndex = 1;
+        introductionScreens = false;
         ResetGameVolume();
         ResetPlayerSkins();
         LoadLocalizationData();
