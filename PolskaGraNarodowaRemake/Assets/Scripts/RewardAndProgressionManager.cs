@@ -75,6 +75,7 @@ public class RewardAndProgressionManager : MonoBehaviour
     }
     public void RestartGame()
     {
+        flightControllerScript = GetComponent<FlightController>();
         levelCounter = 1;
         playerOneProgress.levelProgressCounter = 0;
         playerOneProgress.scorePointsCounter = 0;

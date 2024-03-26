@@ -39,34 +39,71 @@ public class AudioManager : MonoBehaviour
         landingSpeechPlayed = false;
         pausedSounds = new List<Sound>();
     }
+    void OnApplicationPause(bool pause)
+    {
+        PausePlayingAllSounds();
+    }
+    void OnApplicationFocus(bool focus)
+    {
+        ResumeAllPausedSounds();
+    }
     private void LoadSounds(Sound [] sounds)
     {
-        foreach (Sound s in sounds)
-        {
-            s.source = gameObject.AddComponent<AudioSource>();
-            s.source.clip = s.clip;
-            s.source.volume = s.volumeSetInEditor;
-            s.source.pitch = s.pitch;
-            s.source.loop = s.looping;
-        }
+        if (sounds.Length != 0)
+            foreach (Sound s in sounds)
+            {
+                s.source = gameObject.AddComponent<AudioSource>();
+                s.source.clip = s.clip;
+                if (UnityEngine.Device.Application.isMobilePlatform)
+                    s.source.volume = s.volumeMobile;
+                else
+                    s.source.volume = s.volumePC;
+                s.source.pitch = s.pitch;
+                s.source.loop = s.looping;
+            }
     }
     public void UpdateAllSoundsVolume()
     {
         if(localOneLinersSounds != null)
             foreach (Sound s in localOneLinersSounds)
-                s.source.volume = gameplaySettings.volumeQuotes * s.volumeSetInEditor;
+            {
+                if(UnityEngine.Device.Application.isMobilePlatform)
+                    s.source.volume = gameplaySettings.volumeQuotes * s.volumeMobile;
+                else
+                    s.source.volume = gameplaySettings.volumeQuotes * s.volumePC;
+            }
         if(localHitReactionSounds != null)
             foreach (Sound s in localHitReactionSounds)
-                s.source.volume = gameplaySettings.volumeQuotes * s.volumeSetInEditor;
-        if(localLandingSounds != null)
+            {
+                if (UnityEngine.Device.Application.isMobilePlatform)
+                    s.source.volume = gameplaySettings.volumeQuotes * s.volumeMobile;
+                else
+                    s.source.volume = gameplaySettings.volumeQuotes * s.volumePC;
+            }
+        if (localLandingSounds != null)
             foreach (Sound s in localLandingSounds)
-                s.source.volume = gameplaySettings.volumeQuotes * s.volumeSetInEditor;
-        if(localSFX != null)
+            {
+                if (UnityEngine.Device.Application.isMobilePlatform)
+                    s.source.volume = gameplaySettings.volumeQuotes * s.volumeMobile;
+                else
+                    s.source.volume = gameplaySettings.volumeQuotes * s.volumePC;
+            }
+        if (localSFX != null)
             foreach (Sound s in localSFX)
-                s.source.volume = gameplaySettings.volumeSFX * s.volumeSetInEditor;
-        if(localOtherSounds != null)
+            {
+                if (UnityEngine.Device.Application.isMobilePlatform)
+                    s.source.volume = gameplaySettings.volumeSFX * s.volumeMobile;
+                else
+                    s.source.volume = gameplaySettings.volumeSFX * s.volumePC;
+            }
+        if (localOtherSounds != null)
             foreach (Sound s in localOtherSounds)
-                s.source.volume = gameplaySettings.volumeMusic * s.volumeSetInEditor;
+            {
+                if (UnityEngine.Device.Application.isMobilePlatform)
+                    s.source.volume = gameplaySettings.volumeMusic * s.volumeMobile;
+                else
+                    s.source.volume = gameplaySettings.volumeMusic * s.volumePC;
+            }
     }
     public void PlaySound(string soundName, Sound[] localSoundsBank)
     {
@@ -143,21 +180,26 @@ public class AudioManager : MonoBehaviour
     }
     public void StopPlayingAllSounds()
     {
-        foreach(Sound s in localOneLinersSounds)
-            if (s.source.isPlaying)
-                s.source.Stop();
-        foreach (Sound s in localHitReactionSounds)
-            if (s.source.isPlaying)
-                s.source.Stop();
-        foreach (Sound s in localLandingSounds)
-            if (s.source.isPlaying)
-                s.source.Stop();
-        foreach (Sound s in localSFX)
-            if (s.source.isPlaying)
-                s.source.Stop();
-        foreach (Sound s in localOtherSounds)
-            if (s.source.isPlaying)
-                s.source.Stop();
+        if (localOneLinersSounds != null)
+            foreach (Sound s in localOneLinersSounds)
+                if (s.source.isPlaying)
+                    s.source.Stop();
+        if (localHitReactionSounds != null)
+            foreach (Sound s in localHitReactionSounds)
+                if (s.source.isPlaying)
+                    s.source.Stop();
+        if (localLandingSounds != null)
+            foreach (Sound s in localLandingSounds)
+                if (s.source.isPlaying)
+                    s.source.Stop();
+        if (localSFX != null)
+            foreach (Sound s in localSFX)
+                if (s.source.isPlaying)
+                    s.source.Stop();
+        if (localOtherSounds != null)
+            foreach (Sound s in localOtherSounds)
+                if (s.source.isPlaying)
+                    s.source.Stop();
     }
     public void PausePlayingSoundsFromTheSpecificSoundBank(Sound[] soundsBank)
     {
@@ -170,36 +212,41 @@ public class AudioManager : MonoBehaviour
     }
     public void PausePlayingAllSounds()
     {
-        foreach (Sound s in localOneLinersSounds)
-            if (s.source.isPlaying)
-            {
-                s.source.Pause();
-                pausedSounds.Add(s);
-            }
-        foreach (Sound s in localHitReactionSounds)
-            if (s.source.isPlaying)
-            {
-                s.source.Pause();
-                pausedSounds.Add(s);
-            }
-        foreach (Sound s in localLandingSounds)
-            if (s.source.isPlaying)
-            {
-                s.source.Pause();
-                pausedSounds.Add(s);
-            }
-        foreach (Sound s in localSFX)
-            if (s.source.isPlaying)
-            {
-                s.source.Pause();
-                pausedSounds.Add(s);
-            }
-        foreach (Sound s in localOtherSounds)
-            if (s.source.isPlaying)
-            {
-                s.source.Pause();
-                pausedSounds.Add(s);
-            }
+        if (localOneLinersSounds != null)
+            foreach (Sound s in localOneLinersSounds)
+                if (s.source.isPlaying)
+                {
+                    s.source.Pause();
+                    pausedSounds.Add(s);
+                }
+        if (localHitReactionSounds != null)
+            foreach (Sound s in localHitReactionSounds)
+                if (s.source.isPlaying)
+                {
+                    s.source.Pause();
+                    pausedSounds.Add(s);
+                }
+        if (localLandingSounds != null)
+            foreach (Sound s in localLandingSounds)
+                if (s.source.isPlaying)
+                {
+                    s.source.Pause();
+                    pausedSounds.Add(s);
+                }
+        if (localSFX != null)
+            foreach (Sound s in localSFX)
+                if (s.source.isPlaying)
+                {
+                    s.source.Pause();
+                    pausedSounds.Add(s);
+                }
+        if (localOtherSounds != null)
+            foreach (Sound s in localOtherSounds)
+                if (s.source.isPlaying)
+                {
+                    s.source.Pause();
+                    pausedSounds.Add(s);
+                }
     }
     public void ResumeAllPausedSounds()
     {

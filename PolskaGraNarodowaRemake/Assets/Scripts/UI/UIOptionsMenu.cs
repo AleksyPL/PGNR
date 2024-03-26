@@ -24,7 +24,7 @@ public class UIOptionsMenu : MonoBehaviour
         LoadValuesFromSettings();
         UpdateUIWithNewLanguage();
         eventSystem = eventSystemGameObject.GetComponent<EventSystem>();
-        if (!Application.isMobilePlatform)
+        if (!UnityEngine.Device.Application.isMobilePlatform)
             eventSystem.SetSelectedGameObject(backToPauseScreenButton);
         volumeMusicSliderGameObject.GetComponent<Slider>().onValueChanged.AddListener(delegate { audioManagerGameObject.GetComponent<AudioManager>().UpdateAllSoundsVolume(); });
         volumeSFXSliderGameObject.GetComponent<Slider>().onValueChanged.AddListener(delegate { audioManagerGameObject.GetComponent<AudioManager>().UpdateAllSoundsVolume(); });

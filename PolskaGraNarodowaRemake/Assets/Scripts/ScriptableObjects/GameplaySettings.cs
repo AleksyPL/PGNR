@@ -23,8 +23,11 @@ public class GameplaySettings : ScriptableObject
     public PlaneSkin[] planeSkins;
     internal int [] playersPlaneSkins = new int[2];
     [Header("Audio Settings")]
+    [Range(0f, 1f)]
     public float volumeSFX;
+    [Range(0f, 1f)]
     public float volumeQuotes;
+    [Range(0f, 1f)]
     public float volumeMusic;
     public float waitingTimeForOneLiner;
     [Header("Bottle of Vodka Settings")]
@@ -34,7 +37,11 @@ public class GameplaySettings : ScriptableObject
     public int rewardForHittingATarget;
     public int rewardPerSecond;
     [Header("Camera Manager Settings")]
+    [Range(0.5f, -0.5f)]
     public float camerePositionXOffsetPersentageSingle;
+    [Range(0.5f, -0.5f)]
+    public float cameraPositionXOffsetPersentageSingleMobile;
+    [Range(0.5f, -0.5f)]
     public float camerePositionXOffsetPersentageMulti;
     internal float cameraPositionXOffset;
     [Header("Fade Tool Settings")]
@@ -67,6 +74,10 @@ public class GameplaySettings : ScriptableObject
     public float durationTimeForPowerUpMessageOnTheScreen;
     public int gettingWastedXTimesMoreNumber;
     public float multishotSpread;
+    [Header("Mobile")]
+    internal bool mobileDataTaken;
+    internal Resolution deviceResolution;
+    internal ScreenOrientation deviceScreenOrientation;
     [Header("Other")]
     public bool scriptableObjectSafeModOverride;
     internal bool safeMode;
@@ -87,16 +98,23 @@ public class GameplaySettings : ScriptableObject
         introductionScreens = false;
         ResetGameVolume();
         ResetPlayerSkins();
+        ResetMobileData();
         LoadLocalizationData();
     }
-
+    private void ResetMobileData()
+    {
+        mobileDataTaken = false;
+        deviceResolution.width = 1280;
+        deviceResolution.height = 720;
+        deviceResolution.refreshRate = 60;
+        deviceScreenOrientation = ScreenOrientation.Portrait;
+    }
     private void ResetGameVolume()
     {
         volumeSFX = 1;
         volumeQuotes = 1;
         volumeMusic = 1;
     }
-
     private void LoadLocalizationData()
     {
         if(localizationStringsSafe.Length == localizationStringsNotSafe.Length)

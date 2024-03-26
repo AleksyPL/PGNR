@@ -32,6 +32,7 @@ MonoBehaviour:
   rewardForHittingATarget: 50
   rewardPerSecond: 1
   camerePositionXOffsetPersentageSingle: 0.4
+  cameraPositionXOffsetPersentageSingleMobile: 0.32
   camerePositionXOffsetPersentageMulti: 0.45
   fadeOutLifeTime: 1
   fadeInLifeTime: 1
@@ -66,4 +67,4 @@ MonoBehaviour:
   durationTimeForPowerUpMessageOnTheScreen: 3
   gettingWastedXTimesMoreNumber: 3
   multishotSpread: 0.2
-  scriptableObjectSafeModOverride: 0
+  scriptableObjectSafeModOverride: 1

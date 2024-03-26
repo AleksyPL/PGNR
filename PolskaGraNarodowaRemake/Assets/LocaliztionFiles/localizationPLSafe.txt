@@ -1,7 +1,7 @@
 //Main menu - StartGame
 ROZPOCZNIJ GRĘ
-//Main menu - HowToPlay
-JAK GRAĆ
+//Main menu - Controls
+STEROWANIE
 //Main menu - Options
 OPCJE
 //Main menu - QuitGame
@@ -9,7 +9,7 @@ ZAKOŃCZ GRĘ
 //Game Mode Selector - Title
 Wybierz tryb rozgrywki
 //Game Mode Selector - SinglePlayerClassic
-Gra jednoosowa klasyczna
+Gra jednoosobwa klasyczna
 //Game Mode Selector - SinglePlayerEndless
 Gra jednoosobowa nieskończona
 //Game Mode Selector - MultiPlayerClassic
@@ -22,15 +22,15 @@ Wybierz swój samolot
 Pilocie, Ojczyzna Wzywa!
 //Plot - Plot
 Musisz polecieć nowym Polskim samolotem daleko na Wschód. <br><br>Nie licz jednak na to, że to będzie łatwe zadanie. Omijaj przeszkody na swojej drodze, oraz niszcz je śmieciami znalezionymi na pokładzie. <br><br>Ale pamiętaj: aparatura samolotu ustawiona jest na większy ciężar samolotu, im wiecej wyrzucisz śmieci, tym trudniej będzie się leciało. <br><br>Pokaż wszystkim jakim dobrym jesteś pilotem.
-//How to play - Controls - Player 1
+//Controls - Player 1
 W/S - sterowanie<br>Spacja - pijesz<br>Spacja(Przytrzymaj) - butelka poleci dalej<br>ESC - menu pauzy
-//How to play - Controls - Player 2
+//Controls - Player 2
 Strzałki góra/dół - sterowanie<br>P.SHIFT - pijesz<br>P.SHIFT(Przytrzymaj) - butelka poleci dalej<br>Backspace - menu pauzy
-//How to play - Controls - Player 1 indicator
+//Controls - Player 1 indicator
 Gracz 1
-//How to play - Controls - Player 2 indicator
+//Controls - Player 2 indicator
 Gracz 2
-//How to play - Back To Menu Button
+//BackToMainMenu
 WRÓĆ DO MENU GŁÓWNEGO
 //Options - SFX slider
 GŁOŚNOŚĆ EFEKTÓW
@@ -102,3 +102,5 @@ POWRÓT DO EKRANU PAUZY
 OK
 //Disclaimer
 Zignoruj tą wiadomość.
+//Missing Game Modes
+Tryby wieloosobowe nie są dostępne w mobilnej wersji gry

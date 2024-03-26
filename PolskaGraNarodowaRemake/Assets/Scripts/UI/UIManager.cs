@@ -55,6 +55,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject pauseScreenOptionsButtonGameObject;
     [SerializeField] private GameObject pauseScreenBackToMainMenuButtonGameObject;
     [SerializeField] private GameObject pauseScreenResumeGameButtonGameObject;
+    [SerializeField] internal GameObject fullScreenButton;
     [Header("Game Statistics")]
     [SerializeField] private GameObject gameStatsGameObject;
     [SerializeField] private GameObject gameSummaryYearTitle;
@@ -86,7 +87,7 @@ public class UIManager : MonoBehaviour
         eventSystem = eventSystemGameObject.GetComponent<EventSystem>();
         pauseScreenEnabled = false;
         optionsMenuGameObject.GetComponent<UIOptionsMenu>().DisableLanguageButtons();
-        if (Application.isMobilePlatform || flightControllerScript.gameModeScript.simulateMobileApp)
+        if (UnityEngine.Device.Application.isMobilePlatform || flightControllerScript.gameModeScript.simulateMobileApp)
             TurnOnTouchScreenButtons();
     }
     private ref PlayerUI ReturnPlayersUIObject(Plane plane)
@@ -179,13 +180,15 @@ public class UIManager : MonoBehaviour
     }
     private void EnablePauseScreen()
     {
+        flightControllerScript = GetComponent<FlightController>();
         if (((flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerClassic || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerEndless) && flightControllerScript.gameModeScript.playerOnePlane.currentPlaneState != PlaneState.crashed) || ((flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerClassic && flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerEndless) && (flightControllerScript.gameModeScript.playerOnePlane.currentPlaneState != PlaneState.crashed || flightControllerScript.gameModeScript.playerTwoPlane.currentPlaneState != PlaneState.crashed)))
         {
             Time.timeScale = 0;
-            if (Application.isMobilePlatform || flightControllerScript.gameModeScript.simulateMobileApp)
+            if (UnityEngine.Device.Application.isMobilePlatform || flightControllerScript.gameModeScript.simulateMobileApp)
             {
                 TurnOffTouchScreenButtons();
                 flightControllerScript.inputManagerScript.ESCpressed = false;
+                fullScreenButton.GetComponent<FullScreenManager>().TurnOnFullScreenButton();
             }
             else
                 eventSystem.SetSelectedGameObject(pauseScreenResumeGameButtonGameObject);
@@ -205,7 +208,7 @@ public class UIManager : MonoBehaviour
     }
     internal void EnableGameOverScreen()
     {
-        if (Application.isMobilePlatform)
+        if (UnityEngine.Device.Application.isMobilePlatform)
             TurnOffTouchScreenButtons();
         else
             eventSystem.SetSelectedGameObject(gameOverScreenTryAgainButtonGameObject);
@@ -225,8 +228,11 @@ public class UIManager : MonoBehaviour
     }
     internal void DisableGameOverScreen()
     {
-        if (Application.isMobilePlatform)
+        if (UnityEngine.Device.Application.isMobilePlatform || flightControllerScript.gameModeScript.simulateMobileApp)
+        {
             TurnOnTouchScreenButtons();
+            fullScreenButton.GetComponent<FullScreenManager>().TurnOffFullScreenButton();
+        }
         gameOverScreenButtonsGameObject.SetActive(false);
         pauseScreenGameObject.SetActive(false);
         pauseScreenEnabled = false;
@@ -284,7 +290,7 @@ public class UIManager : MonoBehaviour
     public void EnableExitWarning()
     {
         gameStatsGameObject.SetActive(false);
-        if(!Application.isMobilePlatform)
+        if(!UnityEngine.Device.Application.isMobilePlatform)
             eventSystem.SetSelectedGameObject(exitWarningNoButtonGameObject);
         exitWarningTitleGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].warningTitle;
         exitWarningYesButtonGameObject.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].warningYes;
@@ -295,14 +301,14 @@ public class UIManager : MonoBehaviour
     public void DisableExitWarning()
     {
         gameStatsGameObject.SetActive(true);
-        if (!Application.isMobilePlatform)
+        if (!UnityEngine.Device.Application.isMobilePlatform)
             eventSystem.SetSelectedGameObject(pauseScreenOptionsButtonGameObject);
         pauseScreenRegularButtonsGameObject.SetActive(true);
         pauseScreenWarningGameObject.SetActive(false);
     }
     public void EnableOptionsMenu()
     {
-        if (!Application.isMobilePlatform)
+        if (!UnityEngine.Device.Application.isMobilePlatform)
             eventSystem.SetSelectedGameObject(optionsMenuGameObject.GetComponent<UIOptionsMenu>().backToPauseScreenButton);
         pauseScreenTitleGameObject.GetComponentInChildren<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].pauseScreenResumeGame;
         optionsMenuGameObject.SetActive(true);

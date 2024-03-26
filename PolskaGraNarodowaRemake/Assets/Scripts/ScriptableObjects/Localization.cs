@@ -29,14 +29,15 @@ public class Localization : ScriptableObject
     internal string gameModeSelectionMenuSinglePlayerEndless;
     internal string gameModeSelectionMenuMultiPlayerClassic;
     internal string gameModeSelectionMenuMultiPlayerEndless;
+    internal string gameModeSelectionMenuMissingGameModes;
     //skin selection menu
     internal string skinSelectionMenuTitle;
     //plot menu
     internal string plotMenuPlot;
     //how to play
     //internal string howToPlayMenuTitle;
-    internal string howtoPlayMenuControlsPlayerOne;
-    internal string howtoPlayMenuControlsPlayerTwo;
+    internal string ControlsMenuPlayerOne;
+    internal string ControlsMenuPlayerTwo;
     //options
     internal string sfxVolumeSlider;
     internal string musicVolumeSlider;
@@ -94,8 +95,8 @@ public class Localization : ScriptableObject
             skinSelectionMenuTitle = listOfAll[19];
             plotMenuPlot = listOfAll[23];
             //howToPlayMenuTitle = listOfAll[21];
-            howtoPlayMenuControlsPlayerOne = listOfAll[25];
-            howtoPlayMenuControlsPlayerTwo = listOfAll[27];
+            ControlsMenuPlayerOne = listOfAll[25];
+            ControlsMenuPlayerTwo = listOfAll[27];
             playerOneIndicator = listOfAll[29];
             playerTwoIndicator = listOfAll[31];
             backToMainMenu = listOfAll[33];
@@ -134,6 +135,7 @@ public class Localization : ScriptableObject
             backToPauseScreen = listOfAll[99];
             acceptanceMessage = listOfAll[101];
             disclaimerMessage = listOfAll[103];
+            gameModeSelectionMenuMissingGameModes = listOfAll[105];
         }
     }
 }

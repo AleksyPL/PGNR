@@ -15,7 +15,7 @@ public class InputManager : MonoBehaviour
     {
         if(!flightControllerScript.gameModeScript.simulateMobileApp)
         {
-            if (!Application.isMobilePlatform)
+            if (!UnityEngine.Device.Application.isMobilePlatform)
             {
                 flightControllerScript.gameModeScript.playerOnePlane.verticalMovementKeys = Input.GetAxisRaw("Vertical");
                 flightControllerScript.gameModeScript.playerOnePlane.attackKeyPressed = Input.GetButton("Jump");

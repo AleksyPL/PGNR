@@ -1,7 +1,7 @@
 //Main menu - StartGame
 START GAME
-//Main menu - HowToPlay
-HOW TO PLAY
+//Main menu - Controls
+CONTROLS
 //Main menu - Options
 OPTIONS
 //Main menu - QuitGame
@@ -22,15 +22,15 @@ Choose your plane
 Motherland Calls, Pilot!
 //Plot - Plot
 You have to fly a new Polish plane far to the East. <br><br>But don't count on it being an easy task. Avoid obstacles on your way and destroy them with garbage found on board. <br><br>But remember: the plane's equipment is set to accommodate the greater weight of the plane, the more garbage you throw out, the more difficult it will be to fly. <br><br>Show everyone what a good pilot you are.
-//How to play - Controls - Player 1
+//Controls - Player 1
 W/S - flying<br>Space - drinking<br>Space(Hold) - bottle will fly farther<br>ESC - pause menu
-//How to play - Controls - Player 2
+//Controls - Player 2
 Arrows Up/Down - flying<br>R.SHIFT - drinking<br>R.SHIFT(Hold) - bottle will fly farther<br>Backspace - pause menu
-//How to play - Controls - Player 1 indicator
+//Controls - Player 1 indicator
 Player 1
-//How to play - Controls - Player 2 indicator
+//Controls - Player 2 indicator
 Player 2
-//How to play - Back To Menu Button
+//BackToMainMenu
 BACK TO MAIN MENU
 //Options - SFX slider
 SFX VOLUME
@@ -102,3 +102,5 @@ BACK TO PAUSE SCREEN
 OK
 //Disclaimer
 Ignore this message.
+//Missing Game Modes
+Multiplayer modes are not available in mobile version of the game

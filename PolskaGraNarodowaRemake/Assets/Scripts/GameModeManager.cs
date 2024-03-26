@@ -179,8 +179,10 @@ public class GameModeManager : MonoBehaviour
     private void CalculateCameraOffset()
     {
         float offsetX = playerOnePlane.cameraGameObject.GetComponent<Camera>().aspect * 2 * playerOnePlane.cameraGameObject.GetComponent<Camera>().orthographicSize;
-        if (currentGameMode == GameMode.singleplayerClassic || currentGameMode == GameMode.singleplayerEndless)
+        if (!UnityEngine.Device.Application.isMobilePlatform && (currentGameMode == GameMode.singleplayerClassic || currentGameMode == GameMode.singleplayerEndless))
             flightControllerScript.gameplaySettings.cameraPositionXOffset = offsetX * flightControllerScript.gameplaySettings.camerePositionXOffsetPersentageSingle;
+        else if (UnityEngine.Device.Application.isMobilePlatform && (currentGameMode == GameMode.singleplayerClassic || currentGameMode == GameMode.singleplayerEndless))
+            flightControllerScript.gameplaySettings.cameraPositionXOffset = offsetX * flightControllerScript.gameplaySettings.cameraPositionXOffsetPersentageSingleMobile;
         else if (currentGameMode == GameMode.versusClassic || currentGameMode == GameMode.versusEndless)
             flightControllerScript.gameplaySettings.cameraPositionXOffset = offsetX * flightControllerScript.gameplaySettings.camerePositionXOffsetPersentageMulti;
     }

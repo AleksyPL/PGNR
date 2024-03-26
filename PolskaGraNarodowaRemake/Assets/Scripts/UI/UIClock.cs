@@ -61,8 +61,11 @@ public class UIClock : MonoBehaviour
                     flightControllerScript.gameModeScript.playerTwoPlane.activeBottleWarning = false;
                 }
             }
-            if (Application.isMobilePlatform || flightControllerScript.gameModeScript.simulateMobileApp)
+            if (UnityEngine.Device.Application.isMobilePlatform || flightControllerScript.gameModeScript.simulateMobileApp)
+            {
                 flightControllerScript.uiManagerScript.TurnOnTouchScreenButtons();
+                flightControllerScript.uiManagerScript.fullScreenButton.GetComponent<FullScreenManager>().TurnOffFullScreenButton();
+            }
             flightControllerScript.uiManagerScript.playerOneUI.regularHUDMainGameObject.SetActive(true);
             if (flightControllerScript.uiManagerScript.playerTwoUI.regularHUDMainGameObject != null)
                 flightControllerScript.uiManagerScript.playerTwoUI.regularHUDMainGameObject.SetActive(true);

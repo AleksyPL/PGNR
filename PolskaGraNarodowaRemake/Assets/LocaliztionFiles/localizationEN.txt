@@ -1,7 +1,7 @@
 //Main menu - StartGame
 START GAME
-//Main menu - HowToPlay
-HOW TO PLAY
+//Main menu - Controls
+CONTROLS
 //Main menu - Options
 OPTIONS
 //Main menu - QuitGame
@@ -22,15 +22,15 @@ Choose your plane
 Motherland Calls, Pilot!
 //Plot - Plot
 You have to fly the new Polish National Dreamliner far to the East with the President on board. <br><br>But don't think that THE EAST will let you land so easily! Avoid the fog, cut down the birches, destroy the TNT. Vodka is your weapon. Unlimited quantities, because it is a Polish plane. <br><br>But remember: the more you drink, the harder it is to fly ... Before throwing the vodka away, drink a bit. The lighter bottle goes much farther. <br><br>Show the President that a Pole can!
-//How to play - Controls - Player 1
+//Controls - Player 1
 W/S - flying<br>Space - drinking<br>Space(Hold) - bottle will fly farther<br>ESC - pause menu
-//How to play - Controls - Player 2
+//Controls - Player 2
 Arrows Up/Down - flying<br>R.SHIFT - drinking<br>R.SHIFT(Hold) - bottle will fly farther<br>Backspace - pause menu
-//How to play - Controls - Player 1 indicator
+//Controls - Player 1 indicator
 Player 1
-//How to play - Controls - Player 2 indicator
+//Controls - Player 2 indicator
 Player 2
-//How to play - Back To Menu Button
+//BackToMainMenu
 BACK TO MAIN MENU
 //Options - SFX slider
 SFX VOLUME
@@ -102,3 +102,5 @@ BACK TO PAUSE SCREEN
 OK
 //Disclaimer
 ATTENTION!<br><br>You have just launched the uncensored version of the game. The author is not liable for any moral damage caused by the content of the game.<br>The game is a work of fiction and is not intended to offend anyone's feelings. You play at your own risk.<br>If you started this version of the game by accident, remove the "TrueGame" argument from the website address or exe file.
+//Missing Game Modes
+Multiplayer modes are not available in mobile version of the game
