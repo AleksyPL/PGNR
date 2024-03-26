@@ -13,9 +13,31 @@ MonoBehaviour:
   m_Name: SafeEnglishHitReactions
   m_EditorClassIdentifier: 
   sounds:
-  - clip: {fileID: 8300000, guid: 20d262d7f6fb5d142b019337baaf3061, type: 3}
+  - clip: {fileID: 8300000, guid: 9821af2bb99f3cb478c03e8e17cc08b6, type: 3}
     name: HitReaction0
-    volumeSetInEditor: 1
+    volumePC: 1
+    volumeMobile: 1
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 0a6d1c9487fb160459a55fef345a8033, type: 3}
+    name: HitReaction1
+    volumePC: 1
+    volumeMobile: 1
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 0f328e535ea9b824e8711898b56575f4, type: 3}
+    name: HitReaction2
+    volumePC: 1
+    volumeMobile: 1
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 2c62277c3ef41d846b51a951c7d81546, type: 3}
+    name: HitReaction3
+    volumePC: 1
+    volumeMobile: 1
     pitch: 1
     looping: 0
     source: {fileID: 0}

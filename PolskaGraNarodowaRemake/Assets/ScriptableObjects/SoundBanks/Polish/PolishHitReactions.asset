@@ -25,3 +25,15 @@ MonoBehaviour:
     pitch: 1
     looping: 0
     source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: dae350344af8c5147a8623786746f2b7, type: 3}
+    name: HitReaction2
+    volumeSetInEditor: 1
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 9c25ec35dfdd5444eaee2e7f130e1b31, type: 3}
+    name: HitReaction3
+    volumeSetInEditor: 1
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}

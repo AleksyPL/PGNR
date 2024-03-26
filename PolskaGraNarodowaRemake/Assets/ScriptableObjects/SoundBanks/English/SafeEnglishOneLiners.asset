@@ -15,7 +15,8 @@ MonoBehaviour:
   sounds:
   - clip: {fileID: 8300000, guid: bd542ab904686624a8439e0a09fddfdc, type: 3}
     name: OneLiner0
-    volumeSetInEditor: 1
+    volumePC: 1
+    volumeMobile: 1
     pitch: 1
     looping: 0
     source: {fileID: 0}
