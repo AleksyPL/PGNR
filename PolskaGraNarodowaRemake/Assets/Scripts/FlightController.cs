@@ -94,6 +94,9 @@ public class FlightController : MonoBehaviour
             plane.planeGameObject.transform.position = new Vector3(plane.planeGameObject.transform.position.x, plane.topScreenHeight, 0);
         if (plane.planeGameObject.transform.position.y < plane.groundLevelHeight)
             plane.planeGameObject.transform.position = new Vector3(plane.planeGameObject.transform.position.x, plane.groundLevelHeight, 0);
+        //inverted steering Mobile Hack
+        if (plane.invertedSteeringEnabled && UnityEngine.Device.Application.isMobilePlatform)
+            plane.verticalMovementKeys = -plane.verticalMovementKeys;
         if (plane.isTouchingAirport)
         {
             uiManagerScript.UpdateLevelProgressBar(plane);

@@ -87,7 +87,7 @@ public class UIManager : MonoBehaviour
         eventSystem = eventSystemGameObject.GetComponent<EventSystem>();
         pauseScreenEnabled = false;
         optionsMenuGameObject.GetComponent<UIOptionsMenu>().DisableLanguageButtons();
-        if (UnityEngine.Device.Application.isMobilePlatform || flightControllerScript.gameModeScript.simulateMobileApp)
+        if (UnityEngine.Device.Application.isMobilePlatform)
             TurnOnTouchScreenButtons();
     }
     private ref PlayerUI ReturnPlayersUIObject(Plane plane)
@@ -108,7 +108,7 @@ public class UIManager : MonoBehaviour
             if (!pauseScreenEnabled && !pauseScreenGameObject.activeSelf && flightControllerScript.inputManagerScript.ESCpressed && !timerBeforeTheFlightEnabled)
             {
                 EnablePauseScreen();
-                flightControllerScript.gameModeScript.playerOnePlane.activeBottleWarning = flightControllerScript.gameModeScript.playerOnePlane.attackKeyPressed;
+                    flightControllerScript.gameModeScript.playerOnePlane.activeBottleWarning = flightControllerScript.gameModeScript.playerOnePlane.attackKeyPressed;
                 if(flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerClassic && flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerEndless)
                     flightControllerScript.gameModeScript.playerTwoPlane.activeBottleWarning = flightControllerScript.gameModeScript.playerTwoPlane.attackKeyPressed;
             }
@@ -184,7 +184,9 @@ public class UIManager : MonoBehaviour
         if (((flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerClassic || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerEndless) && flightControllerScript.gameModeScript.playerOnePlane.currentPlaneState != PlaneState.crashed) || ((flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerClassic && flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerEndless) && (flightControllerScript.gameModeScript.playerOnePlane.currentPlaneState != PlaneState.crashed || flightControllerScript.gameModeScript.playerTwoPlane.currentPlaneState != PlaneState.crashed)))
         {
             Time.timeScale = 0;
-            if (UnityEngine.Device.Application.isMobilePlatform || flightControllerScript.gameModeScript.simulateMobileApp)
+            pauseScreenEnabled = true;
+            UpdatePauseScreenHUD();
+            if (UnityEngine.Device.Application.isMobilePlatform)
             {
                 TurnOffTouchScreenButtons();
                 flightControllerScript.inputManagerScript.ESCpressed = false;
@@ -202,8 +204,6 @@ public class UIManager : MonoBehaviour
             flightControllerScript.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightControllerScript.audioManagerScript.localOneLinersSounds);
             flightControllerScript.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightControllerScript.audioManagerScript.localHitReactionSounds);
             flightControllerScript.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightControllerScript.audioManagerScript.localLandingSounds);
-            pauseScreenEnabled = true;
-            UpdatePauseScreenHUD();
         }
     }
     internal void EnableGameOverScreen()
@@ -228,7 +228,7 @@ public class UIManager : MonoBehaviour
     }
     internal void DisableGameOverScreen()
     {
-        if (UnityEngine.Device.Application.isMobilePlatform || flightControllerScript.gameModeScript.simulateMobileApp)
+        if (UnityEngine.Device.Application.isMobilePlatform)
         {
             TurnOnTouchScreenButtons();
             fullScreenButton.GetComponent<FullScreenManager>().TurnOffFullScreenButton();
@@ -242,6 +242,8 @@ public class UIManager : MonoBehaviour
         
         fadePanelGameObject.SetActive(false);
         pauseScreenGameObject.SetActive(false);
+        if (UnityEngine.Device.Application.isMobilePlatform)
+            flightControllerScript.uiManagerScript.fullScreenButton.GetComponent<FullScreenManager>().TurnOffFullScreenButton();
         if (flightControllerScript.gameModeScript.playerOnePlane.activeBottleWarning || flightControllerScript.gameModeScript.playerTwoPlane.activeBottleWarning)
         {
             GameObject waring = Instantiate(activeBottleWarningPrefab, UIElements.transform);

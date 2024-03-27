@@ -67,6 +67,7 @@ public class PowerUpObject : MonoBehaviour
             else if (currentPowerUp == PowerUp1.SoberUp)
             {
                 gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).cameraGameObject.GetComponent<CameraManager>().PlayCameraFocusAnimation();
+                gameModeManagerScript.flightControllerScript.uiManagerScript.UpdateBottlesCounter(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject));
                 if(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).bottlesDrunk != 0)
                 {
                     gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).SoberUp();

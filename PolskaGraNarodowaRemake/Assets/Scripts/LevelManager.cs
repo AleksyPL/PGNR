@@ -44,6 +44,11 @@ public class LevelManager : MonoBehaviour
         flightControllerScript = GetComponent<FlightController>();
         flightControllerScript.environmentManagerScript.SpawnBackgroundImage();
         RemoveAllChildrenOfTheGameObject(obstaclesAndProjectilesParentGameObject);
+        if (obstaclesBufferGameObject == null)
+        {
+            obstaclesBufferGameObject = new GameObject("Obstacles Buffer");
+            obstaclesBufferGameObject.transform.position = new Vector3(0, 0, 0);
+        }
         if (flightControllerScript.rewardAndProgressionManagerScript.toNewLevel)
         {
             numberOfObstacles += 2;
@@ -163,11 +168,6 @@ public class LevelManager : MonoBehaviour
         if(enableObstacles)
         {
             obstacleSectorWidth = (placementPointXFinish - placementPointXstart) / numberOfObstacles;
-            if (obstaclesBufferGameObject == null)
-            {
-                obstaclesBufferGameObject = new GameObject("Obstacles Buffer");
-                obstaclesBufferGameObject.transform.position = new Vector3(0, 0, 0);
-            }
             for (int i = 0; i < numberOfObstacles; i++)
             {
                 int obstacle = Random.Range(0, 2);
@@ -215,6 +215,7 @@ public class LevelManager : MonoBehaviour
     public void BackToMainMenu()
     {
         Time.timeScale = 1;
+        flightControllerScript.audioManagerScript.StopPlayingAllPausedSounds();
         SceneManager.LoadScene("MainMenu");
     }
 }

@@ -61,7 +61,7 @@ public class UIClock : MonoBehaviour
                     flightControllerScript.gameModeScript.playerTwoPlane.activeBottleWarning = false;
                 }
             }
-            if (UnityEngine.Device.Application.isMobilePlatform || flightControllerScript.gameModeScript.simulateMobileApp)
+            if (UnityEngine.Device.Application.isMobilePlatform)
             {
                 flightControllerScript.uiManagerScript.TurnOnTouchScreenButtons();
                 flightControllerScript.uiManagerScript.fullScreenButton.GetComponent<FullScreenManager>().TurnOffFullScreenButton();

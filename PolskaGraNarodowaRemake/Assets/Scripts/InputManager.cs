@@ -13,20 +13,17 @@ public class InputManager : MonoBehaviour
     }
     void Update()
     {
-        if(!flightControllerScript.gameModeScript.simulateMobileApp)
+        if (!UnityEngine.Device.Application.isMobilePlatform)
         {
-            if (!UnityEngine.Device.Application.isMobilePlatform)
+            flightControllerScript.gameModeScript.playerOnePlane.verticalMovementKeys = Input.GetAxisRaw("Vertical");
+            flightControllerScript.gameModeScript.playerOnePlane.attackKeyPressed = Input.GetButton("Jump");
+            flightControllerScript.gameModeScript.playerOnePlane.attackKeyReleased = Input.GetButtonUp("Jump");
+            ESCpressed = Input.GetButtonDown("Cancel");
+            if (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusClassic || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusEndless)
             {
-                flightControllerScript.gameModeScript.playerOnePlane.verticalMovementKeys = Input.GetAxisRaw("Vertical");
-                flightControllerScript.gameModeScript.playerOnePlane.attackKeyPressed = Input.GetButton("Jump");
-                flightControllerScript.gameModeScript.playerOnePlane.attackKeyReleased = Input.GetButtonUp("Jump");
-                ESCpressed = Input.GetButtonDown("Cancel");
-                if (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusClassic || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusEndless)
-                {
-                    flightControllerScript.gameModeScript.playerTwoPlane.verticalMovementKeys = Input.GetAxisRaw("Vertical1");
-                    flightControllerScript.gameModeScript.playerTwoPlane.attackKeyPressed = Input.GetButton("Jump1");
-                    flightControllerScript.gameModeScript.playerTwoPlane.attackKeyReleased = Input.GetButtonUp("Jump1");
-                }
+                flightControllerScript.gameModeScript.playerTwoPlane.verticalMovementKeys = Input.GetAxisRaw("Vertical1");
+                flightControllerScript.gameModeScript.playerTwoPlane.attackKeyPressed = Input.GetButton("Jump1");
+                flightControllerScript.gameModeScript.playerTwoPlane.attackKeyReleased = Input.GetButtonUp("Jump1");
             }
         }
     }

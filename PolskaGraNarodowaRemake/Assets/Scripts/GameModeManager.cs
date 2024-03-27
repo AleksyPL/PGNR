@@ -28,7 +28,6 @@ public class GameModeManager : MonoBehaviour
     internal PlayerState playerTwoState;
     internal bool someoneWon;
     internal float waitingTimeForOneLinerCurrent;
-    [SerializeField] internal bool simulateMobileApp;
     void OnEnable()
     {
         Application.targetFrameRate = 144;

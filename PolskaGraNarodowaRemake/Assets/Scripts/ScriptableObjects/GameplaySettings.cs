@@ -106,7 +106,6 @@ public class GameplaySettings : ScriptableObject
         mobileDataTaken = false;
         deviceResolution.width = 1280;
         deviceResolution.height = 720;
-        deviceResolution.refreshRate = 60;
         deviceScreenOrientation = ScreenOrientation.Portrait;
     }
     private void ResetGameVolume()

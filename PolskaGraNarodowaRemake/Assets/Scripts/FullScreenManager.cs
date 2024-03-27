@@ -20,8 +20,8 @@ public class FullScreenManager : MonoBehaviour
             DetectDeviceResolution();
             if (SceneManager.GetActiveScene().name == "MainMenu")
                 TurnOnFullScreenButton();
-            else if (SceneManager.GetActiveScene().name != "MainMenu" && Screen.fullScreen)
-                SetScreenScalerMatchValue();
+            //else if (SceneManager.GetActiveScene().name != "MainMenu" && Screen.fullScreen)
+            //    SetScreenScalerMatchValue();
         }  
     }
     private void DetectDeviceResolution()
@@ -35,13 +35,19 @@ public class FullScreenManager : MonoBehaviour
     }
     internal void TurnOffFullScreenButton()
     {
-        fullScreenButton.GetComponent<Image>().enabled = false;
-        fullScreenButton.GetComponent<Button>().enabled = false;
+        if (fullScreenButton != null)
+        {
+            fullScreenButton.GetComponent<Image>().enabled = false;
+            fullScreenButton.GetComponent<Button>().enabled = false;
+        }
     }
     internal void TurnOnFullScreenButton()
     {
-        fullScreenButton.GetComponent<Image>().enabled = true;
-        fullScreenButton.GetComponent<Button>().enabled = true;
+        if (fullScreenButton != null)
+        {
+            fullScreenButton.GetComponent<Image>().enabled = true;
+            fullScreenButton.GetComponent<Button>().enabled = true;
+        }
     }
     public void DoThingsWithFullScreen()
     {
@@ -54,16 +60,17 @@ public class FullScreenManager : MonoBehaviour
             DisableFullScreen();
         }
     }
-    private void SetScreenScalerMatchValue()
-    {
-        if (gameplaySettings.deviceResolution.width > gameplaySettings.deviceResolution.height)
-            canvasScalerGameObject.GetComponent<CanvasScaler>().matchWidthOrHeight = 0;
-        else
-            canvasScalerGameObject.GetComponent<CanvasScaler>().matchWidthOrHeight = 1;
-    }
+    //private void SetScreenScalerMatchValue()
+    //{
+    //    if (gameplaySettings.deviceResolution.width > gameplaySettings.deviceResolution.height)
+    //        canvasScalerGameObject.GetComponent<CanvasScaler>().matchWidthOrHeight = 0;
+    //    else
+    //        canvasScalerGameObject.GetComponent<CanvasScaler>().matchWidthOrHeight = 1;
+    //}
     private void EnableFullScreen()
     {
         Screen.orientation = ScreenOrientation.LandscapeLeft;
+        canvasScalerGameObject.GetComponent<CanvasScaler>().matchWidthOrHeight = 1;
         landscapeModeEnabled = true;
         if (Screen.fullScreen)
             Screen.fullScreen = false;

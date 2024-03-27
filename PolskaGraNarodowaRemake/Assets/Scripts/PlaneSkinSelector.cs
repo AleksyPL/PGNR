@@ -36,7 +36,7 @@ public class PlaneSkinSelector : MonoBehaviour
         playerOneSkinNameGameObject.GetComponent<TMP_Text>().text = gameplaySettings.planeSkins[gameplaySettings.playersPlaneSkins[0]].skinName[gameplaySettings.langauageIndex];
         if (MainMenuManager.currentGameMode == GameMode.SinglePlayerClassic || MainMenuManager.currentGameMode == GameMode.SinglePlayerEndless)
         {
-            playerOneMainGameObject.GetComponent<RectTransform>().position = new Vector3(playerOneMainGameObject.gameObject.transform.parent.GetComponent<RectTransform>().position.x, playerOneMainGameObject.GetComponent<RectTransform>().position.y, playerOneMainGameObject.GetComponent<RectTransform>().position.z);
+            playerOneMainGameObject.GetComponent<RectTransform>().position = new Vector3(playerOneMainGameObject.transform.parent.GetComponent<RectTransform>().position.x, playerOneMainGameObject.GetComponent<RectTransform>().position.y, playerOneMainGameObject.GetComponent<RectTransform>().position.z);
             playerOneIndicatorGameObject.SetActive(false);
             playerTwoMainGameObject.SetActive(false);
         }

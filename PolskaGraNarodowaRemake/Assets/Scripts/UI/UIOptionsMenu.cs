@@ -45,7 +45,7 @@ public class UIOptionsMenu : MonoBehaviour
     }
     private void UpdateUIWithNewLanguage()
     {
-        List<string> names = new List<string>();
+        List<string> names = new();
         foreach (string s in System.Enum.GetNames(typeof(Languages)))
             names.Add(s);
         activeLanguageGameObject.GetComponent<TMP_Text>().text = names[gameplaySettings.langauageIndex];

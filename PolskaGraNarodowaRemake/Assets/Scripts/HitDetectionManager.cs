@@ -72,6 +72,11 @@ public class HitDetectionManager : MonoBehaviour
             }
             else if(transform.name == "SpawnNewObjects" && (gameModeManagerScript.currentGameMode == GameModeManager.GameMode.singleplayerEndless || gameModeManagerScript.currentGameMode == GameModeManager.GameMode.versusEndless))
             {
+                if (gameModeManagerScript.flightControllerScript.levelManagerScript.obstaclesBufferGameObject == null)
+                {
+                    gameModeManagerScript.flightControllerScript.levelManagerScript.obstaclesBufferGameObject = new GameObject("Obstacles Buffer");
+                    gameModeManagerScript.flightControllerScript.levelManagerScript.obstaclesBufferGameObject.transform.position = new Vector3(0, 0, 0);
+                }
                 //ENDLESS MODE IMPORTANT
                 foreach (Transform child in gameModeManagerScript.flightControllerScript.levelManagerScript.obstaclesAndProjectilesParentGameObject.transform)
                 {
