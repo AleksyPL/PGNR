@@ -15,61 +15,85 @@ MonoBehaviour:
   sounds:
   - clip: {fileID: 8300000, guid: dec7a67cbcb770d458a583bdcc334623, type: 3}
     name: OneLiner0
-    volumeSetInEditor: 1
+    volumePC: 1
+    volumeMobile: 1
     pitch: 1
     looping: 0
     source: {fileID: 0}
   - clip: {fileID: 8300000, guid: f9045fdf5d86d104f9c047a714c6f6db, type: 3}
     name: OneLiner1
-    volumeSetInEditor: 1
+    volumePC: 1
+    volumeMobile: 1
     pitch: 1
     looping: 0
     source: {fileID: 0}
   - clip: {fileID: 8300000, guid: 5da7e78a8b7ff724f9622601e7d4ee42, type: 3}
     name: OneLiner2
-    volumeSetInEditor: 1
+    volumePC: 1
+    volumeMobile: 1
     pitch: 1
     looping: 0
     source: {fileID: 0}
   - clip: {fileID: 8300000, guid: 00edd58e09a74ec439a85105dcb30913, type: 3}
     name: OneLiner3
-    volumeSetInEditor: 1
+    volumePC: 1
+    volumeMobile: 1
     pitch: 1
     looping: 0
     source: {fileID: 0}
   - clip: {fileID: 8300000, guid: 0aad579aadeff994581f93e5479fa7a1, type: 3}
     name: OneLiner4
-    volumeSetInEditor: 1
+    volumePC: 1
+    volumeMobile: 1
     pitch: 1
     looping: 0
     source: {fileID: 0}
   - clip: {fileID: 8300000, guid: faa9224c55a183e40a2e5cb4161f1cbf, type: 3}
     name: OneLiner5
-    volumeSetInEditor: 1
+    volumePC: 1
+    volumeMobile: 1
     pitch: 1
     looping: 0
     source: {fileID: 0}
   - clip: {fileID: 8300000, guid: 39f7cf8474691b648a0d6ab744e5fca4, type: 3}
     name: OneLiner6
-    volumeSetInEditor: 1
+    volumePC: 1
+    volumeMobile: 1
     pitch: 1
     looping: 0
     source: {fileID: 0}
   - clip: {fileID: 8300000, guid: 72b555cff04b8274baeb0227f395d716, type: 3}
     name: OneLiner7
-    volumeSetInEditor: 1
+    volumePC: 1
+    volumeMobile: 1
     pitch: 1
     looping: 0
     source: {fileID: 0}
   - clip: {fileID: 8300000, guid: a8c9760b283f17049ba1c26403a3ffed, type: 3}
     name: OneLiner8
-    volumeSetInEditor: 1
+    volumePC: 1
+    volumeMobile: 1
     pitch: 1
     looping: 0
     source: {fileID: 0}
   - clip: {fileID: 8300000, guid: 6161b84a17741f545ba702108be19bce, type: 3}
     name: OneLiner9
-    volumeSetInEditor: 1
+    volumePC: 1
+    volumeMobile: 1
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 023ba7ae6891f8e4c9102dd25f6811e5, type: 3}
+    name: OneLiner10
+    volumePC: 1
+    volumeMobile: 1
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: ca7b8f586db086746939013d898c215e, type: 3}
+    name: OneLiner11
+    volumePC: 1
+    volumeMobile: 1
     pitch: 1
     looping: 0
     source: {fileID: 0}

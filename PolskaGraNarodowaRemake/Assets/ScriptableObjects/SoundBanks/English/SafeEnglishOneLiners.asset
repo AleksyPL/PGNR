@@ -13,8 +13,36 @@ MonoBehaviour:
   m_Name: SafeEnglishOneLiners
   m_EditorClassIdentifier: 
   sounds:
-  - clip: {fileID: 8300000, guid: bd542ab904686624a8439e0a09fddfdc, type: 3}
+  - clip: {fileID: 8300000, guid: 63864906b7fd16b49be5033f70ac9649, type: 3}
     name: OneLiner0
+    volumePC: 1
+    volumeMobile: 1
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: e6dec46abdb83f04298ce4592cbc29e7, type: 3}
+    name: OneLiner1
+    volumePC: 1
+    volumeMobile: 1
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 5cf45f4a171bc8349ab9fa2987a76797, type: 3}
+    name: OneLiner2
+    volumePC: 1
+    volumeMobile: 1
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 6468d67d6b226b74d8ecab09466448cd, type: 3}
+    name: OneLiner3
+    volumePC: 1
+    volumeMobile: 1
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 26257cf19de180d4a952471c23faeb1e, type: 3}
+    name: OneLiner4
     volumePC: 1
     volumeMobile: 1
     pitch: 1

@@ -23,35 +23,35 @@ MonoBehaviour:
   - clip: {fileID: 8300000, guid: a4272c560b2baeb43b5f9929f152ddda, type: 3}
     name: BreakingGlass
     volumePC: 1
-    volumeMobile: 0
+    volumeMobile: 1
     pitch: 1
     looping: 0
     source: {fileID: 0}
   - clip: {fileID: 8300000, guid: 1978bd7b5386652438aa330bf6811b36, type: 3}
     name: Cannon
     volumePC: 1
-    volumeMobile: 0
+    volumeMobile: 1
     pitch: 1
     looping: 0
     source: {fileID: 0}
   - clip: {fileID: 8300000, guid: a337f753d2316b443bdd834f837da741, type: 3}
     name: Explosion
     volumePC: 1
-    volumeMobile: 0
+    volumeMobile: 1
     pitch: 1
     looping: 0
     source: {fileID: 0}
   - clip: {fileID: 8300000, guid: bbeb5e9f17048054080a508ccdbb31ab, type: 3}
     name: Tires
     volumePC: 1
-    volumeMobile: 0
+    volumeMobile: 1
     pitch: 1
     looping: 0
     source: {fileID: 0}
   - clip: {fileID: 8300000, guid: 5e6bb69571dc6764da467ddd67b8b47d, type: 3}
     name: Whistle
     volumePC: 1
-    volumeMobile: 0
+    volumeMobile: 1
     pitch: 1
     looping: 0
     source: {fileID: 0}

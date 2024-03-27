@@ -13,9 +13,38 @@ MonoBehaviour:
   m_Name: SafePolishOneLiners
   m_EditorClassIdentifier: 
   sounds:
-  - clip: {fileID: 8300000, guid: 626fece6e949ff142a8def6e3d02de3e, type: 3}
+  - clip: {fileID: 8300000, guid: d1fceda9243d59c41aec3824060d0e27, type: 3}
     name: OneLiner0
-    volumeSetInEditor: 1
+    volumePC: 1
+    volumeMobile: 1
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 44385327f25f80e40861e5a88ed76fb4, type: 3}
+    name: OneLiner1
+    volumePC: 1
+    volumeMobile: 1
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 4dfe8fbd47be46b438e984806f78a52b, type: 3}
+    name: OneLiner2
+    volumePC: 1
+    volumeMobile: 1
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 9d95ed238c3ddf34eaed0c49a1d45f87, type: 3}
+    name: OneLiner3
+    volumePC: 1
+    volumeMobile: 1
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 86797df9aa1794a4985bebbe2dec67fd, type: 3}
+    name: OneLiner4
+    volumePC: 1
+    volumeMobile: 1
     pitch: 1
     looping: 0
     source: {fileID: 0}

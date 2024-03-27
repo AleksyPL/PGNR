@@ -15,25 +15,29 @@ MonoBehaviour:
   sounds:
   - clip: {fileID: 8300000, guid: 1dd2e25f5ee08834ebae6b328ce08adb, type: 3}
     name: HitReaction0
-    volumeSetInEditor: 1
+    volumePC: 1
+    volumeMobile: 1
     pitch: 1
     looping: 0
     source: {fileID: 0}
   - clip: {fileID: 8300000, guid: 755f2041b9fbf8046960b7265a9629e4, type: 3}
     name: HitReaction1
-    volumeSetInEditor: 1
+    volumePC: 1
+    volumeMobile: 1
     pitch: 1
     looping: 0
     source: {fileID: 0}
   - clip: {fileID: 8300000, guid: 49a058ffbc06d294fa8633cc71b1874c, type: 3}
     name: HitReaction2
-    volumeSetInEditor: 1
+    volumePC: 1
+    volumeMobile: 1
     pitch: 1
     looping: 0
     source: {fileID: 0}
   - clip: {fileID: 8300000, guid: bb80f1ddaa5f66949bd7f27644901643, type: 3}
     name: HitReaction3
-    volumeSetInEditor: 1
+    volumePC: 1
+    volumeMobile: 1
     pitch: 1
     looping: 0
     source: {fileID: 0}
