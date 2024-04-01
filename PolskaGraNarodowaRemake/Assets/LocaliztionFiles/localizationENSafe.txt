@@ -104,3 +104,11 @@ OK
 Ignore this message.
 //Missing Game Modes
 Multiplayer modes are not available in mobile version of the game
+//Controls - Up
+Upward movement
+//Controls - Down
+Downward movement
+//Controls - Shoot
+Shoot a projectile. Hold the button to increace the power of the shot.
+//Controls - Pause
+Pause Menu

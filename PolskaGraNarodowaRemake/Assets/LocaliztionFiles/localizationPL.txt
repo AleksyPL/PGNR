@@ -104,3 +104,11 @@ OK
 UWAGA!<br><br>Właśnie uruchomiłeś nieocenzurowaną wersję gry. Autor nie ponosi odpowiedzialności za szkody moralne wywołane treścią gry.<br>Gra jest dziełem fikcyjnym, nie ma na celu obrazić niczyich uczuć. Grasz na własną odpowiedzialność.<br>Jeżeli uruchomiłeś tą wersję gry przez przypadek, usuń argument "TrueGame" z adresu strony bądź pliku exe.
 //Missing Game Modes
 Tryby wieloosobowe nie są dostępne w mobilnej wersji gry
+//Controls - Up
+Ruch w góre
+//Controls - Down
+Ruch w dół
+//Controls - Shoot
+Wystrzelenie pocisku. Przytrzymaj przycisk by zwiększyć siłe strzału
+//Controls - Pause
+Menu Pauzy

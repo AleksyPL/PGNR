@@ -35,6 +35,7 @@ public class UIManager : MonoBehaviour
         [SerializeField] internal GameObject gameSummaryBottlesGameObject;
         [Header("PowerUps")]
         [SerializeField] internal GameObject powerUpBarParentGameObject;
+        [SerializeField] internal GameObject powerUpBarParentGameObjectMobile;
         PlayerUI()
         {
             powerUpMessageOnScreenCounter = 0;
@@ -53,6 +54,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject pauseScreenWarningGameObject;
     [SerializeField] private GameObject pauseScreenTitleGameObject;
     [SerializeField] private GameObject pauseScreenOptionsButtonGameObject;
+    [SerializeField] private GameObject pauseScreenControlsButtonGameObject;
     [SerializeField] private GameObject pauseScreenBackToMainMenuButtonGameObject;
     [SerializeField] private GameObject pauseScreenResumeGameButtonGameObject;
     [SerializeField] internal GameObject fullScreenButton;
@@ -65,6 +67,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject powerUpUIClockPrefab;
     [Header("Options Menu")]
     [SerializeField] private GameObject optionsMenuGameObject;
+    [Header("Controls Menu")]
+    [SerializeField] private GameObject controlsMenuGameObject;
     [Header("TimerCircle")]
     [SerializeField] private GameObject timerPrefab;
     [SerializeField] private float pauseScreenTimerDuration;
@@ -129,6 +133,7 @@ public class UIManager : MonoBehaviour
             playerOneUI.gameSummaryYearGameObject.GetComponent<TMP_Text>().text = (2009 + flightControllerScript.rewardAndProgressionManagerScript.levelCounter).ToString();
         pauseScreenOptionsButtonGameObject.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuOptions;
         pauseScreenResumeGameButtonGameObject.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].pauseScreenResumeGame;
+        pauseScreenControlsButtonGameObject.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuControls;
         pauseScreenBackToMainMenuButtonGameObject.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].backToMainMenu;
         if (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusClassic || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusEndless)
         {
@@ -327,8 +332,29 @@ public class UIManager : MonoBehaviour
         gameStatsGameObject.SetActive(true);
         pauseScreenRegularButtonsGameObject.SetActive(true);
         pauseScreenTitleGameObject.GetComponentInChildren<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].pauseScreenPauseMainTitle;
-        flightControllerScript = GetComponent<FlightController>();
-        flightControllerScript.audioManagerScript.UpdateAllSoundsVolume();
+        flightControllerScript.GetComponent<FlightController>().audioManagerScript.UpdateAllSoundsVolume();
+        if (pauseScreenEnabled)
+            EnablePauseScreen();
+    }
+    public void EnableControlsMenu()
+    {
+        if (!UnityEngine.Device.Application.isMobilePlatform)
+            eventSystem.SetSelectedGameObject(controlsMenuGameObject.GetComponent<UIControlsMenu>().backToMainMenuButton);
+        pauseScreenTitleGameObject.GetComponentInChildren<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].pauseScreenResumeGame;
+        controlsMenuGameObject.SetActive(true);
+        pauseScreenRegularButtonsGameObject.SetActive(false);
+        pauseScreenGameObject.SetActive(false);
+        playerOneUI.regularHUDMainGameObject.SetActive(false);
+        if (playerTwoUI.regularHUDMainGameObject != null)
+            playerTwoUI.regularHUDMainGameObject.SetActive(false);
+    }
+    public void DisableControlsMenu()
+    {
+        controlsMenuGameObject.SetActive(false);
+        pauseScreenGameObject.SetActive(true);
+        gameStatsGameObject.SetActive(true);
+        pauseScreenRegularButtonsGameObject.SetActive(true);
+        pauseScreenTitleGameObject.GetComponentInChildren<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].pauseScreenPauseMainTitle;
         if (pauseScreenEnabled)
             EnablePauseScreen();
     }
@@ -352,7 +378,10 @@ public class UIManager : MonoBehaviour
             ReturnPlayersUIObject(plane).powerUpMessageOnScreenCounter = 0;
         else
             ReturnPlayersUIObject(plane).powerUpMessageOnScreenEnabled = true;
-        ChangeTheOrderOnThePowerUpsBar(playerOneUI.powerUpBarParentGameObject);
+        if(UnityEngine.Device.Application.isMobilePlatform)
+            ChangeTheOrderOnThePowerUpsBar(playerOneUI.powerUpBarParentGameObjectMobile);
+        else
+            ChangeTheOrderOnThePowerUpsBar(playerOneUI.powerUpBarParentGameObject);
     }
     internal void DisablePowerUpMessage(Plane plane)
     {
@@ -377,7 +406,10 @@ public class UIManager : MonoBehaviour
                 powerUpUIGameObject.GetComponent<Image>().sprite = currentPowerUp.currentPowerUpSafeUIClockImage;
             else
                 powerUpUIGameObject.GetComponent<Image>().sprite = currentPowerUp.currentPowerUpUIClockImage;
-            powerUpUIGameObject.transform.SetParent(ReturnPlayersUIObject(plane).powerUpBarParentGameObject.transform);
+            if (UnityEngine.Device.Application.isMobilePlatform)
+                powerUpUIGameObject.transform.SetParent(ReturnPlayersUIObject(plane).powerUpBarParentGameObjectMobile.transform);
+            else
+                powerUpUIGameObject.transform.SetParent(ReturnPlayersUIObject(plane).powerUpBarParentGameObject.transform);
             powerUpUIGameObject.GetComponent<UIPowerUp>().EnableUIPowerUp(currentPowerUp.powerUpDuration, currentPowerUp.powerUpName);
         }
     }
@@ -386,15 +418,29 @@ public class UIManager : MonoBehaviour
         if ((plane == flightControllerScript.gameModeScript.playerOnePlane && ReturnPowerUpUIClockIfExists(plane, currentPowerUpName) != null) || (plane == flightControllerScript.gameModeScript.playerTwoPlane && ReturnPowerUpUIClockIfExists(plane, currentPowerUpName) != null))
         {
             Destroy(ReturnPowerUpUIClockIfExists(plane, currentPowerUpName));
-            ChangeTheOrderOnThePowerUpsBar(ReturnPlayersUIObject(plane).powerUpBarParentGameObject);
+            if (UnityEngine.Device.Application.isMobilePlatform)
+                ChangeTheOrderOnThePowerUpsBar(ReturnPlayersUIObject(plane).powerUpBarParentGameObjectMobile);
+            else
+                ChangeTheOrderOnThePowerUpsBar(ReturnPlayersUIObject(plane).powerUpBarParentGameObject);
         }
     }
     internal void ClearPowerUpBar(Plane plane)
     {
-        if(ReturnPlayersUIObject(plane).powerUpBarParentGameObject.transform.childCount != 0)
+        if (UnityEngine.Device.Application.isMobilePlatform)
         {
-            while (ReturnPlayersUIObject(plane).powerUpBarParentGameObject.transform.childCount > 0)
-                DestroyImmediate(ReturnPlayersUIObject(plane).powerUpBarParentGameObject.transform.GetChild(0).gameObject);
+            if (ReturnPlayersUIObject(plane).powerUpBarParentGameObjectMobile.transform.childCount != 0)
+            {
+                while (ReturnPlayersUIObject(plane).powerUpBarParentGameObjectMobile.transform.childCount > 0)
+                    DestroyImmediate(ReturnPlayersUIObject(plane).powerUpBarParentGameObjectMobile.transform.GetChild(0).gameObject);
+            }
+        }
+        else
+        {
+            if (ReturnPlayersUIObject(plane).powerUpBarParentGameObject.transform.childCount != 0)
+            {
+                while (ReturnPlayersUIObject(plane).powerUpBarParentGameObject.transform.childCount > 0)
+                    DestroyImmediate(ReturnPlayersUIObject(plane).powerUpBarParentGameObject.transform.GetChild(0).gameObject);
+            }
         }
     }
     internal void ChangeTheOrderOnThePowerUpsBar(GameObject powerUpBarGameObject)
@@ -419,12 +465,26 @@ public class UIManager : MonoBehaviour
     }
     internal GameObject ReturnPowerUpUIClockIfExists(Plane plane, string powerUpUIClockName)
     {
-        if(ReturnPlayersUIObject(plane).powerUpBarParentGameObject.transform.childCount != 0)
+        if(UnityEngine.Device.Application.isMobilePlatform)
         {
-            for (int i = 0; i < ReturnPlayersUIObject(plane).powerUpBarParentGameObject.transform.childCount; i++)
+            if (ReturnPlayersUIObject(plane).powerUpBarParentGameObjectMobile.transform.childCount != 0)
             {
-                if (ReturnPlayersUIObject(plane).powerUpBarParentGameObject.transform.GetChild(i).gameObject.name == powerUpUIClockName)
-                    return ReturnPlayersUIObject(plane).powerUpBarParentGameObject.transform.GetChild(i).gameObject;
+                for (int i = 0; i < ReturnPlayersUIObject(plane).powerUpBarParentGameObjectMobile.transform.childCount; i++)
+                {
+                    if (ReturnPlayersUIObject(plane).powerUpBarParentGameObjectMobile.transform.GetChild(i).gameObject.name == powerUpUIClockName)
+                        return ReturnPlayersUIObject(plane).powerUpBarParentGameObjectMobile.transform.GetChild(i).gameObject;
+                }
+            }
+        }
+        else
+        {
+            if (ReturnPlayersUIObject(plane).powerUpBarParentGameObject.transform.childCount != 0)
+            {
+                for (int i = 0; i < ReturnPlayersUIObject(plane).powerUpBarParentGameObject.transform.childCount; i++)
+                {
+                    if (ReturnPlayersUIObject(plane).powerUpBarParentGameObject.transform.GetChild(i).gameObject.name == powerUpUIClockName)
+                        return ReturnPlayersUIObject(plane).powerUpBarParentGameObject.transform.GetChild(i).gameObject;
+                }
             }
         }
         return null;

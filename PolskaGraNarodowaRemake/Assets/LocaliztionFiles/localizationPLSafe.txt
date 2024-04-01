@@ -104,3 +104,11 @@ OK
 Zignoruj tą wiadomość.
 //Missing Game Modes
 Tryby wieloosobowe nie są dostępne w mobilnej wersji gry
+//Controls - Up
+Ruch w góre
+//Controls - Down
+Ruch w dół
+//Controls - Shoot
+Wystrzelenie pocisku. Przytrzymaj przycisk by zwiększyć siłe strzału
+//Controls - Pause
+Menu Pauzy

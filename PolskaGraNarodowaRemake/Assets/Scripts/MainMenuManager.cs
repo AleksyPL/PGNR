@@ -37,12 +37,6 @@ public class MainMenuManager : MonoBehaviour
     public GameObject optionsMenuGameObject;
     [Header("Controls menu")]
     public GameObject controlsMenuMainGameObject;
-    public GameObject controlsMenuTitleGameObject;
-    public GameObject controlsMenuPlayerOneTextGameObject;
-    public GameObject controlsMenuPlayerTwoTextGameObject;
-    public GameObject controlsMenuPlayerOneIndicatorGameObject;
-    public GameObject controlsMenuPlayerTwoIndicatorGameObject;
-    public GameObject controlsMenuBackToMainMenuButton;
     [Header("Plot panel")]
     public GameObject plotPanelGameObject;
     public GameObject plotPanelTitleGameObject;
@@ -86,7 +80,7 @@ public class MainMenuManager : MonoBehaviour
     private void UpdateUIButtonsWithLocalization()
     {
         mainMenuPlayGameButton.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuStartGame;
-        mainMenuControlsMenuButton.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuHowToPlay;
+        mainMenuControlsMenuButton.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuControls;
         mainMenuOptionsMenuButton.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuOptions;
         mainMenuExitGameButton.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuQuitGame;
         mainMenuPlotMenuButton.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuButtonPlot;
@@ -97,19 +91,12 @@ public class MainMenuManager : MonoBehaviour
         startMultiPlayerClassicModeMenuButton.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].gameModeSelectionMenuMultiPlayerClassic;
         startMultiPlayerEndlessModeMenuButton.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].gameModeSelectionMenuMultiPlayerEndless;
         gameModeSelectorMissingGameModesGameObject.GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].gameModeSelectionMenuMissingGameModes;
-        controlsMenuTitleGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuHowToPlay;
         plotPanelStoryGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].plotMenuPlot;
         plotPanelTitleGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuButtonPlot;
-        controlsMenuPlayerOneTextGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].ControlsMenuPlayerOne;
-        controlsMenuPlayerTwoTextGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].ControlsMenuPlayerTwo;
-        controlsMenuPlayerOneIndicatorGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].playerOneIndicator;
-        controlsMenuPlayerTwoIndicatorGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].playerTwoIndicator;
-        controlsMenuBackToMainMenuButton.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].backToMainMenu;
         plotPanelBackToMainMenuButton.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].backToMainMenu;
         if(!gameplaySettings.introductionScreens)
         {
             plotPanelBackToMainMenuButton.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].acceptanceMessage;
-            controlsMenuBackToMainMenuButton.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].acceptanceMessage;
             disclaimerPanelAcceptanceButtonGameObject.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].acceptanceMessage;
             disclaimerPanelMessageGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].disclaimerMessage;
         }
@@ -180,7 +167,7 @@ public class MainMenuManager : MonoBehaviour
     public void EnableControlsMenu()
     {
         if (!UnityEngine.Device.Application.isMobilePlatform)
-            eventSystem.SetSelectedGameObject(controlsMenuBackToMainMenuButton);
+            eventSystem.SetSelectedGameObject(controlsMenuMainGameObject.GetComponent<UIControlsMenu>().backToMainMenuButton);
         DisableMainMenuButtons();
         controlsMenuMainGameObject.SetActive(true);
     }

@@ -11,7 +11,7 @@ public class Localization : ScriptableObject
     public TextAsset localizationTextFile;
     //main menu
     internal string mainMenuStartGame;
-    internal string mainMenuHowToPlay;
+    internal string mainMenuControls;
     internal string mainMenuOptions;
     internal string mainMenuQuitGame;
     internal string mainMenuButtonPlot;
@@ -34,7 +34,11 @@ public class Localization : ScriptableObject
     internal string skinSelectionMenuTitle;
     //plot menu
     internal string plotMenuPlot;
-    //how to play
+    //controls
+    internal string controlsMenuUp;
+    internal string controlsMenuDown;
+    internal string controlsMenuShoot;
+    internal string controlsMenuPauseMenu;
     //internal string howToPlayMenuTitle;
     internal string ControlsMenuPlayerOne;
     internal string ControlsMenuPlayerTwo;
@@ -84,7 +88,7 @@ public class Localization : ScriptableObject
         if (listOfAll.Count != 0)
         {
             mainMenuStartGame = listOfAll[1];
-            mainMenuHowToPlay = listOfAll[3];
+            mainMenuControls = listOfAll[3];
             mainMenuOptions = listOfAll[5];
             mainMenuQuitGame = listOfAll[7];
             gameModeSelectionMenuTitle = listOfAll[9];
@@ -136,6 +140,10 @@ public class Localization : ScriptableObject
             acceptanceMessage = listOfAll[101];
             disclaimerMessage = listOfAll[103];
             gameModeSelectionMenuMissingGameModes = listOfAll[105];
+            controlsMenuUp = listOfAll[107];
+            controlsMenuDown = listOfAll[109];
+            controlsMenuShoot = listOfAll[111];
+            controlsMenuPauseMenu = listOfAll[113];
         }
     }
 }
