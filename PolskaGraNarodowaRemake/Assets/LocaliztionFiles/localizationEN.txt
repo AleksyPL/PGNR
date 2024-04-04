@@ -4,8 +4,24 @@ START GAME
 CONTROLS
 //Main menu - Options
 OPTIONS
+//Main Menu - Plot
+PLOT
 //Main menu - QuitGame
 EXIT GAME
+//BackToMainMenu
+BACK TO MAIN MENU
+//BackToPauseScreen
+BACK TO PAUSE SCREEN
+//Warning1
+YES
+//Warning2
+NO
+//Player 1 indicator
+Player 1
+//Player 2 indicator
+Player 2
+//Acceptance
+OK
 //Game Mode Selector - Title
 Choose game mode
 //Game Mode Selector - SinglePlayerClassic
@@ -16,22 +32,20 @@ SinglePlayer endless mode
 Versus classic mode
 //Game Mode Selector - MultiPlayerEndless
 Versus endless mode
+//Missing Game Modes
+Multiplayer modes are not available in mobile version of the game
 //Skin Selection Menu - Title
 Choose your plane
-//How to play - Title
-Motherland Calls, Pilot!
 //Plot - Plot
 You have to fly the new Polish National Dreamliner far to the East with the President on board. <br><br>But don't think that THE EAST will let you land so easily! Avoid the fog, cut down the birches, destroy the TNT. Vodka is your weapon. Unlimited quantities, because it is a Polish plane. <br><br>But remember: the more you drink, the harder it is to fly ... Before throwing the vodka away, drink a bit. The lighter bottle goes much farther. <br><br>Show the President that a Pole can!
-//Controls - Player 1
-W/S - flying<br>Space - drinking<br>Space(Hold) - bottle will fly farther<br>ESC - pause menu
-//Controls - Player 2
-Arrows Up/Down - flying<br>R.SHIFT - drinking<br>R.SHIFT(Hold) - bottle will fly farther<br>Backspace - pause menu
-//Controls - Player 1 indicator
-Player 1
-//Controls - Player 2 indicator
-Player 2
-//BackToMainMenu
-BACK TO MAIN MENU
+//Controls - Up
+Upward movement
+//Controls - Down
+Downward movement
+//Controls - Shoot
+Shoot a projectile. Hold the button to increace the power of the shot.
+//Controls - Pause
+Pause Menu
 //Options - SFX slider
 SFX VOLUME
 //Options - Music slider
@@ -56,6 +70,8 @@ Drunk bottles:
 Earned: 
 //Regular HUD - earned1
 PLN
+//Congratulations after Landing
+Congratulations, you landed safely
 //Pause Screen - Level title
 You've reached the year:
 //Pause Screen - Bottles title
@@ -68,47 +84,23 @@ GAME OVER
 RESUME GAME
 //Game Over Screen - TryAgain
 TRY AGAIN
-//Warning0
+//Warning - Title
 PROGRESS WILL NOT BE SAVED, DO YOU WANT TO CONTINUE?
-//Warning1
-YES
-//Warning2
-NO
+//Active Bottle Warning
+Bottle throw was active before pausing a game, hold the attack button to continue charging the attack, otherwise, the bottle will be thrown anyway
 //Color Panel - Wygrana
 wins
 //Color Panel - Przegrana
 loses
 //Color Panel - Przegrana - SinglePlayer
 You lose
-//Active Bottle Warning
-Bottle throw was active before pausing a game, hold the attack button to continue charging the attack, otherwise, the bottle will be thrown anyway
 //Classic Mode
 , Land safely at the airport!
 //Endless Mode - Single
 Fly as far as you can
 //Endless Mode - Versus
 Fly as far as you can, defeat your enemy
-//Power Up - Sober Up - You are sober
-You are sober
-//Power Up - Inverted Steering - control wheel repaired
-Your control wheel has repaired itself
-//Congratulations after Landing
-Congratulations, you landed safely
-//Main Menu - Plot
-PLOT
-//BackToPauseScreen
-BACK TO PAUSE SCREEN
-//Acceptance
-OK
-//Disclaimer
-ATTENTION!<br><br>You have just launched the uncensored version of the game. The author is not liable for any moral damage caused by the content of the game.<br>The game is a work of fiction and is not intended to offend anyone's feelings. You play at your own risk.<br>If you started this version of the game by accident, remove the "TrueGame" argument from the website address or exe file.
-//Missing Game Modes
-Multiplayer modes are not available in mobile version of the game
-//Controls - Up
-Upward movement
-//Controls - Down
-Downward movement
-//Controls - Shoot
-Shoot a projectile. Hold the button to increace the power of the shot.
-//Controls - Pause
-Pause Menu
+//Disclaimer - Message
+You have just launched the uncensored version of the game. The author is not liable for any moral damage caused by the content of the game.<br>The game is a work of fiction and is not intended to offend anyone's feelings. You play at your own risk.<br>If you started this version of the game by accident, remove the "TrueGame" argument from the website address or exe file.
+//Disclaimer - Title
+ATTENTION!

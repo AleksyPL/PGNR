@@ -4,8 +4,24 @@ ROZPOCZNIJ GRĘ
 STEROWANIE
 //Main menu - Options
 OPCJE
+//Main Menu - Plot
+FABUŁA
 //Main menu - QuitGame
 ZAKOŃCZ GRĘ
+//BackToMainMenu
+WRÓĆ DO MENU GŁÓWNEGO
+//BackToPauseScreen
+POWRÓT DO EKRANU PAUZY
+//Warning1
+TAK
+//Warning2
+NIE
+//Player 1 indicator
+Gracz 1
+//Player 2 indicator
+Gracz 2
+//Acceptance
+OK
 //Game Mode Selector - Title
 Wybierz tryb rozgrywki
 //Game Mode Selector - SinglePlayerClassic
@@ -16,22 +32,20 @@ Gra jednoosobowa nieskończona
 Gra przeciw drugiemu graczowi klasyczna
 //Game Mode Selector - MultiPlayerEndless
 Gra przeciw drugiemu graczowi nieskończona
+//Missing Game Modes
+Tryby wieloosobowe nie są dostępne w mobilnej wersji gry
 //Skin Selection Menu - Title
 Wybierz swój samolot
-//How to play - Title
-Pilocie, Ojczyzna Wzywa!
 //Plot - Plot
 Musisz polecieć nowym Polskim samolotem daleko na Wschód. <br><br>Nie licz jednak na to, że to będzie łatwe zadanie. Omijaj przeszkody na swojej drodze, oraz niszcz je śmieciami znalezionymi na pokładzie. <br><br>Ale pamiętaj: aparatura samolotu ustawiona jest na większy ciężar samolotu, im wiecej wyrzucisz śmieci, tym trudniej będzie się leciało. <br><br>Pokaż wszystkim jakim dobrym jesteś pilotem.
-//Controls - Player 1
-W/S - sterowanie<br>Spacja - pijesz<br>Spacja(Przytrzymaj) - butelka poleci dalej<br>ESC - menu pauzy
-//Controls - Player 2
-Strzałki góra/dół - sterowanie<br>P.SHIFT - pijesz<br>P.SHIFT(Przytrzymaj) - butelka poleci dalej<br>Backspace - menu pauzy
-//Controls - Player 1 indicator
-Gracz 1
-//Controls - Player 2 indicator
-Gracz 2
-//BackToMainMenu
-WRÓĆ DO MENU GŁÓWNEGO
+//Controls - Up
+Ruch w góre
+//Controls - Down
+Ruch w dół
+//Controls - Shoot
+Wystrzelenie pocisku. Przytrzymaj przycisk by zwiększyć siłe strzału
+//Controls - Pause
+Menu Pauzy
 //Options - SFX slider
 GŁOŚNOŚĆ EFEKTÓW
 //Options - Music slider
@@ -56,6 +70,8 @@ Wypite butelki:
 Zarobiłeś: 
 //Regular HUD - earned1
 zł
+//Congratulations after Landing
+Gratulacje, bezpiecznie wylądowałeś na miejscu
 //Pause Screen - Level title
 Aktualny poziom:
 //Pause Screen - Bottles title
@@ -68,47 +84,23 @@ KONIEC GRY
 POWRÓT DO GRY
 //Game Over Screen - TryAgain
 SPRÓBUJ JESZCZE RAZ
-//Warning0
+//Warning - Title
 POSTĘP NIE ZOSTANIE ZACHOWANY, CZY CHCESZ KONTYNUOWAĆ?
-//Warning1
-TAK
-//Warning2
-NIE
+//Active Bottle Warning
+Rzut butelką aktywny przed zapauzowaniem gry, przytrzymaj przycisk ataku kontynuować ładowanie ataku, w przeciwnym razie butelka zostanie wystrzelona
 //Color Panel - Winning
 wygrywa
 //Color Panel - Loosing
 przegrywa
 //Color Panel - Loosing - SinglePlayer
 Przegrywasz
-//Active Bottle Warning
-Rzut butelką aktywny przed zapauzowaniem gry, przytrzymaj przycisk ataku kontynuować ładowanie ataku, w przeciwnym razie butelka zostanie wystrzelona
 //Classic Mode
 , Wyląduj bezpiecznie na lotnisku!
 //Endless Mode - Single
 Leć jak najdalej
 //Endless Mode - Versus
 Leć jak najdalej, pokonaj przeciwnika
-//Power Up - Sober Up - You are sober
-Czujniki są dobrze skalibrowane
-//Power Up - Inverted Steering - control wheel repaired
-Twój ster się naprawił
-//Congratulations after Landing
-Gratulacje, bezpiecznie wylądowałeś na miejscu
-//Main Menu - Plot
-FABUŁA
-//BackToPauseScreen
-POWRÓT DO EKRANU PAUZY
-//Acceptance
-OK
-//Disclaimer
+//Disclaimer - Message
 Zignoruj tą wiadomość.
-//Missing Game Modes
-Tryby wieloosobowe nie są dostępne w mobilnej wersji gry
-//Controls - Up
-Ruch w góre
-//Controls - Down
-Ruch w dół
-//Controls - Shoot
-Wystrzelenie pocisku. Przytrzymaj przycisk by zwiększyć siłe strzału
-//Controls - Pause
-Menu Pauzy
+//Disclaimer - Title
+Zignoruj tą wiadomość

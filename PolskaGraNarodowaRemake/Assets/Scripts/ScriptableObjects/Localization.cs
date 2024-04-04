@@ -14,7 +14,7 @@ public class Localization : ScriptableObject
     internal string mainMenuControls;
     internal string mainMenuOptions;
     internal string mainMenuQuitGame;
-    internal string mainMenuButtonPlot;
+    internal string mainMenuPlot;
     //general
     internal string backToMainMenu;
     internal string backToPauseScreen;
@@ -39,9 +39,6 @@ public class Localization : ScriptableObject
     internal string controlsMenuDown;
     internal string controlsMenuShoot;
     internal string controlsMenuPauseMenu;
-    //internal string howToPlayMenuTitle;
-    internal string ControlsMenuPlayerOne;
-    internal string ControlsMenuPlayerTwo;
     //options
     internal string sfxVolumeSlider;
     internal string musicVolumeSlider;
@@ -74,10 +71,8 @@ public class Localization : ScriptableObject
     internal string classicModeMessage;
     internal string endlessSingleMessage;
     internal string endlessVersusMessage;
-    //power Ups
-    internal string soberUpYouAreSoberMessage;
-    internal string invertedSteeringRepairedMessage;
     //disclaimer
+    internal string disclaimerTitle;
     internal string disclaimerMessage;
 
     internal void LoadData()
@@ -87,63 +82,71 @@ public class Localization : ScriptableObject
             listOfAll.AddRange(localizationTextFile.text.Split(Environment.NewLine));
         if (listOfAll.Count != 0)
         {
+            //main menu
             mainMenuStartGame = listOfAll[1];
             mainMenuControls = listOfAll[3];
             mainMenuOptions = listOfAll[5];
-            mainMenuQuitGame = listOfAll[7];
-            gameModeSelectionMenuTitle = listOfAll[9];
-            gameModeSelectionMenuSinglePlayerClassic = listOfAll[11];
-            gameModeSelectionMenuSinglePlayerEndless = listOfAll[13];
-            gameModeSelectionMenuMultiPlayerClassic = listOfAll[15];
-            gameModeSelectionMenuMultiPlayerEndless = listOfAll[17];
-            skinSelectionMenuTitle = listOfAll[19];
-            plotMenuPlot = listOfAll[23];
-            //howToPlayMenuTitle = listOfAll[21];
-            ControlsMenuPlayerOne = listOfAll[25];
-            ControlsMenuPlayerTwo = listOfAll[27];
-            playerOneIndicator = listOfAll[29];
-            playerTwoIndicator = listOfAll[31];
-            backToMainMenu = listOfAll[33];
-            sfxVolumeSlider = listOfAll[35];
-            musicVolumeSlider = listOfAll[37];
-            quotesVolumeSlider = listOfAll[39];
-            activeLanguage = listOfAll[41];
-            regularHudLevel = listOfAll[43];
-            regularHudProgression0 = listOfAll[45];
-            regularHudProgression1 = listOfAll[47];
-            regularHudLandingMessage = listOfAll[49];
-            regularHudPlaneHit = listOfAll[51];
-            regularHudBottle = listOfAll[53];
-            regularHudEarned0 = listOfAll[55];
-            regularHudEarned1 = listOfAll[57];
-            pauseScreenLevelTitle = listOfAll[59];
-            pauseScreenBottlesTitle = listOfAll[61];
-            pauseScreenPauseMainTitle = listOfAll[63];
-            pauseScreenGameOverMainTitle = listOfAll[65];
-            pauseScreenResumeGame = listOfAll[67];
-            gameOverScreenTryAgain = listOfAll[69];
-            warningTitle = listOfAll[71];
-            warningYes = listOfAll[73];
-            warningNo = listOfAll[75];
-            colorPanelPlayerWins = listOfAll[77];
-            colorPanelPlayerLoses = listOfAll[79];
-            colorPanelPlayerLosesSinglePlayer = listOfAll[81];
-            activeBottleWarning = listOfAll[83];
-            classicModeMessage = listOfAll[85];
-            endlessSingleMessage = listOfAll[87];
-            endlessVersusMessage = listOfAll[89];
-            //soberUpYouAreSoberMessage = listOfAll[91];
-            //invertedSteeringRepairedMessage = listOfAll[93];
-            regularHudCongratulationsAfterLanding = listOfAll[95];
-            mainMenuButtonPlot = listOfAll[97];
-            backToPauseScreen = listOfAll[99];
-            acceptanceMessage = listOfAll[101];
+            mainMenuPlot = listOfAll[7];
+            mainMenuQuitGame = listOfAll[9];
+            //general
+            backToMainMenu = listOfAll[11];
+            backToPauseScreen = listOfAll[13];
+            warningYes = listOfAll[15];
+            warningNo = listOfAll[17];
+            playerOneIndicator = listOfAll[19];
+            playerTwoIndicator = listOfAll[21];
+            acceptanceMessage = listOfAll[23];
+            //game mode selection menu
+            gameModeSelectionMenuTitle = listOfAll[25];
+            gameModeSelectionMenuSinglePlayerClassic = listOfAll[27];
+            gameModeSelectionMenuSinglePlayerEndless = listOfAll[29];
+            gameModeSelectionMenuMultiPlayerClassic = listOfAll[31];
+            gameModeSelectionMenuMultiPlayerEndless = listOfAll[33];
+            gameModeSelectionMenuMissingGameModes = listOfAll[35];
+            //skin selection menu
+            skinSelectionMenuTitle = listOfAll[37];
+            //plot menu
+            plotMenuPlot = listOfAll[39];
+            //controls
+            controlsMenuUp = listOfAll[41];
+            controlsMenuDown = listOfAll[43];
+            controlsMenuShoot = listOfAll[45];
+            controlsMenuPauseMenu = listOfAll[47];
+            //options
+            sfxVolumeSlider = listOfAll[49];
+            musicVolumeSlider = listOfAll[51];
+            quotesVolumeSlider = listOfAll[53];
+            activeLanguage = listOfAll[55];
+            //regular hud
+            regularHudLevel = listOfAll[57];
+            regularHudProgression0 = listOfAll[59];
+            regularHudProgression1 = listOfAll[61];
+            regularHudLandingMessage = listOfAll[63];
+            regularHudPlaneHit = listOfAll[65];
+            regularHudBottle = listOfAll[67];
+            regularHudEarned0 = listOfAll[69];
+            regularHudEarned1 = listOfAll[71];
+            regularHudCongratulationsAfterLanding = listOfAll[73];
+            //pause screen
+            pauseScreenLevelTitle = listOfAll[75];
+            pauseScreenBottlesTitle = listOfAll[77];
+            pauseScreenPauseMainTitle = listOfAll[79];
+            pauseScreenGameOverMainTitle = listOfAll[81];
+            pauseScreenResumeGame = listOfAll[83];
+            gameOverScreenTryAgain = listOfAll[85];
+            warningTitle = listOfAll[87];
+            activeBottleWarning = listOfAll[89];
+            //color panel
+            colorPanelPlayerWins = listOfAll[91];
+            colorPanelPlayerLoses = listOfAll[93];
+            colorPanelPlayerLosesSinglePlayer = listOfAll[95];
+            //game modes
+            classicModeMessage = listOfAll[97];
+            endlessSingleMessage = listOfAll[99];
+            endlessVersusMessage = listOfAll[101];
+            //disclaimer
             disclaimerMessage = listOfAll[103];
-            gameModeSelectionMenuMissingGameModes = listOfAll[105];
-            controlsMenuUp = listOfAll[107];
-            controlsMenuDown = listOfAll[109];
-            controlsMenuShoot = listOfAll[111];
-            controlsMenuPauseMenu = listOfAll[113];
+            disclaimerTitle = listOfAll[105];
         }
     }
 }
