@@ -58,12 +58,14 @@ public class LevelManager : MonoBehaviour
             flightControllerScript.rewardAndProgressionManagerScript.levelCounter++;
             flightControllerScript.gameModeScript.playerOnePlane.ResetPlaneData();
             flightControllerScript.rewardAndProgressionManagerScript.playerOneProgress.levelProgressCounter = 0;
-            flightControllerScript.gameModeScript.playerOnePlane.bottlesDrunk = 0;
+            flightControllerScript.gameModeScript.playerOnePlane.SoberUp();
+            flightControllerScript.uiManagerScript.UpdateBottlesCounter(flightControllerScript.gameModeScript.playerOnePlane);
             if (flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerClassic && flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerEndless)
             {
                 flightControllerScript.gameModeScript.playerTwoPlane.ResetPlaneData();
                 flightControllerScript.rewardAndProgressionManagerScript.playerTwoProgress.levelProgressCounter = 0;
-                flightControllerScript.gameModeScript.playerTwoPlane.bottlesDrunk = 0;
+                flightControllerScript.gameModeScript.playerTwoPlane.SoberUp();
+                flightControllerScript.uiManagerScript.UpdateBottlesCounter(flightControllerScript.gameModeScript.playerTwoPlane);
             }
         }
         if (!flightControllerScript.audioManagerScript.IsTheSoundCurrentlyPlaying("EngineSound", flightControllerScript.audioManagerScript.localSFX))
