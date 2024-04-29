@@ -40,7 +40,7 @@ public class UIClock : MonoBehaviour
         }
         else if (flightControllerScript.uiManagerScript.pauseScreenEnabled)
         {
-             Time.timeScale = 1;
+            Time.timeScale = 1;
             if (transform.parent.Find("ActiveBottleWarning") != null)
             {
                 transform.parent.Find("ActiveBottleWarning").GetComponent<UIActiveBottleWarning>().DestroyBottleWarning();

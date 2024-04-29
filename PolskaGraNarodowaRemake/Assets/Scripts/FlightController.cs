@@ -15,6 +15,7 @@ public class FlightController : MonoBehaviour
     internal AudioManager audioManagerScript;
     internal UIManager uiManagerScript;
     internal PowerUpManager powerUpManagerScript;
+    internal TutorialManager tutorialManagerScript;
     void OnEnable()
     {
         uiManagerScript = GetComponent<UIManager>();
@@ -26,6 +27,8 @@ public class FlightController : MonoBehaviour
         audioManagerScript = GetComponent<AudioManager>();
         rewardAndProgressionManagerScript = GetComponent<RewardAndProgressionManager>();
         powerUpManagerScript = GetComponent<PowerUpManager>();
+        if(gameModeScript.currentGameMode == GameModeManager.GameMode.tutorial)
+            tutorialManagerScript = GetComponent<TutorialManager>();
     }
     private void Start()
     {
@@ -121,6 +124,11 @@ public class FlightController : MonoBehaviour
             }
         }
     }
+    internal void RevertPlanePosition(Plane plane, Vector3 newPlanePosition)
+    {
+        plane.verticalMovementKeys = 0;
+        plane.planeGameObject.transform.position = newPlanePosition;
+    }
     private void MovePlaneDamaged(Plane plane)
     {
         if (plane.currentPlaneState == PlaneState.damaged)
@@ -133,13 +141,13 @@ public class FlightController : MonoBehaviour
     {
         if(!uiManagerScript.pauseScreenEnabled && !uiManagerScript.timerBeforeTheFlightEnabled && !gameModeScript.someoneWon)
         {
-            if (gameModeScript.playerOnePlane.currentPlaneState == PlaneState.standard || gameModeScript.playerOnePlane.currentPlaneState == PlaneState.wheelsOn)
+            if (((gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerClassic || gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerEndless) && (gameModeScript.playerOnePlane.currentPlaneState == PlaneState.standard || gameModeScript.playerOnePlane.currentPlaneState == PlaneState.wheelsOn)) || (gameModeScript.currentGameMode == GameModeManager.GameMode.tutorial && tutorialManagerScript.currentState == TutorialManager.TutorialPlayerState.Flying))
             {
                 MovePlaneStandardAndWheels(gameModeScript.playerOnePlane);
                 if (gameModeScript.playerOnePlane.currentPlaneState != PlaneState.wheelsOn)
                     ThrowBottleOfVodka(gameModeScript.playerOnePlane);
             }
-            if (gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerClassic && gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerEndless && (gameModeScript.playerTwoPlane.currentPlaneState == PlaneState.standard || gameModeScript.playerTwoPlane.currentPlaneState == PlaneState.wheelsOn))
+            if ((gameModeScript.currentGameMode == GameModeManager.GameMode.versusClassic || gameModeScript.currentGameMode == GameModeManager.GameMode.versusEndless) && (gameModeScript.playerTwoPlane.currentPlaneState == PlaneState.standard || gameModeScript.playerTwoPlane.currentPlaneState == PlaneState.wheelsOn))
             {
                 MovePlaneStandardAndWheels(gameModeScript.playerTwoPlane);
                 if (gameModeScript.playerTwoPlane.currentPlaneState != PlaneState.wheelsOn)
@@ -147,7 +155,7 @@ public class FlightController : MonoBehaviour
             }
             if (gameModeScript.playerOnePlane.currentPlaneState == PlaneState.damaged)
                 MovePlaneDamaged(gameModeScript.playerOnePlane);
-            if ((gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerClassic && gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerEndless) && gameModeScript.playerTwoPlane.currentPlaneState == PlaneState.damaged)
+            if ((gameModeScript.currentGameMode == GameModeManager.GameMode.versusClassic || gameModeScript.currentGameMode != GameModeManager.GameMode.versusEndless) && gameModeScript.playerTwoPlane.currentPlaneState == PlaneState.damaged)
                 MovePlaneDamaged(gameModeScript.playerTwoPlane);
         }
     }

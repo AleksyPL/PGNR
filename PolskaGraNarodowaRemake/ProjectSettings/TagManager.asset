@@ -11,6 +11,7 @@ TagManager:
   - KillPlane
   - Vodka
   - PowerUp
+  - Checkpoint
   layers:
   - Default
   - TransparentFX

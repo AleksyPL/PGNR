@@ -9,7 +9,8 @@ public class GameModeManager : MonoBehaviour
         singleplayerClassic,
         singleplayerEndless,
         versusClassic,
-        versusEndless
+        versusEndless,
+        tutorial
     }
     internal enum PlayerState
     {
@@ -24,8 +25,8 @@ public class GameModeManager : MonoBehaviour
     internal FlightController flightControllerScript;
     internal bool gameModeSettingsOverride;
     [SerializeField] internal GameMode currentGameMode;
-    internal PlayerState playerOneState;
-    internal PlayerState playerTwoState;
+    internal GameModeManager.PlayerState playerOneState;
+    internal GameModeManager.PlayerState playerTwoState;
     internal bool someoneWon;
     internal float waitingTimeForOneLinerCurrent;
     void OnEnable()
@@ -35,7 +36,7 @@ public class GameModeManager : MonoBehaviour
         flightControllerScript = GetComponent<FlightController>();
         playerOnePlane.LoadPlaneData(0);
         SetUpGameMode();
-        if (currentGameMode != GameMode.singleplayerClassic && currentGameMode != GameMode.singleplayerEndless)
+        if (currentGameMode == GameMode.versusClassic || currentGameMode == GameMode.versusEndless)
             playerTwoPlane.LoadPlaneData(1);
         CalculateCameraOffset();
         waitingTimeForOneLinerCurrent = 0;
@@ -59,7 +60,7 @@ public class GameModeManager : MonoBehaviour
     {
         if(currentGameMode == GameMode.singleplayerClassic || currentGameMode == GameMode.singleplayerEndless)
         {
-            if (playerOneState == PlayerState.crashed)
+            if (playerOneState == GameModeManager.PlayerState.crashed)
             {
                 flightControllerScript.uiManagerScript.TurnOnColorPanel(flightControllerScript.uiManagerScript.playerOneUI.colorPanelGameObject, flightControllerScript.uiManagerScript.loseColor);
                 flightControllerScript.uiManagerScript.TurnOnColorPanel(flightControllerScript.uiManagerScript.playerTwoUI.colorPanelGameObject, flightControllerScript.uiManagerScript.loseColor);
@@ -74,9 +75,9 @@ public class GameModeManager : MonoBehaviour
                 flightControllerScript.uiManagerScript.SpawnTimerOnTheScreen(gameOverTimer);
             } 
         }
-        else
+        else if (currentGameMode == GameMode.versusClassic || currentGameMode == GameMode.versusEndless)
         {
-            if (playerOneState != PlayerState.crashed && playerTwoState == PlayerState.crashed)
+            if (playerOneState != GameModeManager.PlayerState.crashed && playerTwoState == GameModeManager.PlayerState.crashed)
             {
                 playerOnePlane.difficultyImpulseEnabled = false;
                 playerOnePlane.godMode = true;
@@ -93,7 +94,7 @@ public class GameModeManager : MonoBehaviour
                     flightControllerScript.uiManagerScript.playerTwoUI.regularHUDMainGameObject.SetActive(false);
                 flightControllerScript.uiManagerScript.SpawnTimerOnTheScreen(gameOverTimer);
             }
-            else if (playerOneState == PlayerState.crashed && playerTwoState != PlayerState.crashed)
+            else if (playerOneState == GameModeManager.PlayerState.crashed && playerTwoState != GameModeManager.PlayerState.crashed)
             {
                 playerTwoPlane.difficultyImpulseEnabled = false;
                 playerTwoPlane.godMode = true;
@@ -114,7 +115,7 @@ public class GameModeManager : MonoBehaviour
     }
     private void CheckAndPlayOneLinerSound()
     {
-        if (((currentGameMode == GameMode.singleplayerClassic || currentGameMode == GameMode.singleplayerEndless) && playerOneState == PlayerState.flying) || ((currentGameMode == GameMode.versusClassic || currentGameMode == GameMode.versusEndless) && playerOneState == PlayerState.flying && playerTwoState == PlayerState.flying))
+        if (((currentGameMode == GameMode.singleplayerClassic || currentGameMode == GameMode.singleplayerEndless) && playerOneState == GameModeManager.PlayerState.flying) || ((currentGameMode == GameMode.versusClassic || currentGameMode == GameMode.versusEndless) && playerOneState == GameModeManager.PlayerState.flying && playerTwoState == GameModeManager.PlayerState.flying))
         {
             waitingTimeForOneLinerCurrent += Time.deltaTime;
             if (waitingTimeForOneLinerCurrent >= flightControllerScript.gameplaySettings.waitingTimeForOneLiner)
@@ -130,12 +131,12 @@ public class GameModeManager : MonoBehaviour
         if (currentGameMode != GameMode.singleplayerClassic && currentGameMode != GameMode.singleplayerEndless)
             SetProgressionFlags(playerTwoPlane);
         CheckAndPlayOneLinerSound();
-        if(!flightControllerScript.rewardAndProgressionManagerScript.toNewLevel && (((currentGameMode == GameMode.singleplayerClassic || currentGameMode == GameMode.singleplayerEndless) && playerOneState == PlayerState.landed) || ((currentGameMode == GameMode.versusClassic || currentGameMode == GameMode.versusEndless) && playerOneState == PlayerState.landed && playerTwoState == PlayerState.landed)))
+        if(!flightControllerScript.rewardAndProgressionManagerScript.toNewLevel && (((currentGameMode == GameMode.singleplayerClassic || currentGameMode == GameMode.singleplayerEndless) && playerOneState == PlayerState.landed) || ((currentGameMode == GameMode.versusClassic || currentGameMode == GameMode.versusEndless) && playerOneState == GameModeManager.PlayerState.landed && playerTwoState == GameModeManager.PlayerState.landed)))
         {
             flightControllerScript.rewardAndProgressionManagerScript.toNewLevel = true;
-            playerOneState = PlayerState.flying;
+            playerOneState = GameModeManager.PlayerState.flying;
             if (currentGameMode != GameMode.singleplayerClassic && currentGameMode != GameMode.singleplayerEndless)
-                playerTwoState = PlayerState.flying;
+                playerTwoState = GameModeManager.PlayerState.flying;
             flightControllerScript.audioManagerScript.StopPlayingSoundsFromTheSpecificSoundBank(flightControllerScript.audioManagerScript.localOneLinersSounds);
             flightControllerScript.audioManagerScript.DrawAndPlayASound(flightControllerScript.audioManagerScript.localLandingSounds, "Landing", ref flightControllerScript.audioManagerScript.lastPlayedLandingSound);
             if (flightControllerScript.audioManagerScript.ReturnSoundDuration("Landing" + flightControllerScript.audioManagerScript.lastPlayedLandingSound, flightControllerScript.audioManagerScript.localLandingSounds) > 5f)
@@ -147,16 +148,16 @@ public class GameModeManager : MonoBehaviour
     private void SetProgressionFlags(Plane plane)
     {
         if(!plane.isTouchingAirport && (plane.currentPlaneState == PlaneState.standard || plane.currentPlaneState == PlaneState.wheelsOn))
-            ReturnPlayerStateObject(plane) = PlayerState.flying;
+            ReturnPlayerStateObject(plane) = GameModeManager.PlayerState.flying;
         if(plane.isTouchingAirport && plane.currentPlaneState == PlaneState.wheelsOn && plane.currentPlaneSpeed > 0)
-            ReturnPlayerStateObject(plane) = PlayerState.landing;
+            ReturnPlayerStateObject(plane) = GameModeManager.PlayerState.landing;
         if(plane.isTouchingAirport && plane.currentPlaneState == PlaneState.wheelsOn && plane.currentPlaneSpeed <= 0)
-            ReturnPlayerStateObject(plane) = PlayerState.landed;
+            ReturnPlayerStateObject(plane) = GameModeManager.PlayerState.landed;
         if (plane.currentPlaneState == PlaneState.damaged)
-            ReturnPlayerStateObject(plane) = PlayerState.damaged;
+            ReturnPlayerStateObject(plane) = GameModeManager.PlayerState.damaged;
         if (!someoneWon && plane.currentPlaneState == PlaneState.crashed)
         {
-            ReturnPlayerStateObject(plane) = PlayerState.crashed;
+            ReturnPlayerStateObject(plane) = GameModeManager.PlayerState.crashed;
             someoneWon = true;
             CalculateWiningAndLosing(3f);
         }
@@ -178,9 +179,9 @@ public class GameModeManager : MonoBehaviour
     private void CalculateCameraOffset()
     {
         float offsetX = playerOnePlane.cameraGameObject.GetComponent<Camera>().aspect * 2 * playerOnePlane.cameraGameObject.GetComponent<Camera>().orthographicSize;
-        if (!UnityEngine.Device.Application.isMobilePlatform && (currentGameMode == GameMode.singleplayerClassic || currentGameMode == GameMode.singleplayerEndless))
+        if (!UnityEngine.Device.Application.isMobilePlatform && (currentGameMode == GameMode.singleplayerClassic || currentGameMode == GameMode.singleplayerEndless || currentGameMode == GameMode.tutorial))
             flightControllerScript.gameplaySettings.cameraPositionXOffset = offsetX * flightControllerScript.gameplaySettings.camerePositionXOffsetPersentageSingle;
-        else if (UnityEngine.Device.Application.isMobilePlatform && (currentGameMode == GameMode.singleplayerClassic || currentGameMode == GameMode.singleplayerEndless))
+        else if (UnityEngine.Device.Application.isMobilePlatform && (currentGameMode == GameMode.singleplayerClassic || currentGameMode == GameMode.singleplayerEndless || currentGameMode == GameMode.tutorial))
             flightControllerScript.gameplaySettings.cameraPositionXOffset = offsetX * flightControllerScript.gameplaySettings.cameraPositionXOffsetPersentageSingleMobile;
         else if (currentGameMode == GameMode.versusClassic || currentGameMode == GameMode.versusEndless)
             flightControllerScript.gameplaySettings.cameraPositionXOffset = offsetX * flightControllerScript.gameplaySettings.camerePositionXOffsetPersentageMulti;

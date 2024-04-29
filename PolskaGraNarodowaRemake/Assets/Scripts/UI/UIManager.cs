@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     private EventSystem eventSystem;
     internal FlightController flightControllerScript;
     internal bool pauseScreenEnabled;
+    internal bool tutorialScreenEnabled;
     internal bool timerBeforeTheFlightEnabled;
     [System.Serializable]
     public class PlayerUI
@@ -84,6 +85,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject exitWarningNoButtonGameObject;
     [Header("Touch Screen")]
     [SerializeField] private GameObject touchScreenMainGameObject;
+    [Header("Tutorial")]
+    [SerializeField] internal GameObject tutorialMainGameObject;
+    [SerializeField] private GameObject tutorialTitleGameObject;
+    //[SerializeField] internal GameObject tutorialPlaceToSpawnScreens;
+    [SerializeField] private GameObject tutorialOKButton;
 
     void Start()
     {
@@ -107,6 +113,8 @@ public class UIManager : MonoBehaviour
             DisableExitWarning();
         else if (optionsMenuGameObject.activeSelf && flightControllerScript.inputManagerScript.ESCpressed)
             DisableOptionsMenu();
+        else if (controlsMenuGameObject.activeSelf && flightControllerScript.inputManagerScript.ESCpressed)
+            DisableControlsMenu();
         else if (((flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerClassic || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerEndless) && flightControllerScript.gameModeScript.playerOneState != GameModeManager.PlayerState.crashed) || ((flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerClassic && flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.singleplayerEndless) && flightControllerScript.gameModeScript.playerOneState != GameModeManager.PlayerState.crashed && flightControllerScript.gameModeScript.playerTwoState != GameModeManager.PlayerState.crashed))
         {
             if (!pauseScreenEnabled && !pauseScreenGameObject.activeSelf && flightControllerScript.inputManagerScript.ESCpressed && !timerBeforeTheFlightEnabled)
@@ -199,11 +207,14 @@ public class UIManager : MonoBehaviour
             }
             else
                 eventSystem.SetSelectedGameObject(pauseScreenResumeGameButtonGameObject);
-            pauseScreenTitleGameObject.GetComponentInChildren<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].pauseScreenPauseMainTitle;
             fadePanelGameObject.SetActive(true);
             pauseScreenGameObject.SetActive(true);
+            pauseScreenTitleGameObject.SetActive(true);
+            pauseScreenTitleGameObject.GetComponentInChildren<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].pauseScreenPauseMainTitle;
+            pauseScreenRegularButtonsGameObject.SetActive(true);
+            gameStatsGameObject.SetActive(true);
             playerOneUI.regularHUDMainGameObject.SetActive(false);
-            if(playerTwoUI.regularHUDMainGameObject != null)
+            if (playerTwoUI.regularHUDMainGameObject != null)
                 playerTwoUI.regularHUDMainGameObject.SetActive(false);
             flightControllerScript.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightControllerScript.audioManagerScript.localSFX);
             flightControllerScript.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightControllerScript.audioManagerScript.localOneLinersSounds);
@@ -244,8 +255,10 @@ public class UIManager : MonoBehaviour
     }
     public void DisablePauseScreen()
     {
-        
         fadePanelGameObject.SetActive(false);
+        pauseScreenTitleGameObject.SetActive(false);
+        pauseScreenRegularButtonsGameObject.SetActive(false);
+        gameStatsGameObject.SetActive(false);
         pauseScreenGameObject.SetActive(false);
         if (UnityEngine.Device.Application.isMobilePlatform)
             flightControllerScript.uiManagerScript.fullScreenButton.GetComponent<FullScreenManager>().TurnOffFullScreenButton();
@@ -310,7 +323,6 @@ public class UIManager : MonoBehaviour
         gameStatsGameObject.SetActive(true);
         if (!UnityEngine.Device.Application.isMobilePlatform)
             eventSystem.SetSelectedGameObject(pauseScreenOptionsButtonGameObject);
-        pauseScreenRegularButtonsGameObject.SetActive(true);
         pauseScreenWarningGameObject.SetActive(false);
     }
     public void EnableOptionsMenu()
@@ -328,9 +340,6 @@ public class UIManager : MonoBehaviour
     public void DisableOptionsMenu()
     {
         optionsMenuGameObject.SetActive(false);
-        pauseScreenGameObject.SetActive(true);
-        gameStatsGameObject.SetActive(true);
-        pauseScreenRegularButtonsGameObject.SetActive(true);
         pauseScreenTitleGameObject.GetComponentInChildren<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].pauseScreenPauseMainTitle;
         flightControllerScript.GetComponent<FlightController>().audioManagerScript.UpdateAllSoundsVolume();
         if (pauseScreenEnabled)
@@ -503,6 +512,35 @@ public class UIManager : MonoBehaviour
     {
         if (touchScreenMainGameObject != null)
             touchScreenMainGameObject.SetActive(false);
+    }
+    internal void EnableTutorialScreen()
+    {
+        Time.timeScale = 0;
+        tutorialScreenEnabled = true;
+        tutorialMainGameObject.SetActive(true);
+        if (UnityEngine.Device.Application.isMobilePlatform)
+        {
+            TurnOffTouchScreenButtons();
+            flightControllerScript.inputManagerScript.ESCpressed = false;
+            fullScreenButton.GetComponent<FullScreenManager>().TurnOnFullScreenButton();
+        }
+        else
+            eventSystem.SetSelectedGameObject(tutorialOKButton);
+        flightControllerScript.tutorialManagerScript.SpawnTutorialInfo(flightControllerScript.tutorialManagerScript.checkpointNumber + 1);
+        tutorialTitleGameObject.GetComponentInChildren<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].tutorialTitle;
+        flightControllerScript.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightControllerScript.audioManagerScript.localSFX);
+        flightControllerScript.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightControllerScript.audioManagerScript.localOneLinersSounds);
+        flightControllerScript.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightControllerScript.audioManagerScript.localHitReactionSounds);
+        flightControllerScript.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightControllerScript.audioManagerScript.localLandingSounds);
+    }
+    public void DisableTutorialScreen()
+    {
+        flightControllerScript.tutorialManagerScript.OKButtonLogic();
+        Time.timeScale = 1;
+        tutorialScreenEnabled = false;
+        tutorialMainGameObject.SetActive(false);
+        flightControllerScript.uiManagerScript.playerOneUI.regularHUDMainGameObject.SetActive(true);
+        flightControllerScript.audioManagerScript.ResumeAllPausedSounds();
     }
     public void QuitGame()
     {

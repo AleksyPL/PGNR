@@ -110,6 +110,15 @@ public class HitDetectionManager : MonoBehaviour
                 }
                 Destroy(transform.gameObject);
             }
+            else if (transform.name == "TutorialCheckpoint" && gameModeManagerScript.currentGameMode == GameModeManager.GameMode.tutorial)
+            {
+                gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpointFinished = true;
+                gameModeManagerScript.flightControllerScript.uiManagerScript.EnableTutorialScreen();
+                if(gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpointGoalAchieved)
+                    Destroy(collision.transform.gameObject);
+                else
+                    gameModeManagerScript.flightControllerScript.tutorialManagerScript.CalculatePositionRevertDuration();
+            }
         }
         else if((collision.gameObject.CompareTag("Obstacle") || collision.gameObject.CompareTag("PowerUp")) && transform.gameObject.CompareTag("KillPlane"))
             Destroy(collision.transform.gameObject);

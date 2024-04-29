@@ -104,3 +104,7 @@ Fly as far as you can, defeat your enemy
 Ignore this message.
 //Disclaimer - Title
 Ignore this message
+//Tutorial - Question
+This is your first playthrough. Do you want to play a tutorial level?
+//Tutorial - Title
+Tutorial

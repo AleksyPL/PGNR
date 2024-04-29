@@ -87,13 +87,17 @@ public class GameplaySettings : ScriptableObject
     {
 #if UNITY_EDITOR
         safeMode = scriptableObjectSafeModOverride;
+        if (currentLanguage == Languages.Polski)
+            langauageIndex = 0;
+        else if (currentLanguage == Languages.English)
+            langauageIndex = 1;
 #else
         safeMode = true;
         GetArguments();
 #endif
-        if (currentLanguage == Languages.Polski)
+        if(Application.systemLanguage == SystemLanguage.Polish)
             langauageIndex = 0;
-        else if (currentLanguage == Languages.English)
+        else
             langauageIndex = 1;
         introductionScreens = false;
         ResetGameVolume();
@@ -152,8 +156,8 @@ public class GameplaySettings : ScriptableObject
                 arguments[i] = RemoveSpecialCharacters(arguments[i]);
                 if (arguments[i] == "TrueGame")
                     safeMode = false;
-                if (arguments[i] == "EN")
-                    langauageIndex = 1;
+                //if (arguments[i] == "EN")
+                //    langauageIndex = 1;
             }
         }
     }

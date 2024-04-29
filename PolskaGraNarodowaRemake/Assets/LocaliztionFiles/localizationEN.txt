@@ -104,3 +104,7 @@ Fly as far as you can, defeat your enemy
 You have just launched the uncensored version of the game. The author is not liable for any moral damage caused by the content of the game.<br>The game is a work of fiction and is not intended to offend anyone's feelings. You play at your own risk.<br>If you started this version of the game by accident, remove the "TrueGame" argument from the website address or exe file.
 //Disclaimer - Title
 ATTENTION!
+//Tutorial - Question
+This is your first playthrough. Do you want to play a tutorial level?
+//Tutorial - Title
+Tutorial

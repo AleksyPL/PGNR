@@ -104,3 +104,7 @@ Leć jak najdalej, pokonaj przeciwnika
 Zignoruj tą wiadomość.
 //Disclaimer - Title
 Zignoruj tą wiadomość
+//Tutorial - Question
+Jest to twoja pierwsza rozgrywka. Czy chcesz rozegrać samouczek?
+//Tutorial - Title
+Samouczek

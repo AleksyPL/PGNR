@@ -74,6 +74,9 @@ public class Localization : ScriptableObject
     //disclaimer
     internal string disclaimerTitle;
     internal string disclaimerMessage;
+    //tutorial
+    internal string tutorialQuestion;
+    internal string tutorialTitle;
 
     internal void LoadData()
     {
@@ -147,6 +150,9 @@ public class Localization : ScriptableObject
             //disclaimer
             disclaimerMessage = listOfAll[103];
             disclaimerTitle = listOfAll[105];
+            //tutorial
+            tutorialQuestion = listOfAll[107];
+            tutorialTitle = listOfAll[109];
         }
     }
 }

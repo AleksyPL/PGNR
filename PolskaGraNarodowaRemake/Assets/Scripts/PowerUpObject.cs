@@ -7,7 +7,7 @@ public class PowerUpObject : MonoBehaviour
     private GameModeManager gameModeManagerScript;
     public GameplaySettings gameplaySettings;
     public PowerUp currentPowerUpScriptableObject;
-    public enum PowerUp1
+    public enum PowerUpMode
     {
         Shield,
         GettingWastedXTimesQuicker,
@@ -16,7 +16,7 @@ public class PowerUpObject : MonoBehaviour
         FastPlane,
         InvertedSteering
     }
-    public PowerUp1 currentPowerUp;
+    public PowerUpMode currentPowerUp;
     void Start()
     {
         gameModeManagerScript = GameObject.Find("MasterController").GetComponent<GameModeManager>();
@@ -26,7 +26,7 @@ public class PowerUpObject : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Plane") && gameModeManagerScript.ReturnPlayerStateObject(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject)) == GameModeManager.PlayerState.flying)
         {
-            if(currentPowerUp == PowerUp1.Shield)
+            if(currentPowerUp == PowerUpMode.Shield)
             {
                 gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).cameraGameObject.GetComponent<CameraManager>().PlayCameraFocusAnimation();
                 if (!gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).shieldEnabled)
@@ -45,7 +45,7 @@ public class PowerUpObject : MonoBehaviour
                     gameModeManagerScript.flightControllerScript.uiManagerScript.ResetDurationForTheUIPowerUpClock(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject), currentPowerUpScriptableObject.powerUpName);
                 }
             }
-            else if (currentPowerUp == PowerUp1.FastPlane)
+            else if (currentPowerUp == PowerUpMode.FastPlane)
             {
                 gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).cameraGameObject.GetComponent<CameraManager>().PlayCameraFocusAnimation();
                 if (!gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).speedEnabled)
@@ -64,7 +64,7 @@ public class PowerUpObject : MonoBehaviour
                     gameModeManagerScript.flightControllerScript.uiManagerScript.ResetDurationForTheUIPowerUpClock(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject), currentPowerUpScriptableObject.powerUpName);
                 }
             }
-            else if (currentPowerUp == PowerUp1.SoberUp)
+            else if (currentPowerUp == PowerUpMode.SoberUp)
             {
                 gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).cameraGameObject.GetComponent<CameraManager>().PlayCameraFocusAnimation();
                 gameModeManagerScript.flightControllerScript.uiManagerScript.UpdateBottlesCounter(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject));
@@ -82,7 +82,7 @@ public class PowerUpObject : MonoBehaviour
                 else
                     gameModeManagerScript.flightControllerScript.uiManagerScript.DisplayPowerUpDescriptionOnHUD(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject), currentPowerUpScriptableObject.powerUpAlternativeDescription[gameplaySettings.langauageIndex]);
             }
-            else if (currentPowerUp == PowerUp1.MultiShot)
+            else if (currentPowerUp == PowerUpMode.MultiShot)
             {
                 gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).cameraGameObject.GetComponent<CameraManager>().PlayCameraFocusAnimation();
                 if (!gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).multiShotEnabled)
@@ -100,7 +100,7 @@ public class PowerUpObject : MonoBehaviour
                     gameModeManagerScript.flightControllerScript.uiManagerScript.ResetDurationForTheUIPowerUpClock(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject), currentPowerUpScriptableObject.powerUpName);
                 }
             }
-            else if (currentPowerUp == PowerUp1.InvertedSteering)
+            else if (currentPowerUp == PowerUpMode.InvertedSteering)
             {
                 gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).cameraGameObject.GetComponent<CameraManager>().PlayCameraShakeAnimation();
                 if (!gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).invertedSteeringEnabled)
@@ -123,7 +123,7 @@ public class PowerUpObject : MonoBehaviour
 
                 }
             }
-            else if (currentPowerUp == PowerUp1.GettingWastedXTimesQuicker)
+            else if (currentPowerUp == PowerUpMode.GettingWastedXTimesQuicker)
             {
                 gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).cameraGameObject.GetComponent<CameraManager>().PlayCameraShakeAnimation();
                 if(!gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).gettingWastedXTimesMoreEnabled)

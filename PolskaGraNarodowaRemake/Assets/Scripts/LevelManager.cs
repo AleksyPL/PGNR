@@ -7,7 +7,6 @@ public class LevelManager : MonoBehaviour
 {
     public GameObject airportPrefab;
     public GameObject trotylLauncherPrefab;
-    //public GameObject fogPrefab;
     public GameObject endlessModeSpawnerPrefab;
     public GameObject[] powerUpsPrefabs;
     public GameObject obstaclesAndProjectilesParentGameObject;
@@ -28,7 +27,7 @@ public class LevelManager : MonoBehaviour
     {
         flightControllerScript = GetComponent<FlightController>();
         CalculatePlayerBoundries(flightControllerScript.GetComponent<GameModeManager>().playerOnePlane);
-        if (flightControllerScript.GetComponent<GameModeManager>().currentGameMode != GameModeManager.GameMode.singleplayerClassic && flightControllerScript.GetComponent<GameModeManager>().currentGameMode != GameModeManager.GameMode.singleplayerEndless)
+        if (flightControllerScript.GetComponent<GameModeManager>().currentGameMode == GameModeManager.GameMode.versusClassic || flightControllerScript.GetComponent<GameModeManager>().currentGameMode == GameModeManager.GameMode.versusEndless)
         {
             CalculatePlayerBoundries(flightControllerScript.GetComponent<GameModeManager>().playerTwoPlane);
             distanceBetweenPlayers = Vector2.Distance(new Vector2(flightControllerScript.GetComponent<GameModeManager>().playerOnePlane.groundLevelHeight, 0), new Vector2(flightControllerScript.GetComponent<GameModeManager>().playerTwoPlane.groundLevelHeight, 0));
@@ -70,6 +69,7 @@ public class LevelManager : MonoBehaviour
         }
         if (!flightControllerScript.audioManagerScript.IsTheSoundCurrentlyPlaying("EngineSound", flightControllerScript.audioManagerScript.localSFX))
             flightControllerScript.audioManagerScript.PlaySound("EngineSound", flightControllerScript.audioManagerScript.localSFX);
+        //singleplayer
         if (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerClassic || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusClassic)
         {
             flightControllerScript.gameModeScript.playerOnePlane.planeGameObject.transform.position = new Vector3(0 - flightControllerScript.rewardAndProgressionManagerScript.levelSafeSpace, (flightControllerScript.gameModeScript.playerOnePlane.topScreenHeight + flightControllerScript.gameModeScript.playerOnePlane.groundLevelHeight) / 2, 0);
@@ -87,6 +87,7 @@ public class LevelManager : MonoBehaviour
                 MoveObstaclesFromOneObjectToAnother(ref obstaclesBufferGameObject, ref obstaclesAndProjectilesParentGameObject);
             SpawnAirpot(flightControllerScript.gameModeScript.playerOnePlane);
         }
+        //multiplayer
         else if (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerEndless || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusEndless)
         {
             numberOfObstacles = 5;
@@ -110,6 +111,11 @@ public class LevelManager : MonoBehaviour
                 MoveObstaclesFromOneObjectToAnother(ref obstaclesBufferGameObject, ref obstaclesAndProjectilesParentGameObject);
                 SpawnEndlessModeSpawner(flightControllerScript.gameModeScript.playerOnePlane, obstaclesAndProjectilesParentGameObject, (int)(flightControllerScript.rewardAndProgressionManagerScript.playerOneProgress.levelProgressCounter / flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance) + (float)(0.25 * flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance));
             }
+        }
+        //tutorial
+        else
+        {
+
         }
         if (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerClassic || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusClassic)
             if(flightControllerScript.gameplaySettings.safeMode)
