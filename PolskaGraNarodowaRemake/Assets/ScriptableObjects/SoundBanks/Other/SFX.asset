@@ -55,3 +55,17 @@ MonoBehaviour:
     pitch: 1
     looping: 0
     source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 1043c4fceea28ae4b87ca4d6907a802a, type: 3}
+    name: Rewind
+    volumePC: 1
+    volumeMobile: 1
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 88ba2d073fd7e904ab4982d96b8f436a, type: 3}
+    name: Rewind_faster
+    volumePC: 1
+    volumeMobile: 1
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}

@@ -134,7 +134,7 @@ public class UIManager : MonoBehaviour
         gameSummaryScoreTitle.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].regularHudEarned0;
         gameSummaryYearTitle.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].pauseScreenLevelTitle;
         playerOneUI.gameSummaryBottlesGameObject.GetComponent<TMP_Text>().text = flightControllerScript.gameModeScript.playerOnePlane.bottlesDrunkTotal.ToString();
-        playerOneUI.gameSummaryScoreGameObject.GetComponent<TMP_Text>().text = (flightControllerScript.gameModeScript.playerOnePlane.gameScore + gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].regularHudEarned1).ToString();
+        playerOneUI.gameSummaryScoreGameObject.GetComponent<TMP_Text>().text = ((int)flightControllerScript.gameModeScript.playerOnePlane.gameScore + gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].regularHudEarned1).ToString();
         if (flightControllerScript.gameplaySettings.safeMode)
             playerOneUI.gameSummaryYearGameObject.GetComponent<TMP_Text>().text = flightControllerScript.rewardAndProgressionManagerScript.levelCounter.ToString();
         else
@@ -148,7 +148,7 @@ public class UIManager : MonoBehaviour
             playerOneUI.gameSummaryPlayerIndicator.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].playerOneIndicator;
             playerTwoUI.gameSummaryPlayerIndicator.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].playerTwoIndicator;
             playerTwoUI.gameSummaryBottlesGameObject.GetComponent<TMP_Text>().text = flightControllerScript.gameModeScript.playerTwoPlane.bottlesDrunkTotal.ToString();
-            playerTwoUI.gameSummaryScoreGameObject.GetComponent<TMP_Text>().text = (flightControllerScript.gameModeScript.playerTwoPlane.gameScore + gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].regularHudEarned1).ToString();
+            playerTwoUI.gameSummaryScoreGameObject.GetComponent<TMP_Text>().text = ((int)flightControllerScript.gameModeScript.playerTwoPlane.gameScore + gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].regularHudEarned1).ToString();
             if (flightControllerScript.gameplaySettings.safeMode)
                 playerTwoUI.gameSummaryYearGameObject.GetComponent<TMP_Text>().text = flightControllerScript.rewardAndProgressionManagerScript.levelCounter.ToString();
             else
@@ -189,7 +189,7 @@ public class UIManager : MonoBehaviour
     }
     internal void UpdateScoreCounter(Plane plane)
     {
-        ReturnPlayersUIObject(plane).regularHUDScoreGameObject.GetComponent<TMP_Text>().text = plane.gameScore.ToString();
+        ReturnPlayersUIObject(plane).regularHUDScoreGameObject.GetComponent<TMP_Text>().text = ((int)plane.gameScore).ToString();
     }
     private void EnablePauseScreen()
     {
@@ -518,6 +518,7 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 0;
         tutorialScreenEnabled = true;
         tutorialMainGameObject.SetActive(true);
+        flightControllerScript.tutorialManagerScript.currentState = TutorialManager.TutorialPlayerState.Frozen;
         if (UnityEngine.Device.Application.isMobilePlatform)
         {
             TurnOffTouchScreenButtons();
@@ -526,7 +527,15 @@ public class UIManager : MonoBehaviour
         }
         else
             eventSystem.SetSelectedGameObject(tutorialOKButton);
-        flightControllerScript.tutorialManagerScript.SpawnTutorialInfo(flightControllerScript.tutorialManagerScript.checkpointNumber + 1);
+        if (flightControllerScript.tutorialManagerScript.checkpointFinished && flightControllerScript.tutorialManagerScript.checkpointGoalAchieved)
+        {
+            flightControllerScript.tutorialManagerScript.checkpointNumber++;
+            flightControllerScript.tutorialManagerScript.SpawnTutorialInfo(flightControllerScript.tutorialManagerScript.checkpointNumber + 1);
+        }
+        else if(!flightControllerScript.tutorialManagerScript.checkpointFinished && !flightControllerScript.tutorialManagerScript.checkpointGoalAchieved)
+            flightControllerScript.tutorialManagerScript.SpawnTutorialInfo(flightControllerScript.tutorialManagerScript.checkpointNumber + 1);
+        else if (flightControllerScript.tutorialManagerScript.checkpointFinished && !flightControllerScript.tutorialManagerScript.checkpointGoalAchieved)
+            flightControllerScript.tutorialManagerScript.SpawnTutorialInfo(0);
         tutorialTitleGameObject.GetComponentInChildren<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].tutorialTitle;
         flightControllerScript.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightControllerScript.audioManagerScript.localSFX);
         flightControllerScript.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightControllerScript.audioManagerScript.localOneLinersSounds);
@@ -535,12 +544,33 @@ public class UIManager : MonoBehaviour
     }
     public void DisableTutorialScreen()
     {
-        flightControllerScript.tutorialManagerScript.OKButtonLogic();
         Time.timeScale = 1;
-        tutorialScreenEnabled = false;
-        tutorialMainGameObject.SetActive(false);
-        flightControllerScript.uiManagerScript.playerOneUI.regularHUDMainGameObject.SetActive(true);
-        flightControllerScript.audioManagerScript.ResumeAllPausedSounds();
+        //final checkpoint
+        if (flightControllerScript.tutorialManagerScript.checkpointNumber == 10)
+            flightControllerScript.levelManagerScript.BackToMainMenu();
+        else
+        {
+            if (!flightControllerScript.tutorialManagerScript.checkpointFinished && !flightControllerScript.tutorialManagerScript.checkpointGoalAchieved)
+                flightControllerScript.tutorialManagerScript.currentState = TutorialManager.TutorialPlayerState.Flying;
+            else if (flightControllerScript.tutorialManagerScript.checkpointFinished && flightControllerScript.tutorialManagerScript.checkpointGoalAchieved)
+            {
+                flightControllerScript.tutorialManagerScript.checkpointFinished = false;
+                flightControllerScript.tutorialManagerScript.checkpointGoalAchieved = false;
+                flightControllerScript.tutorialManagerScript.currentState = TutorialManager.TutorialPlayerState.Flying;
+            }
+            else if (flightControllerScript.tutorialManagerScript.checkpointFinished && !flightControllerScript.tutorialManagerScript.checkpointGoalAchieved)
+            {
+                flightControllerScript.tutorialManagerScript.currentState = TutorialManager.TutorialPlayerState.Reverting;
+                if (flightControllerScript.tutorialManagerScript.elapsedTime > 1 && flightControllerScript.tutorialManagerScript.elapsedTime < 2)
+                    flightControllerScript.audioManagerScript.PlaySound("Rewind_faster", flightControllerScript.audioManagerScript.localSFX);
+                else if (flightControllerScript.tutorialManagerScript.elapsedTime >= 2)
+                    flightControllerScript.audioManagerScript.PlaySound("Rewind", flightControllerScript.audioManagerScript.localSFX);
+            }
+            Destroy(tutorialMainGameObject.transform.Find("TutorialScreen").gameObject);
+            tutorialScreenEnabled = false;
+            tutorialMainGameObject.SetActive(false);
+            flightControllerScript.uiManagerScript.playerOneUI.regularHUDMainGameObject.SetActive(true);
+        }
     }
     public void QuitGame()
     {

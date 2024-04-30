@@ -52,13 +52,18 @@ public class HitDetectionManager : MonoBehaviour
             }
             else if(transform.CompareTag("Ground"))
             {
-                if (gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).godMode == false || gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).currentPlaneState == PlaneState.damaged)
+                if (gameModeManagerScript.currentGameMode == GameModeManager.GameMode.tutorial)
+                    OperateTutorialCheckpoint();
+                else
                 {
-                    if (gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).currentPlaneState!= PlaneState.crashed)
-                        gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).DestroyThePlane();
-                    if (gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).speedEnabled)
-                        gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).speedEnabled = false;
-                    gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).TurnOffTheShield();
+                    if (gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).godMode == false || gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).currentPlaneState == PlaneState.damaged)
+                    {
+                        if (gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).currentPlaneState != PlaneState.crashed)
+                            gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).DestroyThePlane();
+                        if (gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).speedEnabled)
+                            gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).speedEnabled = false;
+                        gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).TurnOffTheShield();
+                    }
                 }
             }
             else if(transform.CompareTag("KillPlane"))
@@ -112,15 +117,24 @@ public class HitDetectionManager : MonoBehaviour
             }
             else if (transform.name == "TutorialCheckpoint" && gameModeManagerScript.currentGameMode == GameModeManager.GameMode.tutorial)
             {
-                gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpointFinished = true;
-                gameModeManagerScript.flightControllerScript.uiManagerScript.EnableTutorialScreen();
-                if(gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpointGoalAchieved)
-                    Destroy(collision.transform.gameObject);
-                else
-                    gameModeManagerScript.flightControllerScript.tutorialManagerScript.CalculatePositionRevertDuration();
+                OperateTutorialCheckpoint();   
             }
         }
         else if((collision.gameObject.CompareTag("Obstacle") || collision.gameObject.CompareTag("PowerUp")) && transform.gameObject.CompareTag("KillPlane"))
             Destroy(collision.transform.gameObject);
+    }
+    private void OperateTutorialCheckpoint()
+    {
+        gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpointFinished = true;
+        gameModeManagerScript.flightControllerScript.tutorialManagerScript.scoreJustBeforeTheRewind = gameModeManagerScript.playerOnePlane.gameScore;
+        gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.playerOneProgress.scorePointsCounter = 0;
+        gameModeManagerScript.flightControllerScript.uiManagerScript.EnableTutorialScreen();
+        if (gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpointGoalAchieved)
+        {
+            Destroy(this.transform.gameObject);
+            gameModeManagerScript.flightControllerScript.tutorialManagerScript.scoreAtTheBeginningOfTheCheckpoint = gameModeManagerScript.playerOnePlane.gameScore;
+        }
+        else
+            gameModeManagerScript.flightControllerScript.tutorialManagerScript.CalculateRevertDuration();
     }
 }

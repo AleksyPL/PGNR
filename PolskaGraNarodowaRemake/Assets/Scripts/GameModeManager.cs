@@ -130,7 +130,8 @@ public class GameModeManager : MonoBehaviour
         SetProgressionFlags(playerOnePlane);
         if (currentGameMode != GameMode.singleplayerClassic && currentGameMode != GameMode.singleplayerEndless)
             SetProgressionFlags(playerTwoPlane);
-        CheckAndPlayOneLinerSound();
+        if(currentGameMode != GameMode.tutorial)
+            CheckAndPlayOneLinerSound();
         if(!flightControllerScript.rewardAndProgressionManagerScript.toNewLevel && (((currentGameMode == GameMode.singleplayerClassic || currentGameMode == GameMode.singleplayerEndless) && playerOneState == PlayerState.landed) || ((currentGameMode == GameMode.versusClassic || currentGameMode == GameMode.versusEndless) && playerOneState == GameModeManager.PlayerState.landed && playerTwoState == GameModeManager.PlayerState.landed)))
         {
             flightControllerScript.rewardAndProgressionManagerScript.toNewLevel = true;

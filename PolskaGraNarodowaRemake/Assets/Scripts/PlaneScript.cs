@@ -53,7 +53,7 @@ internal class Plane
     internal bool attackKeyReleased;
     internal bool activeBottleWarning;
     //Score
-    internal int gameScore;
+    internal float gameScore;
     internal bool rewardForLandingAdded;
     //PowerUps
     internal bool shieldEnabled;

@@ -39,7 +39,7 @@ Wybierz swój samolot
 //Plot - Plot
 Musisz polecieć nowym Polskim narodowym Drimlajnerem daleko na Wschód z Panem Prezydentem na pokładzie. <br><br>Nie licz jednak na to, że Wschód pozwoli ci tak łatwo wylądować! Omiń mgły, zetnij brzozy, zniszcz trotyl. Twoją bronią jest wódka. Nieograniczone ilości, bo to polski samolot. <br><br>Ale pamiętaj: im więcej pijesz, tym trudniej się leci... Przed wyrzuceniem wódki, wypij trochę. Lżejsza butelka dalej leci. <br><br>Pokaż Panu Prezydentowi, że Polak potrafi!
 //Controls - Up
-Ruch w góre
+Ruch w górę
 //Controls - Down
 Ruch w dół
 //Controls - Shoot

@@ -39,7 +39,7 @@ Wybierz swój samolot
 //Plot - Plot
 Musisz polecieć nowym Polskim samolotem daleko na Wschód. <br><br>Nie licz jednak na to, że to będzie łatwe zadanie. Omijaj przeszkody na swojej drodze, oraz niszcz je śmieciami znalezionymi na pokładzie. <br><br>Ale pamiętaj: aparatura samolotu ustawiona jest na większy ciężar samolotu, im wiecej wyrzucisz śmieci, tym trudniej będzie się leciało. <br><br>Pokaż wszystkim jakim dobrym jesteś pilotem.
 //Controls - Up
-Ruch w góre
+Ruch w górę
 //Controls - Down
 Ruch w dół
 //Controls - Shoot

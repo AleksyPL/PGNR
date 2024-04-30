@@ -124,10 +124,10 @@ public class FlightController : MonoBehaviour
             }
         }
     }
-    internal void RevertPlanePosition(Plane plane, Vector3 newPlanePosition)
+    internal void RevertPlanePosition(Plane plane, Vector3 newPlanePosition, PlaneState newPlaneState ,float newPlaneTilt)
     {
-        plane.verticalMovementKeys = 0;
         plane.planeGameObject.transform.position = newPlanePosition;
+        plane.planeRendererScript.ChangeTilt(newPlaneState, newPlaneTilt);
     }
     private void MovePlaneDamaged(Plane plane)
     {
@@ -139,7 +139,7 @@ public class FlightController : MonoBehaviour
     }
     private void Update()
     {
-        if(!uiManagerScript.pauseScreenEnabled && !uiManagerScript.timerBeforeTheFlightEnabled && !gameModeScript.someoneWon)
+        if(!uiManagerScript.pauseScreenEnabled && !uiManagerScript.tutorialScreenEnabled && !uiManagerScript.timerBeforeTheFlightEnabled && !gameModeScript.someoneWon)
         {
             if (((gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerClassic || gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerEndless) && (gameModeScript.playerOnePlane.currentPlaneState == PlaneState.standard || gameModeScript.playerOnePlane.currentPlaneState == PlaneState.wheelsOn)) || (gameModeScript.currentGameMode == GameModeManager.GameMode.tutorial && tutorialManagerScript.currentState == TutorialManager.TutorialPlayerState.Flying))
             {
