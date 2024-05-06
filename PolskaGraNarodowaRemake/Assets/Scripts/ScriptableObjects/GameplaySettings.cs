@@ -82,6 +82,7 @@ public class GameplaySettings : ScriptableObject
     public bool scriptableObjectSafeModOverride;
     internal bool safeMode;
     internal bool introductionScreens;
+    internal bool tutorialScreen;
 
     private void OnEnable()
     {
@@ -100,6 +101,7 @@ public class GameplaySettings : ScriptableObject
         else
             langauageIndex = 1;
         introductionScreens = false;
+        tutorialScreen = false;
         ResetGameVolume();
         ResetPlayerSkins();
         ResetMobileData();

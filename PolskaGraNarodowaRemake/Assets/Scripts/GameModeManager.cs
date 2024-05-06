@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameModeManager : MonoBehaviour
 {
@@ -186,5 +187,11 @@ public class GameModeManager : MonoBehaviour
             flightControllerScript.gameplaySettings.cameraPositionXOffset = offsetX * flightControllerScript.gameplaySettings.cameraPositionXOffsetPersentageSingleMobile;
         else if (currentGameMode == GameMode.versusClassic || currentGameMode == GameMode.versusEndless)
             flightControllerScript.gameplaySettings.cameraPositionXOffset = offsetX * flightControllerScript.gameplaySettings.camerePositionXOffsetPersentageMulti;
+    }
+    public void BackToMainMenu()
+    {
+        Time.timeScale = 1;
+        flightControllerScript.audioManagerScript.StopPlayingAllPausedSounds();
+        SceneManager.LoadScene("MainMenu");
     }
 }

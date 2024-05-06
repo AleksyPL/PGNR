@@ -1749,6 +1749,9 @@ MonoBehaviour:
   exitWarningYesButtonGameObject: {fileID: 970519811}
   exitWarningNoButtonGameObject: {fileID: 1713774018}
   touchScreenMainGameObject: {fileID: 874094663}
+  tutorialMainGameObject: {fileID: 0}
+  tutorialTitleGameObject: {fileID: 0}
+  tutorialOKButton: {fileID: 0}
 --- !u!114 &2084290472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1993,7 +1996,7 @@ PrefabInstance:
     - target: {fileID: 2600841779091462278, guid: d52898fbef1ba7f4aaf71c2cc861a25b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2084290469}
+      objectReference: {fileID: 2084290473}
     - target: {fileID: 2600841779211064962, guid: d52898fbef1ba7f4aaf71c2cc861a25b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

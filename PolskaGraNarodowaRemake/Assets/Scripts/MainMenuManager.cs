@@ -31,6 +31,7 @@ public class MainMenuManager : MonoBehaviour
     public GameObject mainMenuPlayGameButton;
     public GameObject mainMenuPlotMenuButton;
     public GameObject mainMenuControlsMenuButton;
+    public GameObject mainMenuTutorialMenuButton;
     public GameObject mainMenuExitGameButton;
     public GameObject mainMenuOptionsMenuButton;
     [Header("Options panel")]
@@ -59,6 +60,12 @@ public class MainMenuManager : MonoBehaviour
     public GameObject disclaimerPanelMessageGameObject;
     public GameObject disclaimerPanelTitleGameObject;
     public GameObject disclaimerPanelAcceptanceButtonGameObject;
+    [Header("Tutorial panel")]
+    public GameObject tutorialPanelGameObject;
+    public GameObject tutorialPanelTitle;
+    public GameObject tutorialPanelMessage;
+    public GameObject tutorialPanelYesButton;
+    public GameObject tutorialPanelNoButton;
     void Start()
     {
         Application.targetFrameRate = 144;
@@ -85,6 +92,7 @@ public class MainMenuManager : MonoBehaviour
         mainMenuOptionsMenuButton.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuOptions;
         mainMenuExitGameButton.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuQuitGame;
         mainMenuPlotMenuButton.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].mainMenuPlot;
+        mainMenuTutorialMenuButton.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].tutorialTitle;
         gameModeSelectionMenuBackToMainMenuButton.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].backToMainMenu;
         gameModeSelectionMenuTitleGameObject.GetComponent<Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].gameModeSelectionMenuTitle;
         startSinglePlayerClassicModeMenuButton.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].gameModeSelectionMenuSinglePlayerClassic;
@@ -101,6 +109,13 @@ public class MainMenuManager : MonoBehaviour
             disclaimerPanelAcceptanceButtonGameObject.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].acceptanceMessage;
             disclaimerPanelTitleGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].disclaimerTitle;
             disclaimerPanelMessageGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].disclaimerMessage;
+        }
+        if(!gameplaySettings.tutorialScreen)
+        {
+            tutorialPanelTitle.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].tutorialTitle;
+            tutorialPanelMessage.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].tutorialQuestion;
+            tutorialPanelYesButton.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].warningYes;
+            tutorialPanelNoButton.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].warningNo;
         }
     }
     private void Update()
@@ -121,6 +136,10 @@ public class MainMenuManager : MonoBehaviour
     public void StartGameMultiPlayer()
     {
         SceneManager.LoadScene("MultiPlayer");
+    }
+    public void StartTutorial()
+    {
+        SceneManager.LoadScene("Tutorial");
     }
     public void QuitGame()
     {
@@ -150,15 +169,20 @@ public class MainMenuManager : MonoBehaviour
     public void EnableGameModeSelectorMenu()
     {
         DisableMainMenuButtons();
-        if (UnityEngine.Device.Application.isMobilePlatform)
-        {
-            startMultiPlayerClassicModeMenuButton.SetActive(false);
-            startMultiPlayerEndlessModeMenuButton.SetActive(false);
-            gameModeSelectorMissingGameModesGameObject.SetActive(true);
-        }
+        if (!gameplaySettings.tutorialScreen)
+            EnableTutorialScreen();
         else
-            eventSystem.SetSelectedGameObject(startSinglePlayerClassicModeMenuButton);
-        gameModeSelectorMenuGameObject.SetActive(true);
+        {
+            if (UnityEngine.Device.Application.isMobilePlatform)
+            {
+                startMultiPlayerClassicModeMenuButton.SetActive(false);
+                startMultiPlayerEndlessModeMenuButton.SetActive(false);
+                gameModeSelectorMissingGameModesGameObject.SetActive(true);
+            }
+            else
+                eventSystem.SetSelectedGameObject(startSinglePlayerClassicModeMenuButton);
+            gameModeSelectorMenuGameObject.SetActive(true);
+        }
     }
     public void DisableGameModeSelectorMenu()
     {
@@ -231,6 +255,19 @@ public class MainMenuManager : MonoBehaviour
     {
         disclaimerPanelGameObject.SetActive(false);
         EnablePlotPanel();
+    }
+    private void EnableTutorialScreen()
+    {
+        gameplaySettings.tutorialScreen = true;
+        if (!UnityEngine.Device.Application.isMobilePlatform)
+            eventSystem.SetSelectedGameObject(tutorialPanelYesButton);
+        tutorialPanelGameObject.SetActive(true);
+    }
+    public void DisableTutorialScreen()
+    {
+        tutorialPanelGameObject.SetActive(false);
+        EnableGameModeSelectorMenu();
+        UpdateUIButtonsWithLocalization();
     }
     public void LaunchTheGame()
     {

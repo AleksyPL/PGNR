@@ -35,8 +35,9 @@ internal class Plane
     internal int difficultyImpulseDirection;
     internal float difficultyImpulsTimeCurrent;
     internal float difficultuImpulseCounter;
-    internal int bottlesDrunk;
-    internal int bottlesDrunkTotal;
+    internal float bottlesDrunk;
+    internal float bottlesDrunkTotal;
+    internal bool canThrowBottles;
     //Camera borders
     internal float groundLevelHeight;
     internal float topScreenHeight;
@@ -83,6 +84,7 @@ internal class Plane
         isTouchingAirport = false;
         isTouchingGround = false;
         tiresSFXPlayed = false;
+        canThrowBottles = true;
         currentPlaneSpeed = gameplaySettings.defaultPlaneSpeed;
         altitudeChangeForce = gameplaySettings.altitudeChangeForce;
         rewardForLandingAdded = false;

@@ -22,12 +22,8 @@ public class TutorialManager : MonoBehaviour
     internal float elapsedTime;
     internal float scoreAtTheBeginningOfTheCheckpoint;
     internal float scoreJustBeforeTheRewind;
-    //[Range(0.1f, 0.99f)]
-    //public float positionRevertMinDuration;
-    //[Range(1, 5)]
-    //public float positionRevertMaxDuration;
-    //[Range(0.01f,1)]
-    //public float positionRevertSpeed;
+    internal float bottlesAtTheBeginningOfTheCheckpoint;
+    internal float bottlesJustBeforeTheRewind;
     private float positonRevertTime;
     private float positionRevertLerpValue;
     //Checkpoint facts
@@ -48,6 +44,8 @@ public class TutorialManager : MonoBehaviour
         checkpointGoalAchieved = false;
         scoreAtTheBeginningOfTheCheckpoint = flightControllerScript.gameModeScript.playerOnePlane.gameScore;
         scoreJustBeforeTheRewind = scoreAtTheBeginningOfTheCheckpoint;
+        bottlesAtTheBeginningOfTheCheckpoint = flightControllerScript.gameModeScript.playerOnePlane.bottlesDrunk;
+        bottlesJustBeforeTheRewind = bottlesAtTheBeginningOfTheCheckpoint;
     }
     void Update()
     {
@@ -60,6 +58,7 @@ public class TutorialManager : MonoBehaviour
             {
                 CalculateNewPlanePosition();
                 CalculateNewPlayerScore();
+                CalculateNewPlayerBottlesDrunk();
             }
             else
                 ClearRewindData();
@@ -74,8 +73,6 @@ public class TutorialManager : MonoBehaviour
     }
     internal void CalculateRevertDuration()
     {
-        //positonRevertTime = elapsedTime / positionRevertMaxDuration / positionRevertSpeed;
-        //positonRevertTime = Mathf.Clamp(positonRevertTime, positionRevertMinDuration, positionRevertMaxDuration);
         if (elapsedTime > 1 && elapsedTime < 2)
             positonRevertTime = 1;
         else if (elapsedTime >= 2)
@@ -91,6 +88,12 @@ public class TutorialManager : MonoBehaviour
         float newScore = Mathf.Lerp(scoreAtTheBeginningOfTheCheckpoint, scoreJustBeforeTheRewind, 1 - positionRevertLerpValue);
         flightControllerScript.gameModeScript.playerOnePlane.gameScore = newScore;
         flightControllerScript.uiManagerScript.UpdateScoreCounter(flightControllerScript.gameModeScript.playerOnePlane);
+    }
+    private void CalculateNewPlayerBottlesDrunk()
+    {
+        float newBottles = Mathf.Lerp(bottlesAtTheBeginningOfTheCheckpoint, bottlesJustBeforeTheRewind, 1 - positionRevertLerpValue);
+        flightControllerScript.gameModeScript.playerOnePlane.bottlesDrunk = newBottles;
+        flightControllerScript.uiManagerScript.UpdateBottlesCounter(flightControllerScript.gameModeScript.playerOnePlane);
     }
     private void ClearRewindData()
     {

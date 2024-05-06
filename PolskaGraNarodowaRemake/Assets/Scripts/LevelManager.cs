@@ -220,10 +220,19 @@ public class LevelManager : MonoBehaviour
         GameObject airport = Instantiate(airportPrefab, new Vector3(flightControllerScript.rewardAndProgressionManagerScript.levelLandingSpace + flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance, plane.groundLevelHeight + airportPrefab.GetComponent<BoxCollider2D>().size.y / 2, 0), Quaternion.identity, obstaclesAndProjectilesParentGameObject.transform);
         airport.name = "airport";
     }
-    public void BackToMainMenu()
+    internal void CleanLevel(Plane plane)
     {
-        Time.timeScale = 1;
-        flightControllerScript.audioManagerScript.StopPlayingAllPausedSounds();
-        SceneManager.LoadScene("MainMenu");
+        GameObject killPlane = plane.cameraGameObject.transform.Find("KillPlaneObjects").gameObject;
+        Vector3 initialPosiont = killPlane.transform.position;
+        while(killPlane.transform.position.x >= initialPosiont.x - 60)
+        {
+            killPlane.transform.position = new Vector3((float)(killPlane.transform.position.x - 0.1), killPlane.transform.position.y, killPlane.transform.position.z);
+        }
+        killPlane.transform.position = initialPosiont;
+        while (killPlane.transform.position.x <= initialPosiont.x + 60)
+        {
+            killPlane.transform.position = new Vector3((float)(killPlane.transform.position.x + 0.1), killPlane.transform.position.y, killPlane.transform.position.z);
+        }
+        killPlane.transform.position = initialPosiont;
     }
 }

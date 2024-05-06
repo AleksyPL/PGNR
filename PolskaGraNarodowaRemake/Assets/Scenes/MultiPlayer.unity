@@ -2011,7 +2011,7 @@ PrefabInstance:
     - target: {fileID: 8535687717261512244, guid: af37a67e2c14f374eb7d00afa5eed0e1, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2134856613}
+      objectReference: {fileID: 2134856611}
     - target: {fileID: 8535687717771846009, guid: af37a67e2c14f374eb7d00afa5eed0e1, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2531,6 +2531,9 @@ MonoBehaviour:
   exitWarningYesButtonGameObject: {fileID: 2097291906}
   exitWarningNoButtonGameObject: {fileID: 2097291907}
   touchScreenMainGameObject: {fileID: 0}
+  tutorialMainGameObject: {fileID: 0}
+  tutorialTitleGameObject: {fileID: 0}
+  tutorialOKButton: {fileID: 0}
 --- !u!114 &2134856619
 MonoBehaviour:
   m_ObjectHideFlags: 0

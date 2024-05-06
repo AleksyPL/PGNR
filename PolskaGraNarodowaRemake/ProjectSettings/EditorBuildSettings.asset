@@ -14,4 +14,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MultiPlayer.unity
     guid: 4c639b344599907498eb2a31981278e3
+  - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: 32de7394d5d332341b1fc358e243ba95
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0

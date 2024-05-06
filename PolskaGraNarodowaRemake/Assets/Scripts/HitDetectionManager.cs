@@ -127,12 +127,14 @@ public class HitDetectionManager : MonoBehaviour
     {
         gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpointFinished = true;
         gameModeManagerScript.flightControllerScript.tutorialManagerScript.scoreJustBeforeTheRewind = gameModeManagerScript.playerOnePlane.gameScore;
+        gameModeManagerScript.flightControllerScript.tutorialManagerScript.bottlesJustBeforeTheRewind = gameModeManagerScript.playerOnePlane.bottlesDrunk;
         gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.playerOneProgress.scorePointsCounter = 0;
         gameModeManagerScript.flightControllerScript.uiManagerScript.EnableTutorialScreen();
         if (gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpointGoalAchieved)
         {
             Destroy(this.transform.gameObject);
             gameModeManagerScript.flightControllerScript.tutorialManagerScript.scoreAtTheBeginningOfTheCheckpoint = gameModeManagerScript.playerOnePlane.gameScore;
+            gameModeManagerScript.flightControllerScript.tutorialManagerScript.bottlesAtTheBeginningOfTheCheckpoint = gameModeManagerScript.playerOnePlane.bottlesDrunk;
         }
         else
             gameModeManagerScript.flightControllerScript.tutorialManagerScript.CalculateRevertDuration();

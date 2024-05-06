@@ -183,9 +183,9 @@ public class UIManager : MonoBehaviour
     internal void UpdateBottlesCounter(Plane plane)
     {
         if ((flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerEndless || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusEndless) && (plane.bottlesDrunk != plane.bottlesDrunkTotal))
-            ReturnPlayersUIObject(plane).regularHUDBottlesGameObject.GetComponent<TMP_Text>().text = plane.bottlesDrunk.ToString() + " (" + plane.bottlesDrunkTotal.ToString() + ")";
+            ReturnPlayersUIObject(plane).regularHUDBottlesGameObject.GetComponent<TMP_Text>().text = ((int)plane.bottlesDrunk).ToString() + " (" + ((int)plane.bottlesDrunkTotal).ToString() + ")";
         else
-            ReturnPlayersUIObject(plane).regularHUDBottlesGameObject.GetComponent<TMP_Text>().text = plane.bottlesDrunk.ToString();
+            ReturnPlayersUIObject(plane).regularHUDBottlesGameObject.GetComponent<TMP_Text>().text = ((int)plane.bottlesDrunk).ToString();
     }
     internal void UpdateScoreCounter(Plane plane)
     {
@@ -547,7 +547,7 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 1;
         //final checkpoint
         if (flightControllerScript.tutorialManagerScript.checkpointNumber == 10)
-            flightControllerScript.levelManagerScript.BackToMainMenu();
+            flightControllerScript.gameModeScript.BackToMainMenu();
         else
         {
             if (!flightControllerScript.tutorialManagerScript.checkpointFinished && !flightControllerScript.tutorialManagerScript.checkpointGoalAchieved)
@@ -561,6 +561,7 @@ public class UIManager : MonoBehaviour
             else if (flightControllerScript.tutorialManagerScript.checkpointFinished && !flightControllerScript.tutorialManagerScript.checkpointGoalAchieved)
             {
                 flightControllerScript.tutorialManagerScript.currentState = TutorialManager.TutorialPlayerState.Reverting;
+                //flightControllerScript.levelManagerScript.CleanLevel(flightControllerScript.gameModeScript.playerOnePlane);
                 if (flightControllerScript.tutorialManagerScript.elapsedTime > 1 && flightControllerScript.tutorialManagerScript.elapsedTime < 2)
                     flightControllerScript.audioManagerScript.PlaySound("Rewind_faster", flightControllerScript.audioManagerScript.localSFX);
                 else if (flightControllerScript.tutorialManagerScript.elapsedTime >= 2)

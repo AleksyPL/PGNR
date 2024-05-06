@@ -141,10 +141,16 @@ public class FlightController : MonoBehaviour
     {
         if(!uiManagerScript.pauseScreenEnabled && !uiManagerScript.tutorialScreenEnabled && !uiManagerScript.timerBeforeTheFlightEnabled && !gameModeScript.someoneWon)
         {
-            if (((gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerClassic || gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerEndless) && (gameModeScript.playerOnePlane.currentPlaneState == PlaneState.standard || gameModeScript.playerOnePlane.currentPlaneState == PlaneState.wheelsOn)) || (gameModeScript.currentGameMode == GameModeManager.GameMode.tutorial && tutorialManagerScript.currentState == TutorialManager.TutorialPlayerState.Flying))
+            if ((gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerClassic || gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerEndless) && (gameModeScript.playerOnePlane.currentPlaneState == PlaneState.standard || gameModeScript.playerOnePlane.currentPlaneState == PlaneState.wheelsOn))
             {
                 MovePlaneStandardAndWheels(gameModeScript.playerOnePlane);
                 if (gameModeScript.playerOnePlane.currentPlaneState != PlaneState.wheelsOn)
+                    ThrowBottleOfVodka(gameModeScript.playerOnePlane);
+            }
+            else if (gameModeScript.currentGameMode == GameModeManager.GameMode.tutorial && tutorialManagerScript.currentState == TutorialManager.TutorialPlayerState.Flying && gameModeScript.playerOnePlane.currentPlaneState == PlaneState.standard || gameModeScript.playerOnePlane.currentPlaneState == PlaneState.wheelsOn)
+            {
+                MovePlaneStandardAndWheels(gameModeScript.playerOnePlane);
+                if (gameModeScript.playerOnePlane.currentPlaneState != PlaneState.wheelsOn && gameModeScript.playerOnePlane.canThrowBottles)
                     ThrowBottleOfVodka(gameModeScript.playerOnePlane);
             }
             if ((gameModeScript.currentGameMode == GameModeManager.GameMode.versusClassic || gameModeScript.currentGameMode == GameModeManager.GameMode.versusEndless) && (gameModeScript.playerTwoPlane.currentPlaneState == PlaneState.standard || gameModeScript.playerTwoPlane.currentPlaneState == PlaneState.wheelsOn))
