@@ -114,6 +114,7 @@ internal class Plane
         {
             int bottleVariant = Random.Range(0, gameplaySettings.bottlePrefab.Length);
             GameObject bottle = Object.Instantiate(gameplaySettings.bottlePrefab[bottleVariant], bottleSpawnerGameObject.transform.position, Quaternion.identity, projectilesParentGameObject.transform);
+            bottle.gameObject.name = "vodkaBottle";
             bottle.GetComponent<BottleOfVodka>().SetParentObject(this);
             bottle.GetComponent<Rigidbody2D>().AddForce(bottleThrowAngle * bottleThrowForce);
             int randomDirection = Random.Range(0, 2);

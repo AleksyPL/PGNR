@@ -77,6 +77,9 @@ public class Localization : ScriptableObject
     //tutorial
     internal string tutorialQuestion;
     internal string tutorialTitle;
+    internal string tutorialTryAgain;
+    internal string tutorialScreen0;
+    internal string tutorialScreen1;
 
     internal void LoadData()
     {
@@ -153,6 +156,9 @@ public class Localization : ScriptableObject
             //tutorial
             tutorialQuestion = listOfAll[107];
             tutorialTitle = listOfAll[109];
+            tutorialTryAgain = listOfAll[111];
+            tutorialScreen0 = listOfAll[113];
+            tutorialScreen1 = listOfAll[115];
         }
     }
 }

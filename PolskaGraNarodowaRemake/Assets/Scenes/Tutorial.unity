@@ -359,8 +359,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 0, y: -25}
+  m_SizeDelta: {x: 1700, y: 650}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &253150717 stripped
 GameObject:
@@ -449,7 +449,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -984,7 +984,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 293209925506309433, guid: 74ea28ced6d4d434194e6364b6ca88c8, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 130
       objectReference: {fileID: 0}
     - target: {fileID: 293209925506309433, guid: 74ea28ced6d4d434194e6364b6ca88c8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1002,6 +1002,22 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2084290471}
+    - target: {fileID: 5991400254367050937, guid: 74ea28ced6d4d434194e6364b6ca88c8, type: 3}
+      propertyPath: playerOneMobilePrefabs.pausePrefab
+      value: 
+      objectReference: {fileID: 8194747106537249017, guid: f2f8a7bd23c515647b934ccaaf0e7727, type: 3}
+    - target: {fileID: 5991400254367050937, guid: 74ea28ced6d4d434194e6364b6ca88c8, type: 3}
+      propertyPath: playerOneMobilePrefabs.shootPrefab
+      value: 
+      objectReference: {fileID: 6494489541078842808, guid: 8a4d69345d9da494daefba8b6ff42737, type: 3}
+    - target: {fileID: 5991400254367050937, guid: 74ea28ced6d4d434194e6364b6ca88c8, type: 3}
+      propertyPath: playerOneMobilePrefabs.upMovementPrefab
+      value: 
+      objectReference: {fileID: 5551582094338519578, guid: 50ee15b99fe0f1c44bc19bd6c7a28c97, type: 3}
+    - target: {fileID: 5991400254367050937, guid: 74ea28ced6d4d434194e6364b6ca88c8, type: 3}
+      propertyPath: playerOneMobilePrefabs.downMovementPrefab
+      value: 
+      objectReference: {fileID: 4971604906951703885, guid: 937077349b57bc44faa378f94e5cfc81, type: 3}
     - target: {fileID: 8629282521281959369, guid: 74ea28ced6d4d434194e6364b6ca88c8, type: 3}
       propertyPath: m_Name
       value: ControlsPanel
@@ -1103,97 +1119,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4826579872890621851, guid: a7da0556a23adf4479c86245bc252273, type: 3}
   m_PrefabInstance: {fileID: 4826579872152006611}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &918624087
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 918624088}
-  - component: {fileID: 918624090}
-  - component: {fileID: 918624089}
-  m_Layer: 13
-  m_Name: KillPlaneObjects
-  m_TagString: KillPlane
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &918624088
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 918624087}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1748445947}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &918624089
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 918624087}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62438c9299537e14983fd45a275e3833, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!61 &918624090
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 918624087}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: -20, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 1, y: 25}
-  m_EdgeRadius: 0
 --- !u!1001 &919508294
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1355,7 +1280,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -190}
+  m_AnchoredPosition: {x: 0, y: -150}
   m_SizeDelta: {x: 900, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &952290733
@@ -2008,7 +1933,6 @@ Transform:
   m_Children:
   - {fileID: 512272600}
   - {fileID: 1648704517}
-  - {fileID: 918624088}
   m_Father: {fileID: 1235010502}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1748445948
@@ -2364,6 +2288,7 @@ MonoBehaviour:
   touchScreenMainGameObject: {fileID: 874094663}
   tutorialMainGameObject: {fileID: 1668536150}
   tutorialTitleGameObject: {fileID: 952290731}
+  tutorialPlaceToSpawnScreens: {fileID: 223366694}
   tutorialOKButton: {fileID: 1412871483}
 --- !u!114 &2084290472
 MonoBehaviour:
@@ -2481,6 +2406,7 @@ MonoBehaviour:
   tutorialScreens:
   - {fileID: 4826579872890621844, guid: bb1feea00a8e8594da6c5b25943dc315, type: 3}
   - {fileID: 4826579872890621844, guid: 5b3529095d3be2e4fa5fa549d987f967, type: 3}
+  - {fileID: 4826579872890621844, guid: 80b1483014e452c4cbf54d4203c95cfd, type: 3}
   - {fileID: 4826579872890621844, guid: 259498038a38d04449bdc791f3698aea, type: 3}
 --- !u!1 &2140582107 stripped
 GameObject:

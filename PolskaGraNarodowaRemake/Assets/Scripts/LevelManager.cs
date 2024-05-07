@@ -222,17 +222,11 @@ public class LevelManager : MonoBehaviour
     }
     internal void CleanLevel(Plane plane)
     {
-        GameObject killPlane = plane.cameraGameObject.transform.Find("KillPlaneObjects").gameObject;
-        Vector3 initialPosiont = killPlane.transform.position;
-        while(killPlane.transform.position.x >= initialPosiont.x - 60)
+        if(obstaclesAndProjectilesParentGameObject.transform.childCount!=0)
         {
-            killPlane.transform.position = new Vector3((float)(killPlane.transform.position.x - 0.1), killPlane.transform.position.y, killPlane.transform.position.z);
+            for (int i = 0; i < obstaclesAndProjectilesParentGameObject.transform.childCount; i++)
+                if (obstaclesAndProjectilesParentGameObject.transform.GetChild(i).name == "vodkaBottle" || obstaclesAndProjectilesParentGameObject.transform.GetChild(i).name == "vodkaBottleCracked")
+                    Destroy(obstaclesAndProjectilesParentGameObject.transform.GetChild(i).gameObject);
         }
-        killPlane.transform.position = initialPosiont;
-        while (killPlane.transform.position.x <= initialPosiont.x + 60)
-        {
-            killPlane.transform.position = new Vector3((float)(killPlane.transform.position.x + 0.1), killPlane.transform.position.y, killPlane.transform.position.z);
-        }
-        killPlane.transform.position = initialPosiont;
     }
 }

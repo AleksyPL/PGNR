@@ -15,6 +15,14 @@ public class UIControlsMenu : MonoBehaviour
         public GameObject shootPrefabEN;
         public GameObject pausePrefab;
     }
+    [System.Serializable]
+    public class MobileControlsPrefabs
+    {
+        public GameObject upMovementPrefab;
+        public GameObject downMovementPrefab;
+        public GameObject shootPrefab;
+        public GameObject pausePrefab;
+    }
     public GameplaySettings gameplaySettings;
     public GameObject titleGameObject;
     public GameObject backToMainMenuButton;
@@ -31,6 +39,7 @@ public class UIControlsMenu : MonoBehaviour
     public GameObject playerTwoIndicatorGameObject;
     public NonMobileControlsPrefabs playerOnePrefabs;
     public NonMobileControlsPrefabs playerTwoPrefabs;
+    public MobileControlsPrefabs playerOneMobilePrefabs;
     public GameObject nonMobileUpArrowGameObject;
     public GameObject nonMobileDownArrowGameObject;
     public GameObject nonMobileShootGameObject;

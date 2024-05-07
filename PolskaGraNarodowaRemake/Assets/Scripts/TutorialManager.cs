@@ -113,7 +113,7 @@ public class TutorialManager : MonoBehaviour
     {
         if (tutorialScreens.Length >= arrayIndex)
         {
-            GameObject newTutorialScreen = Instantiate(tutorialScreens[arrayIndex], flightControllerScript.uiManagerScript.tutorialMainGameObject.transform);
+            GameObject newTutorialScreen = Instantiate(tutorialScreens[arrayIndex], flightControllerScript.uiManagerScript.tutorialPlaceToSpawnScreens.transform);
             newTutorialScreen.transform.name = "TutorialScreen";
         }
     }

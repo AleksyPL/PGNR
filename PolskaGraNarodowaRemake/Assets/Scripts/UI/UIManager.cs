@@ -88,7 +88,7 @@ public class UIManager : MonoBehaviour
     [Header("Tutorial")]
     [SerializeField] internal GameObject tutorialMainGameObject;
     [SerializeField] private GameObject tutorialTitleGameObject;
-    //[SerializeField] internal GameObject tutorialPlaceToSpawnScreens;
+    [SerializeField] internal GameObject tutorialPlaceToSpawnScreens;
     [SerializeField] private GameObject tutorialOKButton;
 
     void Start()
@@ -517,6 +517,7 @@ public class UIManager : MonoBehaviour
     {
         Time.timeScale = 0;
         tutorialScreenEnabled = true;
+        playerOneUI.regularHUDMainGameObject.SetActive(false);
         tutorialMainGameObject.SetActive(true);
         flightControllerScript.tutorialManagerScript.currentState = TutorialManager.TutorialPlayerState.Frozen;
         if (UnityEngine.Device.Application.isMobilePlatform)
@@ -537,6 +538,7 @@ public class UIManager : MonoBehaviour
         else if (flightControllerScript.tutorialManagerScript.checkpointFinished && !flightControllerScript.tutorialManagerScript.checkpointGoalAchieved)
             flightControllerScript.tutorialManagerScript.SpawnTutorialInfo(0);
         tutorialTitleGameObject.GetComponentInChildren<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].tutorialTitle;
+        tutorialOKButton.transform.Find("Text").GetComponentInChildren<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].acceptanceMessage;
         flightControllerScript.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightControllerScript.audioManagerScript.localSFX);
         flightControllerScript.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightControllerScript.audioManagerScript.localOneLinersSounds);
         flightControllerScript.audioManagerScript.PausePlayingSoundsFromTheSpecificSoundBank(flightControllerScript.audioManagerScript.localHitReactionSounds);
@@ -561,14 +563,15 @@ public class UIManager : MonoBehaviour
             else if (flightControllerScript.tutorialManagerScript.checkpointFinished && !flightControllerScript.tutorialManagerScript.checkpointGoalAchieved)
             {
                 flightControllerScript.tutorialManagerScript.currentState = TutorialManager.TutorialPlayerState.Reverting;
-                //flightControllerScript.levelManagerScript.CleanLevel(flightControllerScript.gameModeScript.playerOnePlane);
+                flightControllerScript.levelManagerScript.CleanLevel(flightControllerScript.gameModeScript.playerOnePlane);
                 if (flightControllerScript.tutorialManagerScript.elapsedTime > 1 && flightControllerScript.tutorialManagerScript.elapsedTime < 2)
                     flightControllerScript.audioManagerScript.PlaySound("Rewind_faster", flightControllerScript.audioManagerScript.localSFX);
                 else if (flightControllerScript.tutorialManagerScript.elapsedTime >= 2)
                     flightControllerScript.audioManagerScript.PlaySound("Rewind", flightControllerScript.audioManagerScript.localSFX);
             }
-            Destroy(tutorialMainGameObject.transform.Find("TutorialScreen").gameObject);
+            Destroy(tutorialPlaceToSpawnScreens.transform.Find("TutorialScreen").gameObject);
             tutorialScreenEnabled = false;
+            playerOneUI.regularHUDMainGameObject.SetActive(true);
             tutorialMainGameObject.SetActive(false);
             flightControllerScript.uiManagerScript.playerOneUI.regularHUDMainGameObject.SetActive(true);
         }

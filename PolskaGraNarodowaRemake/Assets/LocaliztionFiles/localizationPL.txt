@@ -108,3 +108,9 @@ UWAGA!
 Jest to twoja pierwsza rozgrywka. Czy chcesz rozegrać samouczek?
 //Tutorial - Title
 SAMOUCZEK
+//Tutorial - Try Again
+Spróbuj jeszcze raz
+//Tutorial - Screen 0 - Introduction
+W tym samouczku dowiesz się wszystkiego co ważne by zagrać w moją grę.<br><br>Poruszaj się góra dół, unikając lub niszcząc przeszkody.
+//Tutorial - Screen 1
+Na twojej drodze stoi wyrzutnia<br><br>Omiń ją i jej pociski!
