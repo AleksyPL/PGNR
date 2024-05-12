@@ -35,6 +35,10 @@ public class PlaneRenderer : MonoBehaviour
         transform.parent.Find("HolesRenderer").gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
         transform.Find("WheelsRenderer").GetComponent<SpriteRenderer>().sprite = null;
         transform.Find("WheelsRenderer").gameObject.transform.localPosition = new Vector3(0, wheelsInitialPositionY, 0);
+        while (transform.Find("SmokeSpawnerInAir").transform.childCount > 0)
+            DestroyImmediate(transform.Find("SmokeSpawnerInAir").transform.GetChild(0).gameObject);
+        while (transform.Find("SmokeSpawnerOnTheGround").transform.childCount > 0)
+            DestroyImmediate(transform.Find("SmokeSpawnerOnTheGround").transform.GetChild(0).gameObject);
         wheelsSlidingOutCounter = 0;
         wheelsSlideOut = false;
     }

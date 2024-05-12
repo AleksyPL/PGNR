@@ -38,6 +38,7 @@ public class Localization : ScriptableObject
     internal string controlsMenuUp;
     internal string controlsMenuDown;
     internal string controlsMenuShoot;
+    internal string controlsMenuShootAlt;
     internal string controlsMenuPauseMenu;
     //options
     internal string sfxVolumeSlider;
@@ -80,6 +81,13 @@ public class Localization : ScriptableObject
     internal string tutorialTryAgain;
     internal string tutorialScreen0;
     internal string tutorialScreen1;
+    internal string tutorialScreen1ProgressBar;
+    internal string tutorialScreen2;
+    internal string tutorialScreen2ProgressBar;
+    internal string tutorialScreen3;
+    internal string tutorialScreen4;
+    internal string tutorialScreen5;
+    internal string tutorialScreen5ProgressBar;
 
     internal void LoadData()
     {
@@ -117,48 +125,56 @@ public class Localization : ScriptableObject
             controlsMenuUp = listOfAll[41];
             controlsMenuDown = listOfAll[43];
             controlsMenuShoot = listOfAll[45];
-            controlsMenuPauseMenu = listOfAll[47];
+            controlsMenuShootAlt = listOfAll[47];
+            controlsMenuPauseMenu = listOfAll[49];
             //options
-            sfxVolumeSlider = listOfAll[49];
-            musicVolumeSlider = listOfAll[51];
-            quotesVolumeSlider = listOfAll[53];
-            activeLanguage = listOfAll[55];
+            sfxVolumeSlider = listOfAll[51];
+            musicVolumeSlider = listOfAll[53];
+            quotesVolumeSlider = listOfAll[55];
+            activeLanguage = listOfAll[57];
             //regular hud
-            regularHudLevel = listOfAll[57];
-            regularHudProgression0 = listOfAll[59];
-            regularHudProgression1 = listOfAll[61];
-            regularHudLandingMessage = listOfAll[63];
-            regularHudPlaneHit = listOfAll[65];
-            regularHudBottle = listOfAll[67];
-            regularHudEarned0 = listOfAll[69];
-            regularHudEarned1 = listOfAll[71];
-            regularHudCongratulationsAfterLanding = listOfAll[73];
+            regularHudLevel = listOfAll[59];
+            regularHudProgression0 = listOfAll[61];
+            regularHudProgression1 = listOfAll[63];
+            regularHudLandingMessage = listOfAll[65];
+            regularHudPlaneHit = listOfAll[67];
+            regularHudBottle = listOfAll[69];
+            regularHudEarned0 = listOfAll[71];
+            regularHudEarned1 = listOfAll[73];
+            regularHudCongratulationsAfterLanding = listOfAll[75];
             //pause screen
-            pauseScreenLevelTitle = listOfAll[75];
-            pauseScreenBottlesTitle = listOfAll[77];
-            pauseScreenPauseMainTitle = listOfAll[79];
-            pauseScreenGameOverMainTitle = listOfAll[81];
-            pauseScreenResumeGame = listOfAll[83];
-            gameOverScreenTryAgain = listOfAll[85];
-            warningTitle = listOfAll[87];
-            activeBottleWarning = listOfAll[89];
+            pauseScreenLevelTitle = listOfAll[77];
+            pauseScreenBottlesTitle = listOfAll[79];
+            pauseScreenPauseMainTitle = listOfAll[81];
+            pauseScreenGameOverMainTitle = listOfAll[83];
+            pauseScreenResumeGame = listOfAll[85];
+            gameOverScreenTryAgain = listOfAll[87];
+            warningTitle = listOfAll[89];
+            activeBottleWarning = listOfAll[91];
             //color panel
-            colorPanelPlayerWins = listOfAll[91];
-            colorPanelPlayerLoses = listOfAll[93];
-            colorPanelPlayerLosesSinglePlayer = listOfAll[95];
+            colorPanelPlayerWins = listOfAll[93];
+            colorPanelPlayerLoses = listOfAll[95];
+            colorPanelPlayerLosesSinglePlayer = listOfAll[97];
             //game modes
-            classicModeMessage = listOfAll[97];
-            endlessSingleMessage = listOfAll[99];
-            endlessVersusMessage = listOfAll[101];
+            classicModeMessage = listOfAll[99];
+            endlessSingleMessage = listOfAll[101];
+            endlessVersusMessage = listOfAll[103];
             //disclaimer
-            disclaimerMessage = listOfAll[103];
-            disclaimerTitle = listOfAll[105];
+            disclaimerMessage = listOfAll[105];
+            disclaimerTitle = listOfAll[107];
             //tutorial
-            tutorialQuestion = listOfAll[107];
-            tutorialTitle = listOfAll[109];
-            tutorialTryAgain = listOfAll[111];
-            tutorialScreen0 = listOfAll[113];
-            tutorialScreen1 = listOfAll[115];
+            tutorialQuestion = listOfAll[109];
+            tutorialTitle = listOfAll[111];
+            tutorialTryAgain = listOfAll[113];
+            tutorialScreen0 = listOfAll[115];
+            tutorialScreen1 = listOfAll[117];
+            tutorialScreen1ProgressBar = listOfAll[119];
+            tutorialScreen2 = listOfAll[121];
+            tutorialScreen2ProgressBar = listOfAll[123];
+            tutorialScreen3 = listOfAll[125];
+            tutorialScreen4 = listOfAll[127];
+            tutorialScreen5 = listOfAll[129];
+            tutorialScreen5ProgressBar = listOfAll[131];
         }
     }
 }

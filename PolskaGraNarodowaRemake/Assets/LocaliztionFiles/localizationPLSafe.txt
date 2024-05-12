@@ -43,7 +43,9 @@ Ruch w górę
 //Controls - Down
 Ruch w dół
 //Controls - Shoot
-Wystrzelenie pocisku. Przytrzymaj przycisk by zwiększyć siłe strzału
+Wystrzelenie pocisku
+//Controls - Shoot_ALt
+Przytrzymaj przycisk by zwiększyć siłe strzału
 //Controls - Pause
 Menu Pauzy
 //Options - SFX slider
@@ -111,6 +113,20 @@ SAMOUCZEK
 //Tutorial - Try Again
 Spróbuj jeszcze raz
 //Tutorial - Screen 0 - Introduction
-W tym samouczku dowiesz się wszystkiego co ważne by zagrać w moją grę.<br><br>Poruszaj się góra dół, unikając lub niszcząc przeszkody.
+W tym samouczku dowiesz się wszystkiego co ważne by zagrać w moją grę.<br><br>Poruszaj się góra dół, unikając lub niszcząc przeszkody<br>Nie uderz o ziemię.
 //Tutorial - Screen 1
 Na twojej drodze stoi wyrzutnia<br><br>Omiń ją i jej pociski!
+//Tutorial - Screen 1 - Progress Bar
+Omiń wyrzutnie i jej pociski!
+//Tutorial - Screen 2
+Na twojej drodze stoją drzewa<br><br>Zniszcz je!
+//Tutorial - Screen 2 - Progress Bar
+Zniszcz drzewa na swojej drodze!
+//Tutorial - Screen 3
+Niszcząc przeszkody zdobywasz pieniądze. Możesz obejrzeć swój wynik w prawym górnym rogu ekranu.
+//Tutorial - Screen 4
+Z każdym wyrzuconym pociskiem, samolotem ciężej się steruje. Czasami warto unikać przeszkód, by sterowało się łatwiej. Coś za coś.
+//Tutorial - Screen 5
+Przed tobą mgła i kilka przeszkód<br><br>Przetwaj!
+//Tutorial - Screen 5 - Progress Bar
+Przetrwaj!

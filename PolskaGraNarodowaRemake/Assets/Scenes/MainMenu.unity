@@ -9069,6 +9069,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3145669583597843415, guid: 74ea28ced6d4d434194e6364b6ca88c8, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 3145669583597843415, guid: 74ea28ced6d4d434194e6364b6ca88c8, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 3145669583597843415, guid: 74ea28ced6d4d434194e6364b6ca88c8, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -450
+      objectReference: {fileID: 0}
+    - target: {fileID: 3145669583597843415, guid: 74ea28ced6d4d434194e6364b6ca88c8, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 4134786324686466158, guid: 74ea28ced6d4d434194e6364b6ca88c8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -9077,7 +9093,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Controls
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8629282521281959369, guid: 74ea28ced6d4d434194e6364b6ca88c8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8783956580465056727, guid: 74ea28ced6d4d434194e6364b6ca88c8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 2835685592536185138, guid: 74ea28ced6d4d434194e6364b6ca88c8, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

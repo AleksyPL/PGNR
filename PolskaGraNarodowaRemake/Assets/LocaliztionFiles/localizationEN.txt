@@ -43,7 +43,9 @@ Upward movement
 //Controls - Down
 Downward movement
 //Controls - Shoot
-Shoot a projectile. Hold the button to increace the power of the shot.
+Shoot a projectile
+//Controls - Shoot_Alt
+Hold the button to increace the power of the shot.
 //Controls - Pause
 Pause Menu
 //Options - SFX slider
@@ -111,6 +113,20 @@ TUTORIAL
 //Tutorial - Try Again
 Try Again
 //Tutorial - Screen 0 - Introduction
-In this tutorial you will learn about everything important in this game.<br><br>Control the plane up and down, avoid or destroy obstacles.
+In this tutorial you will learn about everything important in this game.<br><br>Control the plane up and down, avoid or destroy obstacles<br>Do not hit the ground.
 //Tutorial - Screen 1
 Launcher on your way<br><br>Avoid it and it's projectiles!
+//Tutorial - Screen 1 - Progress Bar
+Avoid the launcher and it's projectiles!
+//Tutorial - Screen 2
+Trees on your way<br><br>Destroy them!
+//Tutorial - Screen 2 - Progress Bar
+Destroy trees on your way!
+//Tutorial - Screen 3
+By destroying obstacles you earn money. You can view your score in the upper right corner of the screen.
+//Tutorial - Screen 4
+With each bottle thrown, the plane becomes harder to control. Sometimes it is worth avoiding obstacles to make steering easier. Quid pro quo.
+//Tutorial - Screen 5
+There is a fog and a few obstacles ahead of you<br><br>Survive!
+//Tutorial - Screen 5 - Progress Bar
+Survive!

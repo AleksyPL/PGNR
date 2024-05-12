@@ -127,6 +127,11 @@ public class FlightController : MonoBehaviour
     internal void RevertPlanePosition(Plane plane, Vector3 newPlanePosition, PlaneState newPlaneState ,float newPlaneTilt)
     {
         plane.planeGameObject.transform.position = newPlanePosition;
+        if(plane.currentPlaneState != newPlaneState)
+        {
+            plane.currentPlaneState = newPlaneState;
+            plane.planeRendererScript.ResetPlaneRenderer(plane.currentPlaneState);
+        }
         plane.planeRendererScript.ChangeTilt(newPlaneState, newPlaneTilt);
     }
     private void MovePlaneDamaged(Plane plane)

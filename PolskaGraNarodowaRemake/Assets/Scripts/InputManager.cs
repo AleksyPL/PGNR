@@ -26,6 +26,8 @@ public class InputManager : MonoBehaviour
                 flightControllerScript.gameModeScript.playerTwoPlane.attackKeyReleased = Input.GetButtonUp("Jump1");
             }
         }
+        if (ESCpressed)
+            flightControllerScript.uiManagerScript.CloseWindowsUsingESC();
     }
     public void TouchScreenButtonUpPressed()
     {
