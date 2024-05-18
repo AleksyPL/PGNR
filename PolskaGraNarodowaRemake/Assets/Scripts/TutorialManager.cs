@@ -40,12 +40,26 @@ public class TutorialManager : MonoBehaviour
     internal bool checkpointGoalAchieved;
     [Header("Checkpoint 1")]
     public float checkpoint1LauncherPositionX;
-    private GameObject checkpoint1Launcher;
+    internal GameObject checkpoint1Launcher;
     [Header("Checkpoint 2")]
     public float checkpoint2Tree1PositionX;
     internal GameObject checkpoint2Tree1;
     public float checkpoint2Tree2PositionX;
     internal GameObject checkpoint2Tree2;
+    [Header("Checkpoint 3")]
+    public float checkpoint3LauncherPositionX;
+    internal GameObject checkpoint3Launcher;
+    public float checkpoint3TreePositionX;
+    internal GameObject checkpoint3Tree;
+    public float checkpoint3FogPositionX;
+    internal GameObject checkpoint3Fog;
+    [Header("Checkpoint 4")]
+    public Vector2 checkpoint4PowerUpPosition;
+    public int checkpoint4PowerUpNumber;
+    internal GameObject checkpoint4PowerUp;
+    [Header("Checkpoint 5")]
+    public float checkpoint5AirportPositionX;
+    internal GameObject checkpoint5Airport;
 
     void Start()
     {
@@ -59,6 +73,7 @@ public class TutorialManager : MonoBehaviour
         positionRevertLerpValue = 0;
         checkpointFailedTryAgain = false;
         checkpointGoalAchieved = false;
+        flightControllerScript.gameModeScript.playerOnePlane.canThrowBottles = false;
         scoreAtTheBeginningOfTheCheckpoint = flightControllerScript.gameModeScript.playerOnePlane.gameScore;
         scoreJustBeforeTheRewind = scoreAtTheBeginningOfTheCheckpoint;
         bottlesAtTheBeginningOfTheCheckpoint = flightControllerScript.gameModeScript.playerOnePlane.bottlesDrunk;
@@ -146,9 +161,9 @@ public class TutorialManager : MonoBehaviour
     }
     internal void SpawnTutorialInfoScreen()
     {
-        if(checkpointFailedTryAgain)
+        if (checkpointFailedTryAgain)
         {
-            if(tutorialScreenTryAgain != null)
+            if (tutorialScreenTryAgain != null)
             {
                 GameObject newTutorialScreen = Instantiate(tutorialScreenTryAgain, flightControllerScript.uiManagerScript.tutorialPlaceToSpawnScreens.transform);
                 newTutorialScreen.transform.name = "TutorialScreen";
@@ -165,18 +180,59 @@ public class TutorialManager : MonoBehaviour
     }
     internal void SpawnTutorialObstacles()
     {
-        if(checkpointNumber == 1)
+        if (checkpointNumber == 1)
         {
             if (checkpoint1Launcher == null)
                 checkpoint1Launcher = flightControllerScript.levelManagerScript.SpawnSingleObstacle(flightControllerScript.gameModeScript.playerOnePlane, ref flightControllerScript.levelManagerScript.obstaclesAndProjectilesParentGameObject, checkpoint1LauncherPositionX, flightControllerScript.levelManagerScript.trotylLauncherPrefab, "trotylLauncher");
+            else
+                checkpoint1Launcher.GetComponent<TrotylLauncher>().canShoot = true;
             checkpoint1Launcher.GetComponent<TrotylLauncher>().rateOfFireCounter = 2;
         }
         else if (checkpointNumber == 2)
         {
-            if(checkpoint2Tree1 == null)
+            if (checkpoint2Tree1 == null)
                 checkpoint2Tree1 = flightControllerScript.levelManagerScript.SpawnSingleObstacle(flightControllerScript.gameModeScript.playerOnePlane, ref flightControllerScript.levelManagerScript.obstaclesAndProjectilesParentGameObject, checkpoint2Tree1PositionX, flightControllerScript.environmentManagerScript.environmentsScenarios[flightControllerScript.environmentManagerScript.scenarioIndex].verticalObstaclesPrefabs[1]);
             if (checkpoint2Tree2 == null)
                 checkpoint2Tree2 = flightControllerScript.levelManagerScript.SpawnSingleObstacle(flightControllerScript.gameModeScript.playerOnePlane, ref flightControllerScript.levelManagerScript.obstaclesAndProjectilesParentGameObject, checkpoint2Tree2PositionX, flightControllerScript.environmentManagerScript.environmentsScenarios[flightControllerScript.environmentManagerScript.scenarioIndex].verticalObstaclesPrefabs[2]);
+        }
+        else if (checkpointNumber == 3)
+        {
+            if (checkpoint3Fog == null)
+                checkpoint3Fog = flightControllerScript.levelManagerScript.SpawnSingleObstacle(flightControllerScript.gameModeScript.playerOnePlane, ref flightControllerScript.levelManagerScript.obstaclesAndProjectilesParentGameObject, checkpoint3FogPositionX, flightControllerScript.environmentManagerScript.environmentsScenarios[flightControllerScript.environmentManagerScript.scenarioIndex].fogPrefab);
+            if (checkpoint3Tree == null)
+                checkpoint3Tree = flightControllerScript.levelManagerScript.SpawnSingleObstacle(flightControllerScript.gameModeScript.playerOnePlane, ref flightControllerScript.levelManagerScript.obstaclesAndProjectilesParentGameObject, checkpoint3TreePositionX, flightControllerScript.environmentManagerScript.environmentsScenarios[flightControllerScript.environmentManagerScript.scenarioIndex].verticalObstaclesPrefabs[0]);
+            if (checkpoint3Launcher == null)
+                checkpoint3Launcher = flightControllerScript.levelManagerScript.SpawnSingleObstacle(flightControllerScript.gameModeScript.playerOnePlane, ref flightControllerScript.levelManagerScript.obstaclesAndProjectilesParentGameObject, checkpoint3LauncherPositionX, flightControllerScript.levelManagerScript.trotylLauncherPrefab, "trotylLauncher");
+            else
+                checkpoint3Launcher.GetComponent<TrotylLauncher>().canShoot = true;
+            checkpoint3Launcher.GetComponent<TrotylLauncher>().rateOfFireCounter = 2;
+        }
+        else if (checkpointNumber == 4)
+        {
+            if (checkpoint4PowerUp == null)
+                checkpoint4PowerUp = flightControllerScript.levelManagerScript.SpawnSinglePowerUp(flightControllerScript.levelManagerScript.powerUpsPrefabs[checkpoint4PowerUpNumber], ref flightControllerScript.levelManagerScript.obstaclesAndProjectilesParentGameObject, checkpoint4PowerUpPosition.x, checkpoint4PowerUpPosition.y);
+        }
+        else if (checkpointNumber == 5)
+        {
+            if (checkpoint5Airport == null)
+                checkpoint5Airport = flightControllerScript.levelManagerScript.SpawnAirport(flightControllerScript.gameModeScript.playerOnePlane, checkpoint5AirportPositionX);
+        }
+    }
+    internal void RemoveOldLevelObstacles()
+    {
+        if (checkpointNumber == 2)
+        {
+            if (checkpoint1Launcher != null)
+                Destroy(checkpoint1Launcher.transform);
+        }
+        else if (checkpointNumber == 4)
+        {
+            if (checkpoint3Fog != null)
+                Destroy(checkpoint3Fog.transform);
+            if (checkpoint3Tree != null)
+                Destroy(checkpoint3Tree.transform);
+            if (checkpoint3Launcher != null)
+                Destroy(checkpoint3Launcher.transform);
         }
     }
 }

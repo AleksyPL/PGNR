@@ -9,17 +9,19 @@ public class TrotylLauncher : MonoBehaviour
     public GameplaySettings gameplaySettings;
     private AudioManager audioScript;
     internal float rateOfFireCounter;
+    internal bool canShoot;
     void OnEnable()
     {
         if(gameplaySettings.maxLaunchDelay > gameplaySettings.rateOfFire)
             gameplaySettings.rateOfFire = gameplaySettings.maxLaunchDelay;
         rateOfFireCounter = Random.Range(0, gameplaySettings.maxLaunchDelay);
         audioScript = GameObject.Find("MasterController").GetComponent<AudioManager>();
+        canShoot = true;
     }
     void Update()
     {
         rateOfFireCounter += Time.deltaTime;
-        if (rateOfFireCounter >= gameplaySettings.rateOfFire)
+        if (rateOfFireCounter >= gameplaySettings.rateOfFire && canShoot)
         {
             LaunchTheProjectile();
             rateOfFireCounter = 0;

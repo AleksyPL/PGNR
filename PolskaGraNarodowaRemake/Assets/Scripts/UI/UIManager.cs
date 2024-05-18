@@ -65,7 +65,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject gameSummaryBottlesTitle;
     [SerializeField] private GameObject gameSummaryScoreTitle;
     [Header("PowerUps")]
-    [SerializeField] private GameObject powerUpUIClockPrefab;
+    [SerializeField] internal GameObject powerUpUIClockPrefab;
     [Header("Options Menu")]
     [SerializeField] private GameObject optionsMenuGameObject;
     [Header("Controls Menu")]
@@ -185,13 +185,19 @@ public class UIManager : MonoBehaviour
                 ReturnPlayersUIObject(plane).regularHUDLevelProgressGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].tutorialScreen1ProgressBar;
             else if (flightControllerScript.tutorialManagerScript.checkpointNumber == 2)
                 ReturnPlayersUIObject(plane).regularHUDLevelProgressGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].tutorialScreen2ProgressBar;
+            else if (flightControllerScript.tutorialManagerScript.checkpointNumber == 3)
+                ReturnPlayersUIObject(plane).regularHUDLevelProgressGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].tutorialScreen5ProgressBar;
+            else if (flightControllerScript.tutorialManagerScript.checkpointNumber == 4)
+                ReturnPlayersUIObject(plane).regularHUDLevelProgressGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].tutorialScreen7ProgressBar;
+            else if (flightControllerScript.tutorialManagerScript.checkpointNumber == 5)
+                ReturnPlayersUIObject(plane).regularHUDLevelProgressGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].tutorialScreen9ProgressBar;
             else
                 ReturnPlayersUIObject(plane).regularHUDLevelProgressGameObject.GetComponent<TMP_Text>().text = "";
         }
     }
     internal void UpdateBottlesCounter(Plane plane)
     {
-        if ((flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerEndless || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusEndless) && (plane.bottlesDrunk != plane.bottlesDrunkTotal))
+        if ((flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerEndless || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusEndless || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.tutorial) && (plane.bottlesDrunk != plane.bottlesDrunkTotal))
             ReturnPlayersUIObject(plane).regularHUDBottlesGameObject.GetComponent<TMP_Text>().text = ((int)plane.bottlesDrunk).ToString() + " (" + ((int)plane.bottlesDrunkTotal).ToString() + ")";
         else
             ReturnPlayersUIObject(plane).regularHUDBottlesGameObject.GetComponent<TMP_Text>().text = ((int)plane.bottlesDrunk).ToString();
@@ -578,7 +584,6 @@ public class UIManager : MonoBehaviour
             if (UnityEngine.Device.Application.isMobilePlatform)
                 TurnOnTouchScreenButtons();
             flightControllerScript.tutorialManagerScript.currentState = TutorialManager.TutorialPlayerState.Flying;
-            flightControllerScript.tutorialManagerScript.SpawnTutorialObstacles();
             Destroy(tutorialPlaceToSpawnScreens.transform.Find("TutorialScreen").gameObject);
             tutorialScreenEnabled = false;
             playerOneUI.regularHUDMainGameObject.SetActive(true);
@@ -586,6 +591,8 @@ public class UIManager : MonoBehaviour
             flightControllerScript.uiManagerScript.playerOneUI.regularHUDMainGameObject.SetActive(true);
             UpdateLevelProgressBar(flightControllerScript.gameModeScript.playerOnePlane);
         }
+        flightControllerScript.tutorialManagerScript.SpawnTutorialObstacles();
+        flightControllerScript.tutorialManagerScript.RemoveOldLevelObstacles();
     }
     public void QuitGame()
     {

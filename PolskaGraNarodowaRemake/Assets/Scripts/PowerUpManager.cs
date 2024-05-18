@@ -30,7 +30,7 @@ public class PowerUpManager : MonoBehaviour
 
     void Update()
     {
-        if (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerEndless && flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.versusEndless && !flightControllerScript.uiManagerScript.pauseScreenEnabled)
+        if ((flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerEndless || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusEndless || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.tutorial) && !flightControllerScript.uiManagerScript.pauseScreenEnabled && !flightControllerScript.uiManagerScript.tutorialScreenEnabled)
         {
             CheckPlayerShield(flightControllerScript.gameModeScript.playerOnePlane);
             CheckPlayerSpeed(flightControllerScript.gameModeScript.playerOnePlane);

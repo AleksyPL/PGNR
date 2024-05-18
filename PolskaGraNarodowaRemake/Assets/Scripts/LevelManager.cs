@@ -82,11 +82,11 @@ public class LevelManager : MonoBehaviour
                     CopyObstaclesFromOnePlayerToAnother(ref obstaclesBufferGameObject, ref obstaclesAndProjectilesParentGameObject);
                 else
                     FillTheLevelWithObstacles(flightControllerScript.gameModeScript.playerTwoPlane, ref obstaclesAndProjectilesParentGameObject, 0, flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance);
-                SpawnAirpot(flightControllerScript.gameModeScript.playerTwoPlane);
+                SpawnAirport(flightControllerScript.gameModeScript.playerTwoPlane, flightControllerScript.rewardAndProgressionManagerScript.levelLandingSpace + flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance);
             }
             else
                 MoveObstaclesFromOneObjectToAnother(ref obstaclesBufferGameObject, ref obstaclesAndProjectilesParentGameObject);
-            SpawnAirpot(flightControllerScript.gameModeScript.playerOnePlane);
+            SpawnAirport(flightControllerScript.gameModeScript.playerOnePlane, flightControllerScript.rewardAndProgressionManagerScript.levelLandingSpace + flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance);
         }
         //multiplayer
         else if (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerEndless || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusEndless)
@@ -95,7 +95,7 @@ public class LevelManager : MonoBehaviour
             numberOfFogInstances = 1;
             flightControllerScript.gameModeScript.playerOnePlane.planeGameObject.transform.position = new Vector3(0 - flightControllerScript.rewardAndProgressionManagerScript.levelSafeSpace, (flightControllerScript.gameModeScript.playerOnePlane.topScreenHeight + flightControllerScript.gameModeScript.playerOnePlane.groundLevelHeight) / 2, 0);
             FillTheLevelWithObstacles(flightControllerScript.gameModeScript.playerOnePlane, ref obstaclesBufferGameObject, 0, flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance);
-            SpawnPowerUps(flightControllerScript.gameModeScript.playerOnePlane, powerUpsParentGameObject, flightControllerScript.rewardAndProgressionManagerScript.levelSafeSpace + 10, flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance);
+            SpawnPowerUps(flightControllerScript.gameModeScript.playerOnePlane, ref powerUpsParentGameObject, flightControllerScript.rewardAndProgressionManagerScript.levelSafeSpace + 10, flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance);
             if (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusEndless)
             {
                 flightControllerScript.gameModeScript.playerTwoPlane.planeGameObject.transform.position = new Vector3(0 - flightControllerScript.rewardAndProgressionManagerScript.levelSafeSpace, (flightControllerScript.gameModeScript.playerTwoPlane.topScreenHeight + flightControllerScript.gameModeScript.playerTwoPlane.groundLevelHeight) / 2, 0);
@@ -103,7 +103,7 @@ public class LevelManager : MonoBehaviour
                     CopyObstaclesFromOnePlayerToAnother(ref obstaclesBufferGameObject, ref obstaclesAndProjectilesParentGameObject);
                 else
                     FillTheLevelWithObstacles(flightControllerScript.gameModeScript.playerTwoPlane, ref obstaclesAndProjectilesParentGameObject, 0, flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance);
-                SpawnPowerUps(flightControllerScript.gameModeScript.playerTwoPlane, powerUpsParentGameObject, flightControllerScript.rewardAndProgressionManagerScript.levelSafeSpace + 10, flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance);
+                SpawnPowerUps(flightControllerScript.gameModeScript.playerTwoPlane, ref powerUpsParentGameObject, flightControllerScript.rewardAndProgressionManagerScript.levelSafeSpace + 10, flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance);
                 SpawnEndlessModeSpawner(flightControllerScript.gameModeScript.playerOnePlane, obstaclesAndProjectilesParentGameObject, (int)(flightControllerScript.rewardAndProgressionManagerScript.playerOneProgress.levelProgressCounter / flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance) + (float)(0.25 * flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance));
                 SpawnEndlessModeSpawner(flightControllerScript.gameModeScript.playerTwoPlane, obstaclesAndProjectilesParentGameObject, (int)(flightControllerScript.rewardAndProgressionManagerScript.playerTwoProgress.levelProgressCounter / flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance) + (float)(0.25 * flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance) + endlessModeSpawnerPlayerTwoOffset);
             }
@@ -112,11 +112,6 @@ public class LevelManager : MonoBehaviour
                 MoveObstaclesFromOneObjectToAnother(ref obstaclesBufferGameObject, ref obstaclesAndProjectilesParentGameObject);
                 SpawnEndlessModeSpawner(flightControllerScript.gameModeScript.playerOnePlane, obstaclesAndProjectilesParentGameObject, (int)(flightControllerScript.rewardAndProgressionManagerScript.playerOneProgress.levelProgressCounter / flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance) + (float)(0.25 * flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance));
             }
-        }
-        //tutorial
-        else
-        {
-
         }
         if (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerClassic || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusClassic)
             if(flightControllerScript.gameplaySettings.safeMode)
@@ -197,17 +192,24 @@ public class LevelManager : MonoBehaviour
             }
         }
     }
-    internal void SpawnPowerUps(Plane plane, GameObject powerUpParent, float placementPointXstart, float placementPointXFinish)
+    internal void SpawnPowerUps(Plane plane, ref GameObject powerUpParent, float placementPointXstart, float placementPointXFinish)
     {
         if(powerUpsPrefabs.Length !=0 && enablePowerUps && numberOfPowerUpsPerSector >= 1 && (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerEndless || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusEndless))
         {
             for (int i = 0; i < numberOfPowerUpsPerSector; i++)
             {
                 int powerUpNumber = Random.Range(0, powerUpsPrefabs.Length);
-                GameObject powerUpObject = Instantiate(powerUpsPrefabs[powerUpNumber], new Vector3(Random.Range(placementPointXstart, placementPointXFinish), Random.Range(plane.topScreenHeight, plane.groundLevelHeight + 2), 0), Quaternion.identity, powerUpParent.transform);
-                powerUpObject.name = powerUpObject.GetComponent<PowerUpObject>().currentPowerUpScriptableObject.powerUpName;
+                float placementPointX = Random.Range(placementPointXstart, placementPointXFinish);
+                float placementPointY = Random.Range(plane.topScreenHeight, plane.groundLevelHeight + 2);
+                SpawnSinglePowerUp(powerUpsPrefabs[powerUpNumber], ref powerUpParent, placementPointX, placementPointY);
             }
         }
+    }
+    internal GameObject SpawnSinglePowerUp(GameObject powerUpPrefab, ref GameObject powerUpParent, float placementPointX, float placementPointY)
+    {
+        GameObject powerUpObject = Instantiate(powerUpPrefab, new Vector3(placementPointX, placementPointY, 0), Quaternion.identity, powerUpParent.transform);
+        powerUpObject.name = powerUpObject.GetComponent<PowerUpObject>().currentPowerUpScriptableObject.powerUpName;
+        return powerUpObject;
     }
     internal void SpawnEndlessModeSpawner(Plane plane, GameObject parentGameObject, float placementPointX)
     {
@@ -217,10 +219,11 @@ public class LevelManager : MonoBehaviour
             endlessModeSpawner.name = "SpawnNewObjects";
         }
     }
-    private void SpawnAirpot(Plane plane)
+    internal GameObject SpawnAirport(Plane plane, float placementPointX)
     {
-        GameObject airport = Instantiate(airportPrefab, new Vector3(flightControllerScript.rewardAndProgressionManagerScript.levelLandingSpace + flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance, plane.groundLevelHeight + airportPrefab.GetComponent<BoxCollider2D>().size.y / 2, 0), Quaternion.identity, obstaclesAndProjectilesParentGameObject.transform);
+        GameObject airport = Instantiate(airportPrefab, new Vector3(placementPointX, plane.groundLevelHeight + airportPrefab.GetComponent<BoxCollider2D>().size.y / 2, 0), Quaternion.identity, obstaclesAndProjectilesParentGameObject.transform);
         airport.name = "airport";
+        return airport;
     }
     internal void CleanLevel(Plane plane)
     {

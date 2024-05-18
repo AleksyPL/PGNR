@@ -130,3 +130,17 @@ With each bottle thrown, the plane becomes harder to control. Sometimes it is wo
 There is a fog and a few obstacles ahead of you<br><br>Survive!
 //Tutorial - Screen 5 - Progress Bar
 Survive!
+//Tutorial - Screen 6
+For the purposes of the tutorial, the difficulty level will be reset.
+//Tutorial - Screen 7
+In endless mode you can trigger a power up. Touch a mistery box to do it.
+//Tutorial - Screen 7 - Progress Bar
+Touch a mistery box
+//Tutorial - Screen 8
+After activating a power up, a timer will appear in the lower right corner of the screen, along with a pictogram corresponding to the power up.
+//Tutorial - Screen 9
+You are approaching the airport, land there!
+//Tutorial - Screen 9 - Progress Bar
+Land at the airport
+//Tutorial - Screen 10
+Congratulations, you have completed the tutorial. Now you know how to play. Good luck

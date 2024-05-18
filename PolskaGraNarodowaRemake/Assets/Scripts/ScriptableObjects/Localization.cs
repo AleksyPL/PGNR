@@ -88,6 +88,13 @@ public class Localization : ScriptableObject
     internal string tutorialScreen4;
     internal string tutorialScreen5;
     internal string tutorialScreen5ProgressBar;
+    internal string tutorialScreen6;
+    internal string tutorialScreen7;
+    internal string tutorialScreen7ProgressBar;
+    internal string tutorialScreen8;
+    internal string tutorialScreen9;
+    internal string tutorialScreen9ProgressBar;
+    internal string tutorialScreen10;
 
     internal void LoadData()
     {
@@ -175,6 +182,13 @@ public class Localization : ScriptableObject
             tutorialScreen4 = listOfAll[127];
             tutorialScreen5 = listOfAll[129];
             tutorialScreen5ProgressBar = listOfAll[131];
+            tutorialScreen6 = listOfAll[133];
+            tutorialScreen7 = listOfAll[135];
+            tutorialScreen7ProgressBar = listOfAll[137];
+            tutorialScreen8 = listOfAll[139];
+            tutorialScreen9 = listOfAll[141];
+            tutorialScreen9ProgressBar = listOfAll[143];
+            tutorialScreen10 = listOfAll[145];
         }
     }
 }

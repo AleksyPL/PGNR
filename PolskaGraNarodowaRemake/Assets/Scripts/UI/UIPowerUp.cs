@@ -11,9 +11,10 @@ public class UIPowerUp : MonoBehaviour
     internal string powerUpName;
     private Image clockImageGameObject;
     private bool powerUpEnabled;
+    //internal bool fakeClock;
     void Start()
     {
-        clockImageGameObject = transform.Find("Clock").GetComponent<Image>();
+        
         uiManagerScript = GameObject.Find("MasterController").GetComponent<UIManager>();
     }
     void Update()
@@ -30,11 +31,18 @@ public class UIPowerUp : MonoBehaviour
             }
         }
     }
-    internal void EnableUIPowerUp(float thisPowerUpDuration, string thisPowerUpName)
+    internal void EnableUIPowerUp(float thisPowerUpDuration, string thisPowerUpName, bool isFake = false, float fakeClockFillAmount = 0.75f)
     {
+        clockImageGameObject = transform.Find("Clock").GetComponent<Image>();
         powerUpDuration = thisPowerUpDuration;
         powerUpDurationCounter = powerUpDuration;
         powerUpName = thisPowerUpName;
-        powerUpEnabled = true;
+        if (!isFake)
+            powerUpEnabled = true;
+        else
+        {
+            fakeClockFillAmount = Mathf.Clamp(fakeClockFillAmount, 0, 1);
+            clockImageGameObject.fillAmount = fakeClockFillAmount;
+        }
     }
 }

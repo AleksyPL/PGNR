@@ -92,14 +92,14 @@ public class HitDetectionManager : MonoBehaviour
                         Destroy(child.gameObject);
                 }
                 gameModeManagerScript.flightControllerScript.levelManagerScript.FillTheLevelWithObstacles(gameModeManagerScript.playerOnePlane, ref gameModeManagerScript.flightControllerScript.levelManagerScript.obstaclesBufferGameObject, ((int)(transform.position.x / gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance) + 1) * gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance, ((int)(transform.position.x / gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance) + 2) * gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance);
-                gameModeManagerScript.flightControllerScript.levelManagerScript.SpawnPowerUps(gameModeManagerScript.playerOnePlane, gameModeManagerScript.flightControllerScript.levelManagerScript.powerUpsParentGameObject, (((int)transform.position.x / gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance) + 1) * gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance, ((int)(transform.position.x / gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance) + 2) * gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance);
+                gameModeManagerScript.flightControllerScript.levelManagerScript.SpawnPowerUps(gameModeManagerScript.playerOnePlane, ref gameModeManagerScript.flightControllerScript.levelManagerScript.powerUpsParentGameObject, (((int)transform.position.x / gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance) + 1) * gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance, ((int)(transform.position.x / gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance) + 2) * gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance);
                 if (gameModeManagerScript.currentGameMode == GameModeManager.GameMode.versusEndless)
                 {
                     if(!gameModeManagerScript.flightControllerScript.levelManagerScript.sameObstaclesForBothPlayes)
                         gameModeManagerScript.flightControllerScript.levelManagerScript.FillTheLevelWithObstacles(gameModeManagerScript.playerOnePlane, ref gameModeManagerScript.flightControllerScript.levelManagerScript.obstaclesBufferGameObject, ((int)(transform.position.x / gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance) + 1) * gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance, ((int)(transform.position.x / gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance) + 2) * gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance);
                     else
                         gameModeManagerScript.flightControllerScript.levelManagerScript.CopyObstaclesFromOnePlayerToAnother(ref gameModeManagerScript.flightControllerScript.levelManagerScript.obstaclesBufferGameObject, ref gameModeManagerScript.flightControllerScript.levelManagerScript.obstaclesAndProjectilesParentGameObject);
-                    gameModeManagerScript.flightControllerScript.levelManagerScript.SpawnPowerUps(gameModeManagerScript.playerTwoPlane, gameModeManagerScript.flightControllerScript.levelManagerScript.powerUpsParentGameObject, (((int)transform.position.x / gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance) + 1) * gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance, ((int)(transform.position.x / gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance) + 2) * gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance);
+                    gameModeManagerScript.flightControllerScript.levelManagerScript.SpawnPowerUps(gameModeManagerScript.playerTwoPlane, ref gameModeManagerScript.flightControllerScript.levelManagerScript.powerUpsParentGameObject, (((int)transform.position.x / gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance) + 1) * gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance, ((int)(transform.position.x / gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance) + 2) * gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance);
                     if(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject) == gameModeManagerScript.playerOnePlane)
                     {
                         gameModeManagerScript.flightControllerScript.levelManagerScript.SpawnEndlessModeSpawner(gameModeManagerScript.playerOnePlane, gameModeManagerScript.flightControllerScript.levelManagerScript.obstaclesAndProjectilesParentGameObject, transform.position.x + gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance);
@@ -131,18 +131,37 @@ public class HitDetectionManager : MonoBehaviour
         gameModeManagerScript.flightControllerScript.tutorialManagerScript.scoreJustBeforeTheRewind = gameModeManagerScript.playerOnePlane.gameScore;
         gameModeManagerScript.flightControllerScript.tutorialManagerScript.bottlesJustBeforeTheRewind = gameModeManagerScript.playerOnePlane.bottlesDrunk;
         gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.playerOneProgress.scorePointsCounter = 0;
+        //setting checkpoints facts
         if (!gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpointFailedTryAgain)
         {
-            //setting checkpoints facts
             if (gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpointNumber == 0)
                 gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpointGoalAchieved = true;
-            if (gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpointNumber == 1)
+            else if (gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpointNumber == 1)
+            {
                 gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpointGoalAchieved = true;
-            if (gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpointNumber == 2)
+                gameModeManagerScript.playerOnePlane.canThrowBottles = true;
+            }
+            else if (gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpointNumber == 2)
+            {
                 if (gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpoint2Tree1 == null && gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpoint2Tree2 == null)
                     gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpointGoalAchieved = true;
-            if (gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpointNumber == 3)
+            }
+            else if (gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpointNumber == 3)
+            {
                 gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpointGoalAchieved = true;
+                gameModeManagerScript.playerOnePlane.canThrowBottles = false;
+                gameModeManagerScript.playerOnePlane.SoberUp();
+                gameModeManagerScript.flightControllerScript.uiManagerScript.UpdateBottlesCounter(gameModeManagerScript.playerOnePlane);
+            }
+            else if (gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpointNumber == 4)
+            {
+                if (gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpoint4PowerUp == null)
+                {
+                    gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpointGoalAchieved = true;
+                    gameModeManagerScript.playerOnePlane.currentPlaneState = PlaneState.wheelsOn;
+                    gameModeManagerScript.playerOnePlane.planeRendererScript.ChangePlaneSprite(PlaneState.wheelsOn);
+                }
+            }
             if (gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpointGoalAchieved)
             {
                 Destroy(this.transform.gameObject);
@@ -154,6 +173,19 @@ public class HitDetectionManager : MonoBehaviour
             }
             else
                 gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpointFailedTryAgain = true;
+        }
+        if(gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpointFailedTryAgain)
+        {
+            if(gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpointNumber == 1)
+            {
+                if (gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpoint1Launcher != null)
+                    gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpoint1Launcher.GetComponent<TrotylLauncher>().canShoot = false;
+            }
+            else if (gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpointNumber == 3)
+            {
+                if (gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpoint3Launcher != null)
+                    gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpoint3Launcher.GetComponent<TrotylLauncher>().canShoot = false;
+            }
         }
         gameModeManagerScript.flightControllerScript.uiManagerScript.EnableTutorialScreen();
     }

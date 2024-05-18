@@ -146,7 +146,7 @@ public class FlightController : MonoBehaviour
     {
         if(!uiManagerScript.pauseScreenEnabled && !uiManagerScript.tutorialScreenEnabled && !uiManagerScript.timerBeforeTheFlightEnabled && !gameModeScript.someoneWon)
         {
-            if ((gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerClassic || gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerEndless) && (gameModeScript.playerOnePlane.currentPlaneState == PlaneState.standard || gameModeScript.playerOnePlane.currentPlaneState == PlaneState.wheelsOn))
+            if (gameModeScript.currentGameMode != GameModeManager.GameMode.tutorial && (gameModeScript.playerOnePlane.currentPlaneState == PlaneState.standard || gameModeScript.playerOnePlane.currentPlaneState == PlaneState.wheelsOn))
             {
                 MovePlaneStandardAndWheels(gameModeScript.playerOnePlane);
                 if (gameModeScript.playerOnePlane.currentPlaneState != PlaneState.wheelsOn)

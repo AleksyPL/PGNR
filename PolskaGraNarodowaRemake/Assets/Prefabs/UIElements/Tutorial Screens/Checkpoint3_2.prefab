@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 4826579872890621851}
   - component: {fileID: 6389535187944126025}
   m_Layer: 5
-  m_Name: Checkpoint4
+  m_Name: Checkpoint3_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameplaySettings: {fileID: 11400000, guid: d338db95f60174b41bd6e219f61b651f, type: 2}
-  tutorialScreenNumber: 6
+  tutorialScreenNumber: 5
 --- !u!1 &6578256984391659661
 GameObject:
   m_ObjectHideFlags: 0

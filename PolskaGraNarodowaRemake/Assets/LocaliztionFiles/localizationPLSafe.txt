@@ -130,3 +130,17 @@ Z każdym wyrzuconym pociskiem, samolotem ciężej się steruje. Czasami warto u
 Przed tobą mgła i kilka przeszkód<br><br>Przetwaj!
 //Tutorial - Screen 5 - Progress Bar
 Przetrwaj!
+//Tutorial - Screen 6
+Na potrzeby samouczka, poziom trudności zostanie zresetowany.
+//Tutorial - Screen 7
+W trybach nieskończonych możesz uruchomić specjalne zdolności. Dotknij pudełka z niespodzianką by to zrobić.
+//Tutorial - Screen 7 - Progress Bar
+Dotknij pudełka z niespodzianką
+//Tutorial - Screen 8
+Po aktywacji zdolności specjalnej, licznik czasu pojawi się w prawym dolnym rogu ekranu, wraz z piktogramem odpowiadającym zdolności specjalnej.
+//Tutorial - Screen 9
+Zbliżasz się do lotniska, wyląduj na nim!
+//Tutorial - Screen 9 - Progress Bar
+Wyląduj na lotnisku
+//Tutorial - Screen 10
+Gratulacje, udało ci się ukończyć tutorial. Teraz wiesz jak grać. Powodzenia

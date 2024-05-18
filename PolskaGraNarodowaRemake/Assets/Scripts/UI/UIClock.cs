@@ -10,6 +10,7 @@ public class UIClock : MonoBehaviour
     private TMP_Text textGameObject;
     private Image imageGameObject;
     private float timerCircleTimeCounter;
+    
 
     void Start()
     {
@@ -18,7 +19,7 @@ public class UIClock : MonoBehaviour
         imageGameObject = transform.Find("Fill").GetComponent<Image>();
     }
     void Update()
-    {
+    {   
         UpdateTimer();
     }
     internal void TurnOnTheTimer(float time)

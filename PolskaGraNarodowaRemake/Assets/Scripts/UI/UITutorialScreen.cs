@@ -8,6 +8,7 @@ public class UITutorialScreen : MonoBehaviour
 {
     public GameplaySettings gameplaySettings;
     private UIControlsMenu controlsMenuScript;
+    private UIManager uiManagerScript;
     public int tutorialScreenNumber;
     private Image imageGameObject;
     private TMP_Text textGameObject;
@@ -17,6 +18,7 @@ public class UITutorialScreen : MonoBehaviour
             imageGameObject = transform.Find("Image").gameObject.GetComponent<Image>();
         textGameObject = transform.Find("MainText").gameObject.GetComponent<TMP_Text>();
         controlsMenuScript = transform.parent.parent.parent.transform.Find("ControlsPanel").GetComponent<UIControlsMenu>();
+        uiManagerScript = GameObject.Find("MasterController").GetComponent<UIManager>();
         SetupTutorialScreen(tutorialScreenNumber);
     }
     void SetupTutorialScreen(int stringNumber)
@@ -84,6 +86,27 @@ public class UITutorialScreen : MonoBehaviour
             textToDisplay = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].tutorialScreen4;
         else if (stringNumber == 5)
             textToDisplay = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].tutorialScreen5;
+        else if (stringNumber == 6)
+            textToDisplay = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].tutorialScreen6;
+        else if (stringNumber == 7)
+            textToDisplay = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].tutorialScreen7;
+        else if (stringNumber == 8)
+        {
+            textToDisplay = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].tutorialScreen8;
+            GameObject powerUpUIGameObject = Instantiate(uiManagerScript.powerUpUIClockPrefab);
+            powerUpUIGameObject.transform.name = uiManagerScript.flightControllerScript.tutorialManagerScript.checkpoint4PowerUp.GetComponent<PowerUpObject>().currentPowerUpScriptableObject.powerUpName;
+            if (gameplaySettings.safeMode)
+                powerUpUIGameObject.GetComponent<Image>().sprite = uiManagerScript.flightControllerScript.tutorialManagerScript.checkpoint4PowerUp.GetComponent<PowerUpObject>().currentPowerUpScriptableObject.currentPowerUpSafeUIClockImage;
+            else
+                powerUpUIGameObject.GetComponent<Image>().sprite = uiManagerScript.flightControllerScript.tutorialManagerScript.checkpoint4PowerUp.GetComponent<PowerUpObject>().currentPowerUpScriptableObject.currentPowerUpUIClockImage;
+            powerUpUIGameObject.transform.SetParent(transform.Find("PresentationObject"));
+            powerUpUIGameObject.GetComponent<UIPowerUp>().EnableUIPowerUp(uiManagerScript.flightControllerScript.tutorialManagerScript.checkpoint4PowerUp.GetComponent<PowerUpObject>().currentPowerUpScriptableObject.powerUpDuration, uiManagerScript.flightControllerScript.tutorialManagerScript.checkpoint4PowerUp.GetComponent<PowerUpObject>().currentPowerUpScriptableObject.powerUpName, true);
+            powerUpUIGameObject.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
+        }
+        else if (stringNumber == 9)
+            textToDisplay = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].tutorialScreen9;
+        else if (stringNumber == 10)
+            textToDisplay = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].tutorialScreen10;
         textGameObject.text = textToDisplay;
     }
 }

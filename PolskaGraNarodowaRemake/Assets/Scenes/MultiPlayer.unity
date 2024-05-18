@@ -2381,7 +2381,7 @@ MonoBehaviour:
     projectilesParentGameObject: {fileID: 1172776397}
     cameraGameObject: {fileID: 199547950}
     godModeLevelStart: 0
-  currentGameMode: 2
+  currentGameMode: 3
 --- !u!114 &2134856612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2533,6 +2533,7 @@ MonoBehaviour:
   touchScreenMainGameObject: {fileID: 0}
   tutorialMainGameObject: {fileID: 0}
   tutorialTitleGameObject: {fileID: 0}
+  tutorialPlaceToSpawnScreens: {fileID: 0}
   tutorialOKButton: {fileID: 0}
 --- !u!114 &2134856619
 MonoBehaviour:
