@@ -24,8 +24,18 @@ public class MainMenuManager : MonoBehaviour
     public GameObject audioManagerGameObject;
     internal PlaneSkinSelector planeSkinSelectorScript;
     public static GameMode currentGameMode;
+    internal bool gameIsNotFullScreenedAndVertical;
     internal static bool fromMainMenu = false;
     public GameplaySettings gameplaySettings;
+    [Header("Fullscreen button")]
+    public GameObject fullscreenButtonGameObject;
+    [Header("Background image")]
+    public GameObject mainMenuBackgroundUpperImageGameObject;
+    public GameObject mainMenuBackgroundLowerImageGameObject;
+    public GameObject mainMenuLogoImageGameObject;
+    public GameObject mainMenuSignatureGameObject;
+    public Sprite regularMainMenuBackgroundImage;
+    public Sprite alternativeMainMenuBackgroundImage;
     [Header("Main menu buttons")]
     public GameObject menuButtonsMainGameObject;
     public GameObject mainMenuPlayGameButton;
@@ -69,21 +79,26 @@ public class MainMenuManager : MonoBehaviour
     void Start()
     {
         Application.targetFrameRate = 144;
-#if (UNITY_WEBGL || UNITY_MOBILE)
-        DisableQuitGameButton();
-#endif
+        gameIsNotFullScreenedAndVertical = false;
+        if (UnityEngine.Device.Application.isMobilePlatform || Application.platform == RuntimePlatform.WebGLPlayer)
+        {
+            DisableQuitGameButton();
+            if (Screen.orientation != ScreenOrientation.LandscapeLeft && Screen.orientation != ScreenOrientation.LandscapeRight)
+                gameIsNotFullScreenedAndVertical = true;
+        }
+//#if (UNITY_WEBGL || UNITY_MOBILE)
+//        DisableQuitGameButton();
+//#endif
         currentGameMode = GameMode.SinglePlayerClassic;
         eventSystem = eventSystemGameObject.GetComponent<EventSystem>();
         planeSkinSelectorScript = GetComponent<PlaneSkinSelector>();
         audioManagerScript = audioManagerGameObject.GetComponent<AudioManager>();
         audioManagerScript.PlaySound("MainMenuTheme", audioManagerScript.localOtherSounds);
         UpdateUIButtonsWithLocalization();
-        if (!gameplaySettings.safeMode && !gameplaySettings.introductionScreens)
-            EnableDisclaimerPanel();
-        else if (gameplaySettings.safeMode && !gameplaySettings.introductionScreens)
-            EnablePlotPanel();
+        if (!gameIsNotFullScreenedAndVertical)
+            RegularGameLaunchProcedure();
         else
-            EnableMainMenuButtons();
+            GameStartedAsMobileVertical();
     }
     private void UpdateUIButtonsWithLocalization()
     {
@@ -148,10 +163,15 @@ public class MainMenuManager : MonoBehaviour
     internal void EnableMainMenuButtons()
     {
         if (!UnityEngine.Device.Application.isMobilePlatform)
+        {
+            eventSystem.SetSelectedGameObject(null);
             eventSystem.SetSelectedGameObject(mainMenuPlayGameButton);
+        }
+        else if (UnityEngine.Device.Application.isMobilePlatform && fullscreenButtonGameObject.GetComponent<FullScreenManager>().landscapeModeEnabled)
+            fullscreenButtonGameObject.GetComponent<FullScreenManager>().TurnOnFullScreenButton();
         menuButtonsMainGameObject.SetActive(true);
     }
-    internal void DisableMainMenuButtons()
+    public void DisableMainMenuButtons()
     {
         menuButtonsMainGameObject.SetActive(false);
     }
@@ -201,6 +221,7 @@ public class MainMenuManager : MonoBehaviour
     {
         if (!gameplaySettings.introductionScreens)
             gameplaySettings.introductionScreens = true;
+        eventSystem.SetSelectedGameObject(mainMenuPlayGameButton);
         EnableMainMenuButtons();
         controlsMenuMainGameObject.SetActive(false);
         UpdateUIButtonsWithLocalization();
@@ -280,5 +301,38 @@ public class MainMenuManager : MonoBehaviour
     private void DisableQuitGameButton()
     {
         mainMenuExitGameButton.SetActive(false);
+    }
+    private void GameStartedAsMobileVertical()
+    {
+        fullscreenButtonGameObject.GetComponent<FullScreenManager>().ModifyRectTransformOfTheGameObject();
+        mainMenuBackgroundUpperImageGameObject.GetComponent<Image>().sprite = alternativeMainMenuBackgroundImage;
+        mainMenuBackgroundLowerImageGameObject.SetActive(false);
+        mainMenuBackgroundUpperImageGameObject.GetComponent<BackgroundPlaneSpawner>().enabled = false;
+        mainMenuLogoImageGameObject.SetActive(false);
+        mainMenuSignatureGameObject.SetActive(false);
+        DisableMainMenuButtons();
+    }
+    internal void ScreenOrientationChangedToHorizontal()
+    {
+        fullscreenButtonGameObject.GetComponent<FullScreenManager>().ResetRectTransformOfTheGameObject();
+        mainMenuBackgroundUpperImageGameObject.GetComponent<Image>().sprite = regularMainMenuBackgroundImage;
+        mainMenuBackgroundLowerImageGameObject.SetActive(true);
+        mainMenuBackgroundUpperImageGameObject.GetComponent<BackgroundPlaneSpawner>().enabled = true;
+        mainMenuLogoImageGameObject.SetActive(true);
+        mainMenuSignatureGameObject.SetActive(true);
+        RegularGameLaunchProcedure();
+    }
+    private void RegularGameLaunchProcedure()
+    {
+        if (!gameplaySettings.safeMode && !gameplaySettings.introductionScreens)
+            EnableDisclaimerPanel();
+        else if (gameplaySettings.safeMode && !gameplaySettings.introductionScreens)
+            EnablePlotPanel();
+        else
+        {
+            EnableMainMenuButtons();
+            if (UnityEngine.Device.Application.isMobilePlatform)
+                fullscreenButtonGameObject.GetComponent<FullScreenManager>().TurnOnFullScreenButton();
+        }
     }
 }

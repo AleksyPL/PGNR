@@ -4,22 +4,33 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+public class ButtonTransform
+{
+    internal Vector2 anchorMin;
+    internal Vector2 anchorMax;
+    internal Vector3 position;
+    internal Vector3 scale;
+}
 public class FullScreenManager : MonoBehaviour
 {
-    private bool landscapeModeEnabled;
+    internal bool landscapeModeEnabled;
     private GameObject fullScreenButton;
     private GameObject canvasScalerGameObject;
     public GameplaySettings gameplaySettings;
+    internal ButtonTransform rectTransformHorizontal;
     void Start()
     {
         landscapeModeEnabled = false;
         fullScreenButton = transform.gameObject;
         canvasScalerGameObject = transform.parent.gameObject;
+        rectTransformHorizontal = new ButtonTransform();
         if (UnityEngine.Device.Application.isMobilePlatform)
         {
             DetectDeviceResolution();
             if (SceneManager.GetActiveScene().name == "MainMenu")
                 TurnOnFullScreenButton();
+            //if (Screen.orientation != ScreenOrientation.LandscapeLeft && Screen.orientation != ScreenOrientation.LandscapeRight)
+            //    rectTransformHorizontal = transform.GetComponent<RectTransform>();
             //else if (SceneManager.GetActiveScene().name != "MainMenu" && Screen.fullScreen)
             //    SetScreenScalerMatchValue();
         }  
@@ -76,7 +87,11 @@ public class FullScreenManager : MonoBehaviour
             Screen.fullScreen = false;
         else
             Screen.fullScreen = true;
-
+        if (SceneManager.GetActiveScene().name == "MainMenu" && transform.parent.GetComponent<MainMenuManager>().gameIsNotFullScreenedAndVertical)
+        {
+            TurnOffFullScreenButton();
+            transform.parent.GetComponent<MainMenuManager>().ScreenOrientationChangedToHorizontal();
+        }
     }
     private void DisableFullScreen()
     {
@@ -86,5 +101,23 @@ public class FullScreenManager : MonoBehaviour
             Screen.fullScreen = false;
         else
             Screen.fullScreen = true;
+    }
+    internal void ModifyRectTransformOfTheGameObject()
+    {
+        rectTransformHorizontal.anchorMin = transform.GetComponent<RectTransform>().anchorMin;
+        rectTransformHorizontal.anchorMax = transform.GetComponent<RectTransform>().anchorMax;
+        rectTransformHorizontal.position = transform.GetComponent<RectTransform>().localPosition;
+        rectTransformHorizontal.scale = transform.GetComponent<RectTransform>().localScale;
+        transform.GetComponent<RectTransform>().anchorMin = new Vector2(0.5f, 0.5f);
+        transform.GetComponent<RectTransform>().anchorMax = new Vector2(0.5f, 0.5f);
+        transform.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
+        transform.GetComponent<RectTransform>().localScale = new Vector3(3, 3, 3);
+    }
+    internal void ResetRectTransformOfTheGameObject()
+    {
+        transform.GetComponent<RectTransform>().anchorMin = rectTransformHorizontal.anchorMin;
+        transform.GetComponent<RectTransform>().anchorMax = rectTransformHorizontal.anchorMax;
+        transform.GetComponent<RectTransform>().localPosition = rectTransformHorizontal.position;
+        transform.GetComponent<RectTransform>().localScale = rectTransformHorizontal.scale;
     }
 }

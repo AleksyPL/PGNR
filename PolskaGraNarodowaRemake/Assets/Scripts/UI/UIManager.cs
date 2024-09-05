@@ -170,7 +170,7 @@ public class UIManager : MonoBehaviour
             if (flightControllerScript.rewardAndProgressionManagerScript.ReturnPlayerProgressObject(plane).levelProgressCounter < flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance + flightControllerScript.rewardAndProgressionManagerScript.levelSafeSpace)
             {
                 int levelProgress = (int)(flightControllerScript.rewardAndProgressionManagerScript.ReturnPlayerProgressObject(plane).levelProgressCounter / (flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance + flightControllerScript.rewardAndProgressionManagerScript.levelSafeSpace) * 100);
-                ReturnPlayersUIObject(plane).regularHUDLevelProgressGameObject.GetComponent<TMP_Text>().text = (gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].regularHudProgression0 + levelProgress + gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].regularHudProgression1).ToString();
+                ReturnPlayersUIObject(plane).regularHUDLevelProgressGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].regularHudProgression0 + levelProgress + gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].regularHudProgression1;
             }
             else if (flightControllerScript.rewardAndProgressionManagerScript.ReturnPlayerProgressObject(plane).levelProgressCounter >= (flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance + flightControllerScript.rewardAndProgressionManagerScript.levelSafeSpace) && plane.currentPlaneSpeed > 0)
                 ReturnPlayersUIObject(plane).regularHUDLevelProgressGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].regularHudLandingMessage;
@@ -179,7 +179,7 @@ public class UIManager : MonoBehaviour
         }
         if (flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.tutorial && plane.currentPlaneState == PlaneState.damaged)
             ReturnPlayersUIObject(plane).regularHUDLevelProgressGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].regularHudPlaneHit;
-        if(flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.tutorial && plane.currentPlaneState == PlaneState.standard || plane.currentPlaneState == PlaneState.wheelsOn)
+        if(flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.tutorial && (plane.currentPlaneState == PlaneState.standard || plane.currentPlaneState == PlaneState.wheelsOn))
         {
             if (flightControllerScript.tutorialManagerScript.checkpointNumber == 1)
                 ReturnPlayersUIObject(plane).regularHUDLevelProgressGameObject.GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].tutorialScreen1ProgressBar;
@@ -246,6 +246,7 @@ public class UIManager : MonoBehaviour
         UpdatePauseScreenHUD();   
         TurnOffColorPanel(playerOneUI.colorPanelGameObject);
         TurnOffColorPanel(playerTwoUI.colorPanelGameObject);
+        pauseScreenTitleGameObject.SetActive(true);
         pauseScreenTitleGameObject.GetComponentInChildren<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].pauseScreenGameOverMainTitle;
         gameOverScreenTryAgainButtonGameObject.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].gameOverScreenTryAgain;
         gameOverScreenExitButtonGameObject.transform.Find("Text").GetComponent<TMP_Text>().text = gameplaySettings.localizationsStrings[gameplaySettings.langauageIndex].backToMainMenu;
@@ -434,6 +435,8 @@ public class UIManager : MonoBehaviour
                 powerUpUIGameObject.transform.SetParent(ReturnPlayersUIObject(plane).powerUpBarParentGameObjectMobile.transform);
             else
                 powerUpUIGameObject.transform.SetParent(ReturnPlayersUIObject(plane).powerUpBarParentGameObject.transform);
+            powerUpUIGameObject.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
+            powerUpUIGameObject.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
             powerUpUIGameObject.GetComponent<UIPowerUp>().EnableUIPowerUp(currentPowerUp.powerUpDuration, currentPowerUp.powerUpName);
         }
     }
@@ -534,7 +537,7 @@ public class UIManager : MonoBehaviour
         tutorialScreenEnabled = true;
         playerOneUI.regularHUDMainGameObject.SetActive(false);
         tutorialMainGameObject.SetActive(true);
-        flightControllerScript.tutorialManagerScript.currentState = TutorialManager.TutorialPlayerState.Frozen;
+        flightControllerScript.tutorialManagerScript.currentTutorialState = TutorialManager.TutorialPlayerState.Frozen;
         if (UnityEngine.Device.Application.isMobilePlatform)
             TurnOffTouchScreenButtons();
         else
@@ -569,10 +572,10 @@ public class UIManager : MonoBehaviour
             tutorialMainGameObject.SetActive(false);
             flightControllerScript.uiManagerScript.playerOneUI.regularHUDMainGameObject.SetActive(true);
             UpdateLevelProgressBar(flightControllerScript.gameModeScript.playerOnePlane);
-            flightControllerScript.tutorialManagerScript.currentState = TutorialManager.TutorialPlayerState.Reverting;
+            flightControllerScript.tutorialManagerScript.currentTutorialState = TutorialManager.TutorialPlayerState.Reverting;
         }
         //close tutorial
-        else if (flightControllerScript.tutorialManagerScript.checkpointNumber == 10)
+        else if (flightControllerScript.tutorialManagerScript.checkpointNumber == 6)
         {
             Time.timeScale = 1;
             flightControllerScript.gameModeScript.BackToMainMenu();
@@ -583,7 +586,7 @@ public class UIManager : MonoBehaviour
             Time.timeScale = 1;
             if (UnityEngine.Device.Application.isMobilePlatform)
                 TurnOnTouchScreenButtons();
-            flightControllerScript.tutorialManagerScript.currentState = TutorialManager.TutorialPlayerState.Flying;
+            flightControllerScript.tutorialManagerScript.currentTutorialState = TutorialManager.TutorialPlayerState.Flying;
             Destroy(tutorialPlaceToSpawnScreens.transform.Find("TutorialScreen").gameObject);
             tutorialScreenEnabled = false;
             playerOneUI.regularHUDMainGameObject.SetActive(true);

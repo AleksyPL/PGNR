@@ -152,7 +152,7 @@ public class FlightController : MonoBehaviour
                 if (gameModeScript.playerOnePlane.currentPlaneState != PlaneState.wheelsOn)
                     ThrowBottleOfVodka(gameModeScript.playerOnePlane);
             }
-            else if (gameModeScript.currentGameMode == GameModeManager.GameMode.tutorial && tutorialManagerScript.currentState == TutorialManager.TutorialPlayerState.Flying && gameModeScript.playerOnePlane.currentPlaneState == PlaneState.standard || gameModeScript.playerOnePlane.currentPlaneState == PlaneState.wheelsOn)
+            else if (gameModeScript.currentGameMode == GameModeManager.GameMode.tutorial && tutorialManagerScript.currentTutorialState == TutorialManager.TutorialPlayerState.Flying && gameModeScript.playerOnePlane.currentPlaneState == PlaneState.standard || gameModeScript.playerOnePlane.currentPlaneState == PlaneState.wheelsOn)
             {
                 MovePlaneStandardAndWheels(gameModeScript.playerOnePlane);
                 if (gameModeScript.playerOnePlane.currentPlaneState != PlaneState.wheelsOn && gameModeScript.playerOnePlane.canThrowBottles)

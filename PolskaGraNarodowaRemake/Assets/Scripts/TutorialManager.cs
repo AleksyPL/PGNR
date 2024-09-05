@@ -18,7 +18,7 @@ public class TutorialManager : MonoBehaviour
         Frozen,
         Reverting
     }
-    internal TutorialPlayerState currentState;
+    internal TutorialPlayerState currentTutorialState;
     //Tutorial info screens
     public GameObject tutorialScreenTryAgain;
     public CheckpointScreens[] tutorialScreens;
@@ -31,6 +31,8 @@ public class TutorialManager : MonoBehaviour
     internal float scoreJustBeforeTheRewind;
     internal float bottlesAtTheBeginningOfTheCheckpoint;
     internal float bottlesJustBeforeTheRewind;
+    internal PlaneState planeStateAtTheBeginningOfTheCheckpoint;
+    internal PlaneState planeStateJustBeforeTheRewind;
     private float positonRevertTime;
     private float positionRevertLerpValue;
     //Checkpoint facts
@@ -67,7 +69,7 @@ public class TutorialManager : MonoBehaviour
         playerPositions = new List<Vector3>();
         playerState = new List<PlaneState>();
         playerTilt = new List<float>();
-        currentState = TutorialPlayerState.Frozen;
+        currentTutorialState = TutorialPlayerState.Frozen;
         flightControllerScript.uiManagerScript.EnableTutorialScreen();
         checkpointNumber = 0;
         positionRevertLerpValue = 0;
@@ -78,14 +80,16 @@ public class TutorialManager : MonoBehaviour
         scoreJustBeforeTheRewind = scoreAtTheBeginningOfTheCheckpoint;
         bottlesAtTheBeginningOfTheCheckpoint = flightControllerScript.gameModeScript.playerOnePlane.bottlesDrunk;
         bottlesJustBeforeTheRewind = bottlesAtTheBeginningOfTheCheckpoint;
+        planeStateAtTheBeginningOfTheCheckpoint = flightControllerScript.gameModeScript.playerOnePlane.currentPlaneState;
+        planeStateJustBeforeTheRewind = planeStateAtTheBeginningOfTheCheckpoint;
         for (int i = 0; i < tutorialScreens.Length; i++)
             tutorialScreens[i].screenToShowIndex = 0;
     }
     void Update()
     {
-        if (currentState == TutorialPlayerState.Flying)
+        if (currentTutorialState == TutorialPlayerState.Flying)
             SavePlayerRewindData();
-        else if (currentState == TutorialPlayerState.Reverting)
+        else if (currentTutorialState == TutorialPlayerState.Reverting)
         {
             positionRevertLerpValue += Time.deltaTime / positonRevertTime;
             if (positionRevertLerpValue < 1)
@@ -151,10 +155,13 @@ public class TutorialManager : MonoBehaviour
             flightControllerScript.gameModeScript.playerOnePlane.difficultyImpulseEnabled = true;
         else
             flightControllerScript.gameModeScript.playerOnePlane.difficultyImpulseEnabled = false;
+        flightControllerScript.gameModeScript.playerOnePlane.currentPlaneState = planeStateAtTheBeginningOfTheCheckpoint;
+        flightControllerScript.gameModeScript.playerOnePlane.planeRendererScript.ResetPlaneRenderer(flightControllerScript.gameModeScript.playerOnePlane.currentPlaneState);
+        flightControllerScript.gameModeScript.playerOnePlane.planeRendererScript.ChangePlaneSprite(flightControllerScript.gameModeScript.playerOnePlane.currentPlaneState);
         if (!nextCheckpoint)
         {
             checkpointFailedTryAgain = false;
-            currentState = TutorialPlayerState.Frozen;
+            currentTutorialState = TutorialPlayerState.Frozen;
             flightControllerScript.audioManagerScript.ResumeAllPausedSounds();
             flightControllerScript.uiManagerScript.EnableTutorialScreen();
         }
@@ -223,16 +230,16 @@ public class TutorialManager : MonoBehaviour
         if (checkpointNumber == 2)
         {
             if (checkpoint1Launcher != null)
-                Destroy(checkpoint1Launcher.transform);
+                Destroy(checkpoint1Launcher.gameObject);
         }
         else if (checkpointNumber == 4)
         {
             if (checkpoint3Fog != null)
-                Destroy(checkpoint3Fog.transform);
+                Destroy(checkpoint3Fog.gameObject);
             if (checkpoint3Tree != null)
-                Destroy(checkpoint3Tree.transform);
+                Destroy(checkpoint3Tree.gameObject);
             if (checkpoint3Launcher != null)
-                Destroy(checkpoint3Launcher.transform);
+                Destroy(checkpoint3Launcher.gameObject);
         }
     }
 }

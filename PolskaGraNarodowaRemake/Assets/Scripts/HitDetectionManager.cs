@@ -126,11 +126,17 @@ public class HitDetectionManager : MonoBehaviour
         else if((collision.gameObject.CompareTag("Obstacle") || collision.gameObject.CompareTag("PowerUp")) && transform.gameObject.CompareTag("KillPlane"))
             Destroy(collision.transform.gameObject);
     }
-    private void OperateTutorialCheckpoints()
+    internal void OperateTutorialCheckpoints()
     {
-        gameModeManagerScript.flightControllerScript.tutorialManagerScript.scoreJustBeforeTheRewind = gameModeManagerScript.playerOnePlane.gameScore;
-        gameModeManagerScript.flightControllerScript.tutorialManagerScript.bottlesJustBeforeTheRewind = gameModeManagerScript.playerOnePlane.bottlesDrunk;
-        gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.playerOneProgress.scorePointsCounter = 0;
+        if (gameModeManagerScript.playerOnePlane.currentPlaneState == PlaneState.damaged || gameModeManagerScript.playerOnePlane.currentPlaneState == PlaneState.crashed)
+            gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpointFailedTryAgain = true;
+        else
+        {
+            gameModeManagerScript.flightControllerScript.tutorialManagerScript.scoreJustBeforeTheRewind = gameModeManagerScript.playerOnePlane.gameScore;
+            gameModeManagerScript.flightControllerScript.tutorialManagerScript.bottlesJustBeforeTheRewind = gameModeManagerScript.playerOnePlane.bottlesDrunk;
+            gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.playerOneProgress.scorePointsCounter = 0;
+            gameModeManagerScript.flightControllerScript.tutorialManagerScript.planeStateJustBeforeTheRewind = gameModeManagerScript.flightControllerScript.gameModeScript.playerOnePlane.currentPlaneState;
+        }
         //setting checkpoints facts
         if (!gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpointFailedTryAgain)
         {
@@ -160,14 +166,18 @@ public class HitDetectionManager : MonoBehaviour
                     gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpointGoalAchieved = true;
                     gameModeManagerScript.playerOnePlane.currentPlaneState = PlaneState.wheelsOn;
                     gameModeManagerScript.playerOnePlane.planeRendererScript.ChangePlaneSprite(PlaneState.wheelsOn);
+                    gameModeManagerScript.flightControllerScript.tutorialManagerScript.planeStateJustBeforeTheRewind = gameModeManagerScript.playerOnePlane.currentPlaneState;
                 }
             }
+            else if (gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpointNumber == 5)
+                gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpointGoalAchieved = true;
             if (gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpointGoalAchieved)
             {
                 Destroy(this.transform.gameObject);
                 gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpointNumber++;
                 gameModeManagerScript.flightControllerScript.tutorialManagerScript.scoreAtTheBeginningOfTheCheckpoint = gameModeManagerScript.playerOnePlane.gameScore;
                 gameModeManagerScript.flightControllerScript.tutorialManagerScript.bottlesAtTheBeginningOfTheCheckpoint = gameModeManagerScript.playerOnePlane.bottlesDrunk;
+                gameModeManagerScript.flightControllerScript.tutorialManagerScript.planeStateAtTheBeginningOfTheCheckpoint = gameModeManagerScript.playerOnePlane.currentPlaneState;
                 gameModeManagerScript.flightControllerScript.tutorialManagerScript.ClearRewindData(true);
                 gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpointGoalAchieved = false;
             }

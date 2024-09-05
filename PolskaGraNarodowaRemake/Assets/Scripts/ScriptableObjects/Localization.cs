@@ -103,6 +103,8 @@ public class Localization : ScriptableObject
             listOfAll.AddRange(localizationTextFile.text.Split(Environment.NewLine));
         if (listOfAll.Count != 0)
         {
+            for(int i=0;i<listOfAll.Count;i++)
+                listOfAll[i] = listOfAll[i].Replace("\r", "");
             //main menu
             mainMenuStartGame = listOfAll[1];
             mainMenuControls = listOfAll[3];

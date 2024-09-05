@@ -1699,7 +1699,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1348917844641302775, guid: 96f7b0c8a65024a44b177654ca437307, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 300
+      value: 285
       objectReference: {fileID: 0}
     - target: {fileID: 1348917844641302775, guid: 96f7b0c8a65024a44b177654ca437307, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2673,7 +2673,7 @@ MonoBehaviour:
   checkpoint3FogPositionX: 190
   checkpoint4PowerUpPosition: {x: 235, y: 27}
   checkpoint4PowerUpNumber: 1
-  checkpoint5AirportPositionX: 365
+  checkpoint5AirportPositionX: 335
 --- !u!1 &2140582107 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2600841777920580954, guid: d52898fbef1ba7f4aaf71c2cc861a25b, type: 3}
@@ -2806,7 +2806,11 @@ PrefabInstance:
     - target: {fileID: 2600841778905497309, guid: d52898fbef1ba7f4aaf71c2cc861a25b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2084290469}
+      objectReference: {fileID: 2084290473}
+    - target: {fileID: 2600841778905497309, guid: d52898fbef1ba7f4aaf71c2cc861a25b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameModeManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 2600841779091462278, guid: d52898fbef1ba7f4aaf71c2cc861a25b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

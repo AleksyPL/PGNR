@@ -63,8 +63,11 @@ public class UIControlsMenu : MonoBehaviour
     }
     private void CleanPrefabParentGameObject()
     {
-        while (nonMobilePrefabParent.transform.childCount > 0)
-            DestroyImmediate(nonMobilePrefabParent.transform.GetChild(0).gameObject);
+        if(nonMobilePrefabParent.transform.childCount > 0)
+        {
+            foreach (Transform child in nonMobilePrefabParent.transform)
+                GameObject.Destroy(child.gameObject);
+        }
     }
     private void SpawnUIButtonImages()
     {

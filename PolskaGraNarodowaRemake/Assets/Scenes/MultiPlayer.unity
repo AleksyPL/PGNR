@@ -358,6 +358,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62438c9299537e14983fd45a275e3833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &107514396 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2617792220354454504, guid: 634ad76ae54ee6c4482d977cf834e3ac, type: 3}
+  m_PrefabInstance: {fileID: 52441333}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &137105967
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -766,6 +771,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62438c9299537e14983fd45a275e3833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &672535159 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1689551057042018777, guid: 634ad76ae54ee6c4482d977cf834e3ac, type: 3}
+  m_PrefabInstance: {fileID: 52441333}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &735743962 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 480233733884581915, guid: 634ad76ae54ee6c4482d977cf834e3ac, type: 3}
@@ -2003,7 +2013,15 @@ PrefabInstance:
     - target: {fileID: 8535687716876871791, guid: af37a67e2c14f374eb7d00afa5eed0e1, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2134856618}
+      objectReference: {fileID: 2134856611}
+    - target: {fileID: 8535687716876871791, guid: af37a67e2c14f374eb7d00afa5eed0e1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: BackToMainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 8535687716876871791, guid: af37a67e2c14f374eb7d00afa5eed0e1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameModeManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 8535687717116870704, guid: af37a67e2c14f374eb7d00afa5eed0e1, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2421,7 +2439,7 @@ MonoBehaviour:
   enableObstacles: 1
   sameObstaclesForBothPlayes: 1
   enablePowerUps: 1
-  numberOfPowerUpsPerSector: 5
+  numberOfPowerUpsPerSector: 2
   endlessModeSpawnerPlayerTwoOffset: 0.15
 --- !u!114 &2134856614
 MonoBehaviour:
@@ -2489,7 +2507,7 @@ MonoBehaviour:
     gameSummaryScoreGameObject: {fileID: 1849406777}
     gameSummaryBottlesGameObject: {fileID: 1849406778}
     powerUpBarParentGameObject: {fileID: 172152494}
-    powerUpBarParentGameObjectMobile: {fileID: 0}
+    powerUpBarParentGameObjectMobile: {fileID: 107514396}
   playerTwoUI:
     colorPanelGameObject: {fileID: 460065363}
     regularHUDMainGameObject: {fileID: 52441335}
@@ -2501,7 +2519,7 @@ MonoBehaviour:
     gameSummaryScoreGameObject: {fileID: 1849406773}
     gameSummaryBottlesGameObject: {fileID: 1849406774}
     powerUpBarParentGameObject: {fileID: 1826782130}
-    powerUpBarParentGameObjectMobile: {fileID: 0}
+    powerUpBarParentGameObjectMobile: {fileID: 672535159}
   winColor: {r: 0.46818078, g: 1, b: 0, a: 0.19607843}
   loseColor: {r: 1, g: 0, b: 0, a: 0.19607843}
   fadePanelGameObject: {fileID: 1849406781}

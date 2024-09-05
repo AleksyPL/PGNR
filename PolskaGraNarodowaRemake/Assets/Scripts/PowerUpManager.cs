@@ -58,7 +58,7 @@ public class PowerUpManager : MonoBehaviour
     internal void ResetPowerUpManager()
     {
         flightControllerScript = GetComponent<FlightController>();
-        if (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerEndless || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusEndless)
+        if (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.singleplayerEndless || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusEndless || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.tutorial)
         {
             playerOnePowerUpController = new PlayerPowerUpController();
             ResetDurationForThePowerUp(flightControllerScript.gameModeScript.playerOnePlane, "ShieldPowerUp");

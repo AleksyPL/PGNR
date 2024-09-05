@@ -286,6 +286,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: KillPlane
       objectReference: {fileID: 0}
+    - target: {fileID: 8640456190315491145, guid: 96f7b0c8a65024a44b177654ca437307, type: 3}
+      propertyPath: m_TagString
+      value: KillPlane
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

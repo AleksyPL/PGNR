@@ -133,18 +133,33 @@ public class GameModeManager : MonoBehaviour
             SetProgressionFlags(playerTwoPlane);
         if(currentGameMode != GameMode.tutorial)
             CheckAndPlayOneLinerSound();
-        if(!flightControllerScript.rewardAndProgressionManagerScript.toNewLevel && (((currentGameMode == GameMode.singleplayerClassic || currentGameMode == GameMode.singleplayerEndless) && playerOneState == PlayerState.landed) || ((currentGameMode == GameMode.versusClassic || currentGameMode == GameMode.versusEndless) && playerOneState == GameModeManager.PlayerState.landed && playerTwoState == GameModeManager.PlayerState.landed)))
+        SetLandingFlags();
+    }
+    internal void SetLandingFlags()
+    {
+        if ((currentGameMode == GameMode.singleplayerClassic && playerOneState == PlayerState.landed) || (currentGameMode == GameMode.versusClassic && playerOneState == GameModeManager.PlayerState.landed && playerTwoState == GameModeManager.PlayerState.landed))
         {
-            flightControllerScript.rewardAndProgressionManagerScript.toNewLevel = true;
-            playerOneState = GameModeManager.PlayerState.flying;
-            if (currentGameMode != GameMode.singleplayerClassic && currentGameMode != GameMode.singleplayerEndless)
-                playerTwoState = GameModeManager.PlayerState.flying;
-            flightControllerScript.audioManagerScript.StopPlayingSoundsFromTheSpecificSoundBank(flightControllerScript.audioManagerScript.localOneLinersSounds);
-            flightControllerScript.audioManagerScript.DrawAndPlayASound(flightControllerScript.audioManagerScript.localLandingSounds, "Landing", ref flightControllerScript.audioManagerScript.lastPlayedLandingSound);
-            if (flightControllerScript.audioManagerScript.ReturnSoundDuration("Landing" + flightControllerScript.audioManagerScript.lastPlayedLandingSound, flightControllerScript.audioManagerScript.localLandingSounds) > 5f)
-                flightControllerScript.uiManagerScript.SpawnTimerOnTheScreen(flightControllerScript.audioManagerScript.ReturnSoundDuration("Landing" + flightControllerScript.audioManagerScript.lastPlayedLandingSound, flightControllerScript.audioManagerScript.localLandingSounds));
-            else
-                flightControllerScript.uiManagerScript.SpawnTimerOnTheScreen(5f);
+            if (!flightControllerScript.rewardAndProgressionManagerScript.toNewLevel)
+            {
+                flightControllerScript.rewardAndProgressionManagerScript.toNewLevel = true;
+                playerOneState = GameModeManager.PlayerState.flying;
+                if (currentGameMode == GameMode.versusClassic)
+                    playerTwoState = GameModeManager.PlayerState.flying;
+                flightControllerScript.audioManagerScript.StopPlayingSoundsFromTheSpecificSoundBank(flightControllerScript.audioManagerScript.localOneLinersSounds);
+                flightControllerScript.audioManagerScript.DrawAndPlayASound(flightControllerScript.audioManagerScript.localLandingSounds, "Landing", ref flightControllerScript.audioManagerScript.lastPlayedLandingSound);
+                if (flightControllerScript.audioManagerScript.ReturnSoundDuration("Landing" + flightControllerScript.audioManagerScript.lastPlayedLandingSound, flightControllerScript.audioManagerScript.localLandingSounds) > 5f)
+                    flightControllerScript.uiManagerScript.SpawnTimerOnTheScreen(flightControllerScript.audioManagerScript.ReturnSoundDuration("Landing" + flightControllerScript.audioManagerScript.lastPlayedLandingSound, flightControllerScript.audioManagerScript.localLandingSounds));
+                else
+                    flightControllerScript.uiManagerScript.SpawnTimerOnTheScreen(5f);
+            }
+        }
+        else if (currentGameMode == GameMode.tutorial && playerOneState == PlayerState.landed)
+        {
+            if (!flightControllerScript.rewardAndProgressionManagerScript.toNewLevel)
+            {
+                playerOnePlane.cameraGameObject.transform.Find("Ground").GetComponent<HitDetectionManager>().OperateTutorialCheckpoints();
+                flightControllerScript.rewardAndProgressionManagerScript.toNewLevel = true;
+            }
         }
     }
     private void SetProgressionFlags(Plane plane)
