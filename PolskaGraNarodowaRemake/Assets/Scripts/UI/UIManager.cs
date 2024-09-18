@@ -337,6 +337,7 @@ public class UIManager : MonoBehaviour
     public void DisableExitWarning()
     {
         gameStatsGameObject.SetActive(true);
+        pauseScreenRegularButtonsGameObject.SetActive(true);
         if (!UnityEngine.Device.Application.isMobilePlatform)
             eventSystem.SetSelectedGameObject(pauseScreenOptionsButtonGameObject);
         pauseScreenWarningGameObject.SetActive(false);
@@ -444,7 +445,7 @@ public class UIManager : MonoBehaviour
     {
         if ((plane == flightControllerScript.gameModeScript.playerOnePlane && ReturnPowerUpUIClockIfExists(plane, currentPowerUpName) != null) || (plane == flightControllerScript.gameModeScript.playerTwoPlane && ReturnPowerUpUIClockIfExists(plane, currentPowerUpName) != null))
         {
-            Destroy(ReturnPowerUpUIClockIfExists(plane, currentPowerUpName));
+            GameObject.Destroy(ReturnPowerUpUIClockIfExists(plane, currentPowerUpName));
             if (UnityEngine.Device.Application.isMobilePlatform)
                 ChangeTheOrderOnThePowerUpsBar(ReturnPlayersUIObject(plane).powerUpBarParentGameObjectMobile);
             else
@@ -455,18 +456,18 @@ public class UIManager : MonoBehaviour
     {
         if (UnityEngine.Device.Application.isMobilePlatform)
         {
-            if (ReturnPlayersUIObject(plane).powerUpBarParentGameObjectMobile.transform.childCount != 0)
+            if (ReturnPlayersUIObject(plane).powerUpBarParentGameObjectMobile.transform.childCount != 0 && ReturnPlayersUIObject(plane).powerUpBarParentGameObjectMobile.transform.childCount > 0)
             {
-                while (ReturnPlayersUIObject(plane).powerUpBarParentGameObjectMobile.transform.childCount > 0)
-                    DestroyImmediate(ReturnPlayersUIObject(plane).powerUpBarParentGameObjectMobile.transform.GetChild(0).gameObject);
+                foreach (Transform child in ReturnPlayersUIObject(plane).powerUpBarParentGameObjectMobile.transform)
+                    GameObject.Destroy(child.gameObject);
             }
         }
         else
         {
-            if (ReturnPlayersUIObject(plane).powerUpBarParentGameObject.transform.childCount != 0)
+            if (ReturnPlayersUIObject(plane).powerUpBarParentGameObject.transform.childCount != 0 && ReturnPlayersUIObject(plane).powerUpBarParentGameObject.transform.childCount > 0)
             {
-                while (ReturnPlayersUIObject(plane).powerUpBarParentGameObject.transform.childCount > 0)
-                    DestroyImmediate(ReturnPlayersUIObject(plane).powerUpBarParentGameObject.transform.GetChild(0).gameObject);
+                foreach (Transform child in ReturnPlayersUIObject(plane).powerUpBarParentGameObject.transform)
+                    GameObject.Destroy(child.gameObject);
             }
         }
     }
@@ -480,7 +481,7 @@ public class UIManager : MonoBehaviour
                 if (powerUpBarGameObject.transform.GetChild(i).gameObject.GetComponent<UIPowerUp>().powerUpDurationCounter > 0)
                     myObjectsUnsorted.Add(powerUpBarGameObject.transform.GetChild(i).gameObject);
                 else
-                    Destroy(powerUpBarGameObject.transform.GetChild(i).gameObject);
+                    GameObject.Destroy(powerUpBarGameObject.transform.GetChild(i).gameObject);
             }
             List<GameObject> myObjectsSorted = myObjectsUnsorted.OrderBy(o => o.GetComponent<UIPowerUp>().powerUpDurationCounter).ToList();
             for (int i = 0; i < myObjectsSorted.Count; i++)
@@ -555,7 +556,7 @@ public class UIManager : MonoBehaviour
         //display another screen
         if (!flightControllerScript.tutorialManagerScript.checkpointFailedTryAgain && (flightControllerScript.tutorialManagerScript.tutorialScreens[flightControllerScript.tutorialManagerScript.checkpointNumber].screensToShow.Length-1) != flightControllerScript.tutorialManagerScript.tutorialScreens[flightControllerScript.tutorialManagerScript.checkpointNumber].screenToShowIndex)
         {
-            Destroy(tutorialPlaceToSpawnScreens.transform.Find("TutorialScreen").gameObject);
+            GameObject.Destroy(tutorialPlaceToSpawnScreens.transform.Find("TutorialScreen").gameObject);
             flightControllerScript.tutorialManagerScript.tutorialScreens[flightControllerScript.tutorialManagerScript.checkpointNumber].screenToShowIndex++;
             EnableTutorialScreen();
         }
@@ -564,7 +565,7 @@ public class UIManager : MonoBehaviour
         {
             Time.timeScale = 1;
             flightControllerScript.tutorialManagerScript.CalculateRevertDuration();
-            Destroy(tutorialPlaceToSpawnScreens.transform.Find("TutorialScreen").gameObject);
+            GameObject.Destroy(tutorialPlaceToSpawnScreens.transform.Find("TutorialScreen").gameObject);
             flightControllerScript.levelManagerScript.CleanLevel(flightControllerScript.gameModeScript.playerOnePlane);
             flightControllerScript.tutorialManagerScript.PlayRewindSFX();
             tutorialScreenEnabled = false;
@@ -587,7 +588,7 @@ public class UIManager : MonoBehaviour
             if (UnityEngine.Device.Application.isMobilePlatform)
                 TurnOnTouchScreenButtons();
             flightControllerScript.tutorialManagerScript.currentTutorialState = TutorialManager.TutorialPlayerState.Flying;
-            Destroy(tutorialPlaceToSpawnScreens.transform.Find("TutorialScreen").gameObject);
+            GameObject.Destroy(tutorialPlaceToSpawnScreens.transform.Find("TutorialScreen").gameObject);
             tutorialScreenEnabled = false;
             playerOneUI.regularHUDMainGameObject.SetActive(true);
             tutorialMainGameObject.SetActive(false);

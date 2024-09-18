@@ -34,7 +34,7 @@ public class FadeOutTool : MonoBehaviour
             else
             {
                 fadingElements[i].GetComponent<SpriteRenderer>().color = new Color(fadingElements[i].GetComponent<SpriteRenderer>().color.r, fadingElements[i].GetComponent<SpriteRenderer>().color.g, fadingElements[i].GetComponent<SpriteRenderer>().color.b, 0);
-                Destroy(transform.gameObject);
+                GameObject.Destroy(transform.gameObject);
             }
         colorFadeCounter = 0;
     }

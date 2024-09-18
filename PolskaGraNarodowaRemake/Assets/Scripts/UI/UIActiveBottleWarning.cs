@@ -47,6 +47,6 @@ public class UIActiveBottleWarning : MonoBehaviour
     }
     internal void DestroyBottleWarning()
     {
-        Destroy(transform.gameObject);
+        GameObject.Destroy(transform.gameObject);
     }
 }

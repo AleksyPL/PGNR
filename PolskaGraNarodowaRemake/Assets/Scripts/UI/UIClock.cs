@@ -86,7 +86,7 @@ public class UIClock : MonoBehaviour
             }     
             flightControllerScript.audioManagerScript.ResumeAllPausedSounds();
         }
-        Destroy(transform.gameObject);
+        GameObject.Destroy(transform.gameObject);
     }
     private void UpdateTimer()
     {

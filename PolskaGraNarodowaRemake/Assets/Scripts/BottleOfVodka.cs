@@ -33,7 +33,7 @@ public class BottleOfVodka : MonoBehaviour
             else if (collision.gameObject.transform.name == "trotyl" || collision.gameObject.transform.name == "trotylLauncher")
             {
                 parentObject.gameScore += gameplaySettings.rewardForHittingATarget;
-                Destroy(collision.gameObject);
+                GameObject.Destroy(collision.gameObject);
                 if (explosionPrefab != null)
                 {
                     GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity, projectileParentGameObject.transform);
@@ -47,7 +47,7 @@ public class BottleOfVodka : MonoBehaviour
                 foreach (Transform child in bottle.transform)
                     child.gameObject.GetComponent<Rigidbody2D>().AddForce(Random.insideUnitCircle.normalized * gameplaySettings.debrisSplashForce);
             }
-            Destroy(gameObject);
+            GameObject.Destroy(gameObject);
         }
     }
 }

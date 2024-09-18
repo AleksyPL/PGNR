@@ -18,7 +18,6 @@ public class UIOptionsMenu : MonoBehaviour
     public GameObject activeLanguageGameObject;
     public GameObject backToPauseScreenButton;
     public GameObject audioManagerGameObject;
-    public Color notAvailableButton;
     private void OnEnable()
     {
         LoadValuesFromSettings();
@@ -74,9 +73,7 @@ public class UIOptionsMenu : MonoBehaviour
     }
     internal void DisableLanguageButtons()
     {
-        languageSelectorGameObject.transform.Find("LeftArrow").GetComponent<Button>().enabled = false;
-        languageSelectorGameObject.transform.Find("LeftArrow").GetComponent<Image>().color = notAvailableButton;
-        languageSelectorGameObject.transform.Find("RightArrow").GetComponent<Button>().enabled = false;
-        languageSelectorGameObject.transform.Find("RightArrow").GetComponent<Image>().color = notAvailableButton;
+        languageSelectorGameObject.transform.Find("LeftArrow").GetComponent<Button>().interactable = false;
+        languageSelectorGameObject.transform.Find("RightArrow").GetComponent<Button>().interactable = false;
     }
 }

@@ -13,9 +13,9 @@ public class BackgroundPlane : MonoBehaviour
         {
             lifeTimeCounter += Time.deltaTime;
             if (lifeTimeCounter >= lifeTime)
-                Destroy(transform.gameObject);
+                GameObject.Destroy(transform.gameObject);
         }
         else
-            Destroy(transform.gameObject);
+            GameObject.Destroy(transform.gameObject);
     }
 }

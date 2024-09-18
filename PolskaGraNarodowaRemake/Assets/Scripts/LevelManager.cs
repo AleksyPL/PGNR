@@ -35,9 +35,9 @@ public class LevelManager : MonoBehaviour
     }
     private void RemoveAllChildrenOfTheGameObject(GameObject sourceGameObject)
     {
-        if(flightControllerScript.gameModeScript.currentGameMode!= GameModeManager.GameMode.tutorial)
-            while (sourceGameObject.transform.childCount > 0)
-                DestroyImmediate(sourceGameObject.transform.GetChild(0).gameObject);
+        if (flightControllerScript.gameModeScript.currentGameMode != GameModeManager.GameMode.tutorial && sourceGameObject.transform.childCount > 0)
+            foreach (Transform child in sourceGameObject.transform)
+                GameObject.Destroy(child.gameObject);
     }
     internal void LoadLevel()
     {
@@ -145,14 +145,14 @@ public class LevelManager : MonoBehaviour
             foreach (GameObject child in clonedObjects)
                 child.transform.parent = finalGameObject.transform;
             MoveObstaclesFromOneObjectToAnother(ref sourceGameObject, ref finalGameObject);
-            Destroy(sourceGameObject);
+            GameObject.Destroy(sourceGameObject);
         }
     }
     internal void MoveObstaclesFromOneObjectToAnother(ref GameObject sourceGameObject, ref GameObject finalGameObject)
     {
         while (sourceGameObject.transform.childCount > 0)
             sourceGameObject.transform.GetChild(0).gameObject.transform.parent = finalGameObject.transform;
-        Destroy(sourceGameObject);
+        GameObject.Destroy(sourceGameObject);
     }
     internal GameObject SpawnSingleObstacle(Plane plane, ref GameObject obstaclesParent, float placementPointX, GameObject prefabToSpawn, string gameObjectName="")
     {
@@ -231,7 +231,7 @@ public class LevelManager : MonoBehaviour
         {
             for (int i = 0; i < obstaclesAndProjectilesParentGameObject.transform.childCount; i++)
                 if (obstaclesAndProjectilesParentGameObject.transform.GetChild(i).name == "vodkaBottle" || obstaclesAndProjectilesParentGameObject.transform.GetChild(i).name == "vodkaBottleCracked" || obstaclesAndProjectilesParentGameObject.transform.GetChild(i).name =="trotyl")
-                    Destroy(obstaclesAndProjectilesParentGameObject.transform.GetChild(i).gameObject);
+                    GameObject.Destroy(obstaclesAndProjectilesParentGameObject.transform.GetChild(i).gameObject);
         }
     }
 }

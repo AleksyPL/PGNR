@@ -20,7 +20,7 @@ public class Trotyl : MonoBehaviour
                 Instantiate(gameModeManagerScript.flightControllerScript.gameplaySettings.explosionPrefab, transform.position, Quaternion.identity, gameModeManagerScript.transform.Find("ObstaclesAndProjectiles").transform);
                 audioScript.PlaySound("Explosion", audioScript.localSFX);
             }
-            Destroy(gameObject);
+            GameObject.Destroy(gameObject);
         }
         if(collision.gameObject.CompareTag("Plane"))
         {
@@ -34,7 +34,7 @@ public class Trotyl : MonoBehaviour
                         gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).DamageThePlane();
                 }
             }
-            Destroy(gameObject);
+            GameObject.Destroy(gameObject);
         }
     }
 }

@@ -230,16 +230,16 @@ public class TutorialManager : MonoBehaviour
         if (checkpointNumber == 2)
         {
             if (checkpoint1Launcher != null)
-                Destroy(checkpoint1Launcher.gameObject);
+                GameObject.Destroy(checkpoint1Launcher.gameObject);
         }
         else if (checkpointNumber == 4)
         {
             if (checkpoint3Fog != null)
-                Destroy(checkpoint3Fog.gameObject);
+                GameObject.Destroy(checkpoint3Fog.gameObject);
             if (checkpoint3Tree != null)
-                Destroy(checkpoint3Tree.gameObject);
+                GameObject.Destroy(checkpoint3Tree.gameObject);
             if (checkpoint3Launcher != null)
-                Destroy(checkpoint3Launcher.gameObject);
+                GameObject.Destroy(checkpoint3Launcher.gameObject);
         }
     }
 }

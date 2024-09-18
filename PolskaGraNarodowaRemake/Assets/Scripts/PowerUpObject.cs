@@ -141,11 +141,11 @@ public class PowerUpObject : MonoBehaviour
                     gameModeManagerScript.flightControllerScript.uiManagerScript.ResetDurationForTheUIPowerUpClock(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject), currentPowerUpScriptableObject.powerUpName);
                 }
             }
-            Destroy(transform.gameObject);
+            GameObject.Destroy(transform.gameObject);
         }
         else if (collision.gameObject.CompareTag("Plane") && gameModeManagerScript.ReturnPlayerStateObject(gameModeManagerScript.ReturnAPlaneObject(collision.gameObject)) != GameModeManager.PlayerState.flying)
         {
-            Destroy(transform.gameObject);
+            GameObject.Destroy(transform.gameObject);
         }
     }
 }

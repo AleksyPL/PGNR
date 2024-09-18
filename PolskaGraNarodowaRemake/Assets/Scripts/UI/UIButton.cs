@@ -5,7 +5,7 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class MainMenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IMoveHandler, ISubmitHandler, IPointerMoveHandler, IDragHandler
+public class UIButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IMoveHandler, ISubmitHandler, IPointerMoveHandler, IDragHandler
 {
     public UnityEvent UIFunction;
     public GameObject eventSystemGameObject;
@@ -61,7 +61,7 @@ public class MainMenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     }
     public void OnMove(AxisEventData eventData)
     {
-        if(eventSystem.currentSelectedGameObject != this)
+        if(eventSystem.currentSelectedGameObject != this.gameObject)
             DeselectUIButton();
     }
     public void OnSubmit(BaseEventData eventData)

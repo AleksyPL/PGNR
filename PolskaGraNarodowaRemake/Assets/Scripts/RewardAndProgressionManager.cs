@@ -118,6 +118,8 @@ public class RewardAndProgressionManager : MonoBehaviour
         }
         if (flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusClassic || flightControllerScript.gameModeScript.currentGameMode == GameModeManager.GameMode.versusEndless)
         {
+            CalculateScore(flightControllerScript.gameModeScript.playerOnePlane);
+            CalculateLevelProgress(flightControllerScript.gameModeScript.playerOnePlane);
             CalculateScore(flightControllerScript.gameModeScript.playerTwoPlane);
             CalculateLevelProgress(flightControllerScript.gameModeScript.playerTwoPlane);
         }

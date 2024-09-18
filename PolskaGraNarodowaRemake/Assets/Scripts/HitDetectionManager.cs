@@ -36,7 +36,7 @@ public class HitDetectionManager : MonoBehaviour
                         if (transform.GetComponent<FadeOutTool>())
                             transform.gameObject.GetComponent<FadeOutTool>().enabled = true;
                         else
-                            Destroy(transform.gameObject);
+                            GameObject.Destroy(transform.gameObject);
                         gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).TurnOffTheShield();
                         if (gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).speedEnabled)
                             gameModeManagerScript.ReturnAPlaneObject(collision.gameObject).speedEnabled = false;
@@ -46,7 +46,7 @@ public class HitDetectionManager : MonoBehaviour
                         if (transform.GetComponent<FadeOutTool>())
                             transform.gameObject.GetComponent<FadeOutTool>().enabled = true;
                         else
-                            Destroy(transform.gameObject);
+                            GameObject.Destroy(transform.gameObject);
                     }
                 }
             }
@@ -89,7 +89,7 @@ public class HitDetectionManager : MonoBehaviour
                 foreach (Transform child in gameModeManagerScript.flightControllerScript.levelManagerScript.obstaclesAndProjectilesParentGameObject.transform)
                 {
                     if (child != transform && child.transform.name == "SpawnNewObjects")
-                        Destroy(child.gameObject);
+                        GameObject.Destroy(child.gameObject);
                 }
                 gameModeManagerScript.flightControllerScript.levelManagerScript.FillTheLevelWithObstacles(gameModeManagerScript.playerOnePlane, ref gameModeManagerScript.flightControllerScript.levelManagerScript.obstaclesBufferGameObject, ((int)(transform.position.x / gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance) + 1) * gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance, ((int)(transform.position.x / gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance) + 2) * gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance);
                 gameModeManagerScript.flightControllerScript.levelManagerScript.SpawnPowerUps(gameModeManagerScript.playerOnePlane, ref gameModeManagerScript.flightControllerScript.levelManagerScript.powerUpsParentGameObject, (((int)transform.position.x / gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance) + 1) * gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance, ((int)(transform.position.x / gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance) + 2) * gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance);
@@ -116,7 +116,7 @@ public class HitDetectionManager : MonoBehaviour
                     gameModeManagerScript.flightControllerScript.levelManagerScript.MoveObstaclesFromOneObjectToAnother(ref gameModeManagerScript.flightControllerScript.levelManagerScript.obstaclesBufferGameObject, ref gameModeManagerScript.flightControllerScript.levelManagerScript.obstaclesAndProjectilesParentGameObject);
                     gameModeManagerScript.flightControllerScript.levelManagerScript.SpawnEndlessModeSpawner(gameModeManagerScript.playerOnePlane, gameModeManagerScript.flightControllerScript.levelManagerScript.obstaclesAndProjectilesParentGameObject, transform.position.x + gameModeManagerScript.flightControllerScript.rewardAndProgressionManagerScript.currentLevelDistance);
                 }
-                Destroy(transform.gameObject);
+                GameObject.Destroy(transform.gameObject);
             }
             else if (transform.name.Contains("TutorialCheckpoint") && gameModeManagerScript.currentGameMode == GameModeManager.GameMode.tutorial)
             {
@@ -124,7 +124,7 @@ public class HitDetectionManager : MonoBehaviour
             }
         }
         else if((collision.gameObject.CompareTag("Obstacle") || collision.gameObject.CompareTag("PowerUp")) && transform.gameObject.CompareTag("KillPlane"))
-            Destroy(collision.transform.gameObject);
+            GameObject.Destroy(collision.transform.gameObject);
     }
     internal void OperateTutorialCheckpoints()
     {
@@ -173,7 +173,7 @@ public class HitDetectionManager : MonoBehaviour
                 gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpointGoalAchieved = true;
             if (gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpointGoalAchieved)
             {
-                Destroy(this.transform.gameObject);
+                GameObject.Destroy(this.transform.gameObject);
                 gameModeManagerScript.flightControllerScript.tutorialManagerScript.checkpointNumber++;
                 gameModeManagerScript.flightControllerScript.tutorialManagerScript.scoreAtTheBeginningOfTheCheckpoint = gameModeManagerScript.playerOnePlane.gameScore;
                 gameModeManagerScript.flightControllerScript.tutorialManagerScript.bottlesAtTheBeginningOfTheCheckpoint = gameModeManagerScript.playerOnePlane.bottlesDrunk;

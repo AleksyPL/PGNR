@@ -56,8 +56,9 @@ public class EnvironmentManager : MonoBehaviour
     }
     private void ClearBackgroundImage()
     {
-        while (backgroundsMainGameObject.transform.childCount > 0)
-            DestroyImmediate(backgroundsMainGameObject.transform.GetChild(0).gameObject);
+        if (backgroundsMainGameObject.transform.childCount > 0)
+            foreach (Transform child in backgroundsMainGameObject.transform)
+                GameObject.Destroy(child.gameObject);
     }
     private void TurnOnTheRain()
     {

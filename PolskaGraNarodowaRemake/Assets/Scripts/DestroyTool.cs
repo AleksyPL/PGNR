@@ -16,6 +16,6 @@ public class DestroyTool : MonoBehaviour
     }
     public void DestroyGameObject()
     {
-        Destroy(transform.gameObject);
+        GameObject.Destroy(transform.gameObject);
     }
 }
